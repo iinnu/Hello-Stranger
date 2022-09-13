@@ -4,10 +4,9 @@ import LoginButton from './pages/LoginPage.jsx'
 function App() {
   return (
     <div className="App">
-      <LoginButton/>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" />
+          <Route path="/" element={<LoginButton/>}/>
           <Route path="/guide" />
           <Route path="/info" />
           <Route path="/main" />

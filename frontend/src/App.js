@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginButton from './pages/LoginPage.jsx'
 
 function App() {
   return (
     <div className="App">
+      <LoginButton/>
       <BrowserRouter>
         <Routes>
           <Route path="/login" />

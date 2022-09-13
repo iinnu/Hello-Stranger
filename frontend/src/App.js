@@ -10,9 +10,9 @@ function App() {
           <Route path="/info" />
           <Route path="/main" />
           <Route path="/recommend" />
-          <Route path="history" />
-          <Route path="near" />
-          <Route path="other" />
+          <Route path="/history" />
+          <Route path="/near" />
+          <Route path="/other" />
         </Routes>
       </BrowserRouter>
   </div>

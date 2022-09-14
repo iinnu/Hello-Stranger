@@ -15,7 +15,6 @@ const RecommendButton = styled(Button)`
 
   &.MuiButton-root:hover {
     background-color: #92b4ec;
-    box-shadow: 0px 2px 2px 0px rgb(0 0 0 / 14%);
   }
 `;
 

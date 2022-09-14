@@ -11,14 +11,14 @@ import java.util.List;
 @Data
 public class UserChoiceReq extends BaseResponseBody{
 
-    List<UserChoiceReqMusic> musicList;
-    List<UserChoiceReqFood> foodList;
-    List<UserChoiceReqActivity> activityList;
+    List<UserChoiceReqMusic> music;
+    List<UserChoiceReqFood> food;
+    List<UserChoiceReqActivity> activity;
 
     @Builder
-    public UserChoiceReq(List<UserChoiceReqMusic> musicList, List<UserChoiceReqFood> foodList, List<UserChoiceReqActivity> activityList) {
-        this.musicList = musicList;
-        this.foodList = foodList;
-        this.activityList = activityList;
+    public UserChoiceReq(List<UserChoiceReqMusic> music, List<UserChoiceReqFood> food, List<UserChoiceReqActivity> activity) {
+        this.music = music;
+        this.food = food;
+        this.activity = activity;
     }
 }

@@ -1,7 +1,7 @@
 const StartApp = () => {
     return (
         <div>
-            해윙
+            시작확인
         </div>
     );
 };

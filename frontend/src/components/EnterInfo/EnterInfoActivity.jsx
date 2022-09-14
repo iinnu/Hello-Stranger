@@ -1,7 +1,7 @@
 const EnterInfo = () => {
     return (
         <div>
-            해윙
+            활동
         </div>
     );
 };

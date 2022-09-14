@@ -31,7 +31,7 @@ function MainPage() {
         >
           <SearchLocation />
           <SearchRange />
-          <RecommendButton variant="contained" size="large">
+          <RecommendButton className="search__button" variant="contained" size="large" sx={{marginTop: "15px"}}>
             추천 시작
           </RecommendButton>
         </Grid>

@@ -1,6 +1,6 @@
 package com.ssafy.api.controller;
 
-import com.ssafy.api.dto.FoodSimpleInfo;
+import com.ssafy.api.dto.SimpleInfo;
 import com.ssafy.api.request.registResultCategoryReq;
 import com.ssafy.api.response.BaseResponseBody;
 import com.ssafy.api.response.getActivityRecRes;
@@ -39,18 +39,17 @@ public class RecController {
             @ApiResponse(code = 200, message = "성공"),
     })
     public ResponseEntity<List<getFoodRecRes>> getFoodRec(@PathVariable Map<String,String> request){
-
         List<getFoodRecRes> res = new ArrayList<>();
-        for(int i=0; i<10;i++){
-            List<FoodSimpleInfo> store = new ArrayList<>();
+        for(int i=0; i<5;i++){
+            List<SimpleInfo> store = new ArrayList<>();
             for(int j=0;j<5;j++){
-                store.add(FoodSimpleInfo.builder()
-                        .foodId(j)
-                        .foodAddress("address"+j)
-                        .foodLatitude(36.107235)
-                        .foodLongitude(128.415520)
-                        .foodName("name"+j)
-                        .foodTime("time"+j).build());
+                store.add(SimpleInfo.builder()
+                        .id(j)
+                        .address("address"+j)
+                        .latitude(36.107235)
+                        .longitude(128.415520)
+                        .name("name"+j)
+                        .time("time"+j).build());
             }
             res.add(getFoodRecRes.builder().foodCategory("category"+i).store(store).build());
         }
@@ -64,7 +63,7 @@ public class RecController {
     })
     public ResponseEntity<List<getMusicRecRes>> getMusicRec(@PathVariable int key){
         List<getMusicRecRes> res = new ArrayList<>();
-        for(int i=0; i<10;i++){
+        for(int i=0; i<5;i++){
             res.add(getMusicRecRes.builder()
                     .musicID(i)
                     .musicName("name"+i)
@@ -77,14 +76,24 @@ public class RecController {
     }
 
     @GetMapping("/activity/{latitude}/{longitude}/{distance}/{key}")
-    @ApiOperation(value = "음식 추천 결과 반환", notes = "<strong>사용자 위도, 경도, 반경, 새로고침 횟수 key</strong>를 받고, 추천된 활동과 해당 장소 정보 리스트를 반환한다.")
+    @ApiOperation(value = "활동 추천 결과 반환", notes = "<strong>사용자 위도, 경도, 반경, 새로고침 횟수 key</strong>를 받고, 추천된 활동과 해당 장소 정보 리스트를 반환한다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
     public ResponseEntity<List<getActivityRecRes>> getActivityRec(@PathVariable Map<String,String> request){
         List<getActivityRecRes> res = new ArrayList<>();
-        for(int i=0; i<10;i++){
-            res.add(getActivityRecRes.builder().a("a").build());
+        for(int i=0; i<5;i++){
+            List<SimpleInfo> store = new ArrayList<>();
+            for(int j=0;j<5;j++){
+                store.add(SimpleInfo.builder()
+                        .id(j)
+                        .address("address"+j)
+                        .latitude(36.107235)
+                        .longitude(128.415520)
+                        .name("name"+j)
+                        .time("time"+j).build());
+            }
+            res.add(getActivityRecRes.builder().activityCategory("category"+i).store(store).build());
         }
         return ResponseEntity.status(200).body(res);
     }

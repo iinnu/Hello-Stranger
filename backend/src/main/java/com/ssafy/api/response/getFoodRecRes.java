@@ -1,6 +1,6 @@
 package com.ssafy.api.response;
 
-import com.ssafy.api.dto.FoodSimpleInfo;
+import com.ssafy.api.dto.SimpleInfo;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,5 +10,5 @@ import java.util.List;
 @Builder
 public class getFoodRecRes {
     private String foodCategory;
-    private List<FoodSimpleInfo> store;
+    private List<SimpleInfo> store;
 }

@@ -5,6 +5,14 @@
   justify-content: center;
   position: relative;
   //height: calc($viewport-height - $map-height);
+
+  &__map {
+    width: 100%;
+    height: $map-height;
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0px 10px 13px -8px #ADADAD;
+    position: relative;
+  }
 }
 
 .search-inner {

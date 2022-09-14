@@ -1,3 +1,5 @@
+import Button from '@mui/material/Button';
+
 const EnterInfoGuideForth = () => {
     return (
         <div>
@@ -6,7 +8,8 @@ const EnterInfoGuideForth = () => {
                 <h1>새로운 일상을</h1>
                 <h1>제공해드릴게요!</h1>
             </div>
-            <button></button>
+            <Button variant="contained">취향 조사 ㄱㄱ</Button>
+
         </div>
     );
 };

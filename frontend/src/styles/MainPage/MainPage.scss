@@ -1,4 +1,12 @@
+@import "../common/util";
+
 .search {
   display: flex;
   justify-content: center;
+  position: relative;
+  //height: calc($viewport-height - $map-height);
+}
+
+.search-inner {
+  height: 100%;
 }

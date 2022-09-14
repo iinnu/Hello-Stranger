@@ -1,5 +1,7 @@
+@import "_util";
+
 #container {
-  height: calc(var(--vh, 1vh) * 100);
+  height: $viewport-height;
   display: flex;
   justify-content: center;
 }

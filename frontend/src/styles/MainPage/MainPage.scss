@@ -13,8 +13,13 @@
     box-shadow: 0px 10px 13px -8px #ADADAD;
     position: relative;
   }
+
+  &__range {
+    margin-top: 10px;
+  }
 }
 
 .search-inner {
   height: 100%;
+  padding: 0 30px;
 }

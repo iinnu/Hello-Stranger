@@ -1,17 +1,18 @@
 package com.ssafy.api.controller;
 
+import com.ssafy.api.dto.CategoryChoiceYN;
 import com.ssafy.api.dto.UserChoiceResActivity;
 import com.ssafy.api.dto.UserChoiceResFood;
 import com.ssafy.api.dto.UserChoiceResMusic;
+import com.ssafy.api.request.CategoryChoiceReq;
+import com.ssafy.api.response.BaseResponseBody;
 import com.ssafy.api.response.UserChoiceRes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,6 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-
     public ResponseEntity<UserChoiceRes> getUserChoice(){
         UserChoiceResMusic music = UserChoiceResMusic.builder()
                 .musicCategory("팝")
@@ -66,5 +66,37 @@ public class UserController {
                 .activity(activityList)
                 .build();
         return ResponseEntity.status(200).body(res);
+    }
+
+
+    @PostMapping("/choice")
+    @ApiOperation(value = "유저 취향 선택", notes = "회원가입 시 취향조사에서 유저가 선택한 음악/음식/활동 목록을 저장한다 ")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+    })
+    public ResponseEntity<? extends BaseResponseBody> registUserChoice(@RequestBody CategoryChoiceReq categoryChoiceReq){
+
+        // 재구현시 함수화
+        List<CategoryChoiceYN> music = categoryChoiceReq.getMusic();
+        for(CategoryChoiceYN c : music){
+            String yn = c.getChoiceYN();
+            if("Y".equals(yn) || "N".equals(yn)) continue;
+            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+        }
+
+        List<CategoryChoiceYN> food = categoryChoiceReq.getFood();
+        for(CategoryChoiceYN c : food){
+            String yn = c.getChoiceYN();
+            if("Y".equals(yn) || "N".equals(yn)) continue;
+            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+        }
+        
+        List<CategoryChoiceYN> activity = categoryChoiceReq.getActivity();
+        for(CategoryChoiceYN c : activity){
+            String yn = c.getChoiceYN();
+            if("Y".equals(yn) || "N".equals(yn)) continue;
+            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+        }
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "정상적으로 저장되었습니다."));
     }
 }

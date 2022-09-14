@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from './pages/LoginPage.jsx'
 import EnterInfoGuide from './pages/EnterInfoGuidePage.jsx'
 import EnterInfo from './pages/EnterInfoPage.jsx'
-
+import DND from './components/EnterInfoGuide/DND.jsx'
 function App() {
   return (
     <div className="App">
@@ -10,6 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage/>}/>
           <Route path="/guide" element={<EnterInfoGuide/>}/>
+          <Route path="/test" element={<DND/>}/>
           <Route path="/info" element={<EnterInfo/>}/>
           <Route path="/main" />
           <Route path="/recommend" />

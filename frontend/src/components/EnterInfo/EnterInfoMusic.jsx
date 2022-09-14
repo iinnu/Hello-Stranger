@@ -1,7 +1,7 @@
 const EnterInfo = () => {
     return (
         <div>
-            뮤직
+            해윙
         </div>
     );
 };

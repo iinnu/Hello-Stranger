@@ -1,7 +1,7 @@
 const EnterInfo = () => {
     return (
         <div>
-            음식
+            해윙
         </div>
     );
 };

@@ -1,7 +1,17 @@
+import EnterInfoActivityCard from './EnterInfoActivityCard.jsx'
+
 const EnterInfo = () => {
     return (
         <div>
-            활동
+            <div>
+                <h1>어던 활동을</h1>
+                <h1>자주 하시나요?</h1>
+            </div>
+            <div>
+                <div>
+                    <EnterInfoActivityCard/>
+                </div>
+            </div>
         </div>
     );
 };

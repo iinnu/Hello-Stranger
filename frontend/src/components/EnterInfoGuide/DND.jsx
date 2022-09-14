@@ -1,101 +1,149 @@
-import {
-	Avatar,
-	Container,
-	List,
-	ListItem,
-	ListItemAvatar,
-	ListItemText,
-	Paper,
-} from "@mui/material";
-
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import uuid from "uuid/v4";
 
-const ItemsList = () => {
-	const itemData = [
-		{
-			id: 0,
-			img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-			title: "Breakfast",
-			author: "@bkristastucchio",
-		},
-		{
-			id: 1,
-			img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-			title: "Burger",
-			author: "@rollelflex_graphy726",
-		},
-		{
-			id: 2,
-			img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-			title: "Camera",
-			author: "@helloimnik",
-		},
-		{
-			id: 3,
-			img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-			title: "Coffee",
-			author: "@nolanissac",
-		},
-		{
-			id: 4,
-			img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-			title: "Hats",
-			author: "@hjrc33",
-		},
-	];
+const itemsFromBackend = [
+  { id: uuid(), content: "First task" },
+  { id: uuid(), content: "Second task" },
+  { id: uuid(), content: "Third task" },
+  { id: uuid(), content: "Fourth task" },
+  { id: uuid(), content: "Fifth task" }
+];
 
-	const [data, setData] = useState(itemData);
-	const handleDragEnd = (result) => {
-		if (!result.destination) return;
-		const items = Array.from(data);
-		const [reorderedItem] = items.splice(result.source.index, 1);
-		items.splice(result.destination.index, 0, reorderedItem);
-		console.log(items);
-		setData(items);
-	};
-	return (
-		<div>
-			<Container maxWidth="sm">
-				<DragDropContext onDragEnd={handleDragEnd}>
-					<Droppable droppableId="list">
-						{(provided) => (
-							<List
-								{...provided.droppableProps}
-								ref={provided.innerRef}
-								sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-							>
-								{data &&
-									data.map((item, index) => {
-										return (
-											<Draggable key={item.id} draggableId={item.id.toString()} index={index}>
-												{(provided) => (
-													<Paper
-														ref={provided.innerRef}
-														{...provided.draggableProps}
-														{...provided.dragHandleProps}
-														elevation={2}
-														sx={{ marginBottom: "10px" }}
-													>
-														<ListItem>
-															<ListItemAvatar>
-																<Avatar src={item.img} />
-															</ListItemAvatar>
-															<ListItemText primary={item.title} secondary={`Author: ${item.author}`} />
-														</ListItem>
-													</Paper>
-												)}
-											</Draggable>
-										);
-									})}
-								{provided.placeholder}
-							</List>
-						)}
-					</Droppable>
-				</DragDropContext>
-			</Container>
-		</div>
-	);
+const columnsFromBackend = {
+  [uuid()]: {
+    name: "Requested",
+    items: itemsFromBackend
+  },
+  [uuid()]: {
+    name: "To do",
+    items: []
+  },
+  [uuid()]: {
+    name: "In Progress",
+    items: []
+  },
+  [uuid()]: {
+    name: "Done",
+    items: []
+  }
 };
 
-export default ItemsList;
+const onDragEnd = (result, columns, setColumns) => {
+  if (!result.destination) return;
+  const { source, destination } = result;
+
+  if (source.droppableId !== destination.droppableId) {
+    const sourceColumn = columns[source.droppableId];
+    const destColumn = columns[destination.droppableId];
+    const sourceItems = [...sourceColumn.items];
+    const destItems = [...destColumn.items];
+    const [removed] = sourceItems.splice(source.index, 1);
+    destItems.splice(destination.index, 0, removed);
+    setColumns({
+      ...columns,
+      [source.droppableId]: {
+        ...sourceColumn,
+        items: sourceItems
+      },
+      [destination.droppableId]: {
+        ...destColumn,
+        items: destItems
+      }
+    });
+  } else {
+    const column = columns[source.droppableId];
+    const copiedItems = [...column.items];
+    const [removed] = copiedItems.splice(source.index, 1);
+    copiedItems.splice(destination.index, 0, removed);
+    setColumns({
+      ...columns,
+      [source.droppableId]: {
+        ...column,
+        items: copiedItems
+      }
+    });
+  }
+};
+
+function DND() {
+  const [columns, setColumns] = useState(columnsFromBackend);
+  return (
+    <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+      <DragDropContext
+        onDragEnd={result => onDragEnd(result, columns, setColumns)}
+      >
+        {Object.entries(columns).map(([columnId, column], index) => {
+          return (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center"
+              }}
+              key={columnId}
+            >
+              <h2>{column.name}</h2>
+              <div style={{ margin: 8 }}>
+                <Droppable droppableId={columnId} key={columnId}>
+                  {(provided, snapshot) => {
+                    return (
+                      <div
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                        style={{
+                          background: snapshot.isDraggingOver
+                            ? "lightblue"
+                            : "lightgrey",
+                          padding: 4,
+                          width: 250,
+                          minHeight: 500
+                        }}
+                      >
+                        {column.items.map((item, index) => {
+                          return (
+                            <Draggable
+                              key={item.id}
+                              draggableId={item.id}
+                              index={index}
+                            >
+                              {(provided, snapshot) => {
+                                return (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    style={{
+                                      userSelect: "none",
+                                      padding: 16,
+                                      margin: "0 0 8px 0",
+                                      minHeight: "50px",
+                                      backgroundColor: snapshot.isDragging
+                                        ? "#263B4A"
+                                        : "#456C86",
+                                      color: "white",
+                                      ...provided.draggableProps.style
+                                    }}
+                                  >
+                                    {item.content}
+                                  </div>
+                                );
+                              }}
+                            </Draggable>
+                          );
+                        })}
+                        {provided.placeholder}
+                      </div>
+                    );
+                  }}
+                </Droppable>
+              </div>
+            </div>
+          );
+        })}
+      </DragDropContext>
+    </div>
+  );
+}
+
+export default DND;

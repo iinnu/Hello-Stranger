@@ -1,17 +1,17 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LoginButton from './pages/LoginPage.jsx'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from 'pages/MainPage';
-
+import LoginPage from './pages/LoginPage.jsx'
+import EnterInfoGuide from './pages/EnterInfoGuidePage.jsx'
+import EnterInfo from './pages/EnterInfoPage.jsx'
 function App() {
 
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/login"></Navigate>} />
-          <Route path="/login" />
-          <Route path="/guide" />
-          <Route path="/info" />
+          <Route path="/" element={<LoginPage/>}/>
+          <Route path="/guide" element={<EnterInfoGuide/>}/>
+          <Route path="/info" element={<EnterInfo/>}/>
           <Route path="/main" element={<MainPage />} />
           <Route path="/recommend" />
           <Route path="/history" />

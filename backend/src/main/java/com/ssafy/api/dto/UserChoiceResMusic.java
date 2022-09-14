@@ -1,9 +1,11 @@
 package com.ssafy.api.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class UserChoiceReqMusic {
+@Builder
+public class UserChoiceResMusic {
 
     String musicCategory;
     String musicName;

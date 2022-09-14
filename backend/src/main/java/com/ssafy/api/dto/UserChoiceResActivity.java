@@ -1,9 +1,11 @@
 package com.ssafy.api.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class UserChoiceReqActivity {
+@Builder
+public class UserChoiceResActivity {
 
     String activityCategory;
     String activityImgUrl;

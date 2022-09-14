@@ -1,9 +1,11 @@
 package com.ssafy.api.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class UserChoiceReqFood {
+@Builder
+public class UserChoiceResFood {
 
     String foodCategory;
     String foodImgUrl;

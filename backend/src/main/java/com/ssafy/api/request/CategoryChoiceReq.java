@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class CategoryChoiceRes {
+public class CategoryChoiceReq {
 
     List<CategoryChoiceYN> music;
     List<CategoryChoiceYN> food;

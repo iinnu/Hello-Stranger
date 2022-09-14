@@ -1,14 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginButton from './pages/LoginPage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+import EnterInfoGuide from './pages/EnterInfoGuidePage.jsx'
+import EnterInfo from './pages/EnterInfoPage.jsx'
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginButton/>}/>
-          <Route path="/guide" />
-          <Route path="/info" />
+          <Route path="/" element={<LoginPage/>}/>
+          <Route path="/guide" element={<EnterInfoGuide/>}/>
+          <Route path="/info" element={<EnterInfo/>}/>
           <Route path="/main" />
           <Route path="/recommend" />
           <Route path="/history" />

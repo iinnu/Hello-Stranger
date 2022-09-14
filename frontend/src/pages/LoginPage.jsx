@@ -6,7 +6,7 @@ import mascot from '../assets/images/WalkingGirl.gif'
 
 const clientId = '835634401246-ddaeprck32cbkjmajefeffl5vh7f5kd6.apps.googleusercontent.com'
 
-const LoginButton = ({ onSocial }) => {
+const LoginPage = ({ onSocial }) => {
     useEffect(() => {
         function start() {
             gapi.client.init({
@@ -41,4 +41,4 @@ const LoginButton = ({ onSocial }) => {
 
 
 
-export default LoginButton;
+export default LoginPage;

@@ -5,7 +5,8 @@ import EnterInfoGuideForth from '../components/EnterInfoGuide/EnterInfoGuideFort
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-const EnterInfoGuidePage = () => {
+
+const EnterInfoGuidePage = () => {   
     const settings={
         dots: true,
         infinite: false,
@@ -26,3 +27,4 @@ const EnterInfoGuidePage = () => {
 };
 
 export default EnterInfoGuidePage;
+

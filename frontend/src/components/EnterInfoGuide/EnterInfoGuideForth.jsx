@@ -1,6 +1,10 @@
 import Button from '@mui/material/Button';
 
+
 const EnterInfoGuideForth = () => {
+    function handleClick(e) {
+        window.location.href ="/info"
+    }
     return (
         <div>
             <div>
@@ -8,10 +12,11 @@ const EnterInfoGuideForth = () => {
                 <h1>새로운 일상을</h1>
                 <h1>제공해드릴게요!</h1>
             </div>
-            <Button variant="contained">취향 조사 ㄱㄱ</Button>
+            <Button variant="contained" onClick={handleClick}>취향 조사 ㄱㄱ</Button>
 
         </div>
     );
+    
 };
 
 export default EnterInfoGuideForth;

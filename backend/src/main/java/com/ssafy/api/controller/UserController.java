@@ -1,12 +1,12 @@
 package com.ssafy.api.controller;
 
 import com.ssafy.api.dto.CategoryChoiceYN;
-import com.ssafy.api.dto.UserChoiceResActivity;
-import com.ssafy.api.dto.UserChoiceResFood;
-import com.ssafy.api.dto.UserChoiceResMusic;
+import com.ssafy.api.dto.UserChoiceGetResActivity;
+import com.ssafy.api.dto.UserChoiceGetResFood;
+import com.ssafy.api.dto.UserChoiceGetResMusic;
 import com.ssafy.api.request.CategoryChoiceReq;
 import com.ssafy.api.response.BaseResponseBody;
-import com.ssafy.api.response.UserChoiceRes;
+import com.ssafy.api.response.UserChoiceGetRes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -27,40 +27,40 @@ public class UserController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<UserChoiceRes> getUserChoice(){
-        UserChoiceResMusic music = UserChoiceResMusic.builder()
+    public ResponseEntity<UserChoiceGetRes> getUserChoice(){
+        UserChoiceGetResMusic music = UserChoiceGetResMusic.builder()
                 .musicCategory("팝")
                 .musicName("Waves")
                 .musicArtist("Paige")
                 .build();
 
-        UserChoiceResFood food = UserChoiceResFood.builder()
+        UserChoiceGetResFood food = UserChoiceGetResFood.builder()
                 .foodCategory("떡볶이")
                 .foodImgUrl("https://firebasestorage.googleapis.com/v0/b/viewdle-b6bf5.appspot.com/o/ch%40ssafy.com_profile?alt=media&token=e0584d41-eced-40bb-b79d-e395f1203855")
                 .build();
 
-        UserChoiceResActivity activity = UserChoiceResActivity.builder()
+        UserChoiceGetResActivity activity = UserChoiceGetResActivity.builder()
                 .activityCategory("호캉스")
                 .activityImgUrl("https://firebasestorage.googleapis.com/v0/b/viewdle-b6bf5.appspot.com/o/ch%40ssafy.com_profile?alt=media&token=e0584d41-eced-40bb-b79d-e395f1203855")
                 .build();
 
 
-        List<UserChoiceResMusic> musicList = new ArrayList<>();
+        List<UserChoiceGetResMusic> musicList = new ArrayList<>();
         for(int i = 0; i < 5; i++){
             musicList.add(music);
         }
 
-        List<UserChoiceResFood> foodList = new ArrayList<>();
+        List<UserChoiceGetResFood> foodList = new ArrayList<>();
         for(int i = 0; i < 5; i++){
             foodList.add(food);
         }
 
-        List<UserChoiceResActivity> activityList = new ArrayList<>();
+        List<UserChoiceGetResActivity> activityList = new ArrayList<>();
         for(int i = 0; i < 5; i++){
             activityList.add(activity);
         }
 
-        UserChoiceRes res = UserChoiceRes.builder()
+        UserChoiceGetRes res = UserChoiceGetRes.builder()
                 .music(musicList)
                 .food(foodList)
                 .activity(activityList)

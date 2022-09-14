@@ -1,11 +1,11 @@
 package com.ssafy.api.controller;
 
-import com.ssafy.api.dto.SimpleInfo;
-import com.ssafy.api.request.registResultCategoryReq;
+import com.ssafy.api.dto.BaseInfo;
+import com.ssafy.api.request.CategoryChoiceReq;
 import com.ssafy.api.response.BaseResponseBody;
-import com.ssafy.api.response.getActivityRecRes;
-import com.ssafy.api.response.getFoodRecRes;
-import com.ssafy.api.response.getMusicRecRes;
+import com.ssafy.api.response.ActivityRecGetRes;
+import com.ssafy.api.response.FoodRecGetRes;
+import com.ssafy.api.response.MusicRecGetRes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -26,7 +26,7 @@ public class RecController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<? extends BaseResponseBody> registResultCategory(@RequestBody registResultCategoryReq resultCategory){
+    public ResponseEntity<? extends BaseResponseBody> registResultCategory(@RequestBody CategoryChoiceReq resultCategory){
         if(resultCategory!=null){
             return ResponseEntity.status(200).body(BaseResponseBody.of(200,"결과 전달 성공"));
         }
@@ -38,12 +38,12 @@ public class RecController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<List<getFoodRecRes>> getFoodRec(@PathVariable Map<String,String> request){
-        List<getFoodRecRes> res = new ArrayList<>();
+    public ResponseEntity<List<FoodRecGetRes>> getFoodRec(@PathVariable Map<String,String> request){
+        List<FoodRecGetRes> res = new ArrayList<>();
         for(int i=0; i<5;i++){
-            List<SimpleInfo> store = new ArrayList<>();
+            List<BaseInfo> store = new ArrayList<>();
             for(int j=0;j<5;j++){
-                store.add(SimpleInfo.builder()
+                store.add(BaseInfo.builder()
                         .id(j)
                         .address("address"+j)
                         .latitude(36.107235)
@@ -51,7 +51,7 @@ public class RecController {
                         .name("name"+j)
                         .time("time"+j).build());
             }
-            res.add(getFoodRecRes.builder().foodCategory("category"+i).store(store).build());
+            res.add(FoodRecGetRes.builder().foodCategory("category"+i).store(store).build());
         }
         return ResponseEntity.status(200).body(res);
     }
@@ -61,10 +61,10 @@ public class RecController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<List<getMusicRecRes>> getMusicRec(@PathVariable int key){
-        List<getMusicRecRes> res = new ArrayList<>();
+    public ResponseEntity<List<MusicRecGetRes>> getMusicRec(@PathVariable int key){
+        List<MusicRecGetRes> res = new ArrayList<>();
         for(int i=0; i<5;i++){
-            res.add(getMusicRecRes.builder()
+            res.add(MusicRecGetRes.builder()
                     .musicID(i)
                     .musicName("name"+i)
                     .musicArtist("artist"+i)
@@ -80,12 +80,12 @@ public class RecController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<List<getActivityRecRes>> getActivityRec(@PathVariable Map<String,String> request){
-        List<getActivityRecRes> res = new ArrayList<>();
+    public ResponseEntity<List<ActivityRecGetRes>> getActivityRec(@PathVariable Map<String,String> request){
+        List<ActivityRecGetRes> res = new ArrayList<>();
         for(int i=0; i<5;i++){
-            List<SimpleInfo> store = new ArrayList<>();
+            List<BaseInfo> store = new ArrayList<>();
             for(int j=0;j<5;j++){
-                store.add(SimpleInfo.builder()
+                store.add(BaseInfo.builder()
                         .id(j)
                         .address("address"+j)
                         .latitude(36.107235)
@@ -93,7 +93,7 @@ public class RecController {
                         .name("name"+j)
                         .time("time"+j).build());
             }
-            res.add(getActivityRecRes.builder().activityCategory("category"+i).store(store).build());
+            res.add(ActivityRecGetRes.builder().activityCategory("category"+i).store(store).build());
         }
         return ResponseEntity.status(200).body(res);
     }

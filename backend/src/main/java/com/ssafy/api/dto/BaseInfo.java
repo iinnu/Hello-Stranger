@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class SimpleInfo {
+public class BaseInfo {
     int id;
     String name;
     String address;

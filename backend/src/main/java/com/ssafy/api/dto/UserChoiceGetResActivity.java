@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class UserChoiceResActivity {
+public class UserChoiceGetResActivity {
 
     String activityCategory;
     String activityImgUrl;

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class UserChoiceResMusic {
+public class UserChoiceGetResMusic {
 
     String musicCategory;
     String musicName;

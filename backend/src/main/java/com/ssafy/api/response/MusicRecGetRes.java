@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class getMusicRecRes {
+public class MusicRecGetRes {
      private int musicID;
      private String musicName;
      private String musicArtist;

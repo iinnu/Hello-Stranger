@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class UserChoiceResFood {
+public class UserChoiceGetResFood {
 
     String foodCategory;
     String foodImgUrl;

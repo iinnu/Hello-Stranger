@@ -73,6 +73,7 @@ public class UserController {
     @ApiOperation(value = "유저 취향 선택", notes = "회원가입 시 취향조사에서 유저가 선택한 음악/음식/활동 목록을 저장한다 ")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
+            @ApiResponse(code = 901, message = "유효하지 않은 값"),
     })
     public ResponseEntity<? extends BaseResponseBody> registUserChoice(@RequestBody CategoryChoiceReq categoryChoiceReq){
 

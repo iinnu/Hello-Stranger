@@ -1,0 +1,10 @@
+#container {
+  height: calc(var(--vh, 1vh) * 100);
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  width: 100vw;
+  max-width: 500px;
+}

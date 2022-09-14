@@ -1,11 +1,8 @@
+import { Button, TextField, Grid, Slider } from "@mui/material";
 import BottomNav from "components/common/BottomNav";
 import Container from "components/common/Container";
 import Map from "components/MainPage/Map";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Slider from "@mui/material/Slider";
 import "styles/MainPage/MainPage.scss";
-import { Button } from "@mui/material";
 
 function valuetext(value) {
   return `${value}`;

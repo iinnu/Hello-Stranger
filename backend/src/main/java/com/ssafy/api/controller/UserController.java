@@ -7,7 +7,7 @@ import com.ssafy.api.dto.UserChoiceGetResMusic;
 import com.ssafy.api.request.CategoryChoiceReq;
 import com.ssafy.api.request.UserRegistReq;
 import com.ssafy.api.response.BaseResponseBody;
-import com.ssafy.api.response.UserChoiceRes;
+import com.ssafy.api.response.UserChoiceGetRes;
 import com.ssafy.api.response.UserRegistRes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

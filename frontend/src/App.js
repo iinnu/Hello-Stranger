@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HistoryPage from "pages/HistoryPage";
-import HistoryDetail from 'components/History/HistoryDetail'
 import NearAnalysisPage from "pages/NearAnalysisPage";
-import OtherUserPage from "pages/OtherUserPage";
+import DetailInfoPage from "pages/DetailInfoPage";
 import MainPage from 'pages/MainPage';
 import LoginPage from './pages/LoginPage.jsx'
 import EnterInfoGuide from './pages/EnterInfoGuidePage.jsx'
@@ -18,9 +17,9 @@ function App() {
           <Route path="/main" element={<MainPage />} />
           <Route path="/recommend" />
           <Route path="/history" element={<HistoryPage/>} />
-          <Route path="/history/:historyId" element={<HistoryDetail/>} />
+          <Route path="/history/:id" element={<DetailInfoPage/>} />
           <Route path="/near" element={<NearAnalysisPage/>} />
-          <Route path="/other" element={<OtherUserPage/>} />
+          <Route path="/other" element={<DetailInfoPage/>} />
         </Routes>
       </BrowserRouter>
     </div>

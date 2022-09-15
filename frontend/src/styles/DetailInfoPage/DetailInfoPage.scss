@@ -1,0 +1,26 @@
+@import "../common/util";
+
+.detail-info {
+ display: flex;
+ justify-content: center;
+ position: relative;
+ height: calc($viewport-height - $map-height - 56px);
+
+ &__map {
+  width: 100%;
+  height: $map-height;
+  border-radius: 0 0 50px 50px;
+  box-shadow: 0px 10px 5px -6px #ADADAD;
+  position: relative;
+ }
+}
+
+.detail-info-inner {
+  height: 100%;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}

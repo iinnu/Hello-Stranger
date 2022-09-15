@@ -29,14 +29,17 @@ const LoginPage = ({ onSocial }) => {
     return (
         <div>
             <Container>
-                <img classname="" src={logo} alt="Logo" />
-                <img classname="" src={mascot} alt="Mascot" />
-                <GoogleLogin
-                    clientId={clientId}
-                    buttonText="로그인하기"
-                    onSuccess={onSuccess}
-                    onFailure={onFailure}
-                />
+                <div className="Login">
+                    <img className="Login__Logo" src={logo} alt="Logo" />
+                    <img className="Login__Mascot" src={mascot} alt="Mascot" />
+                    <GoogleLogin
+                        className="Login__GoogleLogin"
+                        clientId={clientId}
+                        buttonText="로그인하기"
+                        onSuccess={onSuccess}
+                        onFailure={onFailure}
+                    />
+                </div>
             </Container>
         </div>
     );

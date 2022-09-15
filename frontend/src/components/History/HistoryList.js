@@ -1,6 +1,5 @@
-import React from "react";
-import HistoryCard from "components/History/HistoryCard.jsx";
-const HistoryList = ({className}) => {
+import HistoryCard from "components/History/HistoryCard.js";
+function HistoryList({className}) {
   return (
     <>
       <div className={className}>

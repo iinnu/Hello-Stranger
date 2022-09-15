@@ -1,5 +1,5 @@
 import React from "react";
-import HistoryList from "components/History/HistoryList.jsx";
+import HistoryList from "components/History/HistoryList.js";
 import BottomNav from 'components/common/BottomNav';
 import Container from 'components/common/Container';
 import 'styles/HistoryPage/HistoryPage.scss'

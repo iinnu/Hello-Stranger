@@ -1,14 +1,15 @@
-.historyPage{
-    width: 100%;
-    height: calc(var(--vh, 1vh) * 100);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .historyPageTitle{
-        align-self: flex-start;
-    }
+@import "../common/util";
 
-    .historyList{
+.historyPage {
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  .historyPageTitle {
+    align-self: flex-start;
+  }
 
-    }
+  .historyList {
+  }
 }

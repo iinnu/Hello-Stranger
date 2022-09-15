@@ -1,11 +1,10 @@
-import React from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 import { useNavigate } from 'react-router-dom';
 
-const HistoryCard = () => {
+function HistoryCard() {
   const navigate = useNavigate();
   function openHistory(historyId){
     navigate(`/history/${historyId}`)

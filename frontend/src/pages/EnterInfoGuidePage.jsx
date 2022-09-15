@@ -6,7 +6,7 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'styles/EnterInfoGuidePage/EnterInfoGuidePage.scss';
-import Container from 'components/EnterInfoGuide/Container';
+import Container from 'components/common/Container';
 
 const EnterInfoGuidePage = () => {   
     function NextArrow(props) {

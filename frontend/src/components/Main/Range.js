@@ -45,7 +45,7 @@ function valuetext(value) {
   return `${value}`;
 }
 
-function SearchRange() {
+function Range() {
   return (
     <div className="search__range">
       <div className="search__title">검색 범위</div>
@@ -63,4 +63,4 @@ function SearchRange() {
   );
 }
 
-export default SearchRange;
+export default Range;

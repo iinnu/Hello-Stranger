@@ -1,9 +1,8 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LoginButton from './pages/LoginPage.jsx'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import LoginButton from './pages/LoginPage.jsx';
 import MainPage from 'pages/MainPage';
 
 function App() {
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -19,7 +18,7 @@ function App() {
           <Route path="/other" />
         </Routes>
       </BrowserRouter>
-  </div>
+    </div>
   );
 }
 

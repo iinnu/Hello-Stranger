@@ -1,7 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css';
 
 function setScreenSize() {
   // 1vh == 화면 높이의 1%
@@ -13,7 +13,7 @@ function setScreenSize() {
 setScreenSize();
 window.addEventListener('resize', setScreenSize);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />

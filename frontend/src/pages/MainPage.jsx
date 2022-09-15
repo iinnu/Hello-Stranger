@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 import BottomNav from 'components/common/BottomNav';
 import Container from 'components/common/Container';
 import Map from 'components/Main/Map';
-import SearchLocation from 'components/Main/SearchLocation';
-import SearchRange from 'components/Main/SearchRange';
+import Location from 'components/Main/Location';
+import Range from 'components/Main/Range';
 import 'styles/MainPage/MainPage.scss';
 import { MainProvider } from 'components/Main/MainContext';
 
@@ -31,9 +31,14 @@ function MainPage() {
             direction="column"
             justifyContent="center"
           >
-            <SearchLocation />
-            <SearchRange />
-            <RecommendButton className="search__button" variant="contained" size="large" sx={{marginTop: "15px"}}>
+            <Location />
+            <Range />
+            <RecommendButton
+              className="search__button"
+              variant="contained"
+              size="large"
+              sx={{ marginTop: '15px' }}
+            >
               추천 시작
             </RecommendButton>
           </Grid>

@@ -1,4 +1,4 @@
-@import "../common/util";
+@import '../common/util';
 
 .search {
   display: flex;
@@ -10,9 +10,9 @@
     width: 100%;
     height: $map-height;
     border-radius: 0 0 50px 50px;
-    box-shadow: 0px 10px 5px -6px #ADADAD;
+    box-shadow: 0px 10px 5px -6px #adadad;
     position: relative;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(245, 245, 245);
   }
 
   &__title {

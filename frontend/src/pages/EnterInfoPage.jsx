@@ -5,6 +5,8 @@ import StartApp from '../components/EnterInfo/StartApp.jsx'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import 'styles/EnterInfoPage/EnterInfoPage.scss';
+import Container from 'components/common/Container';
 
 const EnterInfoPage = () => {
     function NextArrow(props) {
@@ -43,12 +45,14 @@ const EnterInfoPage = () => {
     };
     return(
         <div>
+          <Container>
             <Slider {...settings}>
                 <EnterInfoMusic/>
                 <EnterInfoFood/>
                 <EnterInfoActivity/>
                 <StartApp/>
             </Slider>
+          </Container>
         </div>
     );
 };

@@ -5,8 +5,10 @@ import com.ssafy.api.dto.UserChoiceGetResActivity;
 import com.ssafy.api.dto.UserChoiceGetResFood;
 import com.ssafy.api.dto.UserChoiceGetResMusic;
 import com.ssafy.api.request.CategoryChoiceReq;
+import com.ssafy.api.request.UserRegistReq;
 import com.ssafy.api.response.BaseResponseBody;
-import com.ssafy.api.response.UserChoiceGetRes;
+import com.ssafy.api.response.UserChoiceRes;
+import com.ssafy.api.response.UserRegistRes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -21,6 +23,42 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
+    @PostMapping()
+    @ApiOperation(value = "소셜로그인, 소셜회원가입", notes = "저장되지 않은 이메일 일 시에는 회원가입과 로그인을 시키고, 저장된 이메일 일 시에는 로그인 시켜준다")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+//            @ApiResponse(code = 901, message = "유효하지 않은 값"),
+    })
+    public ResponseEntity<UserRegistRes> registUser(@RequestBody UserRegistReq userRegistReq){
+
+        String idToken = userRegistReq.getIdToken();
+
+        //이미일 중복 확인
+
+        // 회원가입 처리
+
+        // accessToken 반환
+        String accessToken = "12345";
+        UserRegistRes res = UserRegistRes.builder()
+                .accessToken(accessToken)
+                .build();
+        return ResponseEntity.status(200).body(res);
+    }
+
+    @DeleteMapping()
+    @ApiOperation(value = "회원탈퇴", notes = "회원 탈퇴")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+//            @ApiResponse(code = 901, message = "유효하지 않은 값"),
+    })
+    public ResponseEntity<Void> deleteUser(){
+        // auth에서 가져오기
+        String accessToken;
+
+        // 탈퇴 처리
+        return ResponseEntity.status(200).build();
+    }
 
     @GetMapping("/choice")
     @ApiOperation(value = "유저 취향 조사 목록", notes = "회원가입 시 유저의 취향조사에 필요한 음악/음식/활동 목록을 반환한다.")

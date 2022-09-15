@@ -10,8 +10,8 @@ import Recommend from 'components/Main/Recommend';
 
 function MainPage() {
   return (
-    <Container>
-      <MainProvider>
+    <MainProvider>
+      <Container>
         <Map />
         <div className="search">
           <Grid
@@ -22,12 +22,12 @@ function MainPage() {
           >
             <Location />
             <Range />
-            <Recommend />
+            <Recommend>추천 시작</Recommend>
           </Grid>
         </div>
         <BottomNav />
-      </MainProvider>
-    </Container>
+      </Container>
+    </MainProvider>
   );
 }
 

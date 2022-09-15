@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Loading from './Loading';
+import { useMainDispatch, useMainstate } from './MainContext';
 
 const { kakao, navigator } = window;
 
@@ -10,28 +11,32 @@ const geolocationOptions = {
 };
 
 const Map = () => {
-  const [location, setLocation] = useState({});
-  const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
+  const { location } = useMainstate();
+  const dispatch = useMainDispatch();
 
   useEffect(() => {
     const { geolocation } = navigator;
     // 현재 브라우저에서 Geolocation이 정의되지 않은 경우 오류로 처리
     if (!geolocation) {
-      setError('geolocation을 사용할 수 없습니다.');
+      console.log('geolocation을 사용할 수 없습니다.');
       return;
     }
 
     // Geolocation의 getCurrentPosition 메소드에 대한 성공 콜백 핸들러
     const handleSuccess = (pos) => {
       const { latitude, longitude } = pos.coords;
-      setLocation({ lat: latitude, lng: longitude });
+      // setLocation({ lat: latitude, lng: longitude });
+      dispatch({
+        type: 'location',
+        location: { lat: latitude, lng: longitude },
+      });
       setLoading(false);
     };
 
     // Geolocation의 getCurrentPosition 메소드에 대한 실패 콜백 핸들러
     const handleError = (error) => {
-      setError(error.message);
+      console.log(error);
     };
 
     // Geolocation API 호출

@@ -1,5 +1,4 @@
-import { Button, Grid } from '@mui/material';
-import styled from '@emotion/styled';
+import { Grid } from '@mui/material';
 import BottomNav from 'components/common/BottomNav';
 import Container from 'components/common/Container';
 import Map from 'components/Main/Map';
@@ -7,17 +6,7 @@ import Location from 'components/Main/Location';
 import Range from 'components/Main/Range';
 import 'styles/MainPage/MainPage.scss';
 import { MainProvider } from 'components/Main/MainContext';
-
-const RecommendButton = styled(Button)`
-  background-color: #92b4ec;
-  border: none;
-  box-shadow: 0px 2px 2px 0px rgb(0 0 0 / 14%);
-  font-weight: 600;
-
-  &.MuiButton-root:hover {
-    background-color: #92b4ec;
-  }
-`;
+import Recommend from 'components/Main/Recommend';
 
 function MainPage() {
   return (
@@ -33,14 +22,7 @@ function MainPage() {
           >
             <Location />
             <Range />
-            <RecommendButton
-              className="search__button"
-              variant="contained"
-              size="large"
-              sx={{ marginTop: '15px' }}
-            >
-              추천 시작
-            </RecommendButton>
+            <Recommend />
           </Grid>
         </div>
         <BottomNav />

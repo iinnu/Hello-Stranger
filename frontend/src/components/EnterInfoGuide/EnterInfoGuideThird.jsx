@@ -1,7 +1,6 @@
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import EnterInfoBasicCard from './EnterInfoBasicCard.jsx'
-
 const EnterInfoGuideThird = () => {
     return (
         <div>

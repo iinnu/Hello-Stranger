@@ -6,7 +6,7 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'styles/EnterInfoGuidePage/EnterInfoGuidePage.scss';
-import Container from 'components/common/Container';
+import Container from 'components/EnterInfoGuide/Container';
 
 const EnterInfoGuidePage = () => {   
     function NextArrow(props) {
@@ -46,11 +46,11 @@ const EnterInfoGuidePage = () => {
     return(
         <div>
           <Container>
-            <Slider {...settings}>
-                <EnterInfoGuideFirst/>
-                <EnterInfoGuideSecond/>
-                <EnterInfoGuideThird/>
-                <EnterInfoGuideForth/>
+            <Slider {...settings} className="Guide">
+                <EnterInfoGuideFirst className="Guide__First"/>
+                <EnterInfoGuideSecond className="Guide__Second"/>
+                <EnterInfoGuideThird className="Guide__Third"/>
+                <EnterInfoGuideForth className="Guide__Forth"/>
             </Slider>
           </Container>
         </div>

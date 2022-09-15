@@ -1,0 +1,17 @@
+@import "../common/_util";
+
+#container {
+  min-height: $viewport-height;
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: $viewport-height;
+  max-width: 500px;
+  position: relative;
+}

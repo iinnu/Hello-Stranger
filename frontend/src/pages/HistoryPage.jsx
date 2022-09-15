@@ -2,7 +2,7 @@ import React from "react";
 import HistoryList from "components/History/HistoryList.jsx";
 import BottomNav from 'components/common/BottomNav';
 import Container from 'components/common/Container';
-import 'styles/HistoryPage.scss'
+import 'styles/HistoryPage/HistoryPage.scss'
 const HistoryPage = () => {
   return (
     <>

@@ -37,7 +37,6 @@ const Map = () => {
     // Geolocation API 호출
     geolocation.getCurrentPosition(handleSuccess, handleError, geolocationOptions);
   }, [])
-  
 
   useEffect(() => {
     if(!loading) {

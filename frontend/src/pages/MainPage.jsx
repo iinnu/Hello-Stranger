@@ -2,9 +2,9 @@ import { Button, Grid } from '@mui/material';
 import styled from '@emotion/styled';
 import BottomNav from 'components/common/BottomNav';
 import Container from 'components/common/Container';
-import Map from 'components/MainPage/Map';
-import SearchLocation from 'components/MainPage/SearchLocation';
-import SearchRange from 'components/MainPage/SearchRange';
+import Map from 'components/Main/Map';
+import SearchLocation from 'components/Main/SearchLocation';
+import SearchRange from 'components/Main/SearchRange';
 import 'styles/MainPage/MainPage.scss';
 
 const RecommendButton = styled(Button)`

@@ -6,6 +6,7 @@ import Map from 'components/Main/Map';
 import SearchLocation from 'components/Main/SearchLocation';
 import SearchRange from 'components/Main/SearchRange';
 import 'styles/MainPage/MainPage.scss';
+import { MainProvider } from 'components/Main/MainContext';
 
 const RecommendButton = styled(Button)`
   background-color: #92b4ec;
@@ -21,22 +22,24 @@ const RecommendButton = styled(Button)`
 function MainPage() {
   return (
     <Container>
-      <Map />
-      <div className="search">
-        <Grid
-          container
-          className="search-inner"
-          direction="column"
-          justifyContent="center"
-        >
-          <SearchLocation />
-          <SearchRange />
-          <RecommendButton className="search__button" variant="contained" size="large" sx={{marginTop: "15px"}}>
-            추천 시작
-          </RecommendButton>
-        </Grid>
-      </div>
-      <BottomNav />
+      <MainProvider>
+        <Map />
+        <div className="search">
+          <Grid
+            container
+            className="search-inner"
+            direction="column"
+            justifyContent="center"
+          >
+            <SearchLocation />
+            <SearchRange />
+            <RecommendButton className="search__button" variant="contained" size="large" sx={{marginTop: "15px"}}>
+              추천 시작
+            </RecommendButton>
+          </Grid>
+        </div>
+        <BottomNav />
+      </MainProvider>
     </Container>
   );
 }

@@ -4,7 +4,7 @@ import { gapi } from 'gapi-script';
 import logo from '../assets/images/Logo.png'
 import mascot from '../assets/images/WalkingGirl.gif'
 import Container from 'components/common/Container';
-import 'styles/MainPage/MainPage.scss';
+import 'styles/LoginPage/LoginPage.scss';
 
 const clientId = '835634401246-ddaeprck32cbkjmajefeffl5vh7f5kd6.apps.googleusercontent.com'
 

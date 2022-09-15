@@ -1,11 +1,14 @@
 import React from "react";
 import BottomNav from 'components/common/BottomNav';
+import Container from 'components/common/Container';
 
 function OtherUserPage() {
   return (
     <>
-    <h1>타유저 선택</h1>
-    <BottomNav/>
+    <Container>
+      <h1>타유저 선택</h1>
+      <BottomNav/>
+    </Container>
     </>
   );
 }

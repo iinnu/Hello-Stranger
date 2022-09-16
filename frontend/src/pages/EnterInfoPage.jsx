@@ -36,22 +36,24 @@ const EnterInfoPage = () => {
         speed: 500,
         slidesToShow:1,
         slidesToScroll: 1,
-        nextArrow: (
-            <NextArrow />
-          ),
-          prevArrow: (
-            <PrevArrow />
-          ),
+        // nextArrow: (
+        //     <NextArrow />
+        //   ),
+        //   prevArrow: (
+        //     <PrevArrow />
+        //   ),
     };
     return(
         <div>
           <Container>
-            <Slider {...settings} className="UserInput">
-                <EnterInfoMusic className="UserInput__Music"/>
-                <EnterInfoFood className="UserInput__Food"/>
-                <EnterInfoActivity className="UserInput__Activity"/>
-                <StartApp className="UserInput__Start"/>
-            </Slider>
+            <div className="UserInput">
+              <Slider {...settings}>
+                  <EnterInfoMusic className="UserInput__Music"/>
+                  <EnterInfoFood className="UserInput__Food"/>
+                  <EnterInfoActivity className="UserInput__Activity"/>
+                  <StartApp className="UserInput__Start"/>
+              </Slider>
+            </div>
           </Container>
         </div>
     );

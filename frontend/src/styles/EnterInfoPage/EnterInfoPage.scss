@@ -2,6 +2,9 @@
 
 .UserInput{
     max-width: 400px;
+    width: 80%;
+    margin-left: 10%;
+    height: calc($viewport-height - $map-height - 56px);
     &__Music{
 
     }
@@ -9,7 +12,20 @@
         
     }
     &__Activity{
-        
+        &__Title{
+            height: 150px;
+            margin-top: 10%;
+            margin-bottom: 30%;
+        }
+        &__Item{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &__Mascot{
+                max-width: 400px;
+                width: 80%;
+            }
+        }
     }
     &__Start{
         

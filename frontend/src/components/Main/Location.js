@@ -1,10 +1,10 @@
 import useGeocoder from 'hook/useGeocoder';
 import { useEffect, useState } from 'react';
-import { useMainstate } from './MainContext';
+import { useMainState } from './MainContext';
 
 function Location({ handleOpen }) {
   const [postCode, setPostCode] = useState('경북 구미시 3공단3로 302');
-  const { location } = useMainstate();
+  const { location } = useMainState();
   const { coord2Address } = useGeocoder();
 
   const callback = (result) => {

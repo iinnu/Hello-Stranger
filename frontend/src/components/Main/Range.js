@@ -1,5 +1,6 @@
-import styled from "@emotion/styled";
-import { Slider } from "@mui/material";
+import styled from '@emotion/styled';
+import { Slider } from '@mui/material';
+import { useMainDispatch, useMainState } from './MainContext';
 
 const PrettoSlider = styled(Slider)({
   color: '#92B4EC',
@@ -46,14 +47,22 @@ function valuetext(value) {
 }
 
 function Range() {
+  const { range } = useMainState();
+  const dispatch = useMainDispatch();
+
+  const handleChange = (event, value) => {
+    dispatch({ type: 'range', range: value });
+  };
+
   return (
     <div className="search__range">
       <div className="search__title">검색 범위</div>
       <PrettoSlider
         aria-label="Search range"
-        defaultValue={2}
         getAriaValueText={valuetext}
         valueLabelDisplay="auto"
+        value={range}
+        onChange={handleChange}
         step={1}
         marks
         min={1}

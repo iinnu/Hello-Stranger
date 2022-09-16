@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Loading from './Loading';
-import { useMainDispatch, useMainstate } from './MainContext';
+import { useMainDispatch, useMainState } from './MainContext';
 
 const { kakao, navigator } = window;
 
@@ -12,7 +12,7 @@ const geolocationOptions = {
 
 const Map = () => {
   const [loading, setLoading] = useState(true);
-  const { location } = useMainstate();
+  const { location } = useMainState();
   const dispatch = useMainDispatch();
 
   useEffect(() => {

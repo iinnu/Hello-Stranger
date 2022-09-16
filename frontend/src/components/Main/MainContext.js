@@ -11,7 +11,7 @@ function reducer(state, action) {
     case 'location':
       return { ...state, location: action.location };
     case 'range':
-      return { ...state, location: action.range };
+      return { ...state, range: action.range };
     default:
       throw new Error();
   }
@@ -33,7 +33,7 @@ export function MainProvider({ children }) {
 }
 
 /* context custom hook */
-export function useMainstate() {
+export function useMainState() {
   return useContext(MainStateContext);
 }
 

@@ -1,21 +1,7 @@
-import styled from '@emotion/styled';
-import { TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useMainstate } from './MainContext';
 
 const { kakao } = window;
-
-const Address = styled('button')`
-  width: 100%;
-  background-color: white;
-  padding: 12px 10px;
-  cursor: pointer;
-  text-align: start;
-  color: #666;
-  font-size: 0.9em;
-  border-radius: 5px;
-  border: 1px solid gray;
-`;
 
 function Location() {
   const { location } = useMainstate();
@@ -41,7 +27,7 @@ function Location() {
   return (
     <div className="search__location">
       <div className="search__title title--top">검색 기준 위치</div>
-      <Address>{postCode}</Address>
+      <button className="search__address">{postCode}</button>
     </div>
   );
 }

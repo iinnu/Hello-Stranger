@@ -4,11 +4,12 @@
     max-width: 400px;
     width: 80%;
     margin-left: 10%;
+    &__Title{
+        height: 150px;
+        margin-top: 10%;
+        margin-bottom: 30%;
+    }
     &__First{
-        &__Title{
-            margin-top: 10%;
-            margin-bottom: 30%;
-        }
         &__Item{
             display: flex;
             justify-content: center;
@@ -20,7 +21,15 @@
         }
     }
     &__Second{
-
+        &__Item{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &__Mascot{
+                max-width: 400px;
+                width: 80%;
+            }
+        }
     }
     &__Third{
 

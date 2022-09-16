@@ -46,12 +46,14 @@ const EnterInfoGuidePage = () => {
     return(
         <div>
           <Container>
-            <Slider {...settings} className="Guide">
-                <EnterInfoGuideFirst className="Guide__First"/>
-                <EnterInfoGuideSecond className="Guide__Second"/>
-                <EnterInfoGuideThird className="Guide__Third"/>
-                <EnterInfoGuideForth className="Guide__Forth"/>
-            </Slider>
+            <div className="Guide">
+              <Slider {...settings}>
+                  <EnterInfoGuideFirst className="Guide__First"/>
+                  <EnterInfoGuideSecond className="Guide__Second"/>
+                  <EnterInfoGuideThird className="Guide__Third"/>
+                  <EnterInfoGuideForth className="Guide__Forth"/>
+              </Slider>
+            </div>
           </Container>
         </div>
     );

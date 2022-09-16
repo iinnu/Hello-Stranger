@@ -56,7 +56,7 @@ function Range() {
 
   return (
     <div className="search__range">
-      <div className="search__title">검색 범위</div>
+      <div className="search__title">검색 범위 (km)</div>
       <PrettoSlider
         aria-label="Search range"
         getAriaValueText={valuetext}

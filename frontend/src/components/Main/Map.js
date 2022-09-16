@@ -12,7 +12,7 @@ const geolocationOptions = {
 
 const Map = () => {
   const [loading, setLoading] = useState(true);
-  const { location } = useMainState();
+  const { location, range } = useMainState();
   const dispatch = useMainDispatch();
 
   useEffect(() => {
@@ -47,22 +47,48 @@ const Map = () => {
     );
   }, []);
 
+  // 지도 확대 레벨 구하기
+  const getLevel = () => {
+    switch (range) {
+      case 1:
+        return 5;
+      case 2:
+        return 6;
+      case 3:
+        return 7;
+      default:
+        return 8;
+    }
+  };
+
   useEffect(() => {
     if (!loading) {
       const container = document.getElementById('map');
       const { lat, lng } = location;
       const options = {
         center: new kakao.maps.LatLng(lat, lng),
-        level: 3, // 지도 확대 레벨
+        level: getLevel(), // 지도 확대 레벨
       };
       const map = new kakao.maps.Map(container, options);
+      // 지도에 마커 생성
       const markerPosition = new kakao.maps.LatLng(lat, lng);
       const marker = new kakao.maps.Marker({
         position: markerPosition,
       });
       marker.setMap(map);
+      // 지도에 검색 범위 표시
+      const circle = new kakao.maps.Circle({
+        center: new kakao.maps.LatLng(lat, lng),
+        radius: range * 1000,
+        strokeWeight: 1.5,
+        strokeColor: '#6D8EC2',
+        strokeOpacity: 1,
+        fillColor: '#92b4ec',
+        fillOpacity: 0.3,
+      });
+      circle.setMap(map);
     }
-  }, [location]);
+  }, [location, range]);
 
   return (
     <div id="map" className="search__map">

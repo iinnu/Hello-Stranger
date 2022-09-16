@@ -3,6 +3,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DaumPostcode from 'react-daum-postcode';
 import 'styles/MainPage/Postcode.scss';
 
+const { kakao } = window;
+
 const boxStyle = {
   position: 'relative',
   width: '100%',
@@ -11,21 +13,9 @@ const boxStyle = {
 
 export default function Postcode({ handleClose }) {
   const handleComplete = (data) => {
-    let fullAddress = data.address;
-    let extraAddress = '';
-
-    if (data.addressType === 'R') {
-      if (data.bname !== '') {
-        extraAddress += data.bname;
-      }
-      if (data.buildingName !== '') {
-        extraAddress +=
-          extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
-      }
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
-    }
-
-    console.log(fullAddress);
+    const address = data.roadAddress ?? data.jibunAddress;
+    console.log(address);
+    handleClose();
   };
 
   return (

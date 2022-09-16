@@ -3,7 +3,7 @@ import { useMainstate } from './MainContext';
 
 const { kakao } = window;
 
-function Location() {
+function Location({ handleOpen }) {
   const { location } = useMainstate();
   const [postCode, setPostCode] = useState('');
 
@@ -27,7 +27,9 @@ function Location() {
   return (
     <div className="search__location">
       <div className="search__title title--top">검색 기준 위치</div>
-      <button className="search__address">{postCode}</button>
+      <button className="search__address" onClick={handleOpen}>
+        {postCode}
+      </button>
     </div>
   );
 }

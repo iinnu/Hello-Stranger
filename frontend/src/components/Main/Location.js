@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useMainstate } from './MainContext';
 
 function Location({ handleOpen }) {
-  const [postCode, setPostCode] = useState('');
+  const [postCode, setPostCode] = useState('경북 구미시 3공단3로 302');
   const { location } = useMainstate();
   const { coord2Address } = useGeocoder();
 

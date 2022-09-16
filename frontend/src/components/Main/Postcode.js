@@ -2,8 +2,8 @@ import { IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DaumPostcode from 'react-daum-postcode';
 import 'styles/MainPage/Postcode.scss';
-
-const { kakao } = window;
+import useGeocoder from 'hook/useGeocoder';
+import { useMainDispatch } from './MainContext';
 
 const boxStyle = {
   position: 'relative',
@@ -12,9 +12,19 @@ const boxStyle = {
 };
 
 export default function Postcode({ handleClose }) {
+  const { addressSearch } = useGeocoder();
+  const dispatch = useMainDispatch();
+
+  const callback = (result) => {
+    console.log(result);
+    const location = { lat: result[0].y, lng: result[0].x };
+    dispatch({ type: 'location', location: location });
+  };
+
   const handleComplete = (data) => {
     const address = data.roadAddress ?? data.jibunAddress;
     console.log(address);
+    addressSearch(address, callback);
     handleClose();
   };
 

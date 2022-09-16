@@ -96,6 +96,9 @@ function DetailInfoPage() {
 
       <Container>
         <Map/>
+        {isHistory && <DetailInfoTitle historyInfo={historyInfo} handleOpen={handleOpen}/>}
+        <Button onClick={handleOpen}>일정 평가</Button>
+
         <div className="detail-info">
           <Grid
             container
@@ -104,7 +107,6 @@ function DetailInfoPage() {
             justifyContent="center"
           >
             <div>{isHistory}</div>
-            {isHistory && <DetailInfoTitle historyInfo={historyInfo} handleOpen={handleOpen}/>}
             <div className="detail-info__music">플레이리스트</div>
             <div className="detail-info__food">{historyInfo.foodTitle}</div>
             <div className="detail-info__activity">{historyInfo.activityTitle}</div>

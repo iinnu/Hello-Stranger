@@ -8,6 +8,9 @@ import java.util.List;
 @Data
 @Builder
 public class ReviewRegistReq {
+
+    String title;
+    int musicId;
     String playlist_url;
     ReviewReqContent food;
     ReviewReqContent activity;

@@ -32,7 +32,8 @@ public class ReviewController {
                 "musicCategory" : "",
                 "foodCategory" : "",
                 "activityCategory" : ""
-
+                ...
+                erd 참고
          */
 
         // 리퀘스트 테스트
@@ -63,6 +64,8 @@ public class ReviewController {
                 .build();
 
         ReviewRegistReq save = ReviewRegistReq.builder()
+                .title("타이틀")
+                .musicId(1)
                 .playlist_url("플레이리스트")
                 .food(food)
                 .activity(activity)
@@ -85,6 +88,7 @@ public class ReviewController {
         for(int i = 1; i < 5; i++){
             ReviewGetResContent content = ReviewGetResContent.builder()
                     .reviewId(i)
+                    .title("제목"+i)
                     .regDate("2022:09:15")
                     .musicCategory("Waves")
                     .foodCategory("떡볶이")

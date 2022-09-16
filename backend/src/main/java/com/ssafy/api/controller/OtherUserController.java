@@ -1,22 +1,18 @@
 package com.ssafy.api.controller;
 
-import com.ssafy.api.dto.BaseInfo;
-import com.ssafy.api.dto.OtherUserSelectInfo;
-import com.ssafy.api.response.FoodRecGetRes;
-import com.ssafy.api.response.OtherUserSelectGetRes;
+import com.ssafy.api.dto.SelectInfo;
+import com.ssafy.api.response.SelectGetRes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Api(value = "타유저 API", tags = {"OtherUserSelect"})
 @RestController
@@ -27,10 +23,10 @@ public class OtherUserController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<List<OtherUserSelectGetRes>> getOtherUserSelect(){
-        List<OtherUserSelectGetRes> res = new ArrayList<>();
+    public ResponseEntity<List<SelectGetRes>> getOtherUserSelect(){
+        List<SelectGetRes> res = new ArrayList<>();
         for(int i=0;i<5;i++){
-            OtherUserSelectInfo food = OtherUserSelectInfo.builder()
+            SelectInfo food = SelectInfo.builder()
                     .id(i)
                     .address("food_address"+i)
                     .category("food_category"+i)
@@ -40,7 +36,7 @@ public class OtherUserController {
                     .name("food_name"+i)
                     .time("food_time"+i)
                     .build();
-            OtherUserSelectInfo activity = OtherUserSelectInfo.builder()
+            SelectInfo activity = SelectInfo.builder()
                     .id(i)
                     .address("activity_address"+i)
                     .category("activity_category"+i)
@@ -50,7 +46,7 @@ public class OtherUserController {
                     .name("activity_name"+i)
                     .time("activity_time"+i)
                     .build();
-            OtherUserSelectGetRes userSelect = OtherUserSelectGetRes.builder().playlistUrl("url"+i).food(food).activity(activity).build();
+            SelectGetRes userSelect = SelectGetRes.builder().playlistUrl("url"+i).food(food).activity(activity).build();
             res.add(userSelect);
         }
         return ResponseEntity.status(200).body(res);

@@ -7,6 +7,7 @@ import lombok.Data;
 @Builder
 public class ReviewGetResContent {
     int reviewId;
+    String title;
     String regDate;
     String musicCategory;
     String foodCategory;

@@ -3,7 +3,7 @@ import mascot from '../../assets/images/WalkingGirl.gif'
 const EnterInfoGuideSecond = () => {
     return (
         <div>
-            <div className='Guide__Title'>
+            <div className='Guide__Second__Title'>
                 <h2>세가지 카테고리에 대한</h2>
                 <h2>선택지를 드릴게요</h2>
             </div>

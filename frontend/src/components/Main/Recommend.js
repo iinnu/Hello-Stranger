@@ -1,5 +1,7 @@
 import { Button } from '@mui/material';
 import styled from '@emotion/styled';
+import { useMainState } from './MainContext';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const RecommendButton = styled(Button)`
   background-color: #92b4ec;
@@ -13,12 +15,21 @@ const RecommendButton = styled(Button)`
 `;
 
 function Recommend({ children }) {
+  const { location, range } = useMainState();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    console.log({ location, range });
+    navigate(`/recommend`);
+  };
+
   return (
     <RecommendButton
       className="search__button"
       variant="contained"
       size="large"
       sx={{ marginTop: '15px' }}
+      onClick={handleClick}
     >
       {children}
     </RecommendButton>

@@ -8,25 +8,24 @@ import Container from "components/common/Container";
 import Grid from "@mui/material/Grid";
 import BottomNav from "components/common/BottomNav";
 import DetailInfoTitle from "components/DetailInfo/DetailInfoTitle";
-import Map from 'components/DetailInfo/Map';
+import Map from "components/DetailInfo/Map";
+import styled from "@emotion/styled";
 
 import "styles/DetailInfoPage/DetailInfoPage.scss";
 
 function DetailInfoPage() {
   let { id } = useParams();
   const navigate = useNavigate();
-  let isHistory = true
+  let isHistory = true;
   // 지금은 랜덤으로 받지만, 여기에 axios 요청이 들어갈 것
-  if(id === undefined){
-    isHistory = false
-    id = Math.floor(( Math.random() * ( 5 - 1 )  ) + 1)
-    console.log(id)
+  if (id === undefined) {
+    isHistory = false;
+    id = Math.floor(Math.random() * (5 - 1) + 1);
+    console.log(id);
   }
-  useEffect(
-    function test(){
-      console.log('isHistory',isHistory)
-    },[]
-  )
+  useEffect(function test() {
+    console.log("isHistory", isHistory);
+  }, []);
   // useEffect(
   //   //axios 함수 통해서 historyId에 해당하는 유저의 일정 뽑아오기가 진행되어야 함
   //   console.log(`useparams id ${id}, ${typeof(id)}`),
@@ -42,7 +41,7 @@ function DetailInfoPage() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: 200,
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -95,9 +94,13 @@ function DetailInfoPage() {
       </Modal>
 
       <Container>
-        <Map/>
-        {isHistory && <DetailInfoTitle historyInfo={historyInfo} handleOpen={handleOpen}/>}
-        <Button onClick={handleOpen}>일정 평가</Button>
+        <Map />
+        {isHistory && (
+          <DetailInfoTitle historyInfo={historyInfo} handleOpen={handleOpen} />
+        )}
+        {/* <FeedbackButton variant="contained" onClick={handleOpen}>
+          일 정<b />평 가
+        </FeedbackButton> */}
 
         <div className="detail-info">
           <Grid
@@ -109,7 +112,9 @@ function DetailInfoPage() {
             <div>{isHistory}</div>
             <div className="detail-info__music">플레이리스트</div>
             <div className="detail-info__food">{historyInfo.foodTitle}</div>
-            <div className="detail-info__activity">{historyInfo.activityTitle}</div>
+            <div className="detail-info__activity">
+              {historyInfo.activityTitle}
+            </div>
           </Grid>
         </div>
         <BottomNav />

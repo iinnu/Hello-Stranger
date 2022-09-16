@@ -22,6 +22,11 @@
         }
     }
     &__Second{
+        &__Title{
+            height: 150px;
+            margin-top: 10%;
+            margin-bottom: 30%;
+        }
         &__Item{
             display: flex;
             justify-content: center;
@@ -33,6 +38,11 @@
         }
     }
     &__Third{
+        &__Title{
+            height: 150px;
+            margin-top: 10%;
+            margin-bottom: 10%;
+        }
         &__Item{
             display: flex;
             flex-flow: column;
@@ -45,6 +55,20 @@
         }
     }
     &__Forth{
-
+        &__Title{
+            height: 150px;
+            margin-top: 10%;
+            margin-bottom: 30%;
+        }
+        &__Item{
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            &__Mascot{
+                max-width: 400px;
+                width: 80%;
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class OtherUserSelectInfo {
+public class SelectInfo {
     private int id;
     private String category;
     private String name;

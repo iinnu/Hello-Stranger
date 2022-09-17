@@ -1,13 +1,28 @@
+import { IconButton } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
 import { useEffect, useState } from 'react';
 import Loading from './Loading';
 import { useMainDispatch, useMainState } from './MainContext';
 
-const { kakao, navigator } = window;
+const { kakao, navigator, localStorage } = window;
 
 const geolocationOptions = {
   enableHighAccuracy: true,
   timeout: 1000 * 60 * 1, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
   maximumAge: 1000 * 3600 * 24, // 24 hour
+};
+
+const setCurrentLocation = (location) => {
+  const current = localStorage.getItem('current');
+
+  if (!current) {
+    localStorage.setItem('current', JSON.stringify(location));
+  } else {
+    const storedLocation = JSON.parse(current);
+    if (location.lat !== storedLocation.lat) {
+      localStorage.setItem('current', JSON.stringify(location));
+    }
+  }
 };
 
 const Map = () => {
@@ -26,12 +41,13 @@ const Map = () => {
     // Geolocation의 getCurrentPosition 메소드에 대한 성공 콜백 핸들러
     const handleSuccess = (pos) => {
       const { latitude, longitude } = pos.coords;
-      // setLocation({ lat: latitude, lng: longitude });
+      const location = { lat: latitude, lng: longitude };
       dispatch({
         type: 'location',
-        location: { lat: latitude, lng: longitude },
+        location: location,
       });
       setLoading(false);
+      setCurrentLocation(location);
     };
 
     // Geolocation의 getCurrentPosition 메소드에 대한 실패 콜백 핸들러
@@ -63,6 +79,7 @@ const Map = () => {
 
   useEffect(() => {
     if (!loading) {
+      // 지도 그리기
       const container = document.getElementById('map');
       const { lat, lng } = location;
       const options = {
@@ -90,9 +107,23 @@ const Map = () => {
     }
   }, [location, range]);
 
+  const resetLocation = () => {
+    const current = JSON.parse(localStorage.getItem('current'));
+    if (current.lat !== location.lat) {
+      dispatch({ type: 'location', location: current });
+    }
+  };
+
   return (
     <div id="map" className="search__map">
       {loading && <Loading />}
+      {!loading && (
+        <div className="map__home">
+          <IconButton aria-label="search-home" onClick={resetLocation}>
+            <HomeIcon />
+          </IconButton>
+        </div>
+      )}
     </div>
   );
 };

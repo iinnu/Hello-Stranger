@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import styled from '@emotion/styled';
-import { useMainState } from './MainContext';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useMainState } from '../MainContext';
+import { useNavigate } from 'react-router-dom';
 
 const RecommendButton = styled(Button)`
   background-color: #92b4ec;

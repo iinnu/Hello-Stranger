@@ -1,23 +1,41 @@
-import DaumPostcodeEmbed from 'react-daum-postcode';
+import { IconButton } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import DaumPostcode from 'react-daum-postcode';
+import 'styles/MainPage/Postcode.scss';
+import useGeocoder from 'hook/useGeocoder';
+import { useMainDispatch } from './MainContext';
 
-export default function Postcode() {
-  const handleComplete = (data) => {
-    let fullAddress = data.address;
-    let extraAddress = '';
+const boxStyle = {
+  position: 'relative',
+  width: '100%',
+  height: 'calc(100% - 40px)',
+};
 
-    if (data.addressType === 'R') {
-      if (data.bname !== '') {
-        extraAddress += data.bname;
-      }
-      if (data.buildingName !== '') {
-        extraAddress +=
-          extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
-      }
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
-    }
+export default function Postcode({ handleClose }) {
+  const { addressSearch } = useGeocoder();
+  const dispatch = useMainDispatch();
 
-    console.log(fullAddress);
+  const callback = (result) => {
+    console.log(result);
+    const location = { lat: result[0].y, lng: result[0].x };
+    dispatch({ type: 'location', location: location });
   };
 
-  return <DaumPostcodeEmbed onComplete={handleComplete} />;
+  const handleComplete = (data) => {
+    const address = data.roadAddress ?? data.jibunAddress;
+    console.log(address);
+    addressSearch(address, callback);
+    handleClose();
+  };
+
+  return (
+    <div className="postcode">
+      <div className="postcode__header">
+        <IconButton aria-label="postcode-close" onClick={handleClose}>
+          <ArrowBackIcon />
+        </IconButton>
+      </div>
+      <DaumPostcode onComplete={handleComplete} style={boxStyle} />
+    </div>
+  );
 }

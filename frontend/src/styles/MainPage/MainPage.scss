@@ -20,6 +20,18 @@
     color: #444;
   }
 
+  &__address {
+    width: 100%;
+    background-color: white;
+    padding: 12px 10px;
+    cursor: pointer;
+    text-align: start;
+    color: #666;
+    font-size: 0.9em;
+    border-radius: 5px;
+    border: 1px solid gray;
+  }
+
   &__range {
     margin-top: 20px;
   }
@@ -33,5 +45,19 @@
 .title {
   &--top {
     padding-bottom: 5px;
+  }
+}
+
+.map {
+  &__home {
+    z-index: 1200;
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 5px 4px 6px -3px #7f7f7f;
+    bottom: 0;
+    right: 0;
+    margin-right: 25px;
+    margin-bottom: 25px;
   }
 }

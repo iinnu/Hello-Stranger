@@ -9,7 +9,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 300,
+  width: 270,
   bgcolor: 'background.paper',
   boxShadow: 3,
   p: 4,
@@ -25,9 +25,9 @@ export default function CustomModal({ open, handleConfirm, handleCancle }) {
         aria-labelledby="modal-custom-title"
         aria-describedby="modal-custom-description"
       >
-        <Box sx={style}>
+        <Box className="modal-box" sx={style}>
           추천을 그만 두시겠습니까?
-          <div>
+          <div className="modal-button">
             <Button variant="contained" onClick={handleConfirm}>
               확인
             </Button>

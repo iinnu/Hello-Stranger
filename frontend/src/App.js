@@ -7,6 +7,8 @@ import MainPage from 'pages/MainPage';
 import LoginPage from './pages/LoginPage.jsx';
 import EnterInfoGuide from './pages/EnterInfoGuidePage.jsx';
 import EnterInfo from './pages/EnterInfoPage.jsx';
+import RecommendPage from 'pages/RecommendPage.jsx';
+import RecommendResultPage from 'pages/RecommendResultPage.jsx';
 
 function App() {
   return (
@@ -17,7 +19,8 @@ function App() {
           <Route path="/guide" element={<EnterInfoGuide />} />
           <Route path="/info" element={<EnterInfo />} />
           <Route path="/main" element={<MainPage />} />
-          <Route path="/recommend" />
+          <Route path="/recommend" element={<RecommendPage />} />
+          <Route path="/result" element={<RecommendResultPage />} />
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/history/:historyId" element={<History />} />
           <Route path="/near" element={<NearAnalysisPage />} />

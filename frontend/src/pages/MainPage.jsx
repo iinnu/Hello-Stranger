@@ -9,6 +9,7 @@ import { MainProvider } from 'components/Main/MainContext';
 import Recommend from 'components/Main/Search/Recommend';
 import Postcode from 'components/Main/Search/Postcode';
 import { useState } from 'react';
+import HistoryAlert from 'components/Main/HistoryAlert';
 
 function MainPage() {
   const [open, setOpen] = useState(false);
@@ -24,6 +25,7 @@ function MainPage() {
   return (
     <MainProvider>
       <Container>
+        <HistoryAlert />
         <Map />
         <div className="search">
           <Grid

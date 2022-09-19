@@ -1,9 +1,6 @@
 package com.ssafy.api.controller;
 
-import com.ssafy.api.dto.CategoryChoiceYN;
-import com.ssafy.api.dto.UserChoiceGetResActivity;
-import com.ssafy.api.dto.UserChoiceGetResFood;
-import com.ssafy.api.dto.UserChoiceGetResMusic;
+import com.ssafy.api.dto.*;
 import com.ssafy.api.request.CategoryChoiceReq;
 import com.ssafy.api.request.UserRegistReq;
 import com.ssafy.api.response.BaseResponseBody;
@@ -67,9 +64,10 @@ public class UserController {
     })
     public ResponseEntity<UserChoiceGetRes> getUserChoice(){
         UserChoiceGetResMusic music = UserChoiceGetResMusic.builder()
-                .musicCategory("팝")
+                .musicId(1)
                 .musicName("Waves")
                 .musicArtist("Paige")
+                .musicImgUrl("https://firebasestorage.googleapis.com/v0/b/viewdle-b6bf5.appspot.com/o/ch%40ssafy.com_profile?alt=media&token=e0584d41-eced-40bb-b79d-e395f1203855")
                 .build();
 
         UserChoiceGetResFood food = UserChoiceGetResFood.builder()
@@ -116,8 +114,8 @@ public class UserController {
     public ResponseEntity<? extends BaseResponseBody> registUserChoice(@RequestBody CategoryChoiceReq categoryChoiceReq){
 
         // 재구현시 함수화
-        List<CategoryChoiceYN> music = categoryChoiceReq.getMusic();
-        for(CategoryChoiceYN c : music){
+        List<IdChoiceYN> music = categoryChoiceReq.getMusic();
+        for(IdChoiceYN c : music){
             String yn = c.getChoiceYN();
             if("Y".equals(yn) || "N".equals(yn)) continue;
             else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));

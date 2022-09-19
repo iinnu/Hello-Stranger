@@ -7,7 +7,8 @@ import lombok.Data;
 @Builder
 public class UserChoiceGetResMusic {
 
-    String musicCategory;
+    int musicId;
     String musicName;
     String musicArtist;
+    String musicImgUrl;
 }

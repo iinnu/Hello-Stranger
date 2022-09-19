@@ -1,6 +1,7 @@
 package com.ssafy.api.request;
 
 import com.ssafy.api.dto.CategoryChoiceYN;
+import com.ssafy.api.dto.IdChoiceYN;
 import lombok.Data;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 @Data
 public class CategoryChoiceReq {
 
-    List<CategoryChoiceYN> music;
+    List<IdChoiceYN> music;
     List<CategoryChoiceYN> food;
     List<CategoryChoiceYN> activity;
 }

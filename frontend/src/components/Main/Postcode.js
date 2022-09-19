@@ -1,7 +1,7 @@
 import { IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DaumPostcode from 'react-daum-postcode';
-import 'styles/MainPage/Postcode.scss';
+import 'styles/Main/Postcode.scss';
 import useGeocoder from 'hook/useGeocoder';
 import { useMainDispatch } from './MainContext';
 

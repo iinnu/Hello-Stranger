@@ -69,9 +69,9 @@ function Playlist() {
   const setCurrent = useSetCurrentMusic();
 
   useEffect(() => {
-    setCurrent(playlist[0]);  
-  }, [])
-  
+    setCurrent(playlist[0]);
+  }, []);
+
   return (
     <div className="playlist">
       <div className="playlist__current-music">
@@ -82,8 +82,11 @@ function Playlist() {
         {playlist.map((item) => (
           <MusicItem
             key={item.musicID}
-            title={item.musicName}
-            artist={item.musicArtist}
+            active={[
+              'list__item',
+              current?.musicID === item.musicID ? 'list__item--active' : '',
+            ]}
+            item={item}
           />
         ))}
       </div>

@@ -1,8 +1,17 @@
-function MusicItem({ title, artist }) {
+import { useSetCurrentMusic } from "./MusicContext";
+
+function MusicItem({ active, item }) {
+  let className = active[0] + " " + active[1];
+  const setCurrent = useSetCurrentMusic();
+
+  const handleClick = () => {
+    setCurrent(item);
+  }
+
   return (
-    <div className="list__item">
-      <span className="item__title">{title}</span>
-      <span className="item__artist">{artist}</span>
+    <div className={className} onClick={handleClick}>
+      <span className="item__title">{item.musicName}</span>
+      <span className="item__artist">{item.musicArtist}</span>
     </div>
   );
 }

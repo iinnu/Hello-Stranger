@@ -5,6 +5,7 @@ import logo from '../assets/images/Logo.png'
 import mascot from '../assets/images/WalkingGirl.gif'
 import Container from 'components/common/Container';
 import 'styles/LoginPage/LoginPage.scss';
+import axios from "axios";
 
 const clientId = '835634401246-ddaeprck32cbkjmajefeffl5vh7f5kd6.apps.googleusercontent.com'
 
@@ -21,6 +22,23 @@ const LoginPage = ({ onSocial }) => {
 
     const onSuccess = (response) => {
         console.log(response);
+        console.log(response.tokenId)
+        axios({
+            url: 'http://localhost:8081/api/user',
+            method: 'post',
+            data:{
+                "idToken" : response.tokenId
+            }
+        })
+        .then(res => {
+            console.log(res)
+            window.location.href ="/main"
+        })
+        .catch(err=>{
+            console.log(err)
+            console.log('이런샹')
+            window.location.href ="/guide"
+        })
     };
 
     const onFailure = (response) => {

@@ -45,10 +45,12 @@ $list-height: calc(100% - $current-music - 20px);
   height: $album-height;
   border-radius: 20px 20px 0 0;
   position: relative;
-  background-color: rgb(215, 215, 215);
 
-  & img {
-    height: 100%;
+  &__darken {
+    width: 100%;
+    height: $album-height;
+    background-color: rgba(0, 0, 0, 0.28);
+    border-radius: 20px 20px 0 0;
   }
 
   &__play-button {

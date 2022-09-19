@@ -1,7 +1,7 @@
 import 'styles/Recommend/Music.scss';
+import { MusicProvider } from './MusicContext';
 import Title from '../Title';
 import AlbumCover from './AlbumCover';
-import { MusicProvider } from './MusicContext';
 import Playlist from './Playlist';
 
 function Music() {

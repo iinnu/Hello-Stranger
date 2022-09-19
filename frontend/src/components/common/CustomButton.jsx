@@ -1,17 +1,11 @@
-import styled from '@emotion/styled';
 import { Button } from '@mui/material';
-
-const BlueButton = styled(Button)`
-  background-color: #92b4ec;
-  border: none;
-  box-shadow: 0px 2px 2px 0px rgb(0 0 0 / 14%);
-  font-weight: 600;
-
-  &.MuiButton-root:hover {
-    background-color: #92b4ec;
-  }
-`;
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
 
 export default function CustomButton({ children, ...props }) {
-  return <BlueButton {...props}>{children}</BlueButton>;
+  return (
+    <ThemeProvider theme={theme}>
+      <Button {...props}>{children}</Button>
+    </ThemeProvider>
+  );
 }

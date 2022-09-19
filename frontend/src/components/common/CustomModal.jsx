@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import CustomButton from './CustomButton';
 
 const style = {
   position: 'absolute',
@@ -28,12 +29,12 @@ export default function CustomModal({ open, handleConfirm, handleCancle }) {
         <Box className="modal-box" sx={style}>
           추천을 그만 두시겠습니까?
           <div className="modal-button">
-            <Button variant="contained" onClick={handleConfirm}>
+            <CustomButton variant="contained" onClick={handleConfirm}>
               확인
-            </Button>
-            <Button variant="outlined" onClick={handleCancle}>
+            </CustomButton>
+            <CustomButton variant="outlined" onClick={handleCancle}>
               취소
-            </Button>
+            </CustomButton>
           </div>
         </Box>
       </Modal>

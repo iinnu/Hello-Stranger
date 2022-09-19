@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useCurrentMusic, useSetCurrentMusic } from './MusicContext';
 import MusicItem from './MusicItem';
 
 const playlist = [
@@ -63,11 +65,18 @@ const playlist = [
 ];
 
 function Playlist() {
+  const current = useCurrentMusic();
+  const setCurrent = useSetCurrentMusic();
+
+  useEffect(() => {
+    setCurrent(playlist[0]);  
+  }, [])
+  
   return (
     <div className="playlist">
       <div className="playlist__current-music">
-        <div className="current-music__title">Afraid</div>
-        <div className="current-music__artist">DAY6</div>
+        <div className="current-music__title">{current?.musicName}</div>
+        <div className="current-music__artist">{current?.musicArtist}</div>
       </div>
       <div className="playlist__list">
         {playlist.map((item) => (

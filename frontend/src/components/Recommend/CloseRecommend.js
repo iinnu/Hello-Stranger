@@ -17,18 +17,18 @@ function CloseRecommend() {
   };
 
   return (
-    <>
-      <div>
-        <IconButton onClick={() => setOpen(true)}>
-          <CloseIcon />
-        </IconButton>
-      </div>
+    <div>
+      <IconButton onClick={() => setOpen(true)}>
+        <CloseIcon />
+      </IconButton>
       <CustomModal
         open={open}
         handleConfirm={handleConfirm}
         handleCancle={handleCancle}
-      />
-    </>
+      >
+        추천을 그만 두시겠습니까?
+      </CustomModal>
+    </div>
   );
 }
 

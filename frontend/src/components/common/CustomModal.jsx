@@ -1,7 +1,5 @@
-import * as React from 'react';
+import 'styles/common/CustomModal.scss';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CustomButton from './CustomButton';
 
@@ -10,14 +8,19 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 270,
+  width: 250,
   bgcolor: 'background.paper',
   boxShadow: 3,
   p: 4,
   borderRadius: 2,
 };
 
-export default function CustomModal({ open, handleConfirm, handleCancle }) {
+export default function CustomModal({
+  children,
+  open,
+  handleConfirm,
+  handleCancle,
+}) {
   return (
     <div>
       <Modal
@@ -26,10 +29,10 @@ export default function CustomModal({ open, handleConfirm, handleCancle }) {
         aria-labelledby="modal-custom-title"
         aria-describedby="modal-custom-description"
       >
-        <Box className="modal-box" sx={style}>
-          추천을 그만 두시겠습니까?
-          <div className="modal-button">
-            <CustomButton variant="contained" onClick={handleConfirm}>
+        <Box className="modal" sx={style}>
+          <div className="modal__content">{children}</div>
+          <div className="modal__button">
+            <CustomButton className="button__confirm" variant="contained" onClick={handleConfirm}>
               확인
             </CustomButton>
             <CustomButton variant="outlined" onClick={handleCancle}>

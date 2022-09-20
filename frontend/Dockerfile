@@ -2,7 +2,7 @@ FROM node:16.17.0 as build-stage
 WORKDIR /var/jenkins_home/workspace/deploy/frontend
 
 COPY package*.json ./
-RUN npm install
+RUN npm install --force
 COPY . .
 RUN npm run build
 

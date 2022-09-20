@@ -25,4 +25,12 @@ $padding-side: 20px;
   justify-content: space-between;
   background-color: white;
   padding: 5px 0;
+
+  &__page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: gray;
+    font-size: 0.9em;
+  }
 }

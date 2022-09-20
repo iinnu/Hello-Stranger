@@ -103,22 +103,22 @@ export default function DetailInfoPage() {
   console.log(`historyInfo ${historyInfo}`);
 
   //Drawer 관련 부분
-  const [openDetail, setOpenDetail] = useState(false);
-  const [detailType, setdetailType] = useState("food");
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [type, setType] = useState("");
   function clickMusic() {
-    setOpenDetail(true);
-    setdetailType("music");
+    setOpenDrawer(true);
+    setType("historyMusic");
   }
   function clickFood() {
-    setOpenDetail(true);
-    setdetailType("food");
+    setOpenDrawer(true);
+    setType("historyFood");
   }
   function clickActivity() {
-    setOpenDetail(true);
-    setdetailType("activity");
+    setOpenDrawer(true);
+    setType("historyActivity");
   }
   function closeDetail() {
-    setOpenDetail(false);
+    setOpenDrawer(false);
   }
   return (
     <>
@@ -167,8 +167,8 @@ export default function DetailInfoPage() {
                     <SkateboardingIcon />
                   </div>
                 </div>
-                <Drawer anchor="bottom" open={openDetail} onClose={closeDetail}>
-                  <DetailInfoList type={detailType} />
+                <Drawer anchor="bottom" open={openDrawer} onClose={closeDetail}>
+                  <DetailInfoList type={type} />
                 </Drawer>
               </>
             )}

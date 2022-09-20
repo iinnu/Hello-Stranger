@@ -1,10 +1,19 @@
 @import '../common/_util';
-@import './RecommendPage.scss';
 
+$padding-top: 10px;
+$padding-side: 20px;
+$top-height: 40px;
+$bottom-height: 46.5px;
+
+$music-player-height: calc($viewport-height - $top-height - 110px);
 $album-height: 200px;
 $current-music: 64px;
-$playlist-height: calc(100% - $album-height - 10px);
-$list-height: calc(100% - $current-music - 20px);
+$playlist-height: calc(
+  $music-player-height - $album-height - $bottom-height - $padding-top
+);
+$list-height: calc($playlist-height - $current-music - 20px);
+
+$playlist-background: #b5c9db;
 
 @mixin custom-scrollbar {
   overflow-y: auto;
@@ -25,16 +34,13 @@ $list-height: calc(100% - $current-music - 20px);
 }
 
 .music-player {
-  position: absolute;
-  bottom: 0;
-  display: block;
   width: 100%;
-  height: 82%;
+  height: $music-player-height;
 
   &__inner {
     margin: 0 $padding-side;
     height: 100%;
-    background-color: $playlist;
+    background-color: $playlist-background;
     border-radius: 20px 20px 0 0;
     box-shadow: 2px -2px 5px 0px #aaa;
   }
@@ -65,7 +71,7 @@ $list-height: calc(100% - $current-music - 20px);
 
 .playlist {
   height: $playlist-height;
-  padding: 10px 20px 0 20px;
+  padding: $padding-top $padding-side 0 $padding-side;
 
   &__current-music {
     height: $current-music;

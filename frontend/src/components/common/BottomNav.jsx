@@ -12,12 +12,6 @@ import PersonPinIcon from '@mui/icons-material/PersonPin';
 
 // react-router와 연결
 import { Link } from 'react-router-dom';
-
-// 기존 아이콘 - 인후
-// import SearchIcon from '@mui/icons-material/Search';
-// import HistoryIcon from '@mui/icons-material/History';
-// import LocationOnIcon from '@mui/icons-material/LocationOn';
-// import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import 'styles/common/BottomNav.scss';
 
 const BottomNavItem = styled(BottomNavigationAction)`
@@ -38,10 +32,30 @@ export default function BottomNav() {
           setValue(newValue);
         }}
       >
-        <BottomNavItem component={Link} to='/main' label="추천받기" icon={<AssistantOutlinedIcon />} />
-        <BottomNavItem component={Link} to='/history' label="다시보기" icon={<HistoryOutlinedIcon />} />
-        <BottomNavItem component={Link} to='/near' label="주변상권" icon={<LocationOnOutlinedIcon />} />
-        <BottomNavItem component={Link} to='/other' label="다른일정" icon={<PersonPinIcon />} />
+        <BottomNavItem
+          component={Link}
+          to="/main"
+          label="추천받기"
+          icon={<AssistantOutlinedIcon />}
+        />
+        <BottomNavItem
+          component={Link}
+          to="/history"
+          label="다시보기"
+          icon={<HistoryOutlinedIcon />}
+        />
+        <BottomNavItem
+          component={Link}
+          to="/near"
+          label="주변상권"
+          icon={<LocationOnOutlinedIcon />}
+        />
+        <BottomNavItem
+          component={Link}
+          to="/other"
+          label="다른일정"
+          icon={<PersonPinIcon />}
+        />
       </BottomNavigation>
     </Box>
   );

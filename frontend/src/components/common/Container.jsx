@@ -1,4 +1,4 @@
-import "styles/common/Container.scss";
+import 'styles/common/Container.scss';
 
 function Container(props) {
   return (

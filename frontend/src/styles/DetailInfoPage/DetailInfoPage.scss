@@ -1,15 +1,18 @@
 @import "../common/util";
 
+$detail-map-height: 55%;
+
 .detail-info {
   display: flex;
   flex-direction: column;
   position: relative;
-  height: calc($viewport-height - $map-height - 56px);
-  // overflow: auto;
-  padding: 30px;
+  height: calc($viewport-height - $detail-map-height - 56px);
+  overflow: scroll;
+  padding: 0 30px;
+  margin-top: 20px;
   &__map {
     width: 100%;
-    height: $map-height;
+    height: $detail-map-height;
     border-radius: 0 0 50px 50px;
     box-shadow: 0px 10px 5px -6px #adadad;
     position: relative;
@@ -70,9 +73,57 @@
     }
   }
 
+  &__music {
+    position: relative;
+    margin-top: -15%;
+    left: 8%;
+    /* justify-self: center; */
+    width: 84%;
+    height: 6%;
+    z-index: 999;
+    border-radius: 10px;
+    background-color: #fff9e0;
+    opacity: 0.8;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__card {
     width: 100%;
   }
+
+  &__list {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  &__drawer {
+    &--title {
+      font-size: 17px;
+      font-weight: bolder;
+      position: fixed;
+      width: 80%;
+      height: 30px;
+      background-color: white;
+      justify-self: center;
+    }
+
+    &--list {
+      margin-top: 30px;
+      overflow: scroll;
+    }
+  }
+}
+
+.detail-info::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+.detail-info__drawer--list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .detail-info-inner {
@@ -83,4 +134,17 @@
 ul {
   margin: 0;
   padding: 0;
+}
+
+.MuiDrawer-root {
+  .MuiPaper-root {
+    height: calc($viewport-height * 0.6);
+    padding: 40px;
+    border-radius: 20px 20px 0 0;
+    overflow: scroll;
+  }
+
+  .MuiPaper-root::-webkit-scrollbar {
+    display: none;
+  }
 }

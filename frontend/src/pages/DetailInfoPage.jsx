@@ -4,21 +4,26 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import Container from "components/common/Container";
 import Grid from "@mui/material/Grid";
+import Drawer from "@mui/material/Drawer";
+
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import SkateboardingIcon from "@mui/icons-material/Skateboarding";
+import Container from "components/common/Container";
 import PlaceCard from "components/card/PlaceCard";
 import BottomNav from "components/common/BottomNav";
-import DetailInfoTitle from "components/DetailInfo/DetailInfoTitle";
-import DetailInfoList from "components/DetailInfo/DetailInfoList";
+import DetailInfoTitle from "components/DetailInfo/Title";
+import DetailInfoList from "components/DetailInfo/List";
 import Map from "components/DetailInfo/Map";
 import styled from "@emotion/styled";
 
 import "styles/DetailInfoPage/DetailInfoPage.scss";
 
-function DetailInfoPage() {
+export default function DetailInfoPage() {
   let { id } = useParams();
   const navigate = useNavigate();
   let isHistory = true;
+
   // 지금은 랜덤으로 받지만, 여기에 axios 요청이 들어갈 것
   if (id === undefined) {
     isHistory = false;
@@ -49,7 +54,6 @@ function DetailInfoPage() {
     boxShadow: 24,
     p: 4,
   };
-
   const cardList = {
     1: {
       title: "일정 제목1",
@@ -96,6 +100,21 @@ function DetailInfoPage() {
 
   const historyInfo = cardList[id];
   console.log(`historyInfo ${historyInfo}`);
+
+  //Drawer 관련 부분
+  const [openDetail, setOpenDetail] = useState(false);
+  const [detailType, setdetailType] = useState("food");
+  function clickFood() {
+    setOpenDetail(true);
+    setdetailType("food");
+  }
+  function clickActivity() {
+    setOpenDetail(true);
+    setdetailType("activity");
+  }
+  function closeDetail() {
+    setOpenDetail(false);
+  }
   return (
     <>
       <Modal
@@ -122,29 +141,31 @@ function DetailInfoPage() {
           일 정<b />평 가
         </FeedbackButton> */}
 
+        <div className="detail-info__music">플레이리스트</div>
         <div className="detail-info">
-          <Grid
-            container
-            className="detail-info-inner"
-          >
-            <div>{isHistory}</div>
-            <div className="detail-info__music">플레이리스트</div>
+          <Grid container className="detail-info-inner">
             <PlaceCard placeInfo={placeList[1]} />
             <PlaceCard placeInfo={placeList[2]} />
             {isHistory && (
               <>
-                <div className="detail-info__list--title">
-                  선택되지 않은 카테고리 목록
+                <div className="detail-info__list">
+                  <div className="detail-info__list--food" onClick={clickFood}>
+                    <FastfoodIcon />
+                  </div>
+                  <div
+                    className="detail-info__list--activity"
+                    onClick={clickActivity}
+                  >
+                    <SkateboardingIcon />
+                  </div>
                 </div>
-                <div className="detail-info__list--food">
-                  선택되지 않은 음식 카테고리
-                </div>
-                <div className="detail-info__list--activity">
-                  선택되지 않은 활동 카테고리
-                </div>
-                {/* https://mui.com/material-ui/react-drawer/ */}
-                {/* mui drawer swipeable 사용*/}
-                <DetailInfoList />
+                <Drawer
+                  anchor="bottom"
+                  open={openDetail}
+                  onClose={closeDetail}
+                >
+                  <DetailInfoList type={detailType} />
+                </Drawer>
               </>
             )}
           </Grid>
@@ -154,5 +175,3 @@ function DetailInfoPage() {
     </>
   );
 }
-
-export default DetailInfoPage;

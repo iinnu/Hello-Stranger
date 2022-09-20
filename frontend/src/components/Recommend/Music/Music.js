@@ -1,22 +1,12 @@
 import 'styles/Recommend/Music.scss';
 import { MusicProvider } from './MusicContext';
-import usePullToRefresh from 'hook/usePullToRefresh';
 import Title from '../Title';
 import AlbumCover from './AlbumCover';
 import Playlist from './Playlist';
 
 function Music() {
-  const { div, handleTouchStart, handleTouchMove, handleTouchEnd } =
-    usePullToRefresh();
-
   return (
-    <div
-      className="recommend-content"
-      // ref={div}
-      // onTouchStart={handleTouchStart}
-      // onTouchMove={handleTouchMove}
-      // onTouchEnd={handleTouchEnd}
-    >
+    <div className="recommend-content">
       <Title>
         <>
           어떤 음악을 <br />

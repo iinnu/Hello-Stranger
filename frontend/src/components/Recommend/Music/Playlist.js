@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useCurrentMusic, useSetCurrentMusic } from './MusicContext';
+import usePullToRefresh from 'hook/usePullToRefresh';
 import MusicItem from './MusicItem';
 
 const playlist = [
@@ -72,6 +73,8 @@ const playlist = [
 function Playlist() {
   const current = useCurrentMusic();
   const setCurrent = useSetCurrentMusic();
+  const { div, handleTouchStart, handleTouchMove, handleTouchEnd } =
+    usePullToRefresh();
 
   useEffect(() => {
     setCurrent(playlist[0]);
@@ -83,7 +86,13 @@ function Playlist() {
         <div className="current-music__title">{current?.musicName}</div>
         <div className="current-music__artist">{current?.musicArtist}</div>
       </div>
-      <div className="playlist__list">
+      <div
+        className="playlist__list"
+        ref={div}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {playlist.map((item) => (
           <MusicItem
             key={item.musicID}

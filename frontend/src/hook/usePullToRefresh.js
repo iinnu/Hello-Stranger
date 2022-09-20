@@ -18,9 +18,15 @@ function usePullToRefresh() {
 
   const MAX_HEIGHT = 60;
 
+  function init() {
+    div.current.removeChild(loading.current);
+    loading.current = null;
+    loadingHeight.current = 0;
+    touchStartY.current = 0;
+  }
+
   function handleTouchStart(e) {
-    if (refresh >= 3) return;
-    if (div.current?.scrollTop !== 0) return;
+    if (refresh >= 3 || div.current?.scrollTop !== 0) return;
 
     touchStartY.current = e.changedTouches[0].screenY;
     const el = document.createElement('div');
@@ -30,7 +36,7 @@ function usePullToRefresh() {
   }
 
   function handleTouchMove(e) {
-    if (refresh >= 3) return;
+    if (refresh >= 3 || div.current?.scrollTop !== 0) return;
     // 로딩 요소가 있으면
     if (loading.current) {
       const screenY = e.changedTouches[0].screenY;
@@ -44,19 +50,19 @@ function usePullToRefresh() {
   }
 
   function handleTouchEnd() {
-    if (refresh >= 3) return;
+    if (refresh >= 3 || div.current?.scrollTop !== 0) return;
     // 로딩 요소의 높이가 MAX_HEIGHT보다 크면
-    if (refresh < 3 && loading.current && loadingHeight.current >= MAX_HEIGHT) {
+    if (loadingHeight.current >= MAX_HEIGHT) {
       setRefresh(refresh + 1);
+      loading.current.style.paddingTop = '10px';
       const el = ReactDOM.createRoot(loading.current);
       el.render(<CustomLoading />);
+      setTimeout(() => {
+        init();
+      }, 1000);
+    } else {
+      init();
     }
-    setTimeout(() => {
-      div.current.removeChild(loading.current);
-      loading.current = null;
-      loadingHeight.current = 0;
-      touchStartY.current = 0;
-    }, 1000);
   }
 
   return { div, handleTouchStart, handleTouchMove, handleTouchEnd };

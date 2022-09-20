@@ -1,7 +1,7 @@
 import * as React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-
+import Playlist from 'components/Recommend/Music/Playlist'
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
@@ -60,6 +60,8 @@ export default function DetailInfoList(props) {
   }
   return (
     <>
+    {props.type !== 'music' && 
+      <>
       {props.type === "food" && (
         <div className="detail-info__drawer--title">{foodCategoryName}</div>
       )}
@@ -71,6 +73,17 @@ export default function DetailInfoList(props) {
           <DetailInfoListItem />
         </List>
       </div>
+      </>
+    }
+    {props.type === 'music' && 
+      <>
+      <div className="detail-info__drawer--list">
+        <List>
+          <DetailInfoListItem />
+        </List>
+      </div> 
+      </>
+    }
     </>
   );
 }

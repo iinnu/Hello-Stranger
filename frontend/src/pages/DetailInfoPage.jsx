@@ -7,6 +7,7 @@ import Modal from "@mui/material/Modal";
 import Grid from "@mui/material/Grid";
 import Drawer from "@mui/material/Drawer";
 
+import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import SkateboardingIcon from "@mui/icons-material/Skateboarding";
 import Container from "components/common/Container";
@@ -104,6 +105,10 @@ export default function DetailInfoPage() {
   //Drawer 관련 부분
   const [openDetail, setOpenDetail] = useState(false);
   const [detailType, setdetailType] = useState("food");
+  function clickMusic() {
+    setOpenDetail(true);
+    setdetailType("music");
+  }
   function clickFood() {
     setOpenDetail(true);
     setdetailType("food");
@@ -141,7 +146,10 @@ export default function DetailInfoPage() {
           일 정<b />평 가
         </FeedbackButton> */}
 
-        <div className="detail-info__music">플레이리스트</div>
+        <div className="detail-info__music" onClick={clickMusic}>
+          <LibraryMusicIcon />
+          Now Playing...
+        </div>
         <div className="detail-info">
           <Grid container className="detail-info-inner">
             <PlaceCard placeInfo={placeList[1]} />
@@ -159,11 +167,7 @@ export default function DetailInfoPage() {
                     <SkateboardingIcon />
                   </div>
                 </div>
-                <Drawer
-                  anchor="bottom"
-                  open={openDetail}
-                  onClose={closeDetail}
-                >
+                <Drawer anchor="bottom" open={openDetail} onClose={closeDetail}>
                   <DetailInfoList type={detailType} />
                 </Drawer>
               </>

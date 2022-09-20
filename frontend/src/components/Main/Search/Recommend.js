@@ -1,6 +1,18 @@
-import { useMainState } from './MainContext';
+import { Button } from '@mui/material';
+import styled from '@emotion/styled';
+import { useMainState } from '../MainContext';
 import { useNavigate } from 'react-router-dom';
-import CustomButton from 'components/common/CustomButton';
+
+const RecommendButton = styled(Button)`
+  background-color: #92b4ec;
+  border: none;
+  box-shadow: 0px 2px 2px 0px rgb(0 0 0 / 14%);
+  font-weight: 600;
+
+  &.MuiButton-root:hover {
+    background-color: #92b4ec;
+  }
+`;
 
 function Recommend({ children }) {
   const { location, range } = useMainState();

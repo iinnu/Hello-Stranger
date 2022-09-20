@@ -12,10 +12,10 @@ function Music() {
   return (
     <div
       className="recommend-content"
-      ref={div}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
+      // ref={div}
+      // onTouchStart={handleTouchStart}
+      // onTouchMove={handleTouchMove}
+      // onTouchEnd={handleTouchEnd}
     >
       <Title>
         <>

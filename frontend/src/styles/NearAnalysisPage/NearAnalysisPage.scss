@@ -1,0 +1,66 @@
+@import "../common/util";
+
+$near-analysis-map-height: 100%;
+
+.near-analysis {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: calc($viewport-height - 56px);
+  width: 100%;
+  &__title {
+    position: relative;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    width: 90%;
+    height: 7%;
+    top: 2%;
+    margin: 0;
+    padding: 5px;
+    z-index: 2;
+
+    &--text {
+      font-size: 20px;
+      margin-left: 20px;
+    }
+  }
+  .MuiButtonGroup-root {
+    box-shadow: none;
+  }
+  .MuiButtonGroup-grouped:not(:last-of-type) {
+    border: none;
+  }
+  &__control {
+    position: relative;
+    align-items: center;
+    top: 15%;
+    z-index: 2;
+    width: 20%;
+    left: 2%;
+    &--button {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .MuiButtonBase-root {
+      background-color: white;
+      color: black;
+    }
+  }
+  &__map {
+    width: 100%;
+    height: $near-analysis-map-height;
+    // border-radius: 0 0 50px 50px;
+    // box-shadow: 0px 10px 5px -6px #adadad;
+    position: absolute;
+    top: 0;
+  }
+}
+
+.near-analysis-inner {
+  height: 100%;
+  padding: 0;
+}

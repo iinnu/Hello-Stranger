@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { useCurrentMusic } from './MusicContext';
 import { IconButton } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
-import { useCurrentMusic } from './MusicContext';
 
 function AlbumCover() {
   const [play, setPlay] = useState(false);
@@ -20,7 +20,7 @@ function AlbumCover() {
 
   return (
     <div className="album-cover" style={albumImg}>
-      <div className="album-cover__darken"/>
+      <div className="album-cover__darken" />
       <div className="album-cover__play-button">
         <IconButton onClick={handlePlay}>
           {!play && <PlayArrowIcon />}

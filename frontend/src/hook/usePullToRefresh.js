@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import styled from '@emotion/styled';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -14,10 +14,12 @@ function usePullToRefresh() {
   const loading = useRef(null);
   const touchStartY = useRef(0);
   const loadingHeight = useRef(0);
+  const [refresh, setRefresh] = useState(0);
 
   const MAX_HEIGHT = 60;
 
   function handleTouchStart(e) {
+    if (refresh >= 3) return;
     if (div.current?.scrollTop !== 0) return;
 
     touchStartY.current = e.changedTouches[0].screenY;
@@ -28,6 +30,7 @@ function usePullToRefresh() {
   }
 
   function handleTouchMove(e) {
+    if (refresh >= 3) return;
     // 로딩 요소가 있으면
     if (loading.current) {
       const screenY = e.changedTouches[0].screenY;
@@ -41,8 +44,10 @@ function usePullToRefresh() {
   }
 
   function handleTouchEnd() {
+    if (refresh >= 3) return;
     // 로딩 요소의 높이가 MAX_HEIGHT보다 크면
-    if (loading.current && loadingHeight.current >= MAX_HEIGHT) {
+    if (refresh < 3 && loading.current && loadingHeight.current >= MAX_HEIGHT) {
+      setRefresh(refresh + 1);
       const el = ReactDOM.createRoot(loading.current);
       el.render(<CustomLoading />);
     }

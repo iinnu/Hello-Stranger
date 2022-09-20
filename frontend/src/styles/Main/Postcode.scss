@@ -1,0 +1,23 @@
+@import '../common/_util';
+
+.postcode {
+  position: absolute;
+  top: 0;
+  z-index: 1500;
+  width: 100%;
+  height: calc($viewport-height - 56px);
+
+  &__header {
+    position: relative;
+    height: 40px;
+    background-color: white;
+  }
+}
+
+.header {
+  &__button {
+    border: none;
+    background-color: white;
+    font-size: 1em;
+  }
+}

@@ -1,0 +1,86 @@
+@import "../common/util";
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: calc($viewport-height - $map-height - 56px);
+  // overflow: auto;
+  padding: 30px;
+  &__map {
+    width: 100%;
+    height: $map-height;
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0px 10px 5px -6px #adadad;
+    position: relative;
+  }
+
+  &__title {
+    z-index: 999;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    top: 2%;
+    left: 5%;
+    width: 90%;
+
+    &--exit {
+      &.MuiButtonBase-root {
+        border: none;
+        width: 1em;
+        padding: 0;
+      }
+      &.MuiButtonBase-root:hover {
+        background-color: transparent;
+        width: 1em;
+      }
+      path {
+        color: #212121;
+      }
+    }
+
+    &--feedback {
+      flex-wrap: wrap;
+      padding: 1%;
+      width: 5%;
+      &.MuiButtonBase-root {
+        font-weight: bold;
+        background-color: #92b4ec;
+      }
+    }
+
+    &--box {
+      display: flex;
+      width: 60%;
+      height: 7%;
+      background-color: white;
+      border-radius: 5px;
+      padding: 5px;
+    }
+
+    &--align {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 2%;
+    }
+    &--text {
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+
+  &__card {
+    width: 100%;
+  }
+}
+
+.detail-info-inner {
+  height: 100%;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}

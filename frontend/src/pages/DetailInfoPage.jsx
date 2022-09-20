@@ -6,8 +6,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Container from "components/common/Container";
 import Grid from "@mui/material/Grid";
+import PlaceCard from "components/card/PlaceCard";
 import BottomNav from "components/common/BottomNav";
 import DetailInfoTitle from "components/DetailInfo/DetailInfoTitle";
+import DetailInfoList from "components/DetailInfo/DetailInfoList";
 import Map from "components/DetailInfo/Map";
 import styled from "@emotion/styled";
 
@@ -23,12 +25,12 @@ function DetailInfoPage() {
     id = Math.floor(Math.random() * (5 - 1) + 1);
     console.log(id);
   }
-  useEffect(function test() {
-    console.log("isHistory", isHistory);
-  }, []);
+
   // useEffect(
   //   //axios 함수 통해서 historyId에 해당하는 유저의 일정 뽑아오기가 진행되어야 함
-  //   console.log(`useparams id ${id}, ${typeof(id)}`),
+  // function test() {
+  //   console.log("isHistory", isHistory);
+  // }
   //   []
   // );
 
@@ -74,6 +76,24 @@ function DetailInfoPage() {
       date: "2022.09.14",
     },
   };
+
+  const placeList = {
+    1: {
+      id: 1,
+      title: "음식점1",
+      address: "xx시 xx동",
+      telephone: "010-000-0000",
+      review: "x점",
+    },
+    2: {
+      id: 1,
+      title: "활동1",
+      address: "xx시 xx동",
+      telephone: "010-000-0000",
+      review: "x점",
+    },
+  };
+
   const historyInfo = cardList[id];
   console.log(`historyInfo ${historyInfo}`);
   return (
@@ -106,15 +126,27 @@ function DetailInfoPage() {
           <Grid
             container
             className="detail-info-inner"
-            direction="column"
-            justifyContent="center"
           >
             <div>{isHistory}</div>
             <div className="detail-info__music">플레이리스트</div>
-            <div className="detail-info__food">{historyInfo.foodTitle}</div>
-            <div className="detail-info__activity">
-              {historyInfo.activityTitle}
-            </div>
+            <PlaceCard placeInfo={placeList[1]} />
+            <PlaceCard placeInfo={placeList[2]} />
+            {isHistory && (
+              <>
+                <div className="detail-info__list--title">
+                  선택되지 않은 카테고리 목록
+                </div>
+                <div className="detail-info__list--food">
+                  선택되지 않은 음식 카테고리
+                </div>
+                <div className="detail-info__list--activity">
+                  선택되지 않은 활동 카테고리
+                </div>
+                {/* https://mui.com/material-ui/react-drawer/ */}
+                {/* mui drawer swipeable 사용*/}
+                <DetailInfoList />
+              </>
+            )}
           </Grid>
         </div>
         <BottomNav />

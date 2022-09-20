@@ -2,10 +2,11 @@
 
 .detail-info {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   position: relative;
   height: calc($viewport-height - $map-height - 56px);
-
+  // overflow: auto;
+  padding: 30px;
   &__map {
     width: 100%;
     height: $map-height;
@@ -67,6 +68,10 @@
       font-weight: bold;
       font-size: 20px;
     }
+  }
+
+  &__card {
+    width: 100%;
   }
 }
 

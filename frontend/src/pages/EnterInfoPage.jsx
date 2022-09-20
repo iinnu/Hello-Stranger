@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import 'styles/EnterInfoPage/EnterInfoPage.scss';
 import Container from 'components/common/Container';
 
-const EnterInfoPage = () => {
+const EnterInfoPage = (props) => {
     function NextArrow(props) {
         const { className, style, onClick } = props;
         return (
@@ -48,9 +48,9 @@ const EnterInfoPage = () => {
           <Container>
             <div className="UserInput">
               <Slider {...settings}>
-                  <EnterInfoMusic className="UserInput__Music"/>
-                  <EnterInfoFood className="UserInput__Food"/>
-                  <EnterInfoActivity className="UserInput__Activity"/>
+                  <EnterInfoMusic Infoarray_Music={props.Infoarray.music} className="UserInput__Music"/>
+                  <EnterInfoFood Infoarray_Food={props.Infoarray.food} className="UserInput__Food"/>
+                  <EnterInfoActivity Infoarray_Activivy={props.Infoarray.activity} className="UserInput__Activity"/>
                   <StartApp className="UserInput__Start"/>
               </Slider>
             </div>

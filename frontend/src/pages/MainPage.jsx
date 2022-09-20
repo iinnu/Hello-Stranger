@@ -4,7 +4,7 @@ import Container from 'components/common/Container';
 import Map from 'components/Main/Map/Map';
 import Location from 'components/Main/Search/Location';
 import Range from 'components/Main/Search/Range';
-import 'styles/MainPage/MainPage.scss';
+import 'styles/Main/MainPage.scss';
 import { MainProvider } from 'components/Main/MainContext';
 import Recommend from 'components/Main/Search/Recommend';
 import Postcode from 'components/Main/Search/Postcode';

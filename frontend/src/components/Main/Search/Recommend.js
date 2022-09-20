@@ -24,7 +24,7 @@ function Recommend({ children }) {
   };
 
   return (
-    <CustomButton
+    <RecommendButton
       className="search__button"
       variant="contained"
       size="large"
@@ -32,7 +32,7 @@ function Recommend({ children }) {
       onClick={handleClick}
     >
       {children}
-    </CustomButton>
+    </RecommendButton>
   );
 }
 

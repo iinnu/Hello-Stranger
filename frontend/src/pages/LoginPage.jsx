@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import GoogleLogin from 'react-google-login';
 import { gapi } from 'gapi-script';
 import logo from '../assets/images/Logo.png'
@@ -6,10 +6,13 @@ import mascot from '../assets/images/WalkingGirl.gif'
 import Container from 'components/common/Container';
 import 'styles/LoginPage/LoginPage.scss';
 import axios from "axios";
+import EnterInfoPage from './EnterInfoPage.jsx'
 
 const clientId = '835634401246-ddaeprck32cbkjmajefeffl5vh7f5kd6.apps.googleusercontent.com'
 
 const LoginPage = ({ onSocial }) => {
+    const [user_choice, set_user_choice] = useState({})
+
     useEffect(() => {
         function start() {
             gapi.client.init({
@@ -36,8 +39,17 @@ const LoginPage = ({ onSocial }) => {
         })
         .catch(err=>{
             console.log(err)
-            console.log('이런샹')
-            window.location.href ="/guide"
+            axios({
+                url: 'http://localhost:8081/api/user/choice',
+                method:'get',
+            })
+            .then(res=>{
+                set_user_choice(res)
+                window.location.href ="/guide"
+            })
+            .catch(err=>{
+                console.log(err)
+            })
         })
     };
 
@@ -46,6 +58,7 @@ const LoginPage = ({ onSocial }) => {
     };
     return (
         <div>
+            <EnterInfoPage Infoarray={user_choice}></EnterInfoPage>
             <Container>
                 <div className="Login">
                     <img className="Login__Logo" src={logo} alt="Logo" />

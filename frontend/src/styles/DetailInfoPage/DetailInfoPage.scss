@@ -9,7 +9,6 @@ $detail-map-height: 55%;
   height: calc($viewport-height - $detail-map-height - 56px);
   overflow: scroll;
   padding: 0 30px;
-  margin-top: 20px;
   &__map {
     width: 100%;
     height: $detail-map-height;

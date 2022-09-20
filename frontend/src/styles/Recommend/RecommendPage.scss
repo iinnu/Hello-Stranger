@@ -1,13 +1,19 @@
 @import '../common/_util';
 
+$padding-top: 10px;
+$padding-side: 20px;
+$playlist: #b5c9db;
+
 .recommend-title {
   font-size: 2em;
   font-weight: 600;
+  padding: 0 $padding-side;
+  padding-top: $padding-top;
 }
 
 .recommend-content {
-  height: calc($viewport_height - 36.5px - 40px - 10px);
-  padding: 10px 20px 0 20px;
+  height: calc(100% - 36.5px - 40px);
+  position: relative;
 }
 
 .recommend-bottom {

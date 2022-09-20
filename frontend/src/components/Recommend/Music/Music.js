@@ -1,4 +1,8 @@
+import 'styles/Recommend/Music.scss';
+import { MusicProvider } from './MusicContext';
 import Title from '../Title';
+import AlbumCover from './AlbumCover';
+import Playlist from './Playlist';
 
 function Music() {
   return (
@@ -9,6 +13,14 @@ function Music() {
           듣고 싶으신가요?
         </>
       </Title>
+      <div className="music-player">
+        <div className="music-player__inner">
+          <MusicProvider>
+            <AlbumCover />
+            <Playlist />
+          </MusicProvider>
+        </div>
+      </div>
     </div>
   );
 }

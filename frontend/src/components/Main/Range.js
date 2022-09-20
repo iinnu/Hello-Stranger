@@ -1,6 +1,6 @@
+import { useMainDispatch, useMainState } from './MainContext';
 import styled from '@emotion/styled';
 import { Slider } from '@mui/material';
-import { useMainDispatch, useMainState } from './MainContext';
 
 const PrettoSlider = styled(Slider)({
   color: '#92B4EC',

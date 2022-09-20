@@ -1,10 +1,16 @@
 import 'styles/Recommend/Music.scss';
+import { useEffect } from 'react';
 import { MusicProvider } from './MusicContext';
 import Title from '../Title';
 import AlbumCover from './AlbumCover';
 import Playlist from './Playlist';
+import { getMusicRecommend } from 'api/recommend';
 
 function Music() {
+  useEffect(() => {
+    console.log('음악 추천 로딩');
+  }, []);
+
   return (
     <div className="recommend-content">
       <Title>

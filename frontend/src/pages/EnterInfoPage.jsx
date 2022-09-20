@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import 'styles/EnterInfoPage/EnterInfoPage.scss';
 import Container from 'components/common/Container';
 
-const EnterInfoPage = (props) => {
+const EnterInfoPage = () => {
     return(
         <div>
           <Container>

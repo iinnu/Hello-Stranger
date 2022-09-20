@@ -6,12 +6,11 @@ import mascot from '../assets/images/WalkingGirl.gif'
 import Container from 'components/common/Container';
 import 'styles/LoginPage/LoginPage.scss';
 import axios from "axios";
-import EnterInfoPage from './EnterInfoPage.jsx'
 
 const clientId = '835634401246-ddaeprck32cbkjmajefeffl5vh7f5kd6.apps.googleusercontent.com'
 
 const LoginPage = ({ onSocial }) => {
-    const [user_choice, set_user_choice] = useState({})
+    const [user_choice, set_user_choice] = useState()
 
     useEffect(() => {
         function start() {
@@ -58,7 +57,6 @@ const LoginPage = ({ onSocial }) => {
     };
     return (
         <div>
-            <EnterInfoPage Infoarray={user_choice}></EnterInfoPage>
             <Container>
                 <div className="Login">
                     <img className="Login__Logo" src={logo} alt="Logo" />

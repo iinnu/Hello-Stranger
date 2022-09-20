@@ -1,7 +1,23 @@
 import Button from '@mui/material/Button';
 import mascot from '../../assets/images/WalkingGirl.gif'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import styled from '@emotion/styled';
+
+const PlainButton = styled(Button)`
+  &.MuiButton-root {
+    color: black;
+    &:hover {
+      background-color: white;
+    }
+  }
+`;
 
 const EnterInfoGuideForth = () => {
+    const handlePrev = () => {
+        console.log('이전');
+        window.location.href ="/guide/third"
+      };
     function handleClick(e) {
         window.location.href ="/info"
     }
@@ -15,6 +31,11 @@ const EnterInfoGuideForth = () => {
             <div className="Guide__Forth__Item">
                 <img className="Guide__Forth__Item__Mascot" src={mascot} alt="Mascot" />
                 <Button variant="contained" onClick={handleClick}>취향 조사 ㄱㄱ</Button>
+            </div>
+            <div className="recommend-bottom">
+                <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>
+                    이전
+                </PlainButton>
             </div>
         </div>
     );

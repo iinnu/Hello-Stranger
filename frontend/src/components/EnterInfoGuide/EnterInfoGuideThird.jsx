@@ -2,7 +2,29 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import EnterInfoBasicCard from './EnterInfoBasicCard.jsx'
 import mascot from '../../assets/images/WalkingGirl.gif'
+import { Button } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import styled from '@emotion/styled';
+
+const PlainButton = styled(Button)`
+  &.MuiButton-root {
+    color: black;
+    &:hover {
+      background-color: white;
+    }
+  }
+`;
 const EnterInfoGuideThird = () => {
+    const handlePrev = () => {
+        console.log('이전');
+        window.location.href ="/guide/second"
+      };
+    
+      const handleNext = () => {
+        console.log('다음');
+        window.location.href ="/guide/forth"
+      };
     return (
         <div>
             <div className='Guide__Third__Title'>
@@ -16,6 +38,14 @@ const EnterInfoGuideThird = () => {
                 <img className="Guide__Third__Item__Mascot" src={mascot} alt="Mascot" />
                 <ArrowDownwardIcon/>
                 <p>싫어하면 밑으로!!</p>
+            </div>
+            <div className="recommend-bottom">
+                <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>
+                    이전
+                </PlainButton>
+                <PlainButton endIcon={<ArrowForwardIosIcon />} onClick={handleNext}>
+                    다음
+                </PlainButton>
             </div>
         </div>
     );

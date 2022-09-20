@@ -1,6 +1,6 @@
-import useGeocoder from 'hook/useGeocoder';
 import { useEffect, useState } from 'react';
 import { useMainState } from './MainContext';
+import useGeocoder from 'hook/useGeocoder';
 
 function Location({ handleOpen }) {
   const [postCode, setPostCode] = useState('경북 구미시 3공단3로 302');

@@ -1,9 +1,9 @@
 import 'styles/Recommend/Music.scss';
 import { MusicProvider } from './MusicContext';
+import usePullToRefresh from 'hook/usePullToRefresh';
 import Title from '../Title';
 import AlbumCover from './AlbumCover';
 import Playlist from './Playlist';
-import usePullToRefresh from 'hook/usePullToRefresh';
 
 function Music() {
   const { div, handleTouchStart, handleTouchMove, handleTouchEnd } =

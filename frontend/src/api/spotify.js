@@ -1,4 +1,5 @@
 import { getSpotifyInstance } from 'api';
+import axios from 'axios';
 
 const api = getSpotifyInstance();
 

@@ -1,10 +1,19 @@
 @import '../common/_util';
-@import './RecommendPage.scss';
 
-$album-height: 200px;
-$current-music: 64px;
-$playlist-height: calc(100% - $album-height - 10px);
-$list-height: calc(100% - $current-music - 20px);
+$padding-top: 10px;
+$padding-side: 20px;
+$top-height: 40px;
+$bottom-height: 46.5px;
+
+$music-player-height: calc($viewport-height - $top-height - 110px);
+$album-height: 170px;
+$current-music: 60px;
+$playlist-height: calc(
+  $music-player-height - $album-height - $bottom-height - $padding-top
+);
+$list-height: calc($playlist-height - $current-music - 20px);
+
+$playlist-background: #b5c9db;
 
 @mixin custom-scrollbar {
   overflow-y: auto;
@@ -25,16 +34,13 @@ $list-height: calc(100% - $current-music - 20px);
 }
 
 .music-player {
-  position: absolute;
-  bottom: 0;
-  display: block;
   width: 100%;
-  height: 82%;
+  height: $music-player-height;
 
   &__inner {
     margin: 0 $padding-side;
     height: 100%;
-    background-color: $playlist;
+    background-color: $playlist-background;
     border-radius: 20px 20px 0 0;
     box-shadow: 2px -2px 5px 0px #aaa;
   }
@@ -49,31 +55,37 @@ $list-height: calc(100% - $current-music - 20px);
   &__darken {
     width: 100%;
     height: $album-height;
-    background-color: rgba(0, 0, 0, 0.28);
+    background-color: rgba(0, 0, 0, 0.4);
     border-radius: 20px 20px 0 0;
   }
 
   &__play-button {
-    background-color: rgba(255, 255, 255, 0.515);
+    background-color: rgba(255, 255, 255, 0.48);
     position: absolute;
     border-radius: 50%;
     bottom: 0;
+    right: 0;
     margin-bottom: 15px;
-    margin-left: 15px;
+    margin-right: 15px;
+
+    & .MuiIconButton-root {
+      height: 50px;
+      width: 50px;
+    }
   }
 }
 
 .playlist {
   height: $playlist-height;
-  padding: 10px 20px 0 20px;
+  padding: $padding-top $padding-side 0 $padding-side;
 
   &__current-music {
     height: $current-music;
+    padding-top: $padding-top;
   }
 
   &__list {
     height: $list-height;
-    margin-top: 10px;
     margin-bottom: 10px;
     @include custom-scrollbar();
   }
@@ -81,7 +93,7 @@ $list-height: calc(100% - $current-music - 20px);
 
 .current-music {
   &__title {
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 600;
   }
 
@@ -93,28 +105,44 @@ $list-height: calc(100% - $current-music - 20px);
 
 .list {
   &__item {
-    border-bottom: 1px solid black;
-    padding: 10px;
-    margin-right: 10px;
+    width: 70%;
+    padding: 14px 10px;
 
     &:hover {
       cursor: pointer;
-    }
-
-    &--active {
-      background-color: rgba(255, 255, 255, 0.4);
     }
   }
 }
 
 .item {
   &__title {
+    font-size: 0.9em;
     font-weight: 600;
   }
 
   &__artist {
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: 100;
-    margin-left: 10px;
+  }
+
+  &__like {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+
+    & .MuiIconButton-root {
+      padding: 0;
+      padding-right: 10px;
+    }
+  }
+}
+
+.music-item {
+  border-bottom: 1px solid black;
+  margin-right: 10px;
+  display: flex;
+
+  &--active {
+    background-color: rgba(255, 255, 255, 0.4);
   }
 }

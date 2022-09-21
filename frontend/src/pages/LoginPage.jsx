@@ -7,11 +7,12 @@ import mascot from '../assets/images/WalkingGirl.gif'
 const clientId = '835634401246-ddaeprck32cbkjmajefeffl5vh7f5kd6.apps.googleusercontent.com'
 
 const LoginPage = ({ onSocial }) => {
+    //youtube 권한 얻기 위해 scope 추가 - 0921 병헌
     useEffect(() => {
         function start() {
             gapi.client.init({
                 clientId,
-                scope: 'email',
+                scope: 'email https://www.googleapis.com/auth/youtube',
             });
         }
         gapi.load('client:auth2', start);

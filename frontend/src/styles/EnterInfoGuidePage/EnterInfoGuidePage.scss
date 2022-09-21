@@ -1,11 +1,12 @@
 @import "../common/util";
+
 .Guide{
     max-width: 500px;
     width: 100%;
     height: 100%;
     &__First{
         &__Title{
-            height: 250px;
+            height: 30%;
         }
         &__Title h2{
             margin: 5px;
@@ -22,7 +23,7 @@
     }
     &__Second{
         &__Title{
-            height: 250px;
+            height: 30%;
         }
         &__Title h2{
             margin: 5px;
@@ -39,7 +40,7 @@
     }
     &__Third{
         &__Title{
-            height: 150px;
+            height: 25%;
         }
         &__Title h2{
             margin: 5px;
@@ -49,10 +50,6 @@
             flex-flow: column;
             justify-content: center;
             align-items: center;
-            &__Mascot{
-                max-width: 400px;
-                width: 60%;
-            }
             &__Card{
                 width:80%;
                 &__Bottom{
@@ -64,7 +61,7 @@
     }
     &__Forth{
         &__Title{
-            height: 250px;
+            height: 30%;
         }
         &__Title h2{
             margin: 5px;

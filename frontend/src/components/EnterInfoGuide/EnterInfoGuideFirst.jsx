@@ -22,7 +22,6 @@ const EnterInfoGuideFirst = () => {
       <div>
         <Container>
         <div className="Guide">
-          <div className="Guide__First">
               <div className='Guide__First__Title'>
                   <h2>시작하기전에,</h2>
                   <h2>회원님에 대해</h2>
@@ -37,7 +36,6 @@ const EnterInfoGuideFirst = () => {
                       다음
                   </PlainButton>
               </div>
-            </div>
         </div>
         </Container>
       </div>

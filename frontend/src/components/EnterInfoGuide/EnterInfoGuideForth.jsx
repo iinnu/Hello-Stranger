@@ -25,8 +25,6 @@ const EnterInfoGuideForth = () => {
         <div>
         <Container>
         <div className="Guide">
-          <div className="Guide__Forth">
-            
             <div className='Guide__Forth__Title'>
                 <h2>회원님의 취향을 고려해서</h2>
                 <h2>새로운 일상을</h2>
@@ -40,7 +38,6 @@ const EnterInfoGuideForth = () => {
                 <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>
                     이전
                 </PlainButton>
-            </div>
             </div>
         </div>
         </Container>

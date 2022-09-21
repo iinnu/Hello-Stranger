@@ -28,7 +28,6 @@ const EnterInfoGuideSecond = () => {
       <div>
       <Container>
       <div className="Guide">
-        <div className="Guide__Second">
             <div className='Guide__Second__Title'>
                 <h2>세가지 카테고리에</h2>
                 <h2>대한 선택지를</h2>
@@ -44,7 +43,6 @@ const EnterInfoGuideSecond = () => {
                 <PlainButton endIcon={<ArrowForwardIosIcon />} onClick={handleNext}>
                     다음
                 </PlainButton>
-            </div>
             </div>
         </div>
         </Container>

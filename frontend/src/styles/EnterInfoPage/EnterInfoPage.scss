@@ -6,58 +6,7 @@
     height: 100%;
     &__Music{
         &__Title{
-            height: 250px;
-        }
-        &__Title h2{
-            margin: 5px;
-        }   
-        &__Item{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            &__Mascot{
-                max-width: 400px;
-                width: 60%;
-            }
-        }
-    }
-    &__Food{
-        &__Title{
-            height: 250px;
-        }
-        &__Title h2{
-            margin: 5px;
-        }   
-        &__Item{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            &__Mascot{
-                max-width: 400px;
-                width: 60%;
-            }
-        }
-    }
-    &__Activity{
-        &__Title{
-            height: 250px;
-        }
-        &__Title h2{
-            margin: 5px;
-        }   
-        &__Item{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            &__Mascot{
-                max-width: 400px;
-                width: 60%;
-            }
-        }
-    }
-    &__Start{
-        &__Title{
-            height: 250px;
+            height: 25%;
         }
         &__Title h2{
             margin: 5px;
@@ -67,9 +16,75 @@
             flex-flow: column;
             justify-content: center;
             align-items: center;
-            &__Mascot{
-                max-width: 400px;
-                width: 60%;
+            &__Card{
+                width:80%;
+                &__Bottom{
+                    display:flex;
+                    justify-content: space-around;
+                }
+            }
+        }
+    }
+    &__Food{
+        &__Title{
+            height: 25%;
+        }
+        &__Title h2{
+            margin: 5px;
+        }  
+        &__Item{
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            &__Card{
+                width:80%;
+                &__Bottom{
+                    display:flex;
+                    justify-content: space-around;
+                }
+            }
+        }
+    }
+    &__Activity{
+        &__Title{
+            height: 25%;
+        }
+        &__Title h2{
+            margin: 5px;
+        } 
+        &__Item{
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            &__Card{
+                width:80%;
+                &__Bottom{
+                    display:flex;
+                    justify-content: space-around;
+                }
+            }
+        }
+    }
+    &__Start{
+        &__Title{
+            height: 25%;
+        }
+        &__Title h2{
+            margin: 5px;
+        } 
+        &__Item{
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            &__Card{
+                width:80%;
+                &__Bottom{
+                    display:flex;
+                    justify-content: space-around;
+                }
             }
         }
     }

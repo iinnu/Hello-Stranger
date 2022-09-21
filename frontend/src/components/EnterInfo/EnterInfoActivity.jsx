@@ -1,5 +1,4 @@
 import EnterInfoActivityCard from './EnterInfoActivityCard.jsx'
-import mascot from '../../assets/images/WalkingGirl.gif'
 import { Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -46,6 +45,14 @@ const EnterInfo = () => {
         console.log('다음');
         window.location.href ="/info/start"
       };
+      const EnterInfoActivityCards = ActivityList.map((e) => (
+        <EnterInfoActivityCard
+          key={e.id}
+          id={e.id}
+          title={e.activityTitle}
+          image={e.activityUrl}
+        />
+      ));
     return (
       <div>
       <Container>
@@ -55,7 +62,7 @@ const EnterInfo = () => {
                 <h2>자주 하시나요?</h2>
             </div>
             <div className='UserInput__Activity__Item'>
-                <EnterInfoActivityCard/>
+                {EnterInfoActivityCards}
             </div>
             <div className="recommend-bottom">
                 <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>

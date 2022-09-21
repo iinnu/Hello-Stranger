@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useSetCurrentMusic } from './MusicContext';
 import { IconButton } from '@mui/material';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
@@ -18,9 +18,9 @@ function MusicItem({ active, item }) {
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
 
-  const handleItemClick = () => {
+  const handleItemClick = useCallback(() => {
     setCurrent(item);
-  };
+  }, [item]);
 
   const handleLike = () => {
     if (dislike) setDislike(false);

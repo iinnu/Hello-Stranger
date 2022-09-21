@@ -128,7 +128,7 @@ $playlist-background: #b5c9db;
   &__like {
     width: 30%;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 
     & .MuiIconButton-root {
       padding: 0;

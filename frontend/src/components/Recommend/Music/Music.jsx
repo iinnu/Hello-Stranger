@@ -11,20 +11,12 @@ function Music() {
       <Helmet>
         <script src="https://sdk.scdn.co/spotify-player.js"></script>
       </Helmet>
-      <div className="recommend-content">
-        <Title>
-          <>
-            어떤 음악을 <br />
-            듣고 싶으신가요?
-          </>
-        </Title>
-        <div className="music-player">
-          <div className="music-player__inner">
-            <MusicProvider>
-              <AlbumCover />
-              <Playlist />
-            </MusicProvider>
-          </div>
+      <div className="music-player">
+        <div className="music-player__inner">
+          <MusicProvider>
+            <AlbumCover />
+            <Playlist />
+          </MusicProvider>
         </div>
       </div>
     </HelmetProvider>

@@ -12,7 +12,7 @@ const LoginPage = ({ onSocial }) => {
         function start() {
             gapi.client.init({
                 clientId,
-                scope: 'email https://www.googleapis.com/auth/youtube',
+                scope: 'email https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.force-ssl https://www.googleapis.com/auth/youtubepartner',
             });
         }
         gapi.load('client:auth2', start);
@@ -20,6 +20,9 @@ const LoginPage = ({ onSocial }) => {
 
     const onSuccess = (response) => {
         console.log(response);
+        //accessToken localStorage에 임시로 저장 - 0921 병헌
+        localStorage.setItem('access_token', response.accessToken)
+        gapi.client.setToken(response.accessToken)
     };
 
     const onFailure = (response) => {

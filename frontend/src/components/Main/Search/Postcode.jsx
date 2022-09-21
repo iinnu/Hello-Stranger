@@ -1,9 +1,10 @@
 import 'styles/Main/Postcode.scss';
-import { useMainDispatch } from './MainContext';
+import { useMainDispatch } from '../MainContext';
 import useGeocoder from 'hook/useGeocoder';
 import { IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DaumPostcode from 'react-daum-postcode';
+
 
 const boxStyle = {
   position: 'relative',

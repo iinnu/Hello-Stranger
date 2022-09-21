@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useMainState } from './MainContext';
+import { useMainState } from '../MainContext';
 import useGeocoder from 'hook/useGeocoder';
 
 function Location({ handleOpen }) {

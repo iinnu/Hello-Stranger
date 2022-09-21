@@ -4,6 +4,9 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
 import Container from 'components/common/Container';
+import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -37,6 +40,19 @@ const EnterInfo = () => {
           foodUrl: 'https://media.istockphoto.com/photos/sandwich-with-mackerel-fish-cucumber-and-mustard-black-background-top-picture-id1292943746?b=1&k=20&m=1292943746&s=170667a&w=0&h=rQbaNuDK2kNMWeGV8TUJDvWfpNqtjtuvv-WRMAbG-gs='
         },
       ];
+      const settings={
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow:1,
+        slidesToScroll: 1,
+        // nextArrow: (
+        //     <NextArrow />
+        //   ),
+        //   prevArrow: (
+        //     <PrevArrow />
+        //   ),
+    };
     const handlePrev = () => {
         console.log('이전');
         window.location.href ="/info/music"
@@ -47,12 +63,14 @@ const EnterInfo = () => {
         window.location.href ="/info/activity"
       };
       const EnterInfoFoodCards = FoodList.map((e) => (
+        <div className='UserInput__Activity__Item__Area'>
         <EnterInfoFoodCard
           key={e.id}
           id={e.id}
           title={e.foodTitle}
           image={e.foodUrl}
         />
+        </div>
       ));
     return (
       <div>
@@ -63,7 +81,9 @@ const EnterInfo = () => {
                 <h2>자주 드시나요?</h2>
             </div>
             <div className='UserInput__Food__Item'>
+              <Slider {...settings}>
                 {EnterInfoFoodCards}
+              </Slider>
             </div>
             <div className="recommend-bottom">
                 <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>

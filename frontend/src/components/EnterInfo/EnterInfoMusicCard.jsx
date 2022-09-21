@@ -10,7 +10,7 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 
 export default function RecipeReviewCard({id, name, artist, image}) {
   return (
-    <Card className="UserInput__Music__Item__Card">
+    <Card className="UserInput__Music__Item__Area__Card">
       <CardHeader
         title={name}
         subheader={artist}

@@ -12,15 +12,12 @@
             margin: 5px;
         } 
         &__Item{
-            display: flex;
-            flex-flow: column;
-            justify-content: center;
-            align-items: center;
-            &__Card{
-                width:80%;
-                &__Bottom{
-                    display:flex;
-                    justify-content: space-around;
+            &__Area{
+                &__Card{
+                    &__Bottom{
+                        display:flex;
+                        justify-content: space-around;
+                    }
                 }
             }
         }
@@ -33,15 +30,13 @@
             margin: 5px;
         }  
         &__Item{
-            display: flex;
-            flex-flow: column;
-            justify-content: center;
-            align-items: center;
-            &__Card{
-                width:80%;
-                &__Bottom{
-                    display:flex;
-                    justify-content: space-around;
+            &__Area{
+                &__Card{
+                    width:80%;
+                    &__Bottom{
+                        display:flex;
+                        justify-content: space-around;
+                    }
                 }
             }
         }
@@ -52,17 +47,15 @@
         }
         &__Title h2{
             margin: 5px;
-        } 
+        }
         &__Item{
-            display: flex;
-            flex-flow: column;
-            justify-content: center;
-            align-items: center;
-            &__Card{
-                width:80%;
-                &__Bottom{
-                    display:flex;
-                    justify-content: space-around;
+            &__Area{
+                &__Card{
+                    width:80%;
+                    &__Bottom{
+                        display:flex;
+                        justify-content: space-around;
+                    }
                 }
             }
         }

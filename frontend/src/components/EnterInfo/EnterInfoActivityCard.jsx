@@ -9,7 +9,7 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 
 export default function RecipeReviewCard({ id, title, image }) {
   return (
-    <Card className="UserInput__Activity__Item__Card">
+    <Card className="UserInput__Activity__Item__Area__Card">
       <CardHeader
         title={title}
       />

@@ -3,6 +3,9 @@ import { Button } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
 import Container from 'components/common/Container';
+import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -37,48 +40,27 @@ const MusicList = [
     musicImgUrl:
       'https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/040/585/421/40585421_1393312393347_1_600x600.JPG/dims/resize/Q_80,0',
   },
-  {
-    musicID: 4,
-    musicName: '신경쓰여',
-    musicArtist: '비비',
-    musicCategory: '',
-    musicImgUrl: 'https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/352/887/81352887_1580457272856_1_600x600.JPG/dims/resize/Q_80,0',
-  },
-  {
-    musicID: 5,
-    musicName: '좋은 밤 좋은 꿈',
-    musicArtist: '너드커넥션',
-    musicCategory: '',
-    musicImgUrl: 'https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/392/508/81392508_1584692219778_1_600x600.JPG/dims/resize/Q_80,0',
-  },
-  {
-    musicID: 6,
-    musicName: 'Think About`chu',
-    musicArtist: '아소토유니온',
-    musicCategory: '',
-    musicImgUrl: 'https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/015/027/829/15027829_1310533115577_1_600x600.JPG/dims/resize/Q_80,0',
-  },
-  {
-    musicID: 7,
-    musicName: '오랜만에',
-    musicArtist: '김현철',
-    musicCategory: '',
-    musicImgUrl: 'https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/015/032/851/15032851_1310028555858_1_600x600.JPG/dims/resize/Q_80,0',
-  },
-  {
-    musicID: 8,
-    musicName: 'Afraid',
-    musicArtist: 'DAY6',
-    musicCategory: '',
-    musicImgUrl: 'https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/081/438/259/81438259_1589175437111_1_600x600.JPG/dims/resize/Q_80,0',
-  },
 ];
+const settings={
+  dots: true,
+  infinite: false,
+  speed: 500,
+  slidesToShow:1,
+  slidesToScroll: 1,
+  // nextArrow: (
+  //     <NextArrow />
+  //   ),
+  //   prevArrow: (
+  //     <PrevArrow />
+  //   ),
+};
 const EnterInfo = () => {  
       const handleNext = () => {
         console.log('다음');
         window.location.href ="/info/food"
       };
       const EnterInfoMusicCards = MusicList.map((e) => (
+        <div className='UserInput__Activity__Item__Area'>
         <EnterInfoMusicCard
           key={e.id}
           id={e.id}
@@ -86,6 +68,7 @@ const EnterInfo = () => {
           name={e.musicName}
           image={e.musicImgUrl}
         />
+        </div>
       ));
     return (
       <div>
@@ -95,15 +78,17 @@ const EnterInfo = () => {
                 <h2>어떤 음악을</h2>
                 <h2>자주 들으시나요?</h2>
             </div>
-                <div className='UserInput__Music__Item'>
+              <div className='UserInput__Music__Item'>
+                <Slider {...settings}>
                     {EnterInfoMusicCards}
-                </div>
-                <div className="recommend-bottom">
+                </Slider>
+              </div>
+              <div className="recommend-bottom">
                 <PlainButton/>
                 <PlainButton endIcon={<ArrowForwardIosIcon />} onClick={handleNext}>
                     다음
                 </PlainButton>
-            </div>
+              </div>
             </div>
           </Container>
         </div>

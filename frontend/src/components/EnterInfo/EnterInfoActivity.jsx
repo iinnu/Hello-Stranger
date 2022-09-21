@@ -4,6 +4,9 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
 import Container from 'components/common/Container';
+import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -36,6 +39,19 @@ const EnterInfo = () => {
           activityUrl: 'https://w.namu.la/s/aee3011c270a268f4c125a6e3bd30547f2d53099eb700d3815db132b51c74476fc3010af7b5ef99867fd1908558ef6b054dc08529097e3373697f6c6251aeb9eddd40d246e044b3943e5a6859437e6272159ea1c1b30a6d61fbbb6297d877dd11017809da585eb3b5c4aafefd5a034de'
         },
       ];
+      const settings={
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow:1,
+        slidesToScroll: 1,
+        // nextArrow: (
+        //     <NextArrow />
+        //   ),
+        //   prevArrow: (
+        //     <PrevArrow />
+        //   ),
+    };
     const handlePrev = () => {
         console.log('이전');
         window.location.href ="/info/food"
@@ -46,12 +62,14 @@ const EnterInfo = () => {
         window.location.href ="/info/start"
       };
       const EnterInfoActivityCards = ActivityList.map((e) => (
+        <div className='UserInput__Activity__Item__Area'>
         <EnterInfoActivityCard
           key={e.id}
           id={e.id}
           title={e.activityTitle}
           image={e.activityUrl}
         />
+        </div>
       ));
     return (
       <div>
@@ -62,7 +80,9 @@ const EnterInfo = () => {
                 <h2>자주 하시나요?</h2>
             </div>
             <div className='UserInput__Activity__Item'>
-                {EnterInfoActivityCards}
+                <Slider {...settings}>
+                  {EnterInfoActivityCards}
+                  </Slider>
             </div>
             <div className="recommend-bottom">
                 <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>

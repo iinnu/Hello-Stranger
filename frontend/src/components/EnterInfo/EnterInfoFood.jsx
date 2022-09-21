@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
+import Container from 'components/common/Container';
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -47,7 +48,9 @@ const EnterInfo = () => {
         window.location.href ="/info/activity"
       };
     return (
-        <div>
+      <div>
+      <Container>
+        <div className="UserInput">
             <div className='UserInput__Food__Title'>
                 <h2>어떤 음식을</h2>
                 <h2>자주 드시나요?</h2>
@@ -64,6 +67,8 @@ const EnterInfo = () => {
                     다음
                 </PlainButton>
             </div>
+            </div>
+          </Container>
         </div>
     );
 };

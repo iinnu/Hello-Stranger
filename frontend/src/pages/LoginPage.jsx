@@ -44,10 +44,11 @@ const LoginPage = ({ onSocial }) => {
             })
             .then(res=>{
                 set_user_choice(res)
-                window.location.href ="/guide"
+                window.location.href ="/main"
             })
             .catch(err=>{
                 console.log(err)
+                window.location.href ="/guide/first"
             })
         })
     };
@@ -57,6 +58,7 @@ const LoginPage = ({ onSocial }) => {
     };
     return (
         <div>
+            <div>{user_choice}</div>
             <Container>
                 <div className="Login">
                     <img className="Login__Logo" src={logo} alt="Logo" />

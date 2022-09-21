@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
+import Container from 'components/common/Container';
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -16,6 +17,7 @@ const PlainButton = styled(Button)`
 const StartApp = () => {
     const handlePrev = () => {
         console.log('이전');
+        window.location.href ="/info/activity"
       };
 
     function handleClick(e) {
@@ -23,6 +25,8 @@ const StartApp = () => {
     }
     return (
         <div>
+        <Container>
+          <div className="UserInput">
             <div className='UserInput__Start__Title'>
                 <h2>이제 새로운 하루를</h2>
                 <h2>보내러 가볼까요?</h2>
@@ -36,6 +40,8 @@ const StartApp = () => {
                     이전
                 </PlainButton>
             </div>
+            </div>
+          </Container>
         </div>
     );
 };

@@ -3,6 +3,7 @@ import mascot from '../../assets/images/WalkingGirl.gif'
 import { Button } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
+import Container from 'components/common/Container';
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -79,7 +80,9 @@ const EnterInfo = () => {
         window.location.href ="/info/food"
       };
     return (
-        <div>
+      <div>
+      <Container>
+        <div className="UserInput">
             <div className='UserInput__Music__Title'>
                 <h2>어떤 음악을</h2>
                 <h2>자주 들으시나요?</h2>
@@ -94,6 +97,8 @@ const EnterInfo = () => {
                     다음
                 </PlainButton>
             </div>
+            </div>
+          </Container>
         </div>
     );
 };

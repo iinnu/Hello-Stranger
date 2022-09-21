@@ -1,8 +1,8 @@
 import Button from '@mui/material/Button';
 import mascot from '../../assets/images/WalkingGirl.gif'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
+import Container from 'components/common/Container';
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -19,10 +19,14 @@ const EnterInfoGuideForth = () => {
         window.location.href ="/guide/third"
       };
     function handleClick(e) {
-        window.location.href ="/info"
+        window.location.href ="/info/music"
     }
     return (
         <div>
+        <Container>
+        <div className="Guide">
+          <div className="Guide__Forth">
+            
             <div className='Guide__Forth__Title'>
                 <h2>회원님의 취향을 고려해서</h2>
                 <h2>새로운 일상을</h2>
@@ -37,7 +41,10 @@ const EnterInfoGuideForth = () => {
                     이전
                 </PlainButton>
             </div>
+            </div>
         </div>
+        </Container>
+      </div>
     );
     
 };

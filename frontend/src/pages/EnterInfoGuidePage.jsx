@@ -2,7 +2,7 @@ import EnterInfoGuideFirst from '../components/EnterInfoGuide/EnterInfoGuideFirs
 import EnterInfoGuideSecond from '../components/EnterInfoGuide/EnterInfoGuideSecond.jsx'
 import EnterInfoGuideThird from '../components/EnterInfoGuide/EnterInfoGuideThird.jsx'
 import EnterInfoGuideForth from '../components/EnterInfoGuide/EnterInfoGuideForth.jsx'
-import Slider from 'react-slick'
+// import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'styles/EnterInfoGuidePage/EnterInfoGuidePage.scss';
@@ -14,7 +14,7 @@ const EnterInfoGuidePage = () => {
     //     return (
     //       <div
     //         className={className}
-    //         style={{ ...style, display: "block", background: "red" }}
+    //         style={{ ...style, position: "absolute", bottom: "0", color: "background" }}
     //         onClick={onClick}
     //       />
     //     );
@@ -46,12 +46,14 @@ const EnterInfoGuidePage = () => {
     return(
         <div>
           <Container>
-            <div className="Guide">
-              <EnterInfoGuideFirst className="Guide__First"/>
-              <EnterInfoGuideSecond className="Guide__Second"/>
-              <EnterInfoGuideThird className="Guide__Third"/>
-              <EnterInfoGuideForth className="Guide__Forth"/>
-            </div>
+              <div className="Guide">
+              {/* <Slider {...settings}> */}
+                <EnterInfoGuideFirst className="Guide__First"/>
+                <EnterInfoGuideSecond className="Guide__Second"/>
+                <EnterInfoGuideThird className="Guide__Third"/>
+                <EnterInfoGuideForth className="Guide__Forth"/>
+                {/* </Slider> */}
+              </div>
           </Container>
         </div>
     );

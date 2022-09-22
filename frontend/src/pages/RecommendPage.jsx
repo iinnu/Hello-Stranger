@@ -22,7 +22,8 @@ function RecommendPage() {
       <CloseRecommend />
       <div className="recommend-content">
         <Title title={titles[index]} />
-        {index === 0 ? <Music /> : index === 1 ? <Food /> : <Activity />}
+        {/* {index === 0 ? <Music /> : index === 1 ? <Food /> : <Activity />} */}
+        <Food />
       </div>
       <PrevNext index={index} />
     </Container>

@@ -2,6 +2,9 @@
 
 $padding-top: 10px;
 $padding-side: 20px;
+$category-height: 200px;
+$category-img-height: 160px;
+$category-desc-height: calc($category-height - $category-img-height);
 
 .recommend-title {
   height: 100px;
@@ -35,7 +38,27 @@ $padding-side: 20px;
   }
 }
 
+/* reload */
 .loading-element {
   display: flex;
   justify-content: center;
+}
+
+/* category card */
+.category-card {
+  width: 80%;
+  max-width: $category-img-height;
+  height: $category-height;
+  margin: 10px;
+  border: 1px solid gray;
+  box-shadow: 3px -3px 5px 0px #e2e2e2;
+
+  &__img-wrapper {
+    height: $category-img-height;
+  }
+
+  &__category-desc {
+    display: flex;
+    justify-content: space-between;
+  }
 }

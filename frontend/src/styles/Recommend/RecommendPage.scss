@@ -40,18 +40,20 @@
 
 /* category card */
 .category-card {
-  width: 80%;
-  // max-width: $category-img-height;
+  width: 82%;
+  //max-width: $category-img-height;
   height: $category-height;
-  margin: 10px;
-  border: 1px solid gray;
-  box-shadow: 3px -3px 5px 0px #e2e2e2;
+  margin: 15px 10px;
+  box-shadow: 3px 3px 5px 0px #e2e2e2;
+  border-radius: $category-border;
 
   &__img-wrapper {
     height: $category-img-height;
 
     & img {
       width: 100%;
+      border-top-left-radius: $category-border;
+      border-top-right-radius: $category-border;
       height: $category-img-height;
     }
   }

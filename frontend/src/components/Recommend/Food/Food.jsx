@@ -1,5 +1,5 @@
 import 'styles/Recommend/Food.scss';
-import CategoryCard from '../CategoryCard';
+import CategoryCard from '../Category/CategoryCard';
 
 export default function Food() {
   return (

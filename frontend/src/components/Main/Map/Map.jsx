@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useMainDispatch, useMainState } from './MainContext';
+import { useMainDispatch, useMainState } from '../MainContext';
 import { IconButton } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import Loading from './Loading';

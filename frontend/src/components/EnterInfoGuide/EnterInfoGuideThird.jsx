@@ -1,25 +1,51 @@
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import EnterInfoBasicCard from './EnterInfoBasicCard.jsx'
+import { Button } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import styled from '@emotion/styled';
+import Container from 'components/common/Container';
 
+const PlainButton = styled(Button)`
+  &.MuiButton-root {
+    color: black;
+    &:hover {
+      background-color: white;
+    }
+  }
+`;
 const EnterInfoGuideThird = () => {
+    const handlePrev = () => {
+        console.log('이전');
+        window.location.href ="/guide/second"
+      };
+    
+      const handleNext = () => {
+        console.log('다음');
+        window.location.href ="/guide/forth"
+      };
     return (
-        <div>
-            <div>
-                <h1>좋아하는 것은 위로,</h1>
-                <h1>싫어하는 것은 아래로</h1>
-                <h1>스와이프 해주세요.</h1>
+      <div>
+      <Container>
+      <div className="Guide">
+            <div className='Guide__Third__Title'>
+                <h2>좋아하는 것은 굳버튼,</h2>
+                <h2>싫어하는 것은 밷버튼을</h2>
+                <h2>눌러주세요.</h2>
             </div>
-            <div>
-                <p>좋아하면 위로!!</p>
-                <ArrowUpwardIcon/>
-                <div>
-                    <EnterInfoBasicCard/>
-                </div>
-                <ArrowDownwardIcon/>
-                <p>싫어하면 밑으로!!</p>
+            <div className='Guide__Third__Item'>
+                <EnterInfoBasicCard/>
+            </div>
+            <div className="recommend-bottom">
+                <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>
+                    이전
+                </PlainButton>
+                <PlainButton endIcon={<ArrowForwardIosIcon />} onClick={handleNext}>
+                    다음
+                </PlainButton>
             </div>
         </div>
+        </Container>
+      </div>
     );
 };
 

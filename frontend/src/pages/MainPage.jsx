@@ -4,11 +4,12 @@ import { MainProvider } from 'components/Main/MainContext';
 import { Grid } from '@mui/material';
 import BottomNav from 'components/common/BottomNav';
 import Container from 'components/common/Container';
-import Map from 'components/Main/Map';
-import Location from 'components/Main/Location';
-import Range from 'components/Main/Range';
-import Recommend from 'components/Main/Recommend';
-import Postcode from 'components/Main/Postcode';
+import Map from 'components/Main/Map/Map';
+import Location from 'components/Main/Search/Location';
+import Range from 'components/Main/Search/Range';
+import Recommend from 'components/Main/Search/Recommend';
+import Postcode from 'components/Main/Search/Postcode';
+import HistoryAlert from 'components/Main/HistoryAlert';
 
 function MainPage() {
   const [open, setOpen] = useState(false);
@@ -24,6 +25,7 @@ function MainPage() {
   return (
     <MainProvider>
       <Container>
+        <HistoryAlert />
         <Map />
         <div className="search">
           <Grid

@@ -1,4 +1,4 @@
-import { useMainDispatch, useMainState } from './MainContext';
+import { useMainDispatch, useMainState } from '../MainContext';
 import styled from '@emotion/styled';
 import { Slider } from '@mui/material';
 

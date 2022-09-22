@@ -3,22 +3,21 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import mascot from '../../assets/images/WalkingGirl.gif'
+import { Button } from '@mui/material';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 
 
-
-export default function RecipeReviewCard() {
-
+export default function RecipeReviewCard({ id, title, image }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card className="UserInput__Food__Item__Area__Card">
       <CardHeader
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={title}
       />
       <CardMedia
         component="img"
         height="194"
-        image={mascot}
+        image={image}
         alt="Paella dish"
       />
       <CardContent>
@@ -28,7 +27,15 @@ export default function RecipeReviewCard() {
           if you like.
         </Typography>
       </CardContent>
-    
+      <div className='Guide__Third__Item__Card__Bottom'>
+        <div>
+          hihi
+        </div>
+        <div>
+          <Button><ThumbUpOffAltIcon/></Button>
+          <Button><ThumbDownOffAltIcon/></Button>
+        </div>
+      </div>
     </Card>
   );
 }

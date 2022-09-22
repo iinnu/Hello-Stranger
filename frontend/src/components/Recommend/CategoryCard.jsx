@@ -4,6 +4,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import sample from 'assets/images/sample.jpg';
 
 export default function CategoryCard() {
   const [like, setLike] = useState(false);
@@ -21,10 +22,12 @@ export default function CategoryCard() {
 
   return (
     <div className="category-card">
-      <div className="category-card__img-wrapper">사진</div>
+      <div className="category-card__img-wrapper">
+        <img src={sample} alt="cateogry-img" />
+      </div>
       <div className="category-card__category-desc">
         <div className="category-desc__inner">
-          <span>카테고리 이름</span>
+          <span>만두</span>
           <div className="category-desc__like">
             <IconButton onClick={handleLike}>
               {!like && <ThumbUpOffAltIcon />}

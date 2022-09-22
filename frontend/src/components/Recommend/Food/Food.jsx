@@ -4,9 +4,14 @@ import CategoryCard from '../CategoryCard';
 export default function Food() {
   return (
     <div className="food-list">
-      <CategoryCard />
-      <CategoryCard />
-      <CategoryCard />
+      <div className="food-list__inner">
+        <CategoryCard />
+        <CategoryCard />
+        <CategoryCard />
+        <CategoryCard />
+        <CategoryCard />
+        <CategoryCard />
+      </div>
     </div>
   );
 }

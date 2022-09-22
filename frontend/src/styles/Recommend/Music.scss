@@ -1,9 +1,4 @@
-@import '../common/_util';
-
-$padding-top: 10px;
-$padding-side: 20px;
-$top-height: 40px;
-$bottom-height: 46.5px;
+@import './common.scss';
 
 $music-player-height: calc($viewport-height - $top-height - 110px);
 $album-height: 170px;

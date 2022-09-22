@@ -1,10 +1,4 @@
-@import '../common/_util';
-
-$padding-top: 10px;
-$padding-side: 20px;
-$category-height: 200px;
-$category-img-height: 160px;
-$category-desc-height: calc($category-height - $category-img-height);
+@import './common.scss';
 
 .recommend-title {
   height: 100px;
@@ -55,6 +49,11 @@ $category-desc-height: calc($category-height - $category-img-height);
 
   &__img-wrapper {
     height: $category-img-height;
+
+    & img {
+      width: 100%;
+      height: $category-img-height;
+    }
   }
 
   &__category-desc {
@@ -69,7 +68,7 @@ $category-desc-height: calc($category-height - $category-img-height);
   &__inner {
     display: flex;
     justify-content: space-between;
-    padding: 0 8px;
+    padding: 0 10px;
 
     & span {
       font-weight: 600;

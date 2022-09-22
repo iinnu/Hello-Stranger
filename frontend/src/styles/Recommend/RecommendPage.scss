@@ -1,4 +1,4 @@
-@import './common.scss';
+@import './_common.scss';
 
 .recommend-title {
   height: 100px;
@@ -36,57 +36,4 @@
 .loading-element {
   display: flex;
   justify-content: center;
-}
-
-/* category card */
-.category-card {
-  width: 82%;
-  //max-width: $category-img-height;
-  height: $category-height;
-  margin: 15px 10px;
-  box-shadow: 3px 3px 5px 0px #e2e2e2;
-  border-radius: $category-border;
-
-  &__img-wrapper {
-    height: $category-img-height;
-
-    & img {
-      width: 100%;
-      border-top-left-radius: $category-border;
-      border-top-right-radius: $category-border;
-      height: $category-img-height;
-    }
-  }
-
-  &__category-desc {
-    display: flex;
-    flex-direction: column;
-    height: $category-desc-height;
-    justify-content: center;
-  }
-}
-
-.category-desc {
-  &__inner {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
-
-    & span {
-      font-weight: 600;
-    }
-  }
-
-  &__like {
-    display: flex;
-    justify-content: flex-end;
-
-    & .MuiIconButton-root {
-      padding: 0;
-
-      &:first-child {
-        margin-right: 10px;
-      }
-    }
-  }
 }

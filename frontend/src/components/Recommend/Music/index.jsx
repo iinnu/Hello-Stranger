@@ -1,11 +1,10 @@
 import 'styles/Recommend/Music.scss';
 import { MusicProvider } from './MusicContext';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import Title from '../Title';
 import AlbumCover from './AlbumCover';
 import Playlist from './Playlist';
 
-function Music() {
+export default function Music() {
   return (
     <HelmetProvider>
       <Helmet>
@@ -22,5 +21,3 @@ function Music() {
     </HelmetProvider>
   );
 }
-
-export default Music;

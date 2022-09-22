@@ -3,10 +3,10 @@ import { useRecommendContext } from 'components/Recommend/RecommendContext';
 import Container from 'components/common/Container';
 import CloseRecommend from 'components/Recommend/CloseRecommend';
 import PrevNext from 'components/Recommend/PrevNext';
-import Music from 'components/Recommend/Music/Music';
+import Music from 'components/Recommend/Music';
 import Title from 'components/Recommend/Title';
-import Food from 'components/Recommend/Food/Food';
-import Activity from 'components/Recommend/Activity/Activity';
+import Food from 'components/Recommend/Food';
+import Activity from 'components/Recommend/Activity';
 
 const titles = [
   ['어떤 음악을', '듣고 싶으신가요?'],
@@ -22,8 +22,8 @@ function RecommendPage() {
       <CloseRecommend />
       <div className="recommend-content">
         <Title title={titles[index]} />
-        {index === 0 ? <Music /> : index === 1 ? <Food /> : <Activity />}
-        {/* <Food /> */}
+        {/* {index === 0 ? <Music /> : index === 1 ? <Food /> : <Activity />} */}
+        <Food />
       </div>
       <PrevNext index={index} />
     </Container>

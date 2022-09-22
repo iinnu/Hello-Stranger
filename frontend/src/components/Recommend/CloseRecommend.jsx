@@ -1,7 +1,7 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import CustomModal from 'components/common/CustomModal';
 
 function CloseRecommend() {

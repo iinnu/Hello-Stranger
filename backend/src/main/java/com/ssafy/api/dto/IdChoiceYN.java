@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class IdChoiceYN {
-    String id;
+    int id;
     String choiceYN;
 }

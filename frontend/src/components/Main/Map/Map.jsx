@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
+import { useMainDispatch, useMainState } from '../MainContext';
 import { IconButton } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
-import { useEffect, useState } from 'react';
 import Loading from './Loading';
-import { useMainDispatch, useMainState } from '../MainContext';
 
 const { kakao, navigator, localStorage } = window;
 

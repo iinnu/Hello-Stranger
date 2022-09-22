@@ -9,7 +9,7 @@ $category-desc-height: calc($category-height - $category-img-height);
 .recommend-title {
   height: 100px;
   font-size: 2em;
-  font-weight: 600;
+  font-weight: 900;
   padding: 0 $padding-side;
   padding-top: $padding-top;
 }
@@ -47,7 +47,7 @@ $category-desc-height: calc($category-height - $category-img-height);
 /* category card */
 .category-card {
   width: 80%;
-  max-width: $category-img-height;
+  // max-width: $category-img-height;
   height: $category-height;
   margin: 10px;
   border: 1px solid gray;
@@ -59,6 +59,33 @@ $category-desc-height: calc($category-height - $category-img-height);
 
   &__category-desc {
     display: flex;
+    flex-direction: column;
+    height: $category-desc-height;
+    justify-content: center;
+  }
+}
+
+.category-desc {
+  &__inner {
+    display: flex;
     justify-content: space-between;
+    padding: 0 8px;
+
+    & span {
+      font-weight: 600;
+    }
+  }
+
+  &__like {
+    display: flex;
+    justify-content: flex-end;
+
+    & .MuiIconButton-root {
+      padding: 0;
+
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
   }
 }

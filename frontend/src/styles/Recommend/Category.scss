@@ -3,6 +3,7 @@
 $food-list-height: calc(
   $viewport-height - $top-height - $bottom-height - $title-height
 );
+$map-border-color: rgb(185, 185, 185);
 
 @mixin custom-scrollbar {
   overflow-y: auto;
@@ -96,5 +97,12 @@ $food-list-height: calc(
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  &__map {
+    width: 100%;
+    height: 300px;
+    border-top: 1px solid $map-border-color;
+    border-bottom: 1px solid $map-border-color;
   }
 }

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Drawer, IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CategoryMap from './CategoryMap';
 
 const CustomDrawer = styled(Drawer)`
   .MuiPaper-root {
@@ -21,6 +22,7 @@ export default function CategoryDetail({ open, handleClose }) {
         </IconButton>
       </div>
       <div className="recommend-title category-detail__title">만두</div>
+      <CategoryMap />
     </CustomDrawer>
   );
 }

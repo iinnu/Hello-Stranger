@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import 'styles/Recommend/Category.scss';
-import CategoryCard from '../Category/CategoryCard';
-import CategoryDetail from '../Category/CategoryDetail';
+import { useState } from 'react';
+import CategoryCard from '../Category';
+import CategoryDetail from '../Category/Detail';
 
 export default function Food() {
   const [openDetail, setOpenDetail] = useState(false);

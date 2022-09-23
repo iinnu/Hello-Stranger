@@ -1,8 +1,5 @@
 @import './_common.scss';
 
-$map-height: 250px;
-$map-border-color: rgb(185, 185, 185);
-
 $category-list-height: calc(
   $viewport-height - $top-height - $title-height - $bottom-height
 );
@@ -10,6 +7,14 @@ $category-detail-title-height: 60px;
 $category-store-list-height: calc(
   $viewport-height - $category-detail-title-height
 );
+$category-store-map-height: calc(
+  $viewport-height - $category-detail-title-height
+);
+
+$store-info-height: 100px;
+
+$map-height: calc($category-store-map-height - $store-info-height);
+$map-border-color: rgb(185, 185, 185);
 
 @mixin custom-scrollbar {
   overflow-y: auto;
@@ -103,13 +108,7 @@ $category-store-list-height: calc(
     display: flex;
     padding: 10px 10px;
     box-shadow: 0px 2px 5px 0px #d6d6d6;
-  }
-
-  &__map {
-    width: 100%;
-    height: $map-height;
-    border-top: 1px solid $map-border-color;
-    border-bottom: 1px solid $map-border-color;
+    z-index: 1200;
   }
 }
 
@@ -163,4 +162,27 @@ $category-store-list-height: calc(
   & img {
     width: 100%;
   }
+}
+
+/* category store map */
+.category-store-map {
+  position: relative;
+  height: $category-store-map-height;
+
+  &__map {
+    width: 100%;
+    height: $map-height;
+    border-top: 1px solid $map-border-color;
+    border-bottom: 1px solid $map-border-color;
+  }
+}
+
+.store-info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  max-width: 500px;
+  height: $store-info-height;
+  box-shadow: 0px -2px 5px 0px #d6d6d6;
+  z-index: 1200;
 }

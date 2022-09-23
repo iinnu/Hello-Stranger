@@ -20,5 +20,5 @@ export default function CategoryMap() {
     marker.setMap(map);
   }, []);
 
-  return <div id="map" className="category-detail__map"></div>;
+  return <div id="map" className="category-store-map__map"></div>;
 }

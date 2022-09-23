@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { Drawer } from '@mui/material';
 import Title from './Title';
-import CategoryMap from './CategoryMap';
-import CategoryStoreList from '../Store';
+import CategoryMap from './Map/CategoryMap';
+import CategoryStoreList from './List/StoreList';
 
 const CustomDrawer = styled(Drawer)`
   .MuiPaper-root {

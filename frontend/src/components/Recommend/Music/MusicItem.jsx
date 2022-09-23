@@ -1,26 +1,21 @@
-import { useCallback, useState } from 'react';
-import { useSetCurrentMusic } from './MusicContext';
+import { useState } from 'react';
+import { useRecommendContext } from '../Context/RecommendContext';
+import { setCurrentMusic } from '../Context/musicReducer';
 import { IconButton } from '@mui/material';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-
-const getClassName = (active) => {
-  let className = 'music-item ';
-  if (active) className += 'music-item--active';
-  return className.trim();
-};
+import classNames from 'classnames';
 
 function MusicItem({ active, item }) {
-  let className = getClassName(active);
-  const setCurrent = useSetCurrentMusic();
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
+  const { dispatch } = useRecommendContext();
 
-  const handleItemClick = useCallback(() => {
-    setCurrent(item);
-  }, [item]);
+  const handleClickItem = () => {
+    dispatch(setCurrentMusic(item));
+  };
 
   const handleLike = () => {
     if (dislike) setDislike(false);
@@ -33,8 +28,13 @@ function MusicItem({ active, item }) {
   };
 
   return (
-    <div className={className}>
-      <div className="list__item" onClick={handleItemClick}>
+    <div
+      className={
+        active ? classNames('music-item', 'music-item--active') : 'music-item'
+      }
+      onClick={handleClickItem}
+    >
+      <div className="list__item">
         <div className="item__title">{item.musicName}</div>
         <div className="item__artist">{item.musicArtist}</div>
       </div>

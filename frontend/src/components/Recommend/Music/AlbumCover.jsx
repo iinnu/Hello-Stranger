@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { useCurrentMusic } from './MusicContext';
 import { IconButton } from '@mui/material';
+import { useRecommendContext } from '../Context/RecommendContext';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 
 function AlbumCover() {
   const [play, setPlay] = useState(false);
-  const current = useCurrentMusic();
+  const { state } = useRecommendContext();
+  const { current } = state.musicReducer;
 
   const albumImg = {
     backgroundImage: `url(${current?.musicImgUrl})`,

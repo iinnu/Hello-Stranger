@@ -8,7 +8,7 @@ import EnterInfoGuide from './pages/EnterInfoGuidePage.jsx';
 import EnterInfo from './pages/EnterInfoPage.jsx';
 import RecommendPage from 'pages/RecommendPage.jsx';
 import RecommendResultPage from 'pages/RecommendResultPage.jsx';
-import { RecommendProvider } from 'components/Recommend/RecommendContext.jsx';
+import { RecommendProvider } from 'components/Recommend/Context/RecommendContext.jsx';
 
 function App() {
   return (

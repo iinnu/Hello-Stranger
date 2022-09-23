@@ -1,5 +1,5 @@
 import 'styles/Recommend/RecommendPage.scss';
-import { useRecommendContext } from 'components/Recommend/RecommendContext';
+import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
 import Container from 'components/common/Container';
 import CloseRecommend from 'components/Recommend/CloseRecommend';
 import PrevNext from 'components/Recommend/PrevNext';
@@ -15,15 +15,17 @@ const titles = [
 ];
 
 function RecommendPage() {
-  const { index } = useRecommendContext().state;
+  // const { index } = useRecommendContext().state;
+  const { state } = useRecommendContext();
+  const index = state.indexReducer.index;
 
   return (
     <Container>
       <CloseRecommend />
       <div className="recommend-content">
         <Title title={titles[index]} />
-        {/* {index === 0 ? <Music /> : index === 1 ? <Food /> : <Activity />} */}
-        <Food />
+        {index === 0 ? <Music /> : index === 1 ? <Food /> : <Activity />}
+        {/* <Food /> */}
       </div>
       <PrevNext index={index} />
     </Container>

@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useCurrentMusic, useSetCurrentMusic } from './MusicContext';
+import { useEffect } from 'react';
+import { useRecommendContext } from '../Context/RecommendContext';
+import { setCurrentMusic, setMusicList } from '../Context/musicReducer';
 import usePullToRefresh from 'hook/usePullToRefresh';
 import useSpotifyReady from 'hook/useSpotifyReady';
 import MusicItem from './MusicItem';
@@ -72,15 +73,15 @@ const playlist = [
 ];
 
 function Playlist() {
-  const current = useCurrentMusic();
-  const setCurrent = useSetCurrentMusic();
   const ready = useSpotifyReady();
   const { div, handleTouchStart, handleTouchMove, handleTouchEnd } =
     usePullToRefresh();
-  const [token, setToken] = useState(false);
+  const { state, dispatch } = useRecommendContext();
+  const { list, current } = state.musicReducer;
 
   useEffect(() => {
-    setCurrent(playlist[0]);
+    dispatch(setMusicList(playlist));
+    dispatch(setCurrentMusic(playlist[0]));
   }, []);
 
   // // set spotify access token
@@ -158,10 +159,10 @@ function Playlist() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {playlist.map((item) => (
+        {list.map((item) => (
           <MusicItem
             key={item.musicID}
-            active={current?.musicID === item.musicID ? true : false}
+            active={item.musicID === current.musicID ? true : false}
             item={item}
           />
         ))}

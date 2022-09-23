@@ -11,7 +11,7 @@ $category-store-map-height: calc(
   $viewport-height - $category-detail-title-height
 );
 
-$store-info-height: 100px;
+$store-info-height: 120px;
 
 $map-height: calc($category-store-map-height - $store-info-height);
 $map-border-color: rgb(185, 185, 185);
@@ -185,4 +185,44 @@ $map-border-color: rgb(185, 185, 185);
   height: $store-info-height;
   box-shadow: 0px -2px 5px 0px #d6d6d6;
   z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  $info-padding: 20px;
+
+  &__top {
+    padding-left: $info-padding;
+  }
+
+  &__scope {
+    padding-left: $info-padding;
+    margin: 3px 0;
+  }
+
+  &__address {
+    padding-left: $info-padding;
+    color: gray;
+  }
+}
+
+.top {
+  $margin-left: 10px;
+
+  &__title {
+    font-size: 1.3em;
+    font-weight: 600;
+  }
+
+  &__isOpen {
+    padding: 0 1px;
+    margin-left: $margin-left;
+    border: 1px solid gray;
+    font-size: 0.9em;
+    color: gray;
+  }
+
+  &__scope {
+    margin-left: $margin-left;
+  }
 }

@@ -1,12 +1,23 @@
+import Rating from '@mui/material/Rating';
+
 export default function StoreInfo() {
   return (
     <div className="store-info">
       <div className="store-info__top">
-        <span>XX 만두가게</span>
-        <span> 영업중</span>
-        <span> ⭑ 4.5/5</span>
+        <span className="top__title">XX 만두가게</span>
+        <span className="top__isOpen">영업중</span>
       </div>
-      <div>대구광역시 중구 동인동</div>
+      <div className="store-info__scope">
+        <span>2.5</span>
+        <Rating
+          name="half-rating-read"
+          defaultValue={2.5}
+          precision={0.5}
+          size="small"
+          readOnly
+        />
+      </div>
+      <div className="store-info__address">대구광역시 중구 동인동</div>
     </div>
   );
 }

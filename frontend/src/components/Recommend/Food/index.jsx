@@ -32,7 +32,6 @@ export default function Food() {
           <CategoryCard />
           <CategoryCard />
           <CategoryCard />
-          <CategoryCard />
         </div>
       </div>
       <CategoryDetail open={openDetail} handleClose={handleCloseDetail} />

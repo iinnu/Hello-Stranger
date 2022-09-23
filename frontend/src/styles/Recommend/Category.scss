@@ -140,6 +140,27 @@ $category-store-list-height: calc(
 }
 
 .store-item {
-  padding: 20px;
-  border-bottom: 1px solid gray;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  border-bottom: 1px solid #eee;
+
+  &__title {
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+
+  &__address {
+    font-weight: 400;
+    color: gray;
+  }
+
+  &__img-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  & img {
+    width: 100%;
+  }
 }

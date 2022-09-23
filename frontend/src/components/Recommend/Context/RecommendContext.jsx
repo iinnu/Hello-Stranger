@@ -9,6 +9,21 @@ const initialState = {
     index: 0,
   },
   musicReducer: {
+    refresh: 0,
+    list: [],
+    current: {},
+    like: [],
+    dislike: [],
+  },
+  foodReducer: {
+    refresh: 0,
+    list: [],
+    current: {},
+    like: [],
+    dislike: [],
+  },
+  activityReducer: {
+    refresh: 0,
     list: [],
     current: {},
     like: [],

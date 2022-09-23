@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import { Drawer } from '@mui/material';
+import Title from './Title';
 import CategoryMap from './CategoryMap';
 import CategoryStoreList from '../Store';
-import Title from './Title';
 
 const CustomDrawer = styled(Drawer)`
   .MuiPaper-root {
@@ -15,10 +16,21 @@ const CustomDrawer = styled(Drawer)`
 `;
 
 export default function CategoryDetail({ open, handleClose }) {
+  const [isList, setIsList] = useState(true);
+
+  const handleClick = () => {
+    setIsList(!isList);
+  };
+
   return (
     <CustomDrawer anchor="right" open={open} onClose={handleClose}>
-      <Title handleClose={handleClose} />
-      <CategoryStoreList />
+      <Title
+        isList={isList}
+        handleClick={handleClick}
+        handleClose={handleClose}
+      />
+      {isList && <CategoryStoreList />}
+      {!isList && <CategoryMap />}
     </CustomDrawer>
   );
 }

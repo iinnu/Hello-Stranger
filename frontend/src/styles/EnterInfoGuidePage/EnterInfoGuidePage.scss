@@ -1,0 +1,80 @@
+@import "../common/util";
+
+.Guide{
+    max-width: 500px;
+    width: 100%;
+    height: 100%;
+    &__First{
+        &__Title{
+            height: 30%;
+        }
+        &__Title h2{
+            margin: 5px;
+        }    
+        &__Item{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &__Mascot{
+                max-width: 400px;
+                width: 60%;
+            }
+        }
+    }
+    &__Second{
+        &__Title{
+            height: 30%;
+        }
+        &__Title h2{
+            margin: 5px;
+        }  
+        &__Item{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &__Mascot{
+                max-width: 400px;
+                width: 60%;
+            }
+        }
+    }
+    &__Third{
+        &__Title{
+            height: 25%;
+        }
+        &__Title h2{
+            margin: 5px;
+        }  
+        &__Item{
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            &__Card{
+                width:80%;
+                &__Bottom{
+                    display:flex;
+                    justify-content: space-around;
+                }
+            }
+        }
+    }
+    &__Forth{
+        &__Title{
+            height: 30%;
+        }
+        &__Title h2{
+            margin: 5px;
+        }  
+        &__Item{
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            &__Mascot{
+                max-width: 400px;
+                width: 60%;
+            }
+        }
+    }
+}

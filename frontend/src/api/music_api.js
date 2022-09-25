@@ -1,0 +1,205 @@
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+
+const genreList = [
+  "acoustic",
+  "afrobeat",
+  "alt-rock",
+  "alternative",
+  "ambient",
+  "anime",
+  "black-metal",
+  "bluegrass",
+  "blues",
+  "bossanova",
+  "brazil",
+  "breakbeat",
+  "british",
+  "cantopop",
+  "chicago-house",
+  "children",
+  "chill",
+  "classical",
+  "club",
+  "comedy",
+  "country",
+  "dance",
+  "dancehall",
+  "death-metal",
+  "deep-house",
+  "detroit-techno",
+  "disco",
+  "disney",
+  "drum-and-bass",
+  "dub",
+  "dubstep",
+  "edm",
+  "electro",
+  "electronic",
+  "emo",
+  "folk",
+  "forro",
+  "french",
+  "funk",
+  "garage",
+  "german",
+  "gospel",
+  "goth",
+  "grindcore",
+  "groove",
+  "grunge",
+  "guitar",
+  "happy",
+  "hard-rock",
+  "hardcore",
+  "hardstyle",
+  "heavy-metal",
+  "hip-hop",
+  "holidays",
+  "honky-tonk",
+  "house",
+  "idm",
+  "indian",
+  "indie",
+  "indie-pop",
+  "industrial",
+  "iranian",
+  "j-dance",
+  "j-idol",
+  "j-pop",
+  "j-rock",
+  "jazz",
+  "k-pop",
+  "kids",
+  "latin",
+  "latino",
+  "malay",
+  "mandopop",
+  "metal",
+  "metal-misc",
+  "metalcore",
+  "minimal-techno",
+  "movies",
+  "mpb",
+  "new-age",
+  "new-release",
+  "opera",
+  "pagode",
+  "party",
+  "philippines-opm",
+  "piano",
+  "pop",
+  "pop-film",
+  "post-dubstep",
+  "power-pop",
+  "progressive-house",
+  "psych-rock",
+  "punk",
+  "punk-rock",
+  "r-n-b",
+  "rainy-day",
+  "reggae",
+  "reggaeton",
+  "road-trip",
+  "rock",
+  "rock-n-roll",
+  "rockabilly",
+  "romance",
+  "sad",
+  "salsa",
+  "samba",
+  "sertanejo",
+  "show-tunes",
+  "singer-songwriter",
+  "ska",
+  "sleep",
+  "songwriter",
+  "soul",
+  "soundtracks",
+  "spanish",
+  "study",
+  "summer",
+  "swedish",
+  "synth-pop",
+  "tango",
+  "techno",
+  "trance",
+  "trip-hop",
+  "turkish",
+  "work-out",
+  "world-music",
+];
+
+export default function getRecommendation() {
+  
+  const accessToken =
+    "BQDxHoZknNIgpsm0vYNPEnLqARauLpMVm02BGjdITHLAe1H4boyuFYw0Gp87eI4orQg5SlJTXDYu4K0eNiNOtVB0zwTYbrhWnj1nxK0vfotf6oKfw18Hc8WERa8hC7lYVyEBv0vzZz_GgGmwVOMix3T9sZTX1q-W7gq5Z6uVLi0kG1-eA667wYxBZEw3m5JWQfs";
+
+  // search를 통해 유저가 선택한 곡 제목을 인풋으로 넣고의 trackId, artistId를 받는 요청
+  const returnPlaylist = axios
+    .get("https://api.spotify.com/v1/search", {
+      params: {
+        q: "macklemore can't hold us",
+        type: "track",
+        limit: "1",
+      },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+
+    // spotify에서 추천받기 위해서는 genre도 필요함
+    // 임의의 장르를 추가할 수는 없기 때문에 artist의 genre를 가져오기로 함
+    // getArtist를 통해 artistId를 인풋으로 넣고 genre를 가져옴
+    .then((res) => {
+      const trackId = res.data.tracks.items[0].id;
+      const artistId = res.data.tracks.items[0].artists[0].id;
+      console.log(`trackId: ${trackId}, artistId: ${artistId}`);
+      axios
+        .get(`https://api.spotify.com/v1/artists/${artistId}`, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        // 이 장르를 또 추천받기 위한 인풋으로 바로 넣을 수는 없음
+        // spotify가 인풋으로 받는 장르와 artist에 달린 genre가 일치하지 않음...
+        // 그래서 spotify가 인풋으로 받는 장르에 있는 것만 받아와서 추천 받음
+        // getRecommendation에 trackId, artistId, genres를 인풋으로 넣고 추천곡들을 가져옴
+        .then((res) => {
+          const genres = res.data.genres;
+          const inputGenres = genres
+            .filter((e1) => {
+              return genreList.includes(e1);
+            })
+            .join();
+          console.log(
+            `trackId: ${trackId}, artistId: ${artistId} genres: ${inputGenres} ${typeof inputGenres}`
+          );
+          axios
+            .get("https://api.spotify.com/v1/recommendations", {
+              params: {
+                limit: 10,
+                market: "KR",
+                seed_artists: artistId,
+                seed_genres: inputGenres,
+                seed_tracks: trackId,
+              },
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${accessToken}`,
+              },
+            })
+            .then((res) => {
+              console.log(res.data.tracks);
+              return res.data.tracks;
+            });
+        });
+    });
+  console.log("오오냐?", returnPlaylist);
+  return returnPlaylist;
+}

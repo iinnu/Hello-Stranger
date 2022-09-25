@@ -1,0 +1,145 @@
+@import './_common.scss';
+
+$map-height: 250px;
+$map-border-color: rgb(185, 185, 185);
+
+$category-list-height: calc(
+  $viewport-height - $top-height - $title-height - $bottom-height
+);
+$category-detail-title-height: 60px;
+$category-store-list-height: calc(
+  $viewport-height - $category-detail-title-height
+);
+
+@mixin custom-scrollbar {
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    padding-left: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $blue;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #85858524;
+  }
+}
+
+/* category card */
+.category-card {
+  width: 82%;
+  //max-width: $category-img-height;
+  height: $category-height;
+  margin: 15px 10px;
+  box-shadow: 3px 3px 5px 0px #e2e2e2;
+  border-radius: $category-border;
+
+  &__img-wrapper {
+    height: $category-img-height;
+    cursor: pointer;
+
+    & img {
+      width: 100%;
+      border-top-left-radius: $category-border;
+      border-top-right-radius: $category-border;
+      height: $category-img-height;
+    }
+  }
+
+  &__category-desc {
+    display: flex;
+    flex-direction: column;
+    height: $category-desc-height;
+    justify-content: center;
+  }
+}
+
+.category-desc {
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+
+    & span {
+      cursor: pointer;
+      font-weight: 600;
+    }
+  }
+
+  &__like {
+    display: flex;
+    justify-content: flex-end;
+
+    & .MuiIconButton-root {
+      padding: 0;
+
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+/* category list */
+.category-list {
+  @include custom-scrollbar();
+
+  height: $category-list-height;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+  }
+}
+
+/* category detail */
+.category-detail {
+  &__title {
+    display: flex;
+    padding: 10px 10px;
+    box-shadow: 0px 2px 5px 0px #d6d6d6;
+  }
+
+  &__map {
+    width: 100%;
+    height: $map-height;
+    border-top: 1px solid $map-border-color;
+    border-bottom: 1px solid $map-border-color;
+  }
+}
+
+.title {
+  &__inner {
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+
+    & span {
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+  }
+}
+
+/* category store list */
+.category-store-list {
+  @include custom-scrollbar();
+  height: $category-store-list-height;
+}
+
+.store-item {
+  padding: 20px;
+  border-bottom: 1px solid gray;
+}

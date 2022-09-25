@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import mascot from '../../assets/images/WalkingGirl.gif'
+import mascot from '../../assets/images/guide_forth.jpg'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import styled from '@emotion/styled';
 import Container from 'components/common/Container';

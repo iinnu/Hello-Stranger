@@ -3,7 +3,6 @@ import { Button } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
 import Container from 'components/common/Container';
-
 const PlainButton = styled(Button)`
   &.MuiButton-root {
     color: black;

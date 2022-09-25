@@ -1,35 +1,76 @@
 import axios from "axios";
 
-export default function createPlaylist() {
- const accessToken =
- "BQAXipLiXOnTJcveaSJ_WgkeknypM9QAU1t2oRPwqmjMOlmhuE6zUZas507SBWkYdER2RPPnQzu5Q0pXanw48Sg5-DJ0ZwHnLtvtFm0_N0TEJSneVTe-c4k0yBhW7gJ3dzTV-hjE_R-OxvH2WWJ6YdMjK-2niYRrsX0ma5nhlQx6N06AX-YM9RYpMOOktHD3CFYMCLCkNfynLQM8L6h7vUBhogeo3VpJSQb9wDAeAZOTgBqoMOMYWVqxEGT2aEs2B_Z_Zj2Oh1rezvJ4Lp-b8LqiTfwE2kG5-y0-Y7YThpb6NOfGAnyfw5ituLZoAXj_qK5bEnhlJ5GNBM_uhV2UVMyLqvwQ-ezujR38oNuUMZyG5XFkbcUK2_AsROUy1LsMEgo_laCfQ";
+export default async function createPlaylist(trackIdLIst) {
+  const accessToken =
+    "BQDqusGlBsU1Eaj4dwLdY6Y3vv5N6JIylcuspIetjx0nSLckd78Krm2Yai7G4LQ3TVski69j3oCZri5giyke6-KVa85fh0scIeUSPKP742L2zV2JJLC2gVrr4SorkKDy3rMqjQlU8W6EkApzie190v_WIH0uBiL74iSsZOXUDNJ8HZaqSDcRO7GAjF9TG_p4hEXheNb1hiaCG6Au5Ay5Eqj1FISaF8jKi8Ogj-p6R4Wqs_GdzQF3LrKPopHEemSz";
 
- // 플레이리스트 만들기 위해 userId를 get user profile 통해 가져옴
-  axios.get('https://api.spotify.com/v1/me', {
-   headers: {
-       'Accept': 'application/json',
-       'Content-Type': 'application/json',
-       'Authorization': 
-         `Bearer ${accessToken}`
-      }
+  // 플레이리스트 만들기 위해 userId를 get user profile 통해 가져옴
+  async function getCurrentUserProfileAxios() {
+    const userId = await axios
+      .get("https://api.spotify.com/v1/me", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        console.log('userId', res.data.id)
+        return res.data.id
+        })
+      .catch((err) => console.error(err));
+    return userId;
   }
 
- // 이제 createPlaylist를 통해 플레이리스트를 새롭게 만듦
- const today = new Date()
- axios.post(
-  'https://api.spotify.com/v1/users/1/playlists',
-  {
-      'name': `Hello Stragner ${today}`,
-      'description': 'Hello Stranger에서 제공한 플레이리스트',
-      'public': false
-  },
-  {
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 
-            `Bearer ${accessToken}`
-      }
+  // 이제 createPlaylist를 통해 플레이리스트를 새롭게 만듦
+  async function createPlaylistAxios() {
+    const today = new Date();
+    const playlistId = await axios
+      .post(
+        `https://api.spotify.com/v1/users/${userId}/playlists`,
+        {
+          name: `Hello Stranger ${today}`,
+          description: "Hello Stranger에서 제공한 플레이리스트",
+          public: false,
+        },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log('playlistId', res.data.id)
+        return res.data.id
+        })      
+    .catch((err) => console.error(err));
+    return playlistId;
   }
-)
+
+  // 이제 Add Items to Playlist
+  async function addItemsToPlaylistAxios() {
+    axios
+      .post(
+        `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+        {
+          uris: trackIdLIst,
+          position: 0,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("와 만들어졌다!", res);
+      });
+  }
+
+  const userId = await getCurrentUserProfileAxios();
+  const playlistId = await createPlaylistAxios();
+  await addItemsToPlaylistAxios();
 }

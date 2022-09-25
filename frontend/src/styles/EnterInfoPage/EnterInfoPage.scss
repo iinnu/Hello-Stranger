@@ -68,16 +68,14 @@
             margin: 5px;
         } 
         &__Item{
+            height: 70%;
             display: flex;
             flex-flow: column;
             justify-content: center;
             align-items: center;
-            &__Card{
-                width:80%;
-                &__Bottom{
-                    display:flex;
-                    justify-content: space-around;
-                }
+            &__Mascot{
+                max-width: 400px;
+                width: 90%;
             }
         }
     }

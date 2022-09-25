@@ -1,4 +1,4 @@
-import mascot from '../../assets/images/WalkingGirl.gif'
+import mascot from '../../assets/images/guide_first.jpg'
 import { Button } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';

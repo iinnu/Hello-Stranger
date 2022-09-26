@@ -9,26 +9,29 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 
 export default function RecipeReviewCard({ id, title, image }) {
   function activityDataInputGood(){
-    const checkData1 = [JSON.parse(localStorage.getItem("activityDataInput"))]
-    const checkData2 = JSON.parse(localStorage.getItem("activityDataInput"))
-    console.log(checkData1.length)
-    console.log(checkData2.length)
-      const existData = [JSON.parse(localStorage.getItem("activityDataInput"))]
-      const activityDataInput = {
+      const activityDataInput = 
+        {
         "category": title,
         "choiceYN" : "Y"
-      }
-      existData.push(activityDataInput)
-      localStorage.setItem("activityDataInput", JSON.stringify(existData))
+        }
+      localStorage.setItem("activityDataInput", JSON.stringify(activityDataInput))
   }
 
   function activityDataInputBad(){
+    const existData = [JSON.parse(localStorage.getItem("activityDataInput"))]
     const activityDataInput = {
       "category": title,
       "choiceYN" : "N"
     }
-
-    localStorage.setItem("activityDataInput", JSON.stringify(activityDataInput))
+    console.log(existData.length)
+    if (existData < 1){
+      existData.push(activityDataInput)
+      localStorage.setItem("activityDataInput", JSON.stringify(existData))
+    }
+    if (existData.length >= 1){
+      existData.push(activityDataInput)
+      localStorage.setItem("activityDataInput", JSON.stringify(existData))
+    }
   }
   
   return (

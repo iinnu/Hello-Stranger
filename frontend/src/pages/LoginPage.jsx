@@ -22,10 +22,12 @@ const LoginPage = ({ onSocial }) => {
         })
         .then(res => {
             console.log(res)
-            window.location.href ="/main"
+            // window.location.href ="/main"
+            window.location.href ="/guide/first"
         })
         .catch(err=>{
             console.log(err)
+            window.location.href ="/guide/first"
         })
     };
 

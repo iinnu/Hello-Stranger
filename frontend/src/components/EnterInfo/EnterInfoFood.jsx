@@ -18,28 +18,7 @@ const PlainButton = styled(Button)`
 `;
 
 const EnterInfo = () => {
-    const FoodList = [
-        {
-          id: 1,
-          foodTitle: "꼬치구이",
-          foodUrl: 'https://cdn.pixabay.com/photo/2015/08/06/15/30/grill-878001__340.jpg'
-        },
-        {
-          id: 2,
-          foodTitle: "오징어",
-          foodUrl: 'https://cdn.pixabay.com/photo/2018/05/24/02/53/fried-squid-3425707__340.jpg'
-        },
-        {
-          id: 3,
-          foodTitle: "돼지고기구이",
-          foodUrl: 'https://cdn.pixabay.com/photo/2015/11/20/08/17/meat-1052571__340.jpg'
-        },
-        {
-          id: 4,
-          foodTitle: "고등어요리",
-          foodUrl: 'https://media.istockphoto.com/photos/sandwich-with-mackerel-fish-cucumber-and-mustard-black-background-top-picture-id1292943746?b=1&k=20&m=1292943746&s=170667a&w=0&h=rQbaNuDK2kNMWeGV8TUJDvWfpNqtjtuvv-WRMAbG-gs='
-        },
-      ];
+      const FoodList = localStorage.getItem("userInputInfoFood");
       const settings={
         dots: true,
         infinite: false,
@@ -62,13 +41,13 @@ const EnterInfo = () => {
         console.log('다음');
         window.location.href ="/info/activity"
       };
-      const EnterInfoFoodCards = FoodList.map((e) => (
+      const EnterInfoFoodCards = JSON.parse(FoodList).map((e) => (
         <div className='UserInput__Activity__Item__Area'>
         <EnterInfoFoodCard
           key={e.id}
           id={e.id}
-          title={e.foodTitle}
-          image={e.foodUrl}
+          title={e.foodCategory}
+          image={e.foodImgUrl}
         />
         </div>
       ));

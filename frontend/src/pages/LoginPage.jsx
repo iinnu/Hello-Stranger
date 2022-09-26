@@ -77,7 +77,7 @@ const LoginPage = ({ onSocial }) => {
             token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
   
             window.location.hash = ""
-            window.localStorage.setItem("token", token)
+            localStorage.setItem("token", token)
         }
   
         setToken(token)
@@ -85,7 +85,7 @@ const LoginPage = ({ onSocial }) => {
   
     const logout = () => {
         setToken("")
-        window.localStorage.removeItem("token")
+        localStorage.removeItem("token")
     }
     return (
         <div>

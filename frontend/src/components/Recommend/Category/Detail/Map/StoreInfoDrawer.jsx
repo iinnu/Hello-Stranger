@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import styled from '@emotion/styled';
 
@@ -12,14 +10,20 @@ const CustomSwipeableDrawer = styled(SwipeableDrawer)`
     left: unset;
     box-shadow: 0px -2px 5px 0px #d6d6d6;
     border-radius: 0;
+    background-color: #f1f1f1;
   }
+`;
+
+const StyledBox = styled('div')`
+  margin-bottom: 8px;
+  background-color: white;
 `;
 
 const backdrop = {
   style: { background: 'none' },
 };
 
-export default function StoreInfoDrawer({open, toggleDrawer}) {
+export default function StoreInfoDrawer({ open, toggleDrawer }) {
   return (
     <CustomSwipeableDrawer
       anchor="bottom"
@@ -34,7 +38,17 @@ export default function StoreInfoDrawer({open, toggleDrawer}) {
         componentsProps: { backdrop: backdrop },
       }}
     >
-      상세정보
+      <StyledBox>
+        <div>사진</div>
+        <div>XX 만두가게</div>
+        <div>
+          <span>영업중</span>
+          <span>별점</span>
+        </div>
+      </StyledBox>
+      <StyledBox>대구광역시 중구 동인동</StyledBox>
+      <StyledBox>010-0000-0000</StyledBox>
+      <StyledBox>리뷰</StyledBox>
     </CustomSwipeableDrawer>
   );
 }

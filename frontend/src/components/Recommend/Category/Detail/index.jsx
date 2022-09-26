@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Drawer } from '@mui/material';
 import Title from './Title';
 import CategoryStoreList from './List/StoreList';
-import Map from './Map';
+import StoreMap from './Map/StoreMap';
 
 const CustomDrawer = styled(Drawer)`
   .MuiPaper-root {
@@ -35,7 +35,7 @@ export default function CategoryDetail({ open, handleClose }) {
         handleClose={ToggleDrawer}
       />
       {isList && <CategoryStoreList />}
-      {!isList && <Map />}
+      {!isList && <StoreMap />}
     </CustomDrawer>
   );
 }

@@ -62,7 +62,7 @@ const LoginPage = ({ onSocial }) => {
     // };
 
     const CLIENT_ID = "6d92d2e223a8402db931ef210c6c4556"
-    const REDIRECT_URI = "http://localhost:3000/guide/first"
+    const REDIRECT_URI = "https://j7d104.p.ssafy.io/guide/first"
     // const REDIRECT_URI = "http://localhost:3000"
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
     const RESPONSE_TYPE = "token"

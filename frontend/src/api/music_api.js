@@ -130,8 +130,8 @@ const genreList = [
 ];
 
 export default async function getRecommendation() {
-  const accessToken =
-    "BQAxGcwDOx-25eOv-pc6OXfuz4r1n1EKiBLDW4X-ESml2CmI8uI3oWASuTjh7b5lL2ZuhG--tt6brmrO0sH7Msef2uZlkGwRC5yLiV2t7-P3jLsFyZZucbUaiGJBjHqQ3Ufvvg0B1jRi8XB6omJQ-MJV9qFtes7F-XPSReDXp1wEwoKyFQ_Zw5p4vFVb9TSU6g8";
+  const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN_ONE
+  console.log('getRecommendation', accessToken)
 
   // search를 통해 유저가 선택한 곡 제목을 인풋으로 넣고의 trackId, artistId를 받는 요청
   function searchAxios() {

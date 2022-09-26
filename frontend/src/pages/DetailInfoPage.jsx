@@ -18,9 +18,21 @@ import DetailInfoList from "components/DetailInfo/List";
 import Map from "components/DetailInfo/Map";
 import styled from "@emotion/styled";
 
+//음악 추천 및 재생
+import getRecommendation from "api/music_api";
+import createPlaylist from "api/playlist";
+import WebPlayback from "components/DetailInfo/WebPlayBack";
+
 import "styles/DetailInfoPage/DetailInfoPage.scss";
 
 export default function DetailInfoPage() {
+  const [trackIdList, settrackIdList] = useState([]);
+  async function recommend() {
+    const data = await getRecommendation();
+    console.log('오나?',data)
+    const playlistIdList = await createPlaylist(data)
+    settrackIdList(playlistIdList)
+  }
   let { id } = useParams();
   const navigate = useNavigate();
   let isHistory = true;
@@ -105,10 +117,10 @@ export default function DetailInfoPage() {
   //Drawer 관련 부분
   const [openDrawer, setOpenDrawer] = useState(false);
   const [type, setType] = useState("");
-  function clickMusic() {
-    setOpenDrawer(true);
-    setType("historyMusic");
-  }
+  // function clickMusic() {
+  //   setOpenDrawer(true);
+  //   setType("historyMusic");
+  // }
   function clickFood() {
     setOpenDrawer(true);
     setType("historyFood");
@@ -146,10 +158,11 @@ export default function DetailInfoPage() {
           일 정<b />평 가
         </FeedbackButton> */}
 
-        <div className="detail-info__music" onClick={clickMusic}>
+        <div className="detail-info__music" onClick={recommend}>
           <LibraryMusicIcon />
           Now Playing...
         </div>
+        {trackIdList.length !== 0 &&<WebPlayback playlist={trackIdList}/>}
         <div className="detail-info">
           <Grid container className="detail-info-inner">
             <PlaceCard placeInfo={placeList[1]} />

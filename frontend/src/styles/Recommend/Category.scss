@@ -228,3 +228,40 @@ $map-border-color: rgb(185, 185, 185);
     margin-left: $margin-left;
   }
 }
+
+/* store info drawer */
+.store-info-drawer {
+  @include custom-scrollbar();
+
+  &__main {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+    text-align: center;
+  }
+}
+
+.main {
+  &__image {
+    width: 220px;
+    height: 220px;
+  }
+
+  &__title {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  &__status {
+    margin-top: 10px;
+  }
+}
+
+.detail {
+  padding: 10px 20px;
+
+  &:first-child {
+    border-bottom: 3px solid #f6f6f6;
+  }
+}

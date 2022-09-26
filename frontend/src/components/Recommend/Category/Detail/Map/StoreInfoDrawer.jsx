@@ -1,5 +1,15 @@
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import styled from '@emotion/styled';
+import Button from '@mui/material/Button';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PhoneIcon from '@mui/icons-material/Phone';
+import StarIcon from '@mui/icons-material/Star';
+import sample from 'assets/images/sample.jpg';
+import OpenClosed from '../OpenClosed';
+
+const backdrop = {
+  style: { background: 'none' },
+};
 
 const CustomSwipeableDrawer = styled(SwipeableDrawer)`
   .MuiPaper-root {
@@ -11,6 +21,7 @@ const CustomSwipeableDrawer = styled(SwipeableDrawer)`
     box-shadow: 0px -2px 5px 0px #d6d6d6;
     border-radius: 0;
     background-color: #f1f1f1;
+    height: 75%;
   }
 `;
 
@@ -19,9 +30,19 @@ const StyledBox = styled('div')`
   background-color: white;
 `;
 
-const backdrop = {
-  style: { background: 'none' },
-};
+const CustomLabel = styled(Button)`
+  background-color: white;
+  color: black;
+  cursor: default;
+
+  &:hover {
+    background: none;
+  }
+
+  & .MuiTouchRipple-root {
+    display: none;
+  }
+`;
 
 export default function StoreInfoDrawer({ open, toggleDrawer }) {
   return (
@@ -38,17 +59,29 @@ export default function StoreInfoDrawer({ open, toggleDrawer }) {
         componentsProps: { backdrop: backdrop },
       }}
     >
-      <StyledBox>
-        <div>사진</div>
-        <div>XX 만두가게</div>
-        <div>
-          <span>영업중</span>
-          <span>별점</span>
-        </div>
-      </StyledBox>
-      <StyledBox>대구광역시 중구 동인동</StyledBox>
-      <StyledBox>010-0000-0000</StyledBox>
-      <StyledBox>리뷰</StyledBox>
+      <div className="store-info-drawer">
+        <StyledBox className="store-info-drawer__main">
+          <div>
+            <img className="main__image" src={sample} alt="store img" />
+            <div className="main__title">XX 만두가게</div>
+            <div className="main__status">
+              <span>★ 4.5/5</span>
+              <OpenClosed />
+            </div>
+          </div>
+        </StyledBox>
+        <StyledBox className="store-info-drawer__detail">
+          <div className="detail detail__address">
+            <CustomLabel startIcon={<LocationOnIcon />}>
+              대구광역시 중구 동인동
+            </CustomLabel>
+          </div>
+          <div className="detail detail__phone">
+            <CustomLabel startIcon={<PhoneIcon />}>010-0000-0000</CustomLabel>
+          </div>
+        </StyledBox>
+        <StyledBox className="store-info-drawer__review">리뷰</StyledBox>
+      </div>
     </CustomSwipeableDrawer>
   );
 }

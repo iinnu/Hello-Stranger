@@ -2,8 +2,9 @@ import styled from '@emotion/styled';
 import { Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useRecommendContext } from './RecommendContext';
+import { useRecommendContext } from './Context/RecommendContext';
 import { useNavigate } from 'react-router-dom';
+import { decreaseIndex, increaseIndex } from './Context/indexReducer';
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -19,12 +20,12 @@ function PrevNext({ index }) {
   const navigate = useNavigate();
 
   const handlePrev = () => {
-    dispatch({type: 'recommend/index/decrease'})
+    dispatch(decreaseIndex());
   };
 
   const handleNext = () => {
-    if(index > 1) navigate('/recommend/result');
-    else dispatch({type: 'recommend/index/increase'});
+    if (index > 1) navigate('/recommend/result');
+    else dispatch(increaseIndex());
   };
 
   return (

@@ -1,12 +1,9 @@
-@import '../common/_util';
-
-$padding-top: 10px;
-$padding-side: 20px;
+@import './_common.scss';
 
 .recommend-title {
   height: 100px;
   font-size: 2em;
-  font-weight: 600;
+  font-weight: 900;
   padding: 0 $padding-side;
   padding-top: $padding-top;
 }
@@ -35,6 +32,7 @@ $padding-side: 20px;
   }
 }
 
+/* reload */
 .loading-element {
   display: flex;
   justify-content: center;

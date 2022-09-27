@@ -12,22 +12,19 @@ const initialState = {
     refresh: 0,
     list: [],
     current: {},
-    like: [],
-    dislike: [],
+    likeYN: {},
   },
   foodReducer: {
     refresh: 0,
     list: [],
     current: {},
-    like: [],
-    dislike: [],
+    likeYN: {},
   },
   activityReducer: {
     refresh: 0,
     list: [],
     current: {},
-    like: [],
-    dislike: [],
+    likeYN: {},
   },
 };
 

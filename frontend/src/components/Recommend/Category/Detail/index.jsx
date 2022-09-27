@@ -21,7 +21,7 @@ const list = [
     foodName: '이태리 제면소',
     foodAddress: '대구 달성군 화원읍 비슬로 2528',
     foodLatitude: '35.8012585',
-    foodLongtitude: '128.494283',
+    foodLongitude: '128.494283',
     foodTime: '매일 11:10 ~ 21:00',
   },
   {
@@ -29,7 +29,7 @@ const list = [
     foodName: '황장군',
     foodAddress: '대구 달성군 화원읍 비슬로 2530',
     foodLatitude: '35.8014342',
-    foodLongtitude: '128.494651',
+    foodLongitude: '128.494651',
     foodTime: '매일 08:00 ~ 21:30',
   },
   {
@@ -37,7 +37,7 @@ const list = [
     foodName: '코스모스막창',
     foodAddress: '대구 달성군 화원읍 명천로 226',
     foodLatitude: '35.7993167',
-    foodLongtitude: '128.493904',
+    foodLongitude: '128.493904',
     foodTime: '매일 15:30 ~ 00:30',
   },
   {
@@ -45,7 +45,7 @@ const list = [
     foodName: '투썸플레이스',
     foodAddress: '대구 달성군 화원읍 비슬로 2529',
     foodLatitude: '35.8019464',
-    foodLongtitude: '128.494041',
+    foodLongitude: '128.494041',
     foodTime: '매일 08:30 ~ 00:30',
   },
   {
@@ -53,7 +53,7 @@ const list = [
     foodName: '이디야 커피',
     foodAddress: '대구 달성군 화원읍 비슬로 2503',
     foodLatitude: '35.8004907',
-    foodLongtitude: '128.491525',
+    foodLongitude: '128.491525',
     foodTime: '매일 09:00 ~ 22:30',
   },
 ];

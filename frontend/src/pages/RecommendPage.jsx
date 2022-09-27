@@ -1,4 +1,5 @@
 import 'styles/Recommend/RecommendPage.scss';
+import { useEffect } from 'react';
 import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
 import Container from 'components/common/Container';
 import CloseRecommend from 'components/Recommend/CloseRecommend';
@@ -7,7 +8,6 @@ import Music from 'components/Recommend/Music';
 import Title from 'components/Recommend/Title';
 import Food from 'components/Recommend/Food';
 import Activity from 'components/Recommend/Activity';
-import { useEffect } from 'react';
 import {
   setCurrentMusic,
   setMusicList,

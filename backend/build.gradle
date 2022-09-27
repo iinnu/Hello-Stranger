@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-   // implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     // swagger
@@ -40,7 +40,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
 
-    //runtimeOnly("mysql:mysql-connector-java")
+    runtimeOnly("mysql:mysql-connector-java")
 
     // querydsl
 //    annotationProcessor("com.querydsl:querydsl-apt:4.4.0:jpa")

@@ -13,6 +13,7 @@ import HistoryAlert from 'components/Main/HistoryAlert';
 
 function MainPage() {
   const [open, setOpen] = useState(false);
+  const [alert, setAlert] = useState(true);
 
   const handleOpen = () => {
     setOpen(true);
@@ -22,10 +23,14 @@ function MainPage() {
     setOpen(false);
   };
 
+  const handleAlertClose = () => {
+    setAlert(false);
+  };
+
   return (
     <MainProvider>
       <Container>
-        <HistoryAlert />
+        <HistoryAlert open={alert} handleClose={handleAlertClose} />
         <Map />
         <div className="search">
           <Grid

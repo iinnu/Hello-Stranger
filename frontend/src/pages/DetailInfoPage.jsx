@@ -5,26 +5,27 @@ import Grid from "@mui/material/Grid";
 import ButtonGroups from "components/DetailInfo/ButtonGroups";
 import FeedbackModal from "components/DetailInfo/Modal";
 import StoreInfoDrawer from "components/Recommend/Category/Detail/Map/StoreInfoDrawer";
+import MusicDrawer from 'components/DetailInfo/MusicDrawer'
 import Container from "components/common/Container";
 import BottomNav from "components/common/BottomNav";
 import DetailInfoTitle from "components/DetailInfo/Title";
 import Map from "components/DetailInfo/Map";
 
-//음악 추천 및 재생
-import getRecommendation from "api/music_api";
-import createPlaylist from "api/playlist";
-import WebPlayback from "components/DetailInfo/WebPlayBack";
+// //음악 추천 및 재생
+// import getRecommendation from "api/music_api";
+// import createPlaylist from "api/playlist";
+// import WebPlayback from "components/DetailInfo/WebPlayBack";
 
 import "styles/DetailInfoPage/DetailInfoPage.scss";
 
 export default function DetailInfoPage() {
   const [trackIdList, settrackIdList] = useState([]);
-  async function recommend() {
-    const data = await getRecommendation();
-    console.log("오나?", data);
-    const playlistIdList = await createPlaylist(data);
-    settrackIdList(playlistIdList);
-  }
+  // async function recommend() {
+  //   const data = await getRecommendation();
+  //   console.log("오나?", data);
+  //   const playlistIdList = await createPlaylist(data);
+  //   settrackIdList(playlistIdList);
+  // }
   let { id } = useParams();
   const navigate = useNavigate();
   let isHistory = true;
@@ -38,6 +39,7 @@ export default function DetailInfoPage() {
 
   // drawer
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [openMusicDrawer, setOpenMusicDrawer] = useState(false);
   const toggleDrawer = (state) => (event) => {
     if (
       event &&
@@ -48,6 +50,16 @@ export default function DetailInfoPage() {
     }
     setOpenDrawer(state);
   };
+  const toggleMusicDrawer = (state) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setOpenMusicDrawer(state);
+  };
 
   const [type, setType] = useState("");
   function clickFood() {
@@ -57,6 +69,11 @@ export default function DetailInfoPage() {
   function clickActivity() {
     setOpenDrawer(true);
     setType("historyActivity");
+  }
+  function clickMusic() {
+    console.log('clickMusic')
+    setOpenMusicDrawer(true);
+    // setType("historyActivity");
   }
 
   // modal
@@ -111,12 +128,12 @@ export default function DetailInfoPage() {
   };
 
   // music spotify api
-  async function getMusic() {
-    const data = await getRecommendation();
-    console.log('오나?',data)
-    const playlistIdList = await createPlaylist(data)
-    settrackIdList(playlistIdList)
-  }
+  // async function getMusic() {
+  //   const data = await getRecommendation();
+  //   console.log('오나?',data)
+  //   const playlistIdList = await createPlaylist(data)
+  //   settrackIdList(playlistIdList)
+  // }
 
 
   const historyInfo = cardList[id];
@@ -132,7 +149,7 @@ export default function DetailInfoPage() {
             isHistory={isHistory}
             clickFood={clickFood}
             clickActivity={clickActivity}
-            getRecommendation={clickActivity}
+            clickMusic={clickMusic}
           />
           <Map />
           {isHistory && (
@@ -141,9 +158,10 @@ export default function DetailInfoPage() {
               handleOpenModal={handleOpenModal}
             />
           )}
-          {trackIdList.length !== 0 && <WebPlayback className="detail-info__plyaer" playlist={trackIdList} />}
+          {/* {trackIdList.length !== 0 && <WebPlayback className="detail-info__plyaer" playlist={trackIdList} />} */}
           <Grid container className="detail-info-inner">
             <StoreInfoDrawer open={openDrawer} toggleDrawer={toggleDrawer} />
+            <MusicDrawer open={openMusicDrawer} toggleDrawer={toggleMusicDrawer}/>
           </Grid>
         </div>
         <BottomNav />

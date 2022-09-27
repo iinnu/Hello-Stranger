@@ -5,7 +5,7 @@ import RestaurantRoundedIcon from "@mui/icons-material/RestaurantRounded";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import SkateboardingIcon from "@mui/icons-material/Skateboarding";
 
-export default function DetailInfoButtonGroups({isHistory, clickFood, clickActivity, getRecommendation}){
+export default function DetailInfoButtonGroups({isHistory, clickFood, clickActivity, clickMusic}){
 
  return(
   <ButtonGroup
@@ -23,7 +23,7 @@ export default function DetailInfoButtonGroups({isHistory, clickFood, clickActiv
     활동
   </Button>
   {isHistory &&
-  <Button className="detail-info__control--button" onClick={getRecommendation}>
+  <Button className="detail-info__control--button" onClick={clickMusic}>
     <LibraryMusicIcon />
     음악
   </Button>}

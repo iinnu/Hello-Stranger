@@ -8,6 +8,7 @@ function Recommend({ children }) {
 
   const handleClick = () => {
     console.log({ location, range });
+    localStorage.setItem('current', JSON.stringify(location));
     navigate(`/recommend`);
   };
 

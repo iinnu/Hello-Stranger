@@ -5,7 +5,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Grid from "@mui/material/Grid";
-import Drawer from "@mui/material/Drawer";
+// import Drawer from "@mui/material/Drawer";
+
+import FeedbackModal from "components/DetailInfo/Modal";
+
+import StoreInfoDrawer from "components/Recommend/Category/Detail/Map/StoreInfoDrawer";
 
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
@@ -29,9 +33,9 @@ export default function DetailInfoPage() {
   const [trackIdList, settrackIdList] = useState([]);
   async function recommend() {
     const data = await getRecommendation();
-    console.log('오나?',data)
-    const playlistIdList = await createPlaylist(data)
-    settrackIdList(playlistIdList)
+    console.log("오나?", data);
+    const playlistIdList = await createPlaylist(data);
+    settrackIdList(playlistIdList);
   }
   let { id } = useParams();
   const navigate = useNavigate();
@@ -52,21 +56,37 @@ export default function DetailInfoPage() {
   //   []
   // );
 
-  // modal 관련 부분
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 200,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
+  // drawer
+  const [openDrawer, setOpenDrawer] = useState(false);
+  // const handleOpenDrawer = () => setOpenDrawer(true);
+  const handleCloseDrawer = () => setOpenDrawer(false);
+  const toggleDrawer = (state) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setOpenDrawer(state);
   };
+  const [type, setType] = useState("");
+  function clickFood() {
+    setOpenDrawer(true);
+    setType("historyFood");
+  }
+  function clickActivity() {
+    setOpenDrawer(true);
+    setType("historyActivity");
+  }
+
+  // modal
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => setOpenModal(false);
+
   const cardList = {
     1: {
       title: "일정 제목1",
@@ -112,57 +132,33 @@ export default function DetailInfoPage() {
   };
 
   const historyInfo = cardList[id];
-  console.log(`historyInfo ${historyInfo}`);
 
   //Drawer 관련 부분
-  const [openDrawer, setOpenDrawer] = useState(false);
-  const [type, setType] = useState("");
   // function clickMusic() {
   //   setOpenDrawer(true);
   //   setType("historyMusic");
   // }
-  function clickFood() {
-    setOpenDrawer(true);
-    setType("historyFood");
-  }
-  function clickActivity() {
-    setOpenDrawer(true);
-    setType("historyActivity");
-  }
-  function closeDetail() {
-    setOpenDrawer(false);
-  }
+
+  const current = JSON.parse(localStorage.getItem("current"));
+
   return (
     <>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            일정에 대한 피드백을 남겨주세요
-          </Typography>
-          <Button>좋았어요</Button>
-          <Button>별로였어요</Button>
-        </Box>
-      </Modal>
+      <FeedbackModal open={openModal} onClose={handleCloseModal} />
 
       <Container>
         <Map />
         {isHistory && (
-          <DetailInfoTitle historyInfo={historyInfo} handleOpen={handleOpen} />
+          <DetailInfoTitle
+            historyInfo={historyInfo}
+            handleOpenModal={handleOpenModal}
+          />
         )}
-        {/* <FeedbackButton variant="contained" onClick={handleOpen}>
-          일 정<b />평 가
-        </FeedbackButton> */}
 
         <div className="detail-info__music" onClick={recommend}>
           <LibraryMusicIcon />
           Now Playing...
         </div>
-        {trackIdList.length !== 0 &&<WebPlayback playlist={trackIdList}/>}
+        {trackIdList.length !== 0 && <WebPlayback playlist={trackIdList} />}
         <div className="detail-info">
           <Grid container className="detail-info-inner">
             <PlaceCard placeInfo={placeList[1]} />
@@ -180,9 +176,10 @@ export default function DetailInfoPage() {
                     <SkateboardingIcon />
                   </div>
                 </div>
-                <Drawer anchor="bottom" open={openDrawer} onClose={closeDetail}>
-                  <DetailInfoList type={type} />
-                </Drawer>
+                <StoreInfoDrawer
+                  open={openDrawer}
+                  toggleDrawer={toggleDrawer}
+                />
               </>
             )}
           </Grid>

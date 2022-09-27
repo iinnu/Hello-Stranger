@@ -1,22 +1,17 @@
-import React, { useEffect } from "react";
+import { useState } from 'react';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import location from 'assets/images/location-pin.png';
 
-const { kakao } = window;
+export default function DetailInfoMap({placeList}) {
+  const current = JSON.parse(localStorage.getItem('current'));
+  const [open, setOpen] = useState(false);
 
-const Map = () => {
-  useEffect(() => {
-    let container = document.getElementById("map");
-    let options = {
-      center: new window.kakao.maps.LatLng(
-        37.365264512305174,
-        127.10676860117488
-      ),
-      level: 3,
-    };
-
-    let map = new window.kakao.maps.Map(container, options);
-  }, []);
-
-  return <div id="map" className="detail-info__map"></div>;
-};
-
-export default Map;
+  return (
+    <Map className="detail-info__map" center={current} level={3}>
+      <MapMarker
+        position={current}
+        image={{ src: location, size: { width: 40, height: 40 } }}
+      />
+    </Map>
+  );
+}

@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
 import Grid from "@mui/material/Grid";
-// import Drawer from "@mui/material/Drawer";
 
+import ButtonGroups from "components/DetailInfo/ButtonGroups";
 import FeedbackModal from "components/DetailInfo/Modal";
-
 import StoreInfoDrawer from "components/Recommend/Category/Detail/Map/StoreInfoDrawer";
-
-import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
-import FastfoodIcon from "@mui/icons-material/Fastfood";
-import SkateboardingIcon from "@mui/icons-material/Skateboarding";
 import Container from "components/common/Container";
-import PlaceCard from "components/card/PlaceCard";
 import BottomNav from "components/common/BottomNav";
 import DetailInfoTitle from "components/DetailInfo/Title";
-import DetailInfoList from "components/DetailInfo/List";
 import Map from "components/DetailInfo/Map";
-import styled from "@emotion/styled";
 
 //음악 추천 및 재생
 import getRecommendation from "api/music_api";
@@ -48,18 +36,8 @@ export default function DetailInfoPage() {
     console.log(id);
   }
 
-  // useEffect(
-  //   //axios 함수 통해서 historyId에 해당하는 유저의 일정 뽑아오기가 진행되어야 함
-  // function test() {
-  //   console.log("isHistory", isHistory);
-  // }
-  //   []
-  // );
-
   // drawer
   const [openDrawer, setOpenDrawer] = useState(false);
-  // const handleOpenDrawer = () => setOpenDrawer(true);
-  const handleCloseDrawer = () => setOpenDrawer(false);
   const toggleDrawer = (state) => (event) => {
     if (
       event &&
@@ -70,6 +48,7 @@ export default function DetailInfoPage() {
     }
     setOpenDrawer(state);
   };
+
   const [type, setType] = useState("");
   function clickFood() {
     setOpenDrawer(true);
@@ -131,57 +110,40 @@ export default function DetailInfoPage() {
     },
   };
 
-  const historyInfo = cardList[id];
+  // music spotify api
+  async function getMusic() {
+    const data = await getRecommendation();
+    console.log('오나?',data)
+    const playlistIdList = await createPlaylist(data)
+    settrackIdList(playlistIdList)
+  }
 
-  //Drawer 관련 부분
-  // function clickMusic() {
-  //   setOpenDrawer(true);
-  //   setType("historyMusic");
-  // }
+
+  const historyInfo = cardList[id];
 
   const current = JSON.parse(localStorage.getItem("current"));
 
   return (
     <>
       <FeedbackModal open={openModal} onClose={handleCloseModal} />
-
       <Container>
-        <Map />
-        {isHistory && (
-          <DetailInfoTitle
-            historyInfo={historyInfo}
-            handleOpenModal={handleOpenModal}
-          />
-        )}
-
-        <div className="detail-info__music" onClick={recommend}>
-          <LibraryMusicIcon />
-          Now Playing...
-        </div>
-        {trackIdList.length !== 0 && <WebPlayback playlist={trackIdList} />}
         <div className="detail-info">
+          <ButtonGroups
+            isHistory={isHistory}
+            clickFood={clickFood}
+            clickActivity={clickActivity}
+            getRecommendation={clickActivity}
+          />
+          <Map />
+          {isHistory && (
+            <DetailInfoTitle
+              historyInfo={historyInfo}
+              handleOpenModal={handleOpenModal}
+            />
+          )}
+          {trackIdList.length !== 0 && <WebPlayback className="detail-info__plyaer" playlist={trackIdList} />}
           <Grid container className="detail-info-inner">
-            <PlaceCard placeInfo={placeList[1]} />
-            <PlaceCard placeInfo={placeList[2]} />
-            {isHistory && (
-              <>
-                <div className="detail-info__list">
-                  <div className="detail-info__list--food" onClick={clickFood}>
-                    <FastfoodIcon />
-                  </div>
-                  <div
-                    className="detail-info__list--activity"
-                    onClick={clickActivity}
-                  >
-                    <SkateboardingIcon />
-                  </div>
-                </div>
-                <StoreInfoDrawer
-                  open={openDrawer}
-                  toggleDrawer={toggleDrawer}
-                />
-              </>
-            )}
+            <StoreInfoDrawer open={openDrawer} toggleDrawer={toggleDrawer} />
           </Grid>
         </div>
         <BottomNav />

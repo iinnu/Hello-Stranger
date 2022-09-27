@@ -15,7 +15,7 @@ const ExitButton = styled(IconButton)`
   }
 `;
 
-function DetailInfoTitle({ historyInfo, handleOpen }) {
+function DetailInfoTitle({ historyInfo, handleOpenModal }) {
   function goBack() {
     navigate(-1);
   }
@@ -32,7 +32,7 @@ function DetailInfoTitle({ historyInfo, handleOpen }) {
             <div className="detail-info__title--date">{historyInfo.date}</div>
           </div>
         </div>
-        <Button className="detail-info__title--feedback" variant="contained" onClick={handleOpen}>
+        <Button className="detail-info__title--feedback" variant="contained" onClick={handleOpenModal}>
           일정평가
         </Button>
       </div>

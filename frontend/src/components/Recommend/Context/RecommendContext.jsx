@@ -9,10 +9,22 @@ const initialState = {
     index: 0,
   },
   musicReducer: {
+    refresh: 0,
     list: [],
     current: {},
-    like: [],
-    dislike: [],
+    likeYN: {},
+  },
+  foodReducer: {
+    refresh: 0,
+    list: [],
+    current: {},
+    likeYN: {},
+  },
+  activityReducer: {
+    refresh: 0,
+    list: [],
+    current: {},
+    likeYN: {},
   },
 };
 

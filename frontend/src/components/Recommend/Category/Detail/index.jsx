@@ -15,7 +15,7 @@ const CustomDrawer = styled(Drawer)`
   }
 `;
 
-export default function CategoryDetail({ open, handleClose }) {
+export default function CategoryDetail({ current, open, handleClose }) {
   const [isList, setIsList] = useState(true);
 
   const ToggleDrawer = () => {
@@ -30,12 +30,15 @@ export default function CategoryDetail({ open, handleClose }) {
   return (
     <CustomDrawer anchor="right" open={open} onClose={ToggleDrawer}>
       <Title
+        title={
+          current.foodCategory ? current.foodCategory : current.activityCategory
+        }
         isList={isList}
         handleClick={handleClick}
         handleClose={ToggleDrawer}
       />
-      {isList && <CategoryStoreList />}
-      {!isList && <StoreMap />}
+      {isList && <CategoryStoreList list={current.store} />}
+      {!isList && <StoreMap list={current.store} />}
     </CustomDrawer>
   );
 }

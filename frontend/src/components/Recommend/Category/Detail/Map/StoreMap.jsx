@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react';
 import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import location from 'assets/images/location-pin.png';
 import StoreInfo from './StoreInfo';
 import StoreInfoDrawer from './StoreInfoDrawer';
+import marker from 'assets/images/marker.png';
+import marker_active from 'assets/images/marker-active.png';
 
 function getMarkers(index, list) {
   const lat = index === 1 ? 'foodLatitude' : 'activityLatitude';
@@ -16,7 +17,7 @@ function getMarkers(index, list) {
       <MapMarker
         key={`${item[lat]}-${item[lng]}`}
         position={pos}
-        image={{ src: location, size: { width: 30, height: 30 } }}
+        image={{ src: marker, size: { width: 30, height: 30 } }}
       />
     );
   });
@@ -45,7 +46,7 @@ export default function StoreMap({ list }) {
       <Map className="category-store-map__map" center={currentPos} level={3}>
         <MapMarker
           position={currentPos}
-          image={{ src: location, size: { width: 40, height: 40 } }}
+          image={{ src: marker, size: { width: 20, height: 20 } }}
         />
         {markers}
       </Map>

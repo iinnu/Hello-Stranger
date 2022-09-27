@@ -3,9 +3,11 @@ import Button from '@mui/material/Button';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StarIcon from '@mui/icons-material/Star';
 import sample from 'assets/images/sample.jpg';
 import OpenClosed from '../OpenClosed';
+import StoreReview from './StoreReview';
 
 const backdrop = {
   style: { background: 'none' },
@@ -79,8 +81,23 @@ export default function StoreInfoDrawer({ open, toggleDrawer }) {
           <div className="detail detail__phone">
             <CustomLabel startIcon={<PhoneIcon />}>010-0000-0000</CustomLabel>
           </div>
+          <div className="detail detail__hours">
+            <CustomLabel startIcon={<AccessTimeIcon />}>
+              09:00 ~ 18:00
+            </CustomLabel>
+          </div>
         </StyledBox>
-        <StyledBox className="store-info-drawer__review">리뷰</StyledBox>
+        <StyledBox className="store-info-drawer__review">
+          <div className="review__title">
+            <div>리뷰</div>
+            <div>*네이버 지도 리뷰</div>
+          </div>
+          <StoreReview />
+          <StoreReview />
+          <StoreReview />
+          <StoreReview />
+          <StoreReview />
+        </StyledBox>
       </div>
     </CustomSwipeableDrawer>
   );

@@ -58,6 +58,15 @@ $near-analysis-map-height: 100%;
     position: absolute;
     top: 0;
   }
+
+  &__drawer{
+    background-color: white;
+    height: 100%;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .near-analysis-inner {

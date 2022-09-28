@@ -1,4 +1,5 @@
 import { getSpotifyInstance } from 'api';
+import queryString from 'query-string';
 
 const api = getSpotifyInstance();
 
@@ -8,8 +9,12 @@ function getSpotifyToken(option, success, fail) {
   api.post(url, option).then(success).catch(fail);
 }
 
-function getSpotifyRefreshedToken(option, success, fail) {
-  const url = 'http://accounts.spotify.com/api/token';
+function getSpotifyRefreshedToken(success, fail) {
+  const url = 'https://accounts.spotify.com/api/token';
+  const option = queryString.stringify({
+    grant_type: 'refresh_token',
+    refresh_token: localStorage.getItem('refresh_token'),
+  });
 
   api.post(url, option).then(success).catch(fail);
 }

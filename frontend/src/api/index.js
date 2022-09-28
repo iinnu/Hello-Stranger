@@ -26,4 +26,16 @@ function getSpotifyInstance() {
   return instance;
 }
 
-export { getApiInstance, getSpotifyInstance };
+function getSpotifyApi(token) {
+  const instance = axios.create({
+    headers: {
+      baseURL: 'https://api.spotify.com/v1',
+      'content-type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    }
+  })
+
+  return instance;
+}
+
+export { getApiInstance, getSpotifyInstance, getSpotifyApi };

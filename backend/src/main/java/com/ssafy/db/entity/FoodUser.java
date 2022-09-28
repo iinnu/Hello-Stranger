@@ -32,8 +32,7 @@ public class FoodUser {
     public FoodUser() {};
 
     @Builder
-    public FoodUser(int foodUserId, int userId, String foodName, int likeYN) {
-        this.foodUserId = foodUserId;
+    public FoodUser(int userId, String foodName, int likeYN) {
         this.userId = userId;
         this.foodName = foodName;
         this.likeYN = likeYN;

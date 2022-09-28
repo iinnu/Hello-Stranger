@@ -24,8 +24,8 @@ public class MusicUser {
     @Column(name = "user_id")
     int userId;
 
-    @Column(name = "music_name")
-    String musicName;
+    @Column(name = "music_id")
+    int musicId;
 
     @Column(name = "like_YN")
     int likeYN;
@@ -33,10 +33,9 @@ public class MusicUser {
     public MusicUser() {};
 
     @Builder
-    public MusicUser(int musicUserId, int userId, String musicName, int likeYN) {
-        this.musicUserId = musicUserId;
+    public MusicUser(int userId, int musicId, int likeYN) {
         this.userId = userId;
-        this.musicName = musicName;
+        this.musicId = musicId;
         this.likeYN = likeYN;
     }
 }

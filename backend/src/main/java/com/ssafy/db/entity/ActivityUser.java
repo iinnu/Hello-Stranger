@@ -33,8 +33,7 @@ public class ActivityUser {
     public ActivityUser() {};
 
     @Builder
-    public ActivityUser(int activityUserId, int userId, String activityName, int likeYN) {
-        this.activityUserId = activityUserId;
+    public ActivityUser(int userId, String activityName, int likeYN) {
         this.userId = userId;
         this.activityName = activityName;
         this.likeYN = likeYN;

@@ -1,15 +1,15 @@
 import StoreItem from './StoreItem';
 
-export default function CategoryStoreList() {
+export default function CategoryStoreList({ list, handleClick }) {
   return (
     <div className="category-store-list">
-      <StoreItem />
-      <StoreItem />
-      <StoreItem />
-      <StoreItem />
-      <StoreItem />
-      <StoreItem />
-      <StoreItem />
+      {list.map((item) => (
+        <StoreItem
+          key={item.foodId ? item.foodId : item.activityId}
+          item={item}
+          handleClick={handleClick}
+        />
+      ))}
     </div>
   );
 }

@@ -12,6 +12,7 @@ import {
   setCurrentMusic,
   setMusicList,
 } from 'components/Recommend/Context/musicReducer';
+import { setFoodList } from 'components/Recommend/Context/foodReducer';
 
 const titles = [
   ['어떤 음악을', '듣고 싶으신가요?'],
@@ -86,14 +87,45 @@ const playlist = [
   },
 ];
 
+const food = [
+  {
+    foodCategory: '만두',
+    store: [],
+  },
+  {
+    foodCategory: '떡볶이',
+    store: [],
+  },
+  {
+    foodCategory: '우동',
+    store: [],
+  },
+  {
+    foodCategory: '라면',
+    store: [],
+  },
+  {
+    foodCategory: '삼겹살',
+    store: [],
+  },
+];
+
+const activity = [];
+
 function RecommendPage() {
   const { state, dispatch } = useRecommendContext();
   const index = state.indexReducer.index;
 
+  // music
   useEffect(() => {
     dispatch(setMusicList(playlist));
     dispatch(setCurrentMusic(playlist[0]));
   }, [playlist]);
+
+  // food
+  useEffect(() => {
+    dispatch(setFoodList(food));
+  }, [food]);
 
   return (
     <Container>

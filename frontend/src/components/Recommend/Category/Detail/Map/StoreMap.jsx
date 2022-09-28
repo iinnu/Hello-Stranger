@@ -16,7 +16,10 @@ export default function StoreMap({ list }) {
   const type = useMemo(() => (index === 1 ? 'food' : 'activity'), [index]);
   const { store } = useRecommendContext().state[type + 'Reducer'];
   const { dispatch } = useRecommendContext();
-  const markers = useMemo(() => getMarkers(list, type, store), [list, type, store]);
+  const markers = useMemo(
+    () => getMarkers(list, type, store),
+    [list, type, store]
+  );
 
   const toggleDrawer = (state) => (event) => {
     if (
@@ -39,7 +42,7 @@ export default function StoreMap({ list }) {
     const id = type + 'Id';
     const lat = type + 'Latitude';
     const lng = type + 'Longitude';
-  
+
     return list.map((item) => {
       const pos = { lat: item[lat], lng: item[lng] };
       const src = store[id] === item[id] ? marker_active : marker;
@@ -47,7 +50,7 @@ export default function StoreMap({ list }) {
         store[id] === item[id]
           ? { width: 45, height: 45 }
           : { width: 32, height: 32 };
-  
+
       return (
         <MapMarker
           key={`${item[lat]}-${item[lng]}`}
@@ -58,7 +61,7 @@ export default function StoreMap({ list }) {
         />
       );
     });
-  };
+  }
 
   return (
     <div className="category-store-map">
@@ -76,8 +79,13 @@ export default function StoreMap({ list }) {
         />
         {markers}
       </Map>
-      <StoreInfo toggleDrawer={toggleDrawer} />
-      <StoreInfoDrawer open={open} toggleDrawer={toggleDrawer} />
+      <StoreInfo type={type} store={store} toggleDrawer={toggleDrawer} />
+      <StoreInfoDrawer
+        open={open}
+        type={type}
+        store={store}
+        toggleDrawer={toggleDrawer}
+      />
     </div>
   );
 }

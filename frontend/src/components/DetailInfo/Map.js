@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
-import location from 'assets/images/location-pin.png';
+import marker from 'assets/images/marker.png';
 
 export default function DetailInfoMap({placeList}) {
   const current = JSON.parse(localStorage.getItem('current'));
@@ -10,7 +10,7 @@ export default function DetailInfoMap({placeList}) {
     <Map className="detail-info__map" center={current} level={3}>
       <MapMarker
         position={current}
-        image={{ src: location, size: { width: 40, height: 40 } }}
+        image={{ src: marker, size: { width: 40, height: 40 } }}
       />
     </Map>
   );

@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react';
+import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
+import { setCurrentStore as activityStore } from 'components/Recommend/Context/activityReducer';
+import { setCurrentStore as foodStore } from 'components/Recommend/Context/foodReducer';
 import styled from '@emotion/styled';
-import { useState } from 'react';
 import { Drawer } from '@mui/material';
 import Title from './Title';
 import CategoryStoreList from './List/StoreList';
@@ -60,6 +63,8 @@ const list = [
 
 export default function CategoryDetail({ current, open, handleClose }) {
   const [isList, setIsList] = useState(true);
+  const {dispatch} = useRecommendContext();
+  const { index } = useRecommendContext().state.indexReducer;
 
   const ToggleDrawer = () => {
     setIsList(true);
@@ -69,6 +74,12 @@ export default function CategoryDetail({ current, open, handleClose }) {
   const handleClick = () => {
     setIsList(!isList);
   };
+
+  useEffect(() => {
+    const actionCreator = index === 1 ? foodStore : activityStore;
+    dispatch(actionCreator(list[0]));
+  }, [])
+  
 
   return (
     <CustomDrawer anchor="right" open={open} onClose={ToggleDrawer}>

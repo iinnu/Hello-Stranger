@@ -4,6 +4,7 @@ const SET_FOOD_LIST = 'food/list';
 const SET_CURRENT_FOOD = 'food/current';
 const ADD_LIKE_FOOD = 'food/like';
 const ADD_DISLIKE_FOOD = 'food/dislike';
+const SET_CURRENT_STORE = 'food/store';
 
 /* 액션 생성 함수 */
 export const refreshFoodList = () => ({
@@ -30,6 +31,11 @@ export const addDislikeFood = (food) => ({
   food,
 });
 
+export const setCurrentStore = (store) => ({
+  type: SET_CURRENT_STORE,
+  store,
+});
+
 /* 리듀서 정의 */
 export function foodReducer(state, action) {
   switch (action.type) {
@@ -43,6 +49,8 @@ export function foodReducer(state, action) {
       return state;
     case ADD_DISLIKE_FOOD:
       return state;
+    case SET_CURRENT_STORE:
+      return { ...state, store: action.store };
     default:
       return state;
   }

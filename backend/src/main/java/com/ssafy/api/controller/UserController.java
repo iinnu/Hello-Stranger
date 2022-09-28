@@ -6,12 +6,10 @@ import com.ssafy.api.request.UserRegistReq;
 import com.ssafy.api.response.BaseResponseBody;
 import com.ssafy.api.response.UserChoiceGetRes;
 import com.ssafy.api.response.UserRegistRes;
-import com.ssafy.api.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -138,4 +136,5 @@ public class UserController {
         }
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "정상적으로 저장되었습니다."));
     }
+
 }

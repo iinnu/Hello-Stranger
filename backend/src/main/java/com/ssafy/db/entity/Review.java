@@ -30,7 +30,7 @@ public class Review {
     @Column(name = "reg_data")
     String regDate;
 
-    @Column(name = "evalYN")
+    @Column(name = "eval_YN")
     String evalYN;
 
     @Column(name = "title")

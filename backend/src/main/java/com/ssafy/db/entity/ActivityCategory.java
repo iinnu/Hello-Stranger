@@ -28,7 +28,7 @@ public class ActivityCategory {
     @Column(name = "activity_category_img_url")
     String categoryImgUrl;
 
-    @OneToMany(mappedBy = "activity_category")
+    @OneToMany(mappedBy = "activityCategory")
     List<Review> reviews = new ArrayList<>();
 
     public ActivityCategory() {};

@@ -28,7 +28,7 @@ public class FoodCategory {
     @Column(name = "food_category_img_url")
     String categoryImgUrl;
 
-    @OneToMany(mappedBy = "food_category")
+    @OneToMany(mappedBy = "foodCategory")
     List<Review> reviews = new ArrayList<>();
 
     public FoodCategory() {};

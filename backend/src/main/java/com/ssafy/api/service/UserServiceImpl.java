@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService{
     @Autowired
     FoodUserRepository foodUserRepository;
 
-    @AutoConfigureOrder
+    @Autowired
     MusicUserRepository musicUserRepository;
 
     @Override
@@ -55,6 +55,17 @@ public class UserServiceImpl implements UserService{
             musicUserList.add(musicUser);
         }
 
+        List<CategoryLikeYN> food = categoryChoiceReq.getFood();
+        for(CategoryLikeYN like : food){
+            FoodUser foodUser = FoodUser.builder()
+                    .userId(userId)
+                    .foodName(like.getCategory())
+                    .likeYN(like.getLikeYN())
+                    .build();
+            foodUserList.add(foodUser);
+        }
+
+
         List<CategoryLikeYN> activity = categoryChoiceReq.getActivity();
         for(CategoryLikeYN like : activity) {
             ActivityUser activityUser = ActivityUser.builder()
@@ -63,16 +74,6 @@ public class UserServiceImpl implements UserService{
                     .likeYN(like.getLikeYN())
                     .build();
             activityUserList.add(activityUser);
-        }
-
-        List<CategoryLikeYN> food = categoryChoiceReq.getActivity();
-        for(CategoryLikeYN like : food){
-            FoodUser foodUser = FoodUser.builder()
-                    .userId(userId)
-                    .foodName(like.getCategory())
-                    .likeYN(like.getLikeYN())
-                    .build();
-            foodUserList.add(foodUser);
         }
 
         musicUserRepository.saveAll(musicUserList);

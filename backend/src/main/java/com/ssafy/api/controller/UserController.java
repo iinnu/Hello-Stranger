@@ -127,6 +127,8 @@ public class UserController {
             return ResponseEntity.status(601).body(BaseResponseBody.of(911, "유효하지 않은 사용자입니다."));
         }
 
+        System.out.println(userId);
+
         // @valid 찾아볼 것
 //        List<IdLikeYN> music = categoryChoiceReq.getMusic();
 //        for(IdLikeYN like : music){

@@ -18,8 +18,8 @@ function getSpotifyInstance() {
 
   const instance = axios.create({
     headers: {
+      'content-type': 'application/x-www-form-urlencoded',
       Authorization: 'Basic ' + auth,
-      'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
 

@@ -1,26 +1,49 @@
-@import "../common/util";
+@import '../common/util';
 
-.Login{
-    display: flex;
+.Login {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  //flex-flow: column nowrap;
+
+  &__Logo {
+    max-width: 400px;
+    width: 70%;
+  }
+
+  &__Mascot {
+    max-width: 400px;
+    width: 80%;
+    margin-bottom: 5%;
+  }
+
+  &__GoogleLogin {
+    max-width: 400px;
+    width: 80%;
     justify-content: center;
-    align-items: center;
-    flex-flow: column nowrap;
+  }
 
+  &__button {
+    display: flex;
+    padding: 10px 15px;
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 3px 3px 5px -2px rgb(203, 203, 203);
 
-    &__Logo{
-        max-width: 400px;
-        width : 70%;
+    & img {
+      width: 25px;
     }
 
-    &__Mascot{
-        max-width: 400px;
-        width:80%;
-        margin-bottom:5%;
+    & div {
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 10px;
+      font-size: 1.1em;
     }
-
-    &__GoogleLogin{
-        max-width: 400px;
-        width: 80%;
-        justify-content: center;
-    }
+  }
 }

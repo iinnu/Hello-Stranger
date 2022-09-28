@@ -17,12 +17,14 @@ import StartApp from 'components/EnterInfo/StartApp.jsx'
 import RecommendPage from 'pages/RecommendPage.jsx';
 import RecommendResultPage from 'pages/RecommendResultPage.jsx';
 import { RecommendProvider } from 'components/Recommend/Context/RecommendContext.jsx';
+import SpotifyRedirectHandler from 'components/Login/SpotifyRedirectHandler.jsx';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/oauth/callback" element={<SpotifyRedirectHandler />} />
           <Route path="/" element={<LoginPage />} />
           <Route path="/guide" element={<EnterInfoGuide />} />
           <Route path="/info" element={<EnterInfo />} />
@@ -46,7 +48,6 @@ function App() {
           <Route path="/info/start" element={<StartApp />} />
         </Routes>
       </BrowserRouter>
-
     </div>
   );
 }

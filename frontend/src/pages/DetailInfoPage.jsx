@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 
 import ButtonGroups from "components/DetailInfo/ButtonGroups";
 import FeedbackModal from "components/DetailInfo/Modal";
-import StoreInfoDrawer from "components/Recommend/Category/Detail/Map/StoreInfoDrawer";
+import StoreInfoDrawer from "components/DetailInfo/Drawer/StoreInfoDrawer2";
 import MusicDrawer from 'components/DetailInfo/MusicDrawer'
 import Container from "components/common/Container";
 import BottomNav from "components/common/BottomNav";

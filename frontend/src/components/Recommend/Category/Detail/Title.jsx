@@ -25,12 +25,12 @@ const CustomButton = styled('button')`
 `;
 
 const CustomLabel = styled('div')`
-  font-size: 0.5em;
+  font-size: 0.7em;
   font-weight: 400;
   text-align: center;
 `;
 
-export default function Title({ isList, handleClick, handleClose }) {
+export default function Title({ title, isList, handleClick, handleClose }) {
   return (
     <div className="category-detail__title">
       <IconButton aria-label="category detail close" onClick={handleClose}>
@@ -39,7 +39,7 @@ export default function Title({ isList, handleClick, handleClose }) {
       <div className="title__inner">
         <div className="title__content">
           <Col>
-            <Row>만두</Row>
+            <Row>{title}</Row>
           </Col>
           {isList && (
             <CustomButton onClick={handleClick}>

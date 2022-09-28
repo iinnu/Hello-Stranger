@@ -1,25 +1,34 @@
+import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
+import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
-const style = {
-  maxWidth: 100,
-};
-
-const Box = styled('div')`
-  padding: 10px;
-  position: absolute;
-  top: 0;
-  z-index: 1300;
-  width: 100%;
+const CustomSnackbar = styled(Snackbar)`
+  &.MuiSnackbar-root {
+    cursor: pointer;
+  }
 `;
 
-function HistoryAlert() {
+function HistoryAlert({ open = false, handleClose }) {
+  const navigate = useNavigate();
+
   return (
-    <Box>
-      <Alert severity="warning" sx={style}>
+    <CustomSnackbar
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      autoHideDuration={6000}
+      open={open}
+      onClose={handleClose}
+      onClick={() => navigate('/history')}
+    >
+      <Alert
+        severity="warning"
+        sx={{ width: '100%' }}
+        icon={<ErrorOutlineIcon />}
+      >
         저번 일정은 어떠셨나요?
       </Alert>
-    </Box>
+    </CustomSnackbar>
   );
 }
 

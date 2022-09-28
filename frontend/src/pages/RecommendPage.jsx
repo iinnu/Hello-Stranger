@@ -1,5 +1,5 @@
 import 'styles/Recommend/RecommendPage.scss';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
 import Container from 'components/common/Container';
 import CloseRecommend from 'components/Recommend/CloseRecommend';
@@ -13,6 +13,7 @@ import {
   setMusicList,
 } from 'components/Recommend/Context/musicReducer';
 import { setFoodList } from 'components/Recommend/Context/foodReducer';
+import { setActivityList } from 'components/Recommend/Context/activityReducer';
 
 const titles = [
   ['어떤 음악을', '듣고 싶으신가요?'],
@@ -110,11 +111,33 @@ const food = [
   },
 ];
 
-const activity = [];
+const activity = [
+  {
+    activityCategory: '테니스',
+    store: [],
+  },
+  {
+    activityCategory: '영화',
+    store: [],
+  },
+  {
+    activityCategory: '클라이밍',
+    store: [],
+  },
+  {
+    activityCategory: '피시방',
+    store: [],
+  },
+  {
+    activityCategory: '테마카페',
+    store: [],
+  },
+];
 
 function RecommendPage() {
   const { state, dispatch } = useRecommendContext();
   const index = state.indexReducer.index;
+  const close = useMemo(() => <CloseRecommend />, []);
 
   // music
   useEffect(() => {
@@ -127,9 +150,14 @@ function RecommendPage() {
     dispatch(setFoodList(food));
   }, [food]);
 
+  // activity
+  useEffect(() => {
+    dispatch(setActivityList(activity));
+  }, [activity]);
+
   return (
     <Container>
-      <CloseRecommend />
+      {close}
       <div className="recommend-content">
         <Title title={titles[index]} />
         {index === 0 ? <Music /> : index === 1 ? <Food /> : <Activity />}

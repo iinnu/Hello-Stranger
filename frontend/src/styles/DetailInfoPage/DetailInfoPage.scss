@@ -1,7 +1,7 @@
 @import "../common/util";
 
 $detail-map-height: 100%;
-
+$player-rswp-height: 40%;
 .detail-info {
   display: flex;
   flex-direction: column;
@@ -73,12 +73,6 @@ $detail-map-height: 100%;
       font-size: 20px;
     }
   }
-  .MuiButtonGroup-root {
-    box-shadow: none;
-  }
-  .MuiButtonGroup-grouped:not(:last-of-type) {
-    border: none;
-  }
   &__control {
     position: relative;
     align-items: center;
@@ -98,32 +92,74 @@ $detail-map-height: 100%;
       color: black;
     }
   }
-  .PlayerRSWP {
-    position: relative;
-    margin-top: -15%;
-    left: 8%;
-    width: 84%;
-    height: 6%;
-    z-index: 999;
-    // border-radius: 10px;
-    // background-color: #fff9e0;
-    // opacity: 0.8;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
+  &__music{
+    &--playlist{
+      z-index: 1;
+      position: relative;
+      padding: 5%;
+      overflow: scroll;
+      .list-items p{
+        margin: 0;
+      }
+      .list-items p:nth-child(1){
+        font-weight: bold;
+      }
+      .list-items p:nth-child(2){
+        margin: 0;
+        margin-bottom: 5%;
+      }
+    }
+    .PlayerRSWP {
+      background-color: #b5c9db !important;
+      position: relative;
+      width: 100%;
+      height: $player-rswp-height;
+      top: 3%;
+      // z-index: 999;
+    }
+
+    ._SliderRSWP{
+      width: 90%;
+      left: 5%;
+
+      div{
+        div{
+          background-color: white !important;
+        }
+      }
+    }
+    ._ContentRSWP{
+      height: calc(100% - 4px);
+      align-self: flex-start;
+      div {
+      }
+    }
+    .rswp__active{
+      border: none;
+      width: 90%;
+      margin-left: 5%;
+      padding: 0;
+      margin-top: 5%;
+      div{
+        p:first-child{
+          span{
+            font-weight: bold;
+            font-size: 17px;
+          }
+        }
+      }
+    }
   }
 
   &__card {
     width: 100%;
   }
-
   &__list {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
     width: 100%;
   }
-
   &__drawer {
     &--title {
       font-size: 17px;
@@ -139,6 +175,12 @@ $detail-map-height: 100%;
       margin-top: 30px;
       overflow: scroll;
     }
+  }
+  .MuiButtonGroup-root {
+    box-shadow: none;
+  }
+  .MuiButtonGroup-grouped:not(:last-of-type) {
+    border: none;
   }
 }
 
@@ -170,4 +212,12 @@ ul {
   .MuiPaper-root::-webkit-scrollbar {
     display: none;
   }
+}
+
+.rswp__active > a > img {
+  display: none;
+}
+
+._ActionsRSWP{
+  display: none;
 }

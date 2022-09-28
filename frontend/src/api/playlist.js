@@ -5,6 +5,7 @@ export default async function createPlaylist(data) {
   console.log('createPlaylist', accessToken)
 
   const playlistIdList = await data.tracks.map((d)=>`spotify:track:${d.id}`)
+  const playlist = data.tracks
   // 플레이리스트 만들기 위해 userId를 get user profile 통해 가져옴
   async function getCurrentUserProfileAxios() {
     const userId = await axios
@@ -75,5 +76,5 @@ export default async function createPlaylist(data) {
   const playlistId = await createPlaylistAxios();
   await addItemsToPlaylistAxios();
 
-  return playlistIdList
+  return {playlistIdList, playlist}
 }

@@ -22,7 +22,7 @@ const CustomSwipeableDrawer = styled(SwipeableDrawer)`
     left: unset;
     box-shadow: 0px -2px 5px 0px #d6d6d6;
     border-radius: 0;
-    background-color: #f1f1f1;
+    background-color: #b5c9db;
     height: 75%;
   }
 `;
@@ -48,12 +48,14 @@ const CustomLabel = styled(Button)`
 
 export default function StoreInfoDrawer({ open, toggleDrawer }) {
   const [trackIdList, settrackIdList] = useState([]);
-
+  const [playlist, setPlaylist] = useState([])
   async function getMusic() {
     const data = await getRecommendation();
     console.log('오나?',data)
-    const playlistIdList = await createPlaylist(data)
+    const {playlistIdList, playlist} = await createPlaylist(data)
+    console.log('zzzz', playlistIdList, playlist)
     settrackIdList(playlistIdList)
+    setPlaylist(playlist)
   }
   useEffect(()=>{getMusic()},[])
 
@@ -70,10 +72,9 @@ export default function StoreInfoDrawer({ open, toggleDrawer }) {
       ModalProps={{
         componentsProps: { backdrop: backdrop },
       }}
+      className="detail-info__music"
     >
-      music
-      {trackIdList.length !== 0 && <WebPlayback className="detail-info__plyaer" playlist={trackIdList} />}
-
+      {trackIdList.length !== 0 && <WebPlayback className="detail-info__music--player" trackIdList={trackIdList} playlist={playlist}/>}
     </CustomSwipeableDrawer>
   );
 }

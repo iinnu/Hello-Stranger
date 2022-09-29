@@ -18,6 +18,8 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ssafy.db.entity.User;
+
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -35,7 +37,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public int getUser(String userEmail) {
-        return userRepository.getUserByUserEmail(userEmail);
+        return userRepository.getUserIdByUserEmail(userEmail);
     }
 
     @Transactional
@@ -79,5 +81,18 @@ public class UserServiceImpl implements UserService{
         musicUserRepository.saveAll(musicUserList);
         foodUserRepository.saveAll(foodUserList);
         activityUserRepository.saveAll(activityUserList);
+    }
+
+    @Override
+    public User getUserByUserEmail(String userEmail) {
+        User user = userRepository.getUserByUserEmail(userEmail);
+        return user;
+    }
+
+    @Override
+    public User createUser(String email, String nickname, String img) {
+        User user = new User(email, nickname, img);
+        userRepository.save(user);
+        return user;
     }
 }

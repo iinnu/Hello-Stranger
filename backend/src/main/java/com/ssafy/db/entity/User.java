@@ -1,7 +1,7 @@
 package com.ssafy.db.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,10 +12,11 @@ import java.util.List;
   `user_nickname` VARCHAR(20) NOT NULL,
   `user_img` VARCHAR(500) NULL DEFAULT NULL,
  */
+
+@Data
 @Entity
-@Getter
-@Setter
 @Table (name = "user")
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -35,7 +36,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     List<Review> reviews = new ArrayList<>();
 
-
-    public User() {};
-
+    public User(String email, String nickname, String img) {
+        this.userEmail = email;
+        this.userNickname = nickname;
+        this.userImg = img;
+    }
 }

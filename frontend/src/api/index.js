@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Buffer } from 'buffer';
 
+// 서버 요청 api
 function getApiInstance() {
   const instance = axios.create({
     baseURL: process.env.REACT_APP_HOST,
@@ -8,9 +9,20 @@ function getApiInstance() {
       'Content-type': 'application/json',
     },
   });
+
+  // 토큰이 있으면 헤더에 토큰 설정
+  // instance.interceptors.request.use(function (config) {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     config.headers['Authorization'] = 'Bearer ' + token;
+  //   }
+  //   return config;
+  // });
+
   return instance;
 }
 
+// 스포티파이 토큰 발급 api
 function getSpotifyTokenInstance() {
   const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
   const client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
@@ -27,6 +39,7 @@ function getSpotifyTokenInstance() {
   return instance;
 }
 
+// 스포티파이 api
 function getSpotifyApiInstance() {
   const instance = axios.create({
     baseURL: 'https://api.spotify.com/v1',

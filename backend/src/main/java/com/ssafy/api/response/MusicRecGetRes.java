@@ -9,6 +9,5 @@ public class MusicRecGetRes {
      private int musicID;
      private String musicName;
      private String musicArtist;
-     private String musicCategory;
      private String musicImgUrl;
 }

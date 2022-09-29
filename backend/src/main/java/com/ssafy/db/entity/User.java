@@ -3,7 +3,7 @@ package com.ssafy.db.entity;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "User")
+@Table (name = "user")
 public class User {
 
     @Id

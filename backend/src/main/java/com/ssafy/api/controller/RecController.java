@@ -68,7 +68,6 @@ public class RecController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    //TODO 음악 추천 컨트롤러 더미데이터 삭제 및 주석 해제
    public ResponseEntity<List<MusicRecGetRes>> getMusicRec(@PathVariable int key){
         List<MusicRecGetRes> res = recService.getMusicRec(key);
         return ResponseEntity.status(200).body(res);

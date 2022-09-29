@@ -19,6 +19,6 @@ public class ActivityRec {
     @Column(name = "user_id")
     int userId;
 
-
-    //TODO 추천활동들 가져오기
+    @Column(name = "activity")
+    String activity;
 }

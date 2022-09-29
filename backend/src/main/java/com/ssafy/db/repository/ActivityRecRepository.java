@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ActivityRecRepository extends JpaRepository<ActivityRec,Integer> {
-    public String findByUserId(int userId);
+    public ActivityRec findByUserId(int userId);
 }

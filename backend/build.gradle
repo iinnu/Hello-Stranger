@@ -42,10 +42,10 @@ dependencies {
 
     runtimeOnly("mysql:mysql-connector-java")
 
-    // querydsl
-//    annotationProcessor("com.querydsl:querydsl-apt:4.4.0:jpa")
-//    implementation("com.querydsl:querydsl-jpa:4.4.0")
-//    implementation("com.querydsl:querydsl-apt:4.4.0")
+  //   querydsl
+    annotationProcessor("com.querydsl:querydsl-apt:4.4.0:jpa")
+    implementation("com.querydsl:querydsl-jpa:4.4.0")
+    implementation("com.querydsl:querydsl-apt:4.4.0")
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

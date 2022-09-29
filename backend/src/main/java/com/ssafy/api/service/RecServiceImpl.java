@@ -28,8 +28,9 @@ public class RecServiceImpl implements RecService{
     public List<MusicRecGetRes> getMusicRec(int key) {
         //TODO 시큐리티 적용
         int userId=1;
-        int start = 10*key;
         int recNum = 10;
+        int start = recNum*key;
+
         List<MusicRecGetRes> res = new ArrayList<>();
         String [] musicRecs = musicRecRepository.findByUserId(userId).getMusic().split(" ");
         for(int i=start; i<start+recNum;i++){
@@ -49,9 +50,14 @@ public class RecServiceImpl implements RecService{
     public List<ActivityRecGetRes> getActivityRec(int key) {
         List<ActivityRecGetRes> res = new ArrayList<>();
         //TODO userId 등록, 구분자 등록
-        String [] activityRecs = activityRecRepository.findByUserId(0).split("");
-        for(int i=0; i<activityRecs.length; i++){
+        int userId = 1;
+        int recNum = 6;
+        int start = recNum*key;
 
+        String [] activityRecs = activityRecRepository.findByUserId(userId).getActivity().split(" ");
+        for(int i=start; i<start+recNum; i++){
+
+            //res.add(ActivityRecGetRes.builder().activityCategory(activityRecs[i]).store());
         }
         return res;
     }

@@ -46,20 +46,11 @@ public class RecController {
     })
     //TODO 음식추천 컨트롤러
     public ResponseEntity<List<FoodRecGetRes>> getFoodRec(@PathVariable Map<String,String> request){
-        List<FoodRecGetRes> res = new ArrayList<>();
-        for(int i=0; i<5;i++){
-            List<BaseInfo> store = new ArrayList<>();
-            for(int j=0;j<5;j++){
-                store.add(BaseInfo.builder()
-                        .id(j)
-                        .address("address"+j)
-                        .latitude(36.107235)
-                        .longitude(128.415520)
-                        .name("name"+j)
-                        .time("time"+j).build());
-            }
-            res.add(FoodRecGetRes.builder().foodCategory("category"+i).store(store).build());
-        }
+        int key = Integer.parseInt(request.get("key"));
+        int distance = Integer.parseInt(request.get("distance"));
+        double latitude = Double.parseDouble(request.get("latitude"));
+        double longitude = Double.parseDouble(request.get("longitude"));
+        List<FoodRecGetRes> res = recService.getFoodRec(key,distance,latitude,longitude);
         return ResponseEntity.status(200).body(res);
     }
 
@@ -80,20 +71,11 @@ public class RecController {
     })
     //TODO 활동추천 컨트롤러
     public ResponseEntity<List<ActivityRecGetRes>> getActivityRec(@PathVariable Map<String,String> request){
-        List<ActivityRecGetRes> res = new ArrayList<>();
-        for(int i=0; i<5;i++){
-            List<BaseInfo> store = new ArrayList<>();
-            for(int j=0;j<5;j++){
-                store.add(BaseInfo.builder()
-                        .id(j)
-                        .address("address"+j)
-                        .latitude(36.107235)
-                        .longitude(128.415520)
-                        .name("name"+j)
-                        .time("time"+j).build());
-            }
-            res.add(ActivityRecGetRes.builder().activityCategory("category"+i).store(store).build());
-        }
+        int key = Integer.parseInt(request.get("key"));
+        int distance = Integer.parseInt(request.get("distance"));
+        double latitude = Double.parseDouble(request.get("latitude"));
+        double longitude = Double.parseDouble(request.get("longitude"));
+        List<ActivityRecGetRes> res = recService.getActivityRec(key,distance,latitude,longitude);
         return ResponseEntity.status(200).body(res);
     }
 

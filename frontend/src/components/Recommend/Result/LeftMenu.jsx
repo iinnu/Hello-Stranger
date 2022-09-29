@@ -13,10 +13,11 @@ const list = [
 const drawer = ['음악 플레이리스트', '음식 가게 목록', '활동 가게 목록'];
 
 export default function LeftMenu() {
-  const [menu, setMenu] = useState(0);
+  const [menu, setMenu] = useState(-1);
 
   const handleClick = (index) => {
-    setMenu(index);
+    if (menu === index) setMenu(-1);
+    else setMenu(index);
   };
 
   return (

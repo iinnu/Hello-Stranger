@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLoginToken, useSpotifyToken } from 'Context';
-import { getSpotifyToken } from 'api/spotify';
-import { getApiInstance, getSpotifyApi } from 'api';
+import { getSpotifyToken, getSpotifyUserInfo } from 'api/spotify';
+import { getApiInstance, getSpotifyApiInstance } from 'api';
 import queryString from 'query-string';
 
 export default function SpotifyRedirectHandler() {
@@ -21,11 +21,10 @@ export default function SpotifyRedirectHandler() {
         // 스포티파이 토큰 저장
         const access_token = res.data.access_token;
         const refresh_token = res.data.refresh_token;
-        setSpotify(access_token);
+        await setSpotify(access_token);
         localStorage.setItem('refresh_token', refresh_token);
         // 스포티파이에서 유저 정보 얻기
-        const spotify = getSpotifyApi(access_token);
-        const info = await spotify.get('/me');
+        const info = await getSpotifyUserInfo(access_token);
         // 유저 정보를 성공적으로 얻었으면 로그인 요청
         if (info.status === 200) {
           const email = { idToken: info.data.email };

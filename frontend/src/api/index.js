@@ -11,12 +11,13 @@ function getApiInstance() {
   return instance;
 }
 
-function getSpotifyInstance() {
+function getSpotifyTokenInstance() {
   const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
   const client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
   const auth = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 
   const instance = axios.create({
+    baseURL: 'https://accounts.spotify.com/api/token',
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
       Authorization: 'Basic ' + auth,
@@ -26,16 +27,15 @@ function getSpotifyInstance() {
   return instance;
 }
 
-function getSpotifyApi(token) {
+function getSpotifyApiInstance() {
   const instance = axios.create({
     baseURL: 'https://api.spotify.com/v1',
     headers: {
       'content-type': 'application/json',
-      Authorization: 'Bearer ' + token,
     },
   });
 
   return instance;
 }
 
-export { getApiInstance, getSpotifyInstance, getSpotifyApi };
+export { getApiInstance, getSpotifyTokenInstance, getSpotifyApiInstance };

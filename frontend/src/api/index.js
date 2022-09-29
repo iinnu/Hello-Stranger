@@ -11,13 +11,13 @@ function getApiInstance() {
   });
 
   // 토큰이 있으면 헤더에 토큰 설정
-  // instance.interceptors.request.use(function (config) {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     config.headers['Authorization'] = 'Bearer ' + token;
-  //   }
-  //   return config;
-  // });
+  instance.interceptors.request.use(function (config) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers['Authorization'] = 'Bearer ' + token;
+    }
+    return config;
+  });
 
   return instance;
 }

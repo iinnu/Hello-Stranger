@@ -15,32 +15,7 @@ const PlainButton = styled(Button)`
     }
   }
 `;
-const MusicList = [
-  {
-    musicID: 1,
-    musicName: '가장 보통의 존재',
-    musicArtist: '언니네 이발관',
-    musicCategory: '',
-    musicImgUrl:
-      'https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/066/039/122/66039122_1395715494760_1_600x600.JPG/dims/resize/Q_80,0',
-  },
-  {
-    musicID: 2,
-    musicName: '정말 사랑했을까',
-    musicArtist: '브라운아이드소울',
-    musicCategory: '',
-    musicImgUrl:
-      'https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/015/027/251/15027251_1388739020483_1_600x600.JPG/dims/resize/Q_80,0',
-  },
-  {
-    musicID: 3,
-    musicName: 'starlight',
-    musicArtist: 'Muse',
-    musicCategory: '',
-    musicImgUrl:
-      'https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/040/585/421/40585421_1393312393347_1_600x600.JPG/dims/resize/Q_80,0',
-  },
-];
+const MusicList = localStorage.getItem("userInputInfoMusic");
 const settings={
   dots: true,
   infinite: false,
@@ -59,11 +34,11 @@ const EnterInfo = () => {
         console.log('다음');
         window.location.href ="/info/food"
       };
-      const EnterInfoMusicCards = MusicList.map((e) => (
+      const EnterInfoMusicCards = JSON.parse(MusicList).map((e) => (
         <div className='UserInput__Activity__Item__Area'>
         <EnterInfoMusicCard
-          key={e.id}
-          id={e.id}
+          key={e.musicId}
+          id={e.musicId}
           artist={e.musicArtist}
           name={e.musicName}
           image={e.musicImgUrl}

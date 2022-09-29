@@ -5,7 +5,7 @@ const api = getApiInstance();
 function getUserDetail() {
     api.get(`/detail`)
     .then((res)=>{
-        console.log(res)
+        return res.data
     })
     .catch((err)=>{
         console.error(err)

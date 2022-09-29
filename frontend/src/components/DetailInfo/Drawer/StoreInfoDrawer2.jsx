@@ -8,6 +8,8 @@ import StarIcon from '@mui/icons-material/Star';
 import sample from 'assets/images/sample.jpg';
 import OpenClosed from './OpenClosed';
 import StoreReview from './StoreReview';
+import {getOtherUserActivity, getOtherUserFood} from 'api/other'
+import { useEffect, useState } from 'react';
 
 const backdrop = {
   style: { background: 'none' },
@@ -46,7 +48,22 @@ const CustomLabel = styled(Button)`
   }
 `;
 
-export default function StoreInfoDrawer({ open, toggleDrawer }) {
+export default function StoreInfoDrawer({ open, toggleDrawer, data, isHistory, type }) {
+  const [detailData, setDetailData] = useState({}) 
+  useEffect(()=>{
+    async function getData(){
+      if(type === 'food'){
+        const data = await getOtherUserFood(data.id)
+        setDetailData(data)
+      } else {
+        const data = await getOtherUserActivity(data.id)
+        setDetailData(data)
+      }
+    }
+    getData()
+  }
+
+  ,[])
   return (
     <CustomSwipeableDrawer
       anchor="bottom"
@@ -65,9 +82,9 @@ export default function StoreInfoDrawer({ open, toggleDrawer }) {
         <StyledBox className="store-info-drawer__main">
           <div>
             <img className="main__image" src={sample} alt="store img" />
-            <div className="main__title">XX 만두가게</div>
+            <div className="main__title">{detailData.name}</div>
             <div className="main__status">
-              <span>★ 4.5/5</span>
+              <span> {detailData.rating ?  `★${detailData.rating}/5` : `별점 정보가 없습니다.`}</span>
               <OpenClosed />
             </div>
           </div>
@@ -75,15 +92,17 @@ export default function StoreInfoDrawer({ open, toggleDrawer }) {
         <StyledBox className="store-info-drawer__detail">
           <div className="detail detail__address">
             <CustomLabel startIcon={<LocationOnIcon />}>
-              대구광역시 중구 동인동
+              {detailData.address}
             </CustomLabel>
           </div>
           <div className="detail detail__phone">
-            <CustomLabel startIcon={<PhoneIcon />}>010-0000-0000</CustomLabel>
+            <CustomLabel startIcon={<PhoneIcon />}>
+              {detailData.tel ?  detailData.tel: `전화번호 정보가 없습니다.`}
+            </CustomLabel>
           </div>
           <div className="detail detail__hours">
             <CustomLabel startIcon={<AccessTimeIcon />}>
-              09:00 ~ 18:00
+              {detailData.time ?  detailData.time: `영업시간 정보가 없습니다.`}
             </CustomLabel>
           </div>
         </StyledBox>
@@ -92,11 +111,8 @@ export default function StoreInfoDrawer({ open, toggleDrawer }) {
             <div>리뷰</div>
             <div>*네이버 지도 리뷰</div>
           </div>
-          <StoreReview />
-          <StoreReview />
-          <StoreReview />
-          <StoreReview />
-          <StoreReview />
+          {detailData.review && detailData.review.map((e)=><StoreReview content={e}/>)}
+          {!detailData.review && <p>리뷰 정보가 없습니다.</p>}
         </StyledBox>
       </div>
     </CustomSwipeableDrawer>

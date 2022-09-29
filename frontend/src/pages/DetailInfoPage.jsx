@@ -11,31 +11,45 @@ import BottomNav from "components/common/BottomNav";
 import DetailInfoTitle from "components/DetailInfo/Title";
 import Map from "components/DetailInfo/Map";
 
-// //음악 추천 및 재생
-// import getRecommendation from "api/music_api";
-// import createPlaylist from "api/playlist";
-// import WebPlayback from "components/DetailInfo/WebPlayBack";
-
+// data api
+import {getOtherUser} from 'api/other'
+import axios from 'axios'
 import "styles/DetailInfoPage/DetailInfoPage.scss";
+import { getUserDetail } from "api/history";
+import { useLocation } from "react-router-dom";
 
 export default function DetailInfoPage() {
+  const location = useLocation()
+  const pathName = location.pathname.split('/')[1];
+  const [currentPath, setCurrentPath] = useState('');
+  const [userData, setUserData] = useState({})
+  const [isHistory, setIsHistory] = useState(true)
+  const [type, setType] = useState("");
+  const [detailTitle, setDetailTitle] = useState('')
+  const [detailDate, setDetailDate] = useState('')
+
+  useEffect(()=> {
+    async function getData(){
+      if(pathName === 'other'){
+        console.log('다른유저')
+        const Data = await getOtherUser()
+        setUserData(Data)
+        setIsHistory(false)
+      } else {
+        console.log('다시보기')
+        const Data = await getUserDetail()
+        setUserData(Data)
+        setIsHistory(true)
+        setDetailTitle(Data.title)
+        setDetailDate(Data.activity.time)
+      }
+    }
+    getData()
+  }
+  ,[])
   const [trackIdList, settrackIdList] = useState([]);
-  // async function recommend() {
-  //   const data = await getRecommendation();
-  //   console.log("오나?", data);
-  //   const playlistIdList = await createPlaylist(data);
-  //   settrackIdList(playlistIdList);
-  // }
   let { id } = useParams();
   const navigate = useNavigate();
-  let isHistory = true;
-
-  // 지금은 랜덤으로 받지만, 여기에 axios 요청이 들어갈 것
-  if (id === undefined) {
-    isHistory = false;
-    id = Math.floor(Math.random() * (5 - 1) + 1);
-    console.log(id);
-  }
 
   // drawer
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -61,14 +75,14 @@ export default function DetailInfoPage() {
     setOpenMusicDrawer(state);
   };
 
-  const [type, setType] = useState("");
+  // 
   function clickFood() {
     setOpenDrawer(true);
-    setType("historyFood");
+    setType("food");
   }
   function clickActivity() {
     setOpenDrawer(true);
-    setType("historyActivity");
+    setType("activity");
   }
   function clickMusic() {
     console.log('clickMusic')
@@ -83,60 +97,6 @@ export default function DetailInfoPage() {
   };
   const handleCloseModal = () => setOpenModal(false);
 
-  const cardList = {
-    1: {
-      title: "일정 제목1",
-      foodTitle: "음식점1",
-      activityTitle: "활동1",
-      date: "2022.09.14",
-    },
-    2: {
-      title: "일정 제목2",
-      foodTitle: "음식점2",
-      activityTitle: "활동2",
-      date: "2022.09.14",
-    },
-    3: {
-      title: "일정 제목3",
-      foodTitle: "음식점3",
-      activityTitle: "활동3",
-      date: "2022.09.14",
-    },
-    4: {
-      title: "일정 제목4",
-      foodTitle: "음식점4",
-      activityTitle: "활동4",
-      date: "2022.09.14",
-    },
-  };
-
-  const placeList = {
-    1: {
-      id: 1,
-      title: "음식점1",
-      address: "xx시 xx동",
-      telephone: "010-000-0000",
-      review: "x점",
-    },
-    2: {
-      id: 1,
-      title: "활동1",
-      address: "xx시 xx동",
-      telephone: "010-000-0000",
-      review: "x점",
-    },
-  };
-
-  // music spotify api
-  // async function getMusic() {
-  //   const data = await getRecommendation();
-  //   console.log('오나?',data)
-  //   const playlistIdList = await createPlaylist(data)
-  //   settrackIdList(playlistIdList)
-  // }
-
-
-  const historyInfo = cardList[id];
 
   const current = JSON.parse(localStorage.getItem("current"));
 
@@ -154,13 +114,20 @@ export default function DetailInfoPage() {
           <Map />
           {isHistory && (
             <DetailInfoTitle
-              historyInfo={historyInfo}
+              title={detailTitle}
+              date={detailDate}
               handleOpenModal={handleOpenModal}
             />
           )}
           {/* {trackIdList.length !== 0 && <WebPlayback className="detail-info__plyaer" playlist={trackIdList} />} */}
           <Grid container className="detail-info-inner">
-            <StoreInfoDrawer open={openDrawer} toggleDrawer={toggleDrawer} />
+            <StoreInfoDrawer 
+            open={openDrawer} 
+            toggleDrawer={toggleDrawer} 
+            userData={userData} 
+            isHistory={isHistory}
+            type={type}
+            />
             <MusicDrawer open={openMusicDrawer} toggleDrawer={toggleMusicDrawer}/>
           </Grid>
         </div>

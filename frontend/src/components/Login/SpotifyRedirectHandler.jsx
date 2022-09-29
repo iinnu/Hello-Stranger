@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSpotifyContext } from 'Context';
 import { getSpotifyToken } from 'api/spotify';
+import { getApiInstance, getSpotifyApi } from 'api';
 import queryString from 'query-string';
-import { getSpotifyApi } from 'api';
 
 export default function SpotifyRedirectHandler() {
   const { setToken } = useSpotifyContext();
@@ -24,9 +24,25 @@ export default function SpotifyRedirectHandler() {
         const refresh_token = res.data.refresh_token;
         setToken(access_token);
         localStorage.setItem('refresh_token', refresh_token);
-        // 유저 정보 얻기
+        // 스포티파이에서 유저 정보 얻기
         const spotify = getSpotifyApi(access_token);
         const info = await spotify.get('/me');
+        // 유저 정보를 성공적으로 얻었으면 로그인 요청
+        if (info.status === 200) {
+          const email = { idToken: info.data.email };
+          const login = await getApiInstance().post('/user', email);
+          // 로그인 성공 시, 첫 로그인 여부에 따라서 페이지 다르게 이동
+          if (login.status === 200) {
+            localStorage.setItem('token', login.data.accessToken);
+            navigate('/guide/first');
+          } else {
+            alert('로그인에 실패했습니다.');
+            window.location.replace('/');
+          }
+        } else {
+          alert('유저 정보를 얻을 수 없습니다.');
+          window.location.replace('/');
+        }
       },
       (err) => {
         console.log(err);

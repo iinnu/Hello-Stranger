@@ -28,12 +28,12 @@ function getSpotifyInstance() {
 
 function getSpotifyApi(token) {
   const instance = axios.create({
+    baseURL: 'https://api.spotify.com/v1',
     headers: {
-      baseURL: 'https://api.spotify.com/v1',
       'content-type': 'application/json',
       Authorization: 'Bearer ' + token,
-    }
-  })
+    },
+  });
 
   return instance;
 }

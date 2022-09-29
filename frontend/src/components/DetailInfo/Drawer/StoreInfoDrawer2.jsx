@@ -114,6 +114,14 @@ export default function StoreInfoDrawer({ open, toggleDrawer, data, isHistory, t
           {detailData.review && detailData.review.map((e)=><StoreReview content={e}/>)}
           {!detailData.review && <p>리뷰 정보가 없습니다.</p>}
         </StyledBox>
+        <StyledBox className="store-info-drawer__review">
+          <div className="review__title">
+            <div>리뷰</div>
+            <div>*네이버 지도 리뷰</div>
+          </div>
+          {detailData.review && detailData.review.map((e)=><StoreReview content={e}/>)}
+          {!detailData.review && <p>리뷰 정보가 없습니다.</p>}
+        </StyledBox>
       </div>
     </CustomSwipeableDrawer>
   );

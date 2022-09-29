@@ -2,9 +2,21 @@ import { getApiInstance } from 'api';
 
 const api = getApiInstance();
 
-function getUserDetail() {
-    api.get(`/detail`)
+export function getUserHistory() {
+    return api.get('/review')
     .then((res)=>{
+        console.log('다시보기 리스트 불러오기', res.data.contents)
+        return res.data.contents
+    })
+    .catch((err)=>{
+        console.error(err)
+    })
+}
+
+export function getUserDetail() {
+    return api.get(`/detail`)
+    .then((res)=>{
+        console.log('다시보기 세부 일정 불러오기', res.data)
         return res.data
     })
     .catch((err)=>{
@@ -12,7 +24,7 @@ function getUserDetail() {
     });
 }
 
-function getUserDetailActivity(activityId){
+export function getUserDetailActivity(activityId){
     api.get(`/detail/activity/${activityId}`)
     .then((res)=> {
         console.log(res)
@@ -21,7 +33,7 @@ function getUserDetailActivity(activityId){
         console.error(err)
     })
 }
-function getUserDetailFood(foodId){
+export function getUserDetailFood(foodId){
     api.get(`/detail/activity/${foodId}`)
     .then((res)=> {
         console.log(res)
@@ -31,7 +43,7 @@ function getUserDetailFood(foodId){
     })
 }
 
-function rateRecommendation({reviewId, rating}){
+export function rateRecommendation({reviewId, rating}){
     api.post(`detail/detail/${reviewId}/rating`,
         {
         rating,
@@ -57,11 +69,3 @@ function rateRecommendation({reviewId, rating}){
         console.error(err)
     })
 }
-
-export {
-    getUserDetail, 
-    getUserDetailActivity, 
-    getUserDetailFood, 
-    rateRecommendation
-}
-  

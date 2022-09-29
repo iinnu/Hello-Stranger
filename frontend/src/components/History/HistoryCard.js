@@ -3,11 +3,11 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 
-function HistoryCard({ id, title, foodTitle, activityTitle, date }) {
+function HistoryCard({ data }) {
   const navigate = useNavigate();
   function openDetail() {
-    console.log({ id });
-    navigate(`${id}`);
+    console.log(data.reviewId);
+    navigate(`${data.reviewId}`);
   }
 
   return (
@@ -15,10 +15,10 @@ function HistoryCard({ id, title, foodTitle, activityTitle, date }) {
       <div className="history__card">
         <Card onClick={openDetail}>
           <CardContent>
-            <Typography> {title} </Typography>
-            <Typography> {foodTitle} </Typography>
-            <Typography> {activityTitle} </Typography>
-            <Typography> {date} </Typography>
+            <Typography> {data.title} </Typography>
+            <Typography> {data.foodCategory} </Typography>
+            <Typography> {data.activityCategory} </Typography>
+            <Typography> {data.regDate} </Typography>
           </CardContent>
         </Card>
       </div>

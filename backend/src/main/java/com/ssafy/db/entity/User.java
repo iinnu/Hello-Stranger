@@ -1,8 +1,20 @@
 package com.ssafy.db.entity;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+/*
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `user_email` VARCHAR(50) NOT NULL,
+  `user_nickname` VARCHAR(20) NOT NULL,
+  `user_img` VARCHAR(500) NULL DEFAULT NULL,
+ */
 @Entity
+@Getter
+@Setter
 @Table (name = "user")
 public class User {
 
@@ -19,4 +31,11 @@ public class User {
 
     @Column(name = "user_img")
     String userImg;
+
+    @OneToMany(mappedBy = "user")
+    List<Review> reviews = new ArrayList<>();
+
+
+    public User() {};
+
 }

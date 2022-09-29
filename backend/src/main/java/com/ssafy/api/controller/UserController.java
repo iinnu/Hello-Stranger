@@ -4,12 +4,15 @@ import com.ssafy.api.dto.*;
 import com.ssafy.api.request.CategoryChoiceReq;
 import com.ssafy.api.request.UserRegistReq;
 import com.ssafy.api.response.BaseResponseBody;
+import com.ssafy.api.response.CommercialAreaGetRes;
 import com.ssafy.api.response.UserChoiceGetRes;
 import com.ssafy.api.response.UserRegistRes;
+import com.ssafy.api.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
+    @Autowired
+    UserService userService;
 
     @PostMapping()
     @ApiOperation(value = "소셜로그인, 소셜회원가입", notes = "저장되지 않은 이메일 일 시에는 회원가입과 로그인을 시키고, 저장된 이메일 일 시에는 로그인 시켜준다")
@@ -109,31 +115,45 @@ public class UserController {
     @ApiOperation(value = "유저 취향 선택", notes = "회원가입 시 취향조사에서 유저가 선택한 음악/음식/활동 목록을 저장한다 ")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
-            @ApiResponse(code = 901, message = "유효하지 않은 값"),
+            @ApiResponse(code = 911, message = "유효하지 않은 사용자"),
+            @ApiResponse(code = 901, message = "유효하지 않은 값, YN은 1 또는 -1로만 들어올 수 있음"),
     })
     public ResponseEntity<? extends BaseResponseBody> registUserChoice(@RequestBody CategoryChoiceReq categoryChoiceReq){
 
-        // 재구현시 함수화
-        List<IdChoiceYN> music = categoryChoiceReq.getMusic();
-        for(IdChoiceYN c : music){
-            String yn = c.getChoiceYN();
-            if("Y".equals(yn) || "N".equals(yn)) continue;
-            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+        int userId = 0;
+        try {
+            userId = userService.getUser(categoryChoiceReq.getUserEmail());
+        } catch(Exception e){
+            return ResponseEntity.status(601).body(BaseResponseBody.of(911, "유효하지 않은 사용자입니다."));
         }
 
-        List<CategoryChoiceYN> food = categoryChoiceReq.getFood();
-        for(CategoryChoiceYN c : food){
-            String yn = c.getChoiceYN();
-            if("Y".equals(yn) || "N".equals(yn)) continue;
-            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
-        }
-        
-        List<CategoryChoiceYN> activity = categoryChoiceReq.getActivity();
-        for(CategoryChoiceYN c : activity){
-            String yn = c.getChoiceYN();
-            if("Y".equals(yn) || "N".equals(yn)) continue;
-            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
-        }
+        System.out.println(userId);
+
+        // @valid 찾아볼 것
+//        List<IdLikeYN> music = categoryChoiceReq.getMusic();
+//        for(IdLikeYN like : music){
+//            int yn = like.getLikeYN();
+//            if(yn == 1 || yn == -1) continue;
+//            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+//        }
+//
+//        List<CategoryLikeYN> food = categoryChoiceReq.getFood();
+//        for(CategoryLikeYN like : food){
+//            int yn = like.getLikeYN();
+//            if(yn == 1 || yn == -1) continue;
+//            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+//        }
+//
+//        List<CategoryLikeYN> activity = categoryChoiceReq.getActivity();
+//        for(CategoryLikeYN like : activity){
+//            int yn = like.getLikeYN();
+//            if(yn == 1 || yn == -1) continue;
+//            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+//        }
+
+
+        userService.registUserChoice(userId, categoryChoiceReq);
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "정상적으로 저장되었습니다."));
     }
+
 }

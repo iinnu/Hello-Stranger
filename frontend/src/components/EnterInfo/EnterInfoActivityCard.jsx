@@ -8,6 +8,32 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 
 
 export default function RecipeReviewCard({ id, title, image }) {
+  function activityDataInputGood(){
+      const activityDataInput = 
+        {
+        "category": title,
+        "choiceYN" : "Y"
+        }
+      localStorage.setItem("activityDataInput", JSON.stringify(activityDataInput))
+  }
+
+  function activityDataInputBad(){
+    const existData = [JSON.parse(localStorage.getItem("activityDataInput"))]
+    const activityDataInput = {
+      "category": title,
+      "choiceYN" : "N"
+    }
+    console.log(existData.length)
+    if (existData < 1){
+      existData.push(activityDataInput)
+      localStorage.setItem("activityDataInput", JSON.stringify(existData))
+    }
+    if (existData.length >= 1){
+      existData.push(activityDataInput)
+      localStorage.setItem("activityDataInput", JSON.stringify(existData))
+    }
+  }
+  
   return (
     <Card className="UserInput__Activity__Item__Area__Card">
       <CardHeader
@@ -25,8 +51,8 @@ export default function RecipeReviewCard({ id, title, image }) {
           hihi
         </div>
         <div>
-          <Button><ThumbUpOffAltIcon/></Button>
-          <Button><ThumbDownOffAltIcon/></Button>
+          <Button onClick={activityDataInputGood}><ThumbUpOffAltIcon/></Button>
+          <Button onClick={activityDataInputBad}><ThumbDownOffAltIcon/></Button>
         </div>
       </div>
     </Card>

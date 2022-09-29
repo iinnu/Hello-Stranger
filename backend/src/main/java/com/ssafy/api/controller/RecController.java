@@ -6,10 +6,12 @@ import com.ssafy.api.response.BaseResponseBody;
 import com.ssafy.api.response.ActivityRecGetRes;
 import com.ssafy.api.response.FoodRecGetRes;
 import com.ssafy.api.response.MusicRecGetRes;
+import com.ssafy.api.service.RecService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,12 +23,16 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/rec")
 public class RecController {
+
+    @Autowired
+    RecService recService;
     @PostMapping()
     @ApiOperation(value = "결과 카테고리 저장", notes = "<strong>음악,활동,음식 별로 사용자가 YN을 표시한 카테고리, YN</strong>을 가지고 결과를 저장한다")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
     public ResponseEntity<? extends BaseResponseBody> registResultCategory(@RequestBody CategoryChoiceReq resultCategory){
+        //TODO 결과저장 컨트롤러
         if(resultCategory!=null){
             return ResponseEntity.status(200).body(BaseResponseBody.of(200,"결과 전달 성공"));
         }
@@ -38,6 +44,7 @@ public class RecController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
+    //TODO 음식추천 컨트롤러
     public ResponseEntity<List<FoodRecGetRes>> getFoodRec(@PathVariable Map<String,String> request){
         List<FoodRecGetRes> res = new ArrayList<>();
         for(int i=0; i<5;i++){
@@ -61,17 +68,9 @@ public class RecController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<List<MusicRecGetRes>> getMusicRec(@PathVariable int key){
-        List<MusicRecGetRes> res = new ArrayList<>();
-        for(int i=0; i<5;i++){
-            res.add(MusicRecGetRes.builder()
-                    .musicID(i)
-                    .musicName("name"+i)
-                    .musicArtist("artist"+i)
-                    .musicCategory("category")
-                    .musicImgUrl("imgUrl"+i)
-                    .build());
-        }
+    //TODO 음악 추천 컨트롤러 더미데이터 삭제 및 주석 해제
+   public ResponseEntity<List<MusicRecGetRes>> getMusicRec(@PathVariable int key){
+        List<MusicRecGetRes> res = recService.getMusicRec(key);
         return ResponseEntity.status(200).body(res);
     }
 
@@ -80,6 +79,7 @@ public class RecController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
+    //TODO 활동추천 컨트롤러
     public ResponseEntity<List<ActivityRecGetRes>> getActivityRec(@PathVariable Map<String,String> request){
         List<ActivityRecGetRes> res = new ArrayList<>();
         for(int i=0; i<5;i++){

@@ -8,7 +8,12 @@ const Row = styled('div')`
 
 export default function MenuItem({ icon, label, onClick, active }) {
   return (
-    <div className={active ? classNames('menu__item', 'menu__item--active') : 'menu__item'} onClick={onClick}>
+    <div
+      className={
+        active ? classNames('menu__item', 'menu__item--active') : 'menu__item'
+      }
+      onClick={onClick}
+    >
       <Row>{icon}</Row>
       <Row>{label}</Row>
     </div>

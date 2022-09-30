@@ -2,6 +2,7 @@ package com.ssafy.api.controller;
 
 import com.ssafy.api.dto.SelectInfo;
 import com.ssafy.api.response.SelectGetRes;
+import com.ssafy.api.response.SelectOtherUserGetRes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,8 +49,9 @@ public class OtherUserController {
                     .name("activity_name"+i)
                     .time("activity_time"+i)
                     .build();
-            SelectGetRes userSelect = SelectGetRes.builder().playlistUrl("url"+i).food(food).activity(activity).build();
-            res.add(userSelect);
+            SelectOtherUserGetRes selectOtherUserGetRes = SelectOtherUserGetRes.builder().playlistUrl("url"+i).food(food).activity(activity).build();
+
+            res.add(selectOtherUserGetRes);
         }
         return ResponseEntity.status(200).body(res);
     }

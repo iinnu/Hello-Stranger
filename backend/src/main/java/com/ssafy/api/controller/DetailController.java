@@ -12,20 +12,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Api(value = "상세조회 API", tags = {"Detail"})
 @RestController
 @RequestMapping("/api/detail")
 public class DetailController {
 
-    @GetMapping()
+    @GetMapping("{reviewId}")
     @ApiOperation(value = "유저 선택 결과 반환", notes = "유저가 선택했던 음악,음식,활동과 해당 장소 정보 리스트를 반환한다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<SelectGetRes> getDetailSelect(){
+    public ResponseEntity<SelectGetRes> getDetailSelect(@PathVariable int reviewId){
 
-        SelectInfo food = SelectInfo.builder()
+        SelectInfo food_Y = SelectInfo.builder()
                 .id(1)
                 .address("food_address")
                 .category("food_category")
@@ -35,7 +36,19 @@ public class DetailController {
                 .name("food_name")
                 .time("food_time")
                 .build();
-        SelectInfo activity = SelectInfo.builder()
+
+        SelectInfo food_N = SelectInfo.builder()
+                .id(1)
+                .address("food_address")
+                .category("food_category")
+                .ChoiceYN("N")
+                .latitude(33.3333)
+                .longitude(123.3333)
+                .name("food_name")
+                .time("food_time")
+                .build();
+
+        SelectInfo activity_Y = SelectInfo.builder()
                 .id(1)
                 .address("activity_address")
                 .category("activity_category")
@@ -45,9 +58,31 @@ public class DetailController {
                 .name("activity_name")
                 .time("activity_time")
                 .build();
+
+        SelectInfo activity_N = SelectInfo.builder()
+                .id(1)
+                .address("activity_address")
+                .category("activity_category")
+                .ChoiceYN("N")
+                .latitude(33.3333)
+                .longitude(123.3333)
+                .name("activity_name")
+                .time("activity_time")
+                .build();
+
+        List<SelectInfo> food = new ArrayList<>();
+        food.add(food_N);
+        food.add(food_N);
+
+        List<SelectInfo> activity = new ArrayList<>();
+        activity.add(activity_N);
+        activity.add(activity_N);
+
         SelectGetRes res = SelectGetRes.builder()
                 .title("제목")
                 .playlistUrl("url")
+                .choice_food(food_Y)
+                .choice_activity(activity_Y)
                 .food(food)
                 .activity(activity)
                 .build();

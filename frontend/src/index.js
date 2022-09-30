@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
-import store from './store.js'
-import { Provider } from 'react-redux'
-import { persistStore } from 'redux-persist'
-import { PersistGate } from 'redux-persist/integration/react'
+import store from './store/index.js';
+import { Provider } from 'react-redux';
+import { CookiesProvider } from 'react-cookie';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const persistor = persistStore(store);
 
@@ -19,12 +20,13 @@ function setScreenSize() {
 setScreenSize();
 window.addEventListener('resize', setScreenSize);
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <CookiesProvider>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-      <App />
+        <App />
       </PersistGate>
     </Provider>
+  </CookiesProvider>
 );

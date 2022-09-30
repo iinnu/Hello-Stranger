@@ -67,8 +67,13 @@ public class DetailController {
             @ApiResponse(code = 200, message = "성공"),
             @ApiResponse(code = 931, message = "DB에 없는 값"),
     })
-    public ResponseEntity<? extends DetailInfo> getDetailActivity(@PathVariable int activityId){
-        DetailInfo res = detailService.getActivity(activityId);
+    public ResponseEntity<?> getDetailActivity(@PathVariable int activityId){
+        DetailInfo res = null;
+        try {
+            res = detailService.getActivity(activityId);
+        } catch(Exception e){
+            return ResponseEntity.status(931).body(BaseResponseBody.of(931, "DB에 등록되지 않는 값입니다."));
+        }
         return ResponseEntity.status(200).body(res);
     }
 
@@ -76,10 +81,15 @@ public class DetailController {
     @ApiOperation(value = "유저 활동 상세 조회", notes = "유저가 활동 가게 확인")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
+            @ApiResponse(code = 931, message = "DB에 없는 값"),
     })
-    public ResponseEntity<DetailInfo> getDetailFood(@PathVariable int foodId){
-
-        DetailInfo res = detailService.getFood(foodId);
+    public ResponseEntity<?> getDetailFood(@PathVariable int foodId){
+        DetailInfo res = null;
+        try{
+            res = detailService.getFood(foodId);
+        }catch(NullPointerException e){
+            return ResponseEntity.status(931).body(BaseResponseBody.of(931, "DB에 등록되지 않는 값입니다."));
+        }
         return ResponseEntity.status(200).body(res);
     }
 

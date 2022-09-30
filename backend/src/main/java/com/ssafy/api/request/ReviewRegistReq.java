@@ -15,12 +15,14 @@ public class ReviewRegistReq {
     ReviewReqContent food;
     ReviewReqContent activity;
 
+    @Data
     @Builder
     public static class ReviewReqContent {
         String category;
         List<ReviewReqConentStore> store;
     }
 
+    @Data
     @Builder
     public static class ReviewReqConentStore {
         int id;

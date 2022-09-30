@@ -3,14 +3,26 @@ package com.ssafy.api.controller;
 import com.ssafy.api.dto.ReviewGetResContent;
 import com.ssafy.api.request.ReviewRegistReq;
 import com.ssafy.api.response.ReviewGetRes;
+import com.ssafy.api.service.ReviewActivityService;
+import com.ssafy.api.service.ReviewFoodService;
+import com.ssafy.api.service.ReviewMusicService;
+import com.ssafy.api.service.ReviewService;
+import com.ssafy.common.auth.HelloStrangerUserDetails;
+import com.ssafy.db.entity.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Api(value = "리뷰 API", tags = {"Review"})
@@ -18,58 +30,46 @@ import java.util.List;
 @RequestMapping("/api/review")
 public class ReviewController {
 
+    @Autowired
+    ReviewService reviewService;
+
+    @Autowired
+    ReviewActivityService reviewActivityService;
+
+    @Autowired
+    ReviewFoodService reviewFoodService;
+
+    @Autowired
+    ReviewMusicService reviewMusicService;
+
     @PostMapping()
     @ApiOperation(value = "리뷰 저장", notes = "다시보기에 사용될 리뷰 저장")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<Void> registReview(@RequestBody ReviewRegistReq reviewRegistReq){
+    public ResponseEntity<Void> registReview(@ApiIgnore Authentication authentication, @RequestBody ReviewRegistReq reviewRegistReq){
 
-        /*
-        저장
-        "reviewId" : "",
-                "regDate" : "",
-                "musicCategory" : "",
-                "foodCategory" : "",
-                "activityCategory" : ""
-                ...
-                erd 참고
-         */
+        HelloStrangerUserDetails userDetails = (HelloStrangerUserDetails)authentication.getDetails();
+        User user = userDetails.getUser();
 
-        // 리퀘스트 테스트
-        List<ReviewRegistReq.ReviewReqConentStore> stores = new ArrayList<>();
+        int musicId = reviewRegistReq.getMusicId();
+        String regDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy:MM:dd:HH:mm:ss"));
+        String evalYN = "N";
+        String title = reviewRegistReq.getTitle();
+        String activityCategoryName = reviewRegistReq.getActivity().getCategory();
+        String foodCategoryName = reviewRegistReq.getFood().getCategory();
+        String playListUrl = reviewRegistReq.getPlaylist_url();
 
-        ReviewRegistReq.ReviewReqConentStore foodStore1 = ReviewRegistReq.ReviewReqConentStore.builder()
-                .id(1)
-                .choiceYN("Y")
-                .build();
+        Review review = reviewService.createReview(musicId, regDate, evalYN, title, activityCategoryName, foodCategoryName, user);
 
-        ReviewRegistReq.ReviewReqConentStore foodStore2 = ReviewRegistReq.ReviewReqConentStore.builder()
-                .id(2)
-                .choiceYN("N")
-                .build();
+        //DB에 활동이 없어서 에러남
+        List<ReviewRegistReq.ReviewReqConentStore> activityStores =  reviewRegistReq.getActivity().getStore();
+//        reviewActivityService.createReviewActivity(review, activityStores);
 
+        List<ReviewRegistReq.ReviewReqConentStore> foodStores =  reviewRegistReq.getFood().getStore();
+        reviewFoodService.createReviewFood(review, foodStores);
 
-        stores.add(foodStore1);
-        stores.add(foodStore2);
-
-        ReviewRegistReq.ReviewReqContent food = ReviewRegistReq.ReviewReqContent.builder()
-                .category("찐빵")
-                .store(stores)
-                .build();
-
-        ReviewRegistReq.ReviewReqContent activity = ReviewRegistReq.ReviewReqContent.builder()
-                .category("수영")
-                .store(stores)
-                .build();
-
-        ReviewRegistReq save = ReviewRegistReq.builder()
-                .title("타이틀")
-                .musicId(1)
-                .playlist_url("플레이리스트")
-                .food(food)
-                .activity(activity)
-                .build();
+        reviewMusicService.createReviewMusic(review, musicId, playListUrl);
 
         return ResponseEntity.status(200).build();
     }
@@ -80,26 +80,15 @@ public class ReviewController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<ReviewGetRes> getReview(){
+    public ResponseEntity<ReviewGetRes> getReview(@ApiIgnore Authentication authentication){
 
-        List<ReviewGetResContent> contents = new ArrayList<>();
+        HelloStrangerUserDetails userDetails = (HelloStrangerUserDetails)authentication.getDetails();
+        User user = userDetails.getUser();
 
-        // auth로 가져오기
-        for(int i = 1; i < 5; i++){
-            ReviewGetResContent content = ReviewGetResContent.builder()
-                    .reviewId(i)
-                    .title("제목"+i)
-                    .regDate("2022:09:15")
-                    .musicCategory("Waves")
-                    .foodCategory("떡볶이")
-                    .activityCategory("호캉스")
-                    .build();
-
-            contents.add(content);
-        }
+        List<ReviewGetResContent> reviews = reviewService.getReviews(user);
 
         ReviewGetRes res = ReviewGetRes.builder()
-                .contents(contents)
+                .contents(reviews)
                 .build();
 
         return ResponseEntity.status(200).body(res);

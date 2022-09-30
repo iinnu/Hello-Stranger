@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity,Integer> {
-    //TODO 반경검색하기
     String query = "SELECT *,(6371*ACOS(COS(RADIANS(:latitude))*COS(RADIANS(a.activity_latitude))*COS(RADIANS(a.activity_longitude)-RADIANS(:longitude))\n" +
             "+SIN(RADIANS(:latitude))*SIN(RADIANS(a.activity_latitude)))) AS distance from activity a where a.activity_category like :category\n" +
             "HAVING distance < :distance ;";

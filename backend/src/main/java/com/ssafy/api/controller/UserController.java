@@ -85,44 +85,7 @@ public class UserController {
             @ApiResponse(code = 200, message = "성공"),
     })
     public ResponseEntity<UserChoiceGetRes> getUserChoice(){
-        UserChoiceGetResMusic music = UserChoiceGetResMusic.builder()
-                .musicId(1)
-                .musicName("Waves")
-                .musicArtist("Paige")
-                .musicImgUrl("https://firebasestorage.googleapis.com/v0/b/viewdle-b6bf5.appspot.com/o/ch%40ssafy.com_profile?alt=media&token=e0584d41-eced-40bb-b79d-e395f1203855")
-                .build();
-
-        UserChoiceGetResFood food = UserChoiceGetResFood.builder()
-                .foodCategory("떡볶이")
-                .foodImgUrl("https://firebasestorage.googleapis.com/v0/b/viewdle-b6bf5.appspot.com/o/ch%40ssafy.com_profile?alt=media&token=e0584d41-eced-40bb-b79d-e395f1203855")
-                .build();
-
-        UserChoiceGetResActivity activity = UserChoiceGetResActivity.builder()
-                .activityCategory("호캉스")
-                .activityImgUrl("https://firebasestorage.googleapis.com/v0/b/viewdle-b6bf5.appspot.com/o/ch%40ssafy.com_profile?alt=media&token=e0584d41-eced-40bb-b79d-e395f1203855")
-                .build();
-
-
-        List<UserChoiceGetResMusic> musicList = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
-            musicList.add(music);
-        }
-
-        List<UserChoiceGetResFood> foodList = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
-            foodList.add(food);
-        }
-
-        List<UserChoiceGetResActivity> activityList = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
-            activityList.add(activity);
-        }
-
-        UserChoiceGetRes res = UserChoiceGetRes.builder()
-                .music(musicList)
-                .food(foodList)
-                .activity(activityList)
-                .build();
+        UserChoiceGetRes res = userService.getUserChoiceList();
         return ResponseEntity.status(200).body(res);
     }
 
@@ -140,7 +103,7 @@ public class UserController {
         try {
             userId = userService.getUser(categoryChoiceReq.getUserEmail());
         } catch(Exception e){
-            return ResponseEntity.status(601).body(BaseResponseBody.of(911, "유효하지 않은 사용자입니다."));
+            return ResponseEntity.status(911).body(BaseResponseBody.of(911, "유효하지 않은 사용자입니다."));
         }
 
         System.out.println(userId);

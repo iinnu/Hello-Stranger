@@ -2,6 +2,7 @@ package com.ssafy.db.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Entity
 @Getter
+@ToString
 @Table(name = "activity_category")
 public class ActivityCategory {
 

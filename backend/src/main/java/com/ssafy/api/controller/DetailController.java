@@ -79,26 +79,7 @@ public class DetailController {
     })
     public ResponseEntity<DetailInfo> getDetailFood(@PathVariable int foodId){
 
-        ArrayList<String> review = new ArrayList<>();
-        review.add("리뷰1");
-        review.add("리뷰2");
-
-        DetailInfo res = DetailInfo.builder()
-                .id(1)
-                .address("address")
-                .category("category")
-                .choiceYN("Y")
-                .latitude(33.3333)
-                .longitude(123.3333)
-                .name("name")
-                .time("time")
-                .rating("3.5")
-                .imgUrl("이미지url")
-                .review(review)
-                .tel("전화번호")
-                .desc("설명")
-                .build();
-
+        DetailInfo res = detailService.getFood(foodId);
         return ResponseEntity.status(200).body(res);
     }
 

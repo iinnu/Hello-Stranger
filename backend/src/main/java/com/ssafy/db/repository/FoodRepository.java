@@ -19,4 +19,6 @@ public interface FoodRepository extends JpaRepository<Food,Integer> {
     //@Query(value = "delete from feedback f where f.video_seq = :videoSeq", nativeQuery = true)
     @Query(value =  query, nativeQuery = true)
     public List<Food> findFoodByDistance(@Param("distance")double distance, @Param("latitude")double latitude , @Param("longitude") double longitude, @Param("category")String category);
+
+    Food findByFoodId(int foodId);
 }

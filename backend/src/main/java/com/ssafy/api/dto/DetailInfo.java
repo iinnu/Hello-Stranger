@@ -18,7 +18,7 @@ public class DetailInfo{
 
     String rating;
     String imgUrl;
-    List<String> review;
+    String[] review;
     String tel;
     String desc;
     String choiceYN;

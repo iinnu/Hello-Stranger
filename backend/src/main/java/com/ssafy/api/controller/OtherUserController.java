@@ -26,9 +26,9 @@ public class OtherUserController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<List<SelectOtherUserGetRes>> getOtherUserSelect(){
-        List<SelectOtherUserGetRes> res = new ArrayList<>();
-        for(int i=0;i<5;i++){
+    public ResponseEntity<List<SelectGetRes>> getOtherUserSelect(){
+        List<SelectGetRes> res = new ArrayList<>();
+        for(int i=0;i<1;i++){
             SelectInfo food = SelectInfo.builder()
                     .id(i)
                     .address("food_address"+i)

@@ -7,6 +7,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import HomeIcon from '@mui/icons-material/Home';
 import CustomModal from 'components/common/CustomModal';
 import MenuItem from './MenuItem';
+import MenuDrawer from './Drawer/MenuDrawer';
 
 const list = [
   { icon: <QueueMusicIcon />, label: '음악' },
@@ -14,27 +15,23 @@ const list = [
   { icon: <SportsTennisIcon />, label: '활동' },
 ];
 
-const drawer = [
-  '음악 플레이리스트',
-  '음식 가게 목록',
-  '활동 가게 목록',
-  '일정 저장',
-];
-
 export default function Menu() {
   const navigate = useNavigate();
   const [menu, setMenu] = useState(-1);
   const [modal, setModal] = useState(false);
 
+  // 왼쪽 메뉴
   const handleClickMenu = (index) => {
     if (menu === index) setMenu(-1);
     else setMenu(index);
   };
 
+  // 오른쪽 메뉴 - 홈으로
   const handleClickHome = useCallback(() => {
     setModal(true);
   }, []);
 
+  // 모달창
   const handleConfirm = useCallback(() => {
     navigate('/main');
   }, []);
@@ -69,7 +66,7 @@ export default function Menu() {
           onClick={handleClickHome}
         />
       </div>
-      <div className="recommend-result-map__drawer">{drawer[menu]}</div>
+      {menu !== -1 && <MenuDrawer menu={menu} />}
       <CustomModal
         open={modal}
         handleConfirm={handleConfirm}

@@ -16,4 +16,6 @@ public interface ActivityRepository extends JpaRepository<Activity,Integer> {
     //@Query(value = "delete from feedback f where f.video_seq = :videoSeq", nativeQuery = true)
     @Query(value =  query, nativeQuery = true)
     public List<Activity> findActivityByDistance(@Param("distance")double distance, @Param("latitude")double latitude ,@Param("longitude") double longitude, @Param("category")String category);
+
+    Activity findByActivityId(int activityId);
 }

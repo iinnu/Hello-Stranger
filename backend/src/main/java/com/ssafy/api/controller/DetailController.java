@@ -3,11 +3,14 @@ package com.ssafy.api.controller;
 import com.ssafy.api.dto.DetailInfo;
 import com.ssafy.api.dto.SelectInfo;
 import com.ssafy.api.request.DetailRatingRegistReq;
+import com.ssafy.api.response.BaseResponseBody;
 import com.ssafy.api.response.SelectGetRes;
+import com.ssafy.api.service.DetailService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,9 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/api/detail")
 public class DetailController {
+
+    @Autowired
+    DetailService detailService;
 
     @GetMapping()
     @ApiOperation(value = "유저 선택 결과 반환", notes = "유저가 선택했던 음악,음식,활동과 해당 장소 정보 리스트를 반환한다.")
@@ -59,33 +65,14 @@ public class DetailController {
     @ApiOperation(value = "유저 활동 상세 조회", notes = "유저가 활동 가게 확인")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
+            @ApiResponse(code = 931, message = "DB에 없는 값"),
     })
-    public ResponseEntity<DetailInfo> getDetailActivity(@PathVariable int activityId){
-
-        ArrayList<String> review = new ArrayList<>();
-        review.add("리뷰1");
-        review.add("리뷰2");
-
-        DetailInfo res = DetailInfo.builder()
-                .id(1)
-                .address("address")
-                .category("category")
-                .choiceYN("Y")
-                .latitude(33.3333)
-                .longitude(123.3333)
-                .name("name")
-                .time("time")
-                .rating("3.5")
-                .imgUrl("이미지url")
-                .review(review)
-                .tel("전화번호")
-                .desc("설명")
-                .build();
-
+    public ResponseEntity<? extends DetailInfo> getDetailActivity(@PathVariable int activityId){
+        DetailInfo res = detailService.getActivity(activityId);
         return ResponseEntity.status(200).body(res);
     }
 
-    @GetMapping("activity/{foodId}")
+    @GetMapping("food/{foodId}")
     @ApiOperation(value = "유저 활동 상세 조회", notes = "유저가 활동 가게 확인")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),

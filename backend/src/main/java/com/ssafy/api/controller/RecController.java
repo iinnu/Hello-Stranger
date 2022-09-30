@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,9 +33,10 @@ public class RecController {
     public ResponseEntity<? extends BaseResponseBody> registResultCategory(@RequestBody CategoryChoiceReq resultCategory){
         //TODO 결과저장 컨트롤러
         if(resultCategory!=null){
+            recService.registResultCategory(resultCategory);
             return ResponseEntity.status(200).body(BaseResponseBody.of(200,"결과 전달 성공"));
         }
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200,"결과 null값 전달"));
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200,"결과 전달 성공"));
     }
 
     @GetMapping("/food/{latitude}/{longitude}/{distance}/{key}")
@@ -44,7 +44,7 @@ public class RecController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    //TODO 음식추천 컨트롤러
+
     public ResponseEntity<List<FoodRecGetRes>> getFoodRec(@PathVariable Map<String,String> request){
         int key = Integer.parseInt(request.get("key"));
         int distance = Integer.parseInt(request.get("distance"));
@@ -69,7 +69,6 @@ public class RecController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    //TODO 활동추천 컨트롤러
     public ResponseEntity<List<ActivityRecGetRes>> getActivityRec(@PathVariable Map<String,String> request){
         int key = Integer.parseInt(request.get("key"));
         int distance = Integer.parseInt(request.get("distance"));

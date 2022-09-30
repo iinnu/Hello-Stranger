@@ -1,15 +1,15 @@
 package com.ssafy.api.service;
 
 import com.ssafy.api.dto.BaseInfo;
+import com.ssafy.api.dto.CategoryLikeYN;
+import com.ssafy.api.dto.IdLikeYN;
+import com.ssafy.api.request.CategoryChoiceReq;
 import com.ssafy.api.response.ActivityRecGetRes;
 import com.ssafy.api.response.FoodRecGetRes;
 import com.ssafy.api.response.MusicRecGetRes;
-import com.ssafy.db.entity.Activity;
-import com.ssafy.db.entity.Food;
-import com.ssafy.db.entity.Music;
+import com.ssafy.db.entity.*;
 import com.ssafy.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,6 +30,12 @@ public class RecServiceImpl implements RecService{
     @Autowired
     FoodRepository foodRepository;
 
+    @Autowired
+    ActivityUserRepository activityUserRepository;
+    @Autowired
+    FoodUserRepository foodUserRepository;
+    @Autowired
+    MusicUserRepository musicUserRepository;
     @Override
     public List<MusicRecGetRes> getMusicRec(int key) {
         //TODO 시큐리티 적용
@@ -55,7 +61,7 @@ public class RecServiceImpl implements RecService{
     @Override
     public List<ActivityRecGetRes> getActivityRec(int key, double distance, double latitude, double longitude) {
         List<ActivityRecGetRes> res = new ArrayList<>();
-        //TODO userId 등록, 구분자 등록
+        //TODO userId 등록
         int userId = 1;
         int recNum = 6;
         int start = recNum*key;
@@ -87,7 +93,7 @@ public class RecServiceImpl implements RecService{
         int userId = 1;
         int recNum = 6;
         int start = recNum*key;
-
+        //TODO userId 등록
         String [] foodRecs = foodRecRepository.findByUserId(userId).getFood().split(" ");
         for(int i=start; i<start+recNum; i++){
             List<Food> stores = foodRepository.findFoodByDistance(distance,latitude,longitude,foodRecs[i]);
@@ -108,4 +114,45 @@ public class RecServiceImpl implements RecService{
         }
         return res;
     }
+    public void registResultCategory(CategoryChoiceReq req){
+        List<ActivityUser> activityUserList = new ArrayList<>();
+        List<FoodUser> foodUserList = new ArrayList<>();
+        List<MusicUser> musicUserList = new ArrayList<>();
+        int userId = 1;
+        List<IdLikeYN> music = req.getMusic();
+        for(IdLikeYN like : music) {
+            MusicUser musicUser = MusicUser.builder()
+                    .userId(userId)
+                    .musicId(like.getId())
+                    .likeYN(like.getLikeYN())
+                    .build();
+            musicUserList.add(musicUser);
+        }
+
+        List<CategoryLikeYN> food = req.getFood();
+        for(CategoryLikeYN like : food){
+            FoodUser foodUser = FoodUser.builder()
+                    .userId(userId)
+                    .foodName(like.getCategory())
+                    .likeYN(like.getLikeYN())
+                    .build();
+            foodUserList.add(foodUser);
+        }
+
+
+        List<CategoryLikeYN> activity = req.getActivity();
+        for(CategoryLikeYN like : activity) {
+            ActivityUser activityUser = ActivityUser.builder()
+                    .userId(userId)
+                    .activityName(like.getCategory())
+                    .likeYN(like.getLikeYN())
+                    .build();
+            activityUserList.add(activityUser);
+        }
+
+        musicUserRepository.saveAll(musicUserList);
+        foodUserRepository.saveAll(foodUserList);
+        activityUserRepository.saveAll(activityUserList);
+    }
+
 }

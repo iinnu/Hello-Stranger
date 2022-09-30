@@ -1,5 +1,6 @@
 package com.ssafy.api.service;
 
+import com.ssafy.api.request.CategoryChoiceReq;
 import com.ssafy.api.response.ActivityRecGetRes;
 import com.ssafy.api.response.FoodRecGetRes;
 import com.ssafy.api.response.MusicRecGetRes;
@@ -11,4 +12,6 @@ public interface RecService {
     List<MusicRecGetRes> getMusicRec(int key);
     List<ActivityRecGetRes> getActivityRec(int key, double distance, double latitude, double longitude );
     List<FoodRecGetRes> getFoodRec(int key, double distance, double latitude, double longitude);
+
+    public void registResultCategory(CategoryChoiceReq req);
 }

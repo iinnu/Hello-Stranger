@@ -27,7 +27,7 @@ public class OtherUserController {
     })
     public ResponseEntity<List<SelectGetRes>> getOtherUserSelect(){
         List<SelectGetRes> res = new ArrayList<>();
-        for(int i=0;i<5;i++){
+        for(int i=0;i<1;i++){
             SelectInfo food = SelectInfo.builder()
                     .id(i)
                     .address("food_address"+i)

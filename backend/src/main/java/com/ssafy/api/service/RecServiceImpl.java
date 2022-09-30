@@ -37,9 +37,9 @@ public class RecServiceImpl implements RecService{
     @Autowired
     MusicUserRepository musicUserRepository;
     @Override
-    public List<MusicRecGetRes> getMusicRec(int key) {
-        //TODO 시큐리티 적용
-        int userId=1;
+    public List<MusicRecGetRes> getMusicRec(int key, User user) {
+
+        int userId=user.getUserId();
         int recNum = 10;
         int start = recNum*key;
 
@@ -59,10 +59,10 @@ public class RecServiceImpl implements RecService{
     }
 
     @Override
-    public List<ActivityRecGetRes> getActivityRec(int key, double distance, double latitude, double longitude) {
+    public List<ActivityRecGetRes> getActivityRec(int key, double distance, double latitude, double longitude, User user) {
         List<ActivityRecGetRes> res = new ArrayList<>();
-        //TODO userId 등록
-        int userId = 1;
+
+        int userId = user.getUserId();
         int recNum = 6;
         int start = recNum*key;
 
@@ -88,12 +88,11 @@ public class RecServiceImpl implements RecService{
     }
 
     @Override
-    public List<FoodRecGetRes> getFoodRec(int key, double distance, double latitude, double longitude) {
+    public List<FoodRecGetRes> getFoodRec(int key, double distance, double latitude, double longitude, User user) {
         List<FoodRecGetRes> res = new ArrayList<>();
-        int userId = 1;
+        int userId = user.getUserId();
         int recNum = 6;
         int start = recNum*key;
-        //TODO userId 등록
         String [] foodRecs = foodRecRepository.findByUserId(userId).getFood().split(" ");
         for(int i=start; i<start+recNum; i++){
             List<Food> stores = foodRepository.findFoodByDistance(distance,latitude,longitude,foodRecs[i]);
@@ -114,11 +113,11 @@ public class RecServiceImpl implements RecService{
         }
         return res;
     }
-    public void registResultCategory(CategoryChoiceReq req){
+    public void registResultCategory(CategoryChoiceReq req, User user){
         List<ActivityUser> activityUserList = new ArrayList<>();
         List<FoodUser> foodUserList = new ArrayList<>();
         List<MusicUser> musicUserList = new ArrayList<>();
-        int userId = 1;
+        int userId = user.getUserId();
         List<IdLikeYN> music = req.getMusic();
         for(IdLikeYN like : music) {
             MusicUser musicUser = MusicUser.builder()

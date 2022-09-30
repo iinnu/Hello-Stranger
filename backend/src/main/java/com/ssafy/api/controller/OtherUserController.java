@@ -2,6 +2,7 @@ package com.ssafy.api.controller;
 
 import com.ssafy.api.dto.SelectInfo;
 import com.ssafy.api.response.SelectGetRes;
+import com.ssafy.api.response.SelectOtherUserGetRes;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,6 +19,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/otheruser")
 public class OtherUserController {
+
+    //TODO 다른유저선택 한명만 보내주기
     @GetMapping()
     @ApiOperation(value = "타 유저 선택 결과 반환", notes = "타 유저가 선택했던 음악,음식,활동과 해당 장소 정보 리스트를 반환한다.")
     @ApiResponses({
@@ -25,7 +28,7 @@ public class OtherUserController {
     })
     public ResponseEntity<List<SelectGetRes>> getOtherUserSelect(){
         List<SelectGetRes> res = new ArrayList<>();
-        for(int i=0;i<5;i++){
+        for(int i=0;i<1;i++){
             SelectInfo food = SelectInfo.builder()
                     .id(i)
                     .address("food_address"+i)
@@ -46,8 +49,9 @@ public class OtherUserController {
                     .name("activity_name"+i)
                     .time("activity_time"+i)
                     .build();
-            SelectGetRes userSelect = SelectGetRes.builder().playlistUrl("url"+i).food(food).activity(activity).build();
-            res.add(userSelect);
+            SelectOtherUserGetRes selectOtherUserGetRes = SelectOtherUserGetRes.builder().playlistUrl("url"+i).food(food).activity(activity).build();
+
+            res.add(selectOtherUserGetRes);
         }
         return ResponseEntity.status(200).body(res);
     }

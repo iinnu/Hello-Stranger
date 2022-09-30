@@ -1,6 +1,7 @@
 package com.ssafy.db.entity;
 
 
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
@@ -9,12 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Setter
+@Getter
 @Table(name = "activity")
 public class Activity {
     @Id
     @Column(name = "activity_id")
     int activityId;
+
+    @Column(name = "activity_name")
+    String activityName;
 
     @Column(name = "activity_category")
     String activityCategory;

@@ -18,6 +18,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/otheruser")
 public class OtherUserController {
+
+    //TODO 다른유저선택 한명만 보내주기
     @GetMapping()
     @ApiOperation(value = "타 유저 선택 결과 반환", notes = "타 유저가 선택했던 음악,음식,활동과 해당 장소 정보 리스트를 반환한다.")
     @ApiResponses({

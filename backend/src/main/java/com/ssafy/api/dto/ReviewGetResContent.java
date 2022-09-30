@@ -1,5 +1,7 @@
 package com.ssafy.api.dto;
 
+import com.ssafy.db.entity.ActivityCategory;
+import com.ssafy.db.entity.FoodCategory;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,7 +11,7 @@ public class ReviewGetResContent {
     int reviewId;
     String title;
     String regDate;
-    String musicCategory;
-    String foodCategory;
-    String activityCategory;
+    int musicId;
+    String foodCategoryName;
+    String activityCategoryName;
 }

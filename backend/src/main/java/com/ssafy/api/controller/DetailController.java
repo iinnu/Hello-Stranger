@@ -6,6 +6,9 @@ import com.ssafy.api.request.DetailRatingRegistReq;
 import com.ssafy.api.response.BaseResponseBody;
 import com.ssafy.api.response.SelectGetRes;
 import com.ssafy.api.service.DetailService;
+import com.ssafy.api.service.ReviewMusicService;
+import com.ssafy.api.service.ReviewService;
+import com.ssafy.db.entity.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -19,11 +22,17 @@ import java.util.List;
 
 @Api(value = "상세조회 API", tags = {"Detail"})
 @RestController
-@RequestMapping("/api/detail")
+@RequestMapping("/api/detail/{reviewId}")
 public class DetailController {
 
     @Autowired
     DetailService detailService;
+
+    @Autowired
+    ReviewService reviewService;
+
+    @Autowired
+    ReviewMusicService reviewMusicService;
 
     @GetMapping()
     @ApiOperation(value = "유저 선택 결과 반환", notes = "유저가 선택했던 음악,음식,활동과 해당 장소 정보 리스트를 반환한다.")
@@ -32,65 +41,78 @@ public class DetailController {
     })
     public ResponseEntity<SelectGetRes> getDetailSelect(@PathVariable int reviewId){
 
-        SelectInfo food_Y = SelectInfo.builder()
-                .id(1)
-                .address("food_address")
-                .category("food_category")
+        Review review = reviewService.getReview(reviewId);
+
+//        Activity choiceActivity = reviewService.getChoiceActivityIdByReviewId(reviewId);
+//        List<Activity> activity = reviewService.getNoChoiceActivityIdsByReviewId(reviewId);
+//
+//        SelectInfo choiceActivityInfo = SelectInfo.builder()
+//                .id(choiceActivity.getActivityId())
+//                .category(choiceActivity.getActivityCategory())
+//                .name(choiceActivity.getActivityName())
+//                .address(choiceActivity.getActivityAddress())
+//                .latitude(choiceActivity.getActivityLatitude())
+//                .longitude(choiceActivity.getActivityLongitude())
+//                .time(choiceActivity.getActivityTime())
+//                .ChoiceYN("Y")
+//                .build();
+//
+//        List<SelectInfo> noChoiceActivityInfos = new ArrayList<>();
+//
+//        for(int i = 0; i < activity.size(); i++){
+//            SelectInfo tempActivityInfo = SelectInfo.builder()
+//                    .id(activity.get(i).getActivityId())
+//                    .category(activity.get(i).getActivityCategory())
+//                    .name(activity.get(i).getActivityName())
+//                    .address(activity.get(i).getActivityAddress())
+//                    .latitude(activity.get(i).getActivityLatitude())
+//                    .longitude(activity.get(i).getActivityLongitude())
+//                    .time(activity.get(i).getActivityTime())
+//                    .ChoiceYN("N")
+//                    .build();
+//            noChoiceActivityInfos.add(tempActivityInfo);
+//        }
+
+        Food choiceFood = reviewService.getChoicefoodIdByReviewId(reviewId);
+        List<Food> food = reviewService.getNoChoicefoodIdsByReviewId(reviewId);
+
+        SelectInfo choicefoodInfo = SelectInfo.builder()
+                .id(choiceFood.getFoodId())
+                .category(choiceFood.getFoodCategory())
+                .name(choiceFood.getFoodName())
+                .address(choiceFood.getFoodAddress())
+                .latitude(choiceFood.getFoodLatitude())
+                .longitude(choiceFood.getFoodLongitude())
+                .time(choiceFood.getFoodTime())
                 .ChoiceYN("Y")
-                .latitude(33.3333)
-                .longitude(123.3333)
-                .name("food_name")
-                .time("food_time")
                 .build();
 
-        SelectInfo food_N = SelectInfo.builder()
-                .id(1)
-                .address("food_address")
-                .category("food_category")
-                .ChoiceYN("N")
-                .latitude(33.3333)
-                .longitude(123.3333)
-                .name("food_name")
-                .time("food_time")
-                .build();
+        List<SelectInfo> noChoiceFoodInfos = new ArrayList<>();
 
-        SelectInfo activity_Y = SelectInfo.builder()
-                .id(1)
-                .address("activity_address")
-                .category("activity_category")
-                .ChoiceYN("Y")
-                .latitude(33.3333)
-                .longitude(123.3333)
-                .name("activity_name")
-                .time("activity_time")
-                .build();
+        for(int i = 0; i < food.size(); i++){
+            SelectInfo tempFoodInfo = SelectInfo.builder()
+                    .id(food.get(i).getFoodId())
+                    .category(food.get(i).getFoodCategory())
+                    .name(food.get(i).getFoodName())
+                    .address(food.get(i).getFoodAddress())
+                    .latitude(food.get(i).getFoodLatitude())
+                    .longitude(food.get(i).getFoodLongitude())
+                    .time(food.get(i).getFoodTime())
+                    .ChoiceYN("N")
+                    .build();
+            noChoiceFoodInfos.add(tempFoodInfo);
+        }
 
-        SelectInfo activity_N = SelectInfo.builder()
-                .id(1)
-                .address("activity_address")
-                .category("activity_category")
-                .ChoiceYN("N")
-                .latitude(33.3333)
-                .longitude(123.3333)
-                .name("activity_name")
-                .time("activity_time")
-                .build();
-
-        List<SelectInfo> food = new ArrayList<>();
-        food.add(food_N);
-        food.add(food_N);
-
-        List<SelectInfo> activity = new ArrayList<>();
-        activity.add(activity_N);
-        activity.add(activity_N);
+//        Music music = reviewService.getMusicIdByReviewId(reviewId);
+        String playListUrl = reviewMusicService.getReviewMusicPlayListUrlByReview(review);
 
         SelectGetRes res = SelectGetRes.builder()
-                .title("제목")
-                .playlistUrl("url")
-                .choice_food(food_Y)
-                .choice_activity(activity_Y)
-                .food(food)
-                .activity(activity)
+                .title(review.getTitle())
+                .playlistUrl(playListUrl)
+                .choice_food(choicefoodInfo)
+//                .choice_activity(choiceActivityInfo)
+                .food(noChoiceFoodInfos)
+//                .activity(noChoiceActivityInfos)
                 .build();
 
         return ResponseEntity.status(200).body(res);

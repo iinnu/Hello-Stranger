@@ -42,4 +42,3 @@ public class User {
         this.userImg = img;
     }
 }
-

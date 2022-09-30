@@ -27,31 +27,27 @@ public class DetailServiceImpl implements DetailService{
     public DetailInfo getActivity(int activityId) {
         Activity activity = activityRepository.findByActivityId(activityId);
 
-//        String review = activity.getActivityReview();
-//        List<String> reviewList = new ArrayList<>();
-//        review = review.replace(".||.", " ");
-//        StringTokenizer st = new StringTokenizer(review, "[>*}");
-//        while(st.hasMoreTokens()){
-//            reviewList.add(st.nextToken());
-//        }
-//
-//        // review를 파싱해서 다시 담아줘야하므로 mapping interface 사용하지 않음
-//        DetailInfo detailInfo = DetailInfo.builder()
-//                .id(activity.getActivityId())
-//                .name(activity.getActivityName())
-//                .category(activity.getActivityCategory())
-//                .address(activity.getActivityAddress())
-//                .latitude(activity.getActivityLatitude())
-//                .longitude(activity.getActivityLongitude())
-//                .rating(activity.getActivityRating())
-//                .imgUrl(activity.getActivityImgUrl())
-//                .review(reviewList)
-//                .tel(activity.getActivityTel())
-//                .time(activity.getActivityTime())
-//                .desc(activity.getActivityDesc().replace(".||.", " "))
-//                .build();
-//        return detailInfo;
-        return null;
+        String review = activity.getActivityReview();
+        review = review.replace(".||.", " ").replace("\"\"", "\"");
+        review = review.startsWith("\"") ? review.substring(1, review.length()-1) : review;
+        String[] results = review.split("\\[>\\*}");
+
+        // review를 파싱해서 다시 담아줘야하므로 mapping interface 사용하지 않음
+        DetailInfo detailInfo = DetailInfo.builder()
+                .id(activity.getActivityId())
+                .name(activity.getActivityName())
+                .category(activity.getActivityCategory())
+                .address(activity.getActivityAddress())
+                .latitude(activity.getActivityLatitude())
+                .longitude(activity.getActivityLongitude())
+                .rating(activity.getActivityRating())
+                .imgUrl(activity.getActivityImgUrl())
+                .review(results)
+                .tel(activity.getActivityTel().replace("||", " "))
+                .time(activity.getActivityTime())
+                .desc(activity.getActivityDesc().replace(".||.", " ").replace("||", " ").replace("\r", ""))
+                .build();
+        return detailInfo;
     }
 
     @Override

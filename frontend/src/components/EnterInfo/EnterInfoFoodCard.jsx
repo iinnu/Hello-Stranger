@@ -9,6 +9,51 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 
 
 export default function RecipeReviewCard({ id, title, image }) {
+  function foodDataInputGood(){
+    if (!localStorage.foodDataInput){
+    const foodDataInput = [
+      {
+      "category": title,
+      "likeYN" : "Y"
+      }
+    ]
+    localStorage.setItem("foodDataInput", JSON.stringify(foodDataInput))
+   }
+  else if (localStorage.foodDataInput){
+    const existData = JSON.parse(localStorage.getItem("foodDataInput"))
+    const foodDataInput = 
+      {
+      "category": title,
+      "likeYN" : "Y"
+      }
+      existData.push(foodDataInput)
+      localStorage.setItem("foodDataInput", JSON.stringify(existData))
+   }
+  }
+  
+
+  function foodDataInputBad(){
+    if (!localStorage.foodDataInput){
+      const foodDataInput = [
+        {
+        "category": title,
+        "likeYN" : "N"
+        }
+      ]
+      localStorage.setItem("foodDataInput", JSON.stringify(foodDataInput))
+     }
+    else if (localStorage.foodDataInput){
+      const existData = JSON.parse(localStorage.getItem("foodDataInput"))
+      const foodDataInput = 
+        {
+        "category": title,
+        "likeYN" : "N"
+        }
+        existData.push(foodDataInput)
+        localStorage.setItem("foodDataInput", JSON.stringify(existData))
+     }
+    //  localStorage.setItem("foodDataInput", [])
+  }
   return (
     <Card className="UserInput__Food__Item__Area__Card">
       <CardHeader
@@ -29,8 +74,8 @@ export default function RecipeReviewCard({ id, title, image }) {
           hihi
         </div>
         <div>
-          <Button><ThumbUpOffAltIcon/></Button>
-          <Button><ThumbDownOffAltIcon/></Button>
+        <Button onClick={foodDataInputGood}><ThumbUpOffAltIcon/></Button>
+        <Button onClick={foodDataInputBad}><ThumbDownOffAltIcon/></Button>
         </div>
       </div>
     </Card>

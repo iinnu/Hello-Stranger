@@ -29,7 +29,7 @@ const EnterInfoGuideForth = () => {
           userInputInfo.food=res.data.food
           userInputInfo.activity=res.data.activity
           userInputInfo.music=res.data.music
-          console.log(userInputInfo)
+          console.log(res)
           localStorage.setItem("userInputInfoFood", JSON.stringify(userInputInfo.food))
           localStorage.setItem("userInputInfoActivity", JSON.stringify(userInputInfo.activity))
           localStorage.setItem("userInputInfoMusic", JSON.stringify(userInputInfo.music))

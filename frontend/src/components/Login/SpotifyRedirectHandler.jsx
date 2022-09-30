@@ -29,7 +29,12 @@ export default function SpotifyRedirectHandler() {
 
         // 유저 정보를 성공적으로 얻었으면 로그인 요청
         if (info?.status === 200) {
-          const email = { idToken: info.data.email };
+          const email = { 
+            'email': info.data.email,
+            'img': 'https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927',
+            'nickname': info.data.display_name,
+            }
+          console.log(email) 
           const login = await getApiInstance().post('/user', email);
 
           // 로그인 성공 시, 첫 로그인 여부에 따라서 페이지 다르게 이동

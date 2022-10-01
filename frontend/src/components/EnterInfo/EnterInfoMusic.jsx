@@ -51,7 +51,7 @@ const EnterInfo = () => {
         <div className="UserInput">
             <div className='UserInput__Music__Title'>
                 <h2>어떤 음악을</h2>
-                <h2>자주 들으시나요?</h2>
+                <h2 className='UserInput__Music__Title__Bottom'>자주 들으시나요?</h2>
             </div>
               <div className='UserInput__Music__Item'>
                 <Slider {...settings}>

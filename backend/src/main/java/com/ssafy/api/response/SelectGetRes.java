@@ -4,11 +4,15 @@ import com.ssafy.api.dto.SelectInfo;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
 public class SelectGetRes {
     String title;
     String playlistUrl;
-    SelectInfo food;
-    SelectInfo activity;
+    SelectInfo choice_food;
+    SelectInfo choice_activity;
+    List<SelectInfo> food;
+    List<SelectInfo> activity;
 }

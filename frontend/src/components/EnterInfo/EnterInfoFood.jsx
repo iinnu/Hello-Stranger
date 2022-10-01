@@ -57,7 +57,7 @@ const EnterInfo = () => {
         <div className="UserInput">
             <div className='UserInput__Food__Title'>
                 <h2>어떤 음식을</h2>
-                <h2>자주 드시나요?</h2>
+                <h2 className='UserInput__Food__Title__Bottom'>자주 드시나요?</h2>
             </div>
             <div className='UserInput__Food__Item'>
               <Slider {...settings}>

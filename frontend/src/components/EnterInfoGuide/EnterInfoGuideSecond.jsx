@@ -4,6 +4,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import styled from '@emotion/styled';
 import Container from 'components/common/Container';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -31,8 +32,9 @@ const EnterInfoGuideSecond = () => {
             <div className='Guide__Second__Title'>
                 <h2>세가지 카테고리에</h2>
                 <h2>대한 선택지를</h2>
-                <h2>드릴거에요!!!!</h2>
+                <h2 className='Guide__Second__Title__Bottom'>드릴거에요!!!!</h2>
             </div>
+            <div className='Guide__First__Alarm'><ErrorOutlineIcon color="error" fontSize="small"/><p>튜토리얼 입니다!!</p></div>
             <div className="Guide__Second__Item">
                 <img className="Guide__Second__Item__Mascot" src={mascot} alt="Mascot" />
             </div>

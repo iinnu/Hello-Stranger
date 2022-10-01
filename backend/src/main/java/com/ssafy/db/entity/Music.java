@@ -1,5 +1,6 @@
 package com.ssafy.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 
@@ -30,11 +31,9 @@ music_feature varchar(300)
     String musicArtist;
     @Column(name = "music_img_url")
     String musicImgUrl;
+
+    @JsonIgnore
     @Column(name = "music_feature")
     String musicFeature;
-
-
-
-
 
 }

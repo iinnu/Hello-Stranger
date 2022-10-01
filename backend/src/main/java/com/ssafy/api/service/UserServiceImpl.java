@@ -3,19 +3,16 @@ package com.ssafy.api.service;
 import com.ssafy.api.dto.CategoryLikeYN;
 import com.ssafy.api.dto.IdLikeYN;
 import com.ssafy.api.dto.UserChoiceGetResActivity;
+import com.ssafy.api.dto.UserChoiceGetResFood;
 import com.ssafy.api.request.CategoryChoiceReq;
 import com.ssafy.api.response.UserChoiceGetRes;
 import com.ssafy.db.entity.*;
-import com.ssafy.db.mapping.ActivityCategoryMapping;
-import com.ssafy.db.mapping.FoodCategoryMapping;
-import com.ssafy.db.mapping.MusicMapping;
 import com.ssafy.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -94,15 +91,32 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserChoiceGetRes getUserChoiceList() {
 
-        List<MusicMapping> musicMap = musicRepository.getCategoryList();
-        List<FoodCategoryMapping> foodCategoryMap = foodCategoryRepository.getCategoryList();
-        List<ActivityCategoryMapping> activityCategoryMap = activityCategoryRepository.getCategoryList();
+        List<Music> musicCategory = musicRepository.getCategoryList();
+        List<FoodCategory> foodCategory = foodCategoryRepository.getCategoryList();
+        List<ActivityCategory> activityCategory = activityCategoryRepository.getCategoryList();
 
-        // error
+        List<UserChoiceGetResFood> userChoiceGetResFoods = new ArrayList<>();
+        for(FoodCategory category : foodCategory){
+            UserChoiceGetResFood userChoiceFood = UserChoiceGetResFood.builder()
+                    .foodCategory(category.getCategoryName())
+                    .foodImgUrl(category.getCategoryImgUrl())
+                    .build();
+            userChoiceGetResFoods.add(userChoiceFood);
+        }
+
+        List<UserChoiceGetResActivity> userChoiceGetResActivities = new ArrayList<>();
+        for(ActivityCategory category : activityCategory){
+            UserChoiceGetResActivity userChoiceActivity = UserChoiceGetResActivity.builder()
+                    .activityCategory(category.getCategoryName())
+                    .activityImgUrl(category.getCategoryImgUrl())
+                    .build();
+            userChoiceGetResActivities.add(userChoiceActivity);
+        }
+
         UserChoiceGetRes userChoiceGetRes = UserChoiceGetRes.builder()
-                .music(musicMap)
-                .food(foodCategoryMap)
-                .activity(activityCategoryMap)
+                .music(musicCategory)
+                .food(userChoiceGetResFoods)
+                .activity(userChoiceGetResActivities)
                 .build();
 
         return userChoiceGetRes;

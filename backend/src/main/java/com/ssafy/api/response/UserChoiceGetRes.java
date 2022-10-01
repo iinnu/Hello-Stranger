@@ -1,9 +1,8 @@
 package com.ssafy.api.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ssafy.db.mapping.ActivityCategoryMapping;
-import com.ssafy.db.mapping.FoodCategoryMapping;
-import com.ssafy.db.mapping.MusicMapping;
+import com.ssafy.api.dto.UserChoiceGetResActivity;
+import com.ssafy.api.dto.UserChoiceGetResFood;
+import com.ssafy.db.entity.Music;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,8 +12,7 @@ import java.util.List;
 @Builder
 public class UserChoiceGetRes {
 
-    @JsonIgnore
-    List<MusicMapping> music;
-    List<FoodCategoryMapping> food;
-    List<ActivityCategoryMapping> activity;
+    List<Music> music;
+    List<UserChoiceGetResFood> food;
+    List<UserChoiceGetResActivity> activity;
 }

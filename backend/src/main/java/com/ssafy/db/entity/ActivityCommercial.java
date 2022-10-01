@@ -9,16 +9,16 @@ import javax.persistence.Table;
 
 @Entity
 @Getter
-@Table(name = "food_commercial")
-public class FoodCommercial {
+@Table(name = "activity_commercial")
+public class ActivityCommercial {
     @Id
-    @Column()
+    @Column
     int id;
     @Column
-    String category;
+    String activitySigungu;
+    @Column
+    String activityCategory;
     @Column
     int cnt;
-    @Column
-    String foodDong;
 
 }

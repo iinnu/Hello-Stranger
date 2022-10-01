@@ -1,18 +1,20 @@
 package com.ssafy.api.response;
 
+import com.ssafy.api.dto.BaseInfo;
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Builder
 public class CommercialAreaGetRes {
-    String addressName;
-    String leastFoodCategory;
-    int leastFoodCount;
     String mostFoodCategory;
-    int mostFoodCount;
-    String leastActivityCategory;
-    int leastActivityCount;
+    String leastFoodCategory;
     String mostActivityCategory;
-    int mostActivityCount;
+    String leastActivityCategory;
+    private List<BaseInfo> mostFoodStore;
+    private List<BaseInfo> leastFoodStore;
+    private List<BaseInfo> mostActivityStore;
+    private List<BaseInfo> leastActivityStore;
 }

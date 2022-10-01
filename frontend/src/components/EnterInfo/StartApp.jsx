@@ -46,7 +46,7 @@ const StartApp = () => {
           <div className="UserInput">
             <div className='UserInput__Start__Title'>
                 <h2>이제 새로운 하루를</h2>
-                <h2>보내러 가볼까요?</h2>
+                <h2 className='UserInput__Start__Title__Bottom'>보내러 가볼까요?</h2>
             </div>
             <div className='UserInput__Start__Item'>
                 <img className="UserInput__Start__Item__Mascot" src={mascot} alt="Mascot" />

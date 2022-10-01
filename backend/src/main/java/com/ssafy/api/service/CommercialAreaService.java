@@ -6,5 +6,5 @@ import com.ssafy.api.response.CommercialAreaGetRes;
 
 @Service
 public interface CommercialAreaService {
-    public CommercialAreaGetRes getCommercialArea(String userAddress);
+    public CommercialAreaGetRes getCommercialArea(String userAddress, double latitude, double longitude);
 }

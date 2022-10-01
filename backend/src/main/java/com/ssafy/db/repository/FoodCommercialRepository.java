@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FoodCommercialRepository extends JpaRepository<FoodCommercial,Integer> {
-    
+    public FoodCommercial findTopByFoodDongOrderByCnt(String foodDong);
 }

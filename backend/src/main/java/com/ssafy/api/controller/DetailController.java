@@ -6,8 +6,10 @@ import com.ssafy.api.request.DetailRatingRegistReq;
 import com.ssafy.api.response.BaseResponseBody;
 import com.ssafy.api.response.SelectGetRes;
 import com.ssafy.api.service.DetailService;
+import com.ssafy.api.service.RecService;
 import com.ssafy.api.service.ReviewMusicService;
 import com.ssafy.api.service.ReviewService;
+import com.ssafy.common.auth.HelloStrangerUserDetails;
 import com.ssafy.db.entity.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,7 +17,9 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,9 @@ public class DetailController {
     @Autowired
     ReviewMusicService reviewMusicService;
 
+    @Autowired
+    RecService recService;
+
     @GetMapping()
     @ApiOperation(value = "유저 선택 결과 반환", notes = "유저가 선택했던 음악,음식,활동과 해당 장소 정보 리스트를 반환한다.")
     @ApiResponses({
@@ -42,7 +49,6 @@ public class DetailController {
     public ResponseEntity<SelectGetRes> getDetailSelect(@PathVariable int reviewId){
 
         Review review = reviewService.getReview(reviewId);
-
 //        Activity choiceActivity = reviewService.getChoiceActivityIdByReviewId(reviewId);
 //        List<Activity> activity = reviewService.getNoChoiceActivityIdsByReviewId(reviewId);
 //
@@ -150,13 +156,17 @@ public class DetailController {
         return ResponseEntity.status(200).body(res);
     }
 
-    @PostMapping("detail/{reviewId}/rating")
+    @PostMapping("rating")
     @ApiOperation(value = "유저 상세조회에서 카데고리 평가", notes = "카테고리 평가")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<Void> registDetailRating(@PathVariable int reviewId, @RequestBody DetailRatingRegistReq detailRatingResigtReq){
-        // 저장
+    public ResponseEntity<Void> registDetailRating(@PathVariable int reviewId, @ApiIgnore Authentication authentication, @RequestBody DetailRatingRegistReq detailRatingResgistReq){
+        HelloStrangerUserDetails userDetails = (HelloStrangerUserDetails)authentication.getDetails();
+        User user = userDetails.getUser();
+
+        recService.registDetailRating(detailRatingResgistReq, user);
+        reviewService.updateReviewEvalYNbyReviewId(reviewId);
 
         return ResponseEntity.status(200).build();
     }

@@ -121,4 +121,10 @@ public class ReviewServiceImpl implements ReviewService{
         return music;
     }
 
+    @Override
+    public void updateReviewEvalYNbyReviewId(int reviewId) {
+        Review review = reviewRepository.getReviewByReviewId(reviewId);
+        reviewRepository.save(review.withEvalYN("Y"));
+    }
+
 }

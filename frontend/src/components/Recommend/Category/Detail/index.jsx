@@ -63,7 +63,7 @@ const list = [
 
 export default function CategoryDetail({ current, open, handleClose }) {
   const [isList, setIsList] = useState(true);
-  const {dispatch} = useRecommendContext();
+  const { dispatch } = useRecommendContext();
   const { index } = useRecommendContext().state.indexReducer;
 
   const ToggleDrawer = () => {
@@ -78,8 +78,7 @@ export default function CategoryDetail({ current, open, handleClose }) {
   useEffect(() => {
     const actionCreator = index === 1 ? foodStore : activityStore;
     dispatch(actionCreator(list[0]));
-  }, [])
-  
+  }, []);
 
   return (
     <CustomDrawer anchor="right" open={open} onClose={ToggleDrawer}>
@@ -91,8 +90,10 @@ export default function CategoryDetail({ current, open, handleClose }) {
         handleClick={handleClick}
         handleClose={ToggleDrawer}
       />
-      {isList && <CategoryStoreList list={list} handleClick={handleClick} />}
-      {!isList && <StoreMap list={list} />}
+      {isList && (
+        <CategoryStoreList list={current.store} handleClick={handleClick} />
+      )}
+      {!isList && <StoreMap list={current.store} />}
     </CustomDrawer>
   );
 }

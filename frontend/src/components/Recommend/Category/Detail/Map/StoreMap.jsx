@@ -16,10 +16,7 @@ export default function StoreMap({ list }) {
   const type = useMemo(() => (index === 1 ? 'food' : 'activity'), [index]);
   const { store } = useRecommendContext().state[type + 'Reducer'];
   const { dispatch } = useRecommendContext();
-  const markers = useMemo(
-    () => getMarkers(list, type, store),
-    [list, type, store]
-  );
+  const markers = useMemo(() => getMarkers(list, store), [list, store]);
 
   const toggleDrawer = (state) => (event) => {
     if (
@@ -38,22 +35,18 @@ export default function StoreMap({ list }) {
     dispatch(actionCreator(item));
   }
 
-  function getMarkers(list, type, store) {
-    const id = type + 'Id';
-    const lat = type + 'Latitude';
-    const lng = type + 'Longitude';
-
+  function getMarkers(list, store) {
     return list.map((item) => {
-      const pos = { lat: item[lat], lng: item[lng] };
-      const src = store[id] === item[id] ? marker_active : marker;
+      const pos = { lat: item.latitude, lng: item.longitude };
+      const src = store.id === item.id ? marker_active : marker;
       const size =
-        store[id] === item[id]
+        store.id === item.id
           ? { width: 45, height: 45 }
           : { width: 32, height: 32 };
 
       return (
         <MapMarker
-          key={`${item[lat]}-${item[lng]}`}
+          key={`${item.latitude}-${item.longitude}`}
           position={pos}
           image={{ src: src, size: size }}
           clickable={true}
@@ -68,8 +61,8 @@ export default function StoreMap({ list }) {
       <Map
         className="category-store-map__map"
         center={{
-          lat: store[type + 'Latitude'],
-          lng: store[type + 'Longitude'],
+          lat: store.latitude,
+          lng: store.longitude,
         }}
         level={3}
       >
@@ -79,13 +72,8 @@ export default function StoreMap({ list }) {
         />
         {markers}
       </Map>
-      <StoreInfo type={type} store={store} toggleDrawer={toggleDrawer} />
-      <StoreInfoDrawer
-        open={open}
-        type={type}
-        store={store}
-        toggleDrawer={toggleDrawer}
-      />
+      <StoreInfo store={store} toggleDrawer={toggleDrawer} />
+      <StoreInfoDrawer open={open} store={store} toggleDrawer={toggleDrawer} />
     </div>
   );
 }

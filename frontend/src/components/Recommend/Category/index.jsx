@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useRecommendContext } from '../Context/RecommendContext';
+import { setFoodChoice } from '../Context/foodReducer';
+import { setActivityChoice } from '../Context/activityReducer';
 import IconButton from '@mui/material/IconButton';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
@@ -7,7 +9,6 @@ import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import sample from 'assets/images/sample.jpg';
 import sample2 from 'assets/images/sample2.png';
-import { setFoodChoice } from '../Context/foodReducer';
 
 export default function CategoryCard({ item, category, handleOpenDetail }) {
   const { state, dispatch } = useRecommendContext();
@@ -16,22 +17,24 @@ export default function CategoryCard({ item, category, handleOpenDetail }) {
   const [dislike, setDislike] = useState(item.choiceYN === 2 ? true : false);
 
   const handleLike = () => {
+    const actionCreator = index === 1 ? setFoodChoice : setActivityChoice;
+
     if (dislike) setDislike(false);
-    if (like) {
-      if (index === 1) dispatch(setFoodChoice(category, 0));
-    } else {
-      if (index === 1) dispatch(setFoodChoice(category, 1));
-    }
+
+    if (like) dispatch(actionCreator(category, 0));
+    else dispatch(actionCreator(category, 1));
+
     setLike(!like);
   };
 
   const handleDislike = () => {
+    const actionCreator = index === 1 ? setFoodChoice : setActivityChoice;
+
     if (like) setLike(false);
-    if (dislike) {
-      if (index === 1) dispatch(setFoodChoice(category, 0));
-    } else {
-      if (index === 1) dispatch(setFoodChoice(category, 2));
-    }
+
+    if (dislike) dispatch(actionCreator(category, 0));
+    else dispatch(actionCreator(category, 2));
+
     setDislike(!dislike);
   };
 

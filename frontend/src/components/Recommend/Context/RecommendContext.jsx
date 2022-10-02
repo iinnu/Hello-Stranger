@@ -24,7 +24,6 @@ const initialState = {
     refresh: 0,
     list: [],
     current: {},
-    likeYN: [],
   },
 };
 

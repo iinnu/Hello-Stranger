@@ -7,6 +7,9 @@ import com.ssafy.api.response.BaseResponseBody;
 import com.ssafy.api.response.CommercialAreaGetRes;
 import com.ssafy.api.response.UserChoiceGetRes;
 import com.ssafy.api.response.UserRegistRes;
+import com.ssafy.api.service.ActivityRecService;
+import com.ssafy.api.service.FoodRecService;
+import com.ssafy.api.service.MusicRecService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.auth.HelloStrangerUserDetails;
 import com.ssafy.common.util.JwtTokenUtil;
@@ -36,6 +39,15 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MusicRecService musicRecService;
+
+    @Autowired
+    FoodRecService foodRecService;
+
+    @Autowired
+    ActivityRecService activityRecService;
+
     @PostMapping()
     @ApiOperation(value = "소셜로그인, 소셜회원가입", notes = "저장되지 않은 이메일 일 시에는 회원가입과 로그인을 시키고, 저장된 이메일 일 시에는 로그인 시켜준다")
     @ApiResponses({
@@ -54,6 +66,10 @@ public class UserController {
         // 없으면 회원가입
         if(user == null){
             user = userService.createUser(email, nickname, img);
+            // 추천 테이블 생성
+            musicRecService.createMusicRec(user.getUserId());
+            activityRecService.createActivityRec(user.getUserId());
+            foodRecService.createFoodRec(user.getUserId());
         }
 
         // accessToken 반환
@@ -176,6 +192,28 @@ public class UserController {
 
         try {
             exePython(command);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        URL foodRecommend = getClass().getClassLoader().getResource("food_contents_based.py");
+        String[] command2 = new String[2];
+        command2[0] = "python";
+        command2[1] = new File(foodRecommend.getPath()).getAbsolutePath();
+
+        try {
+            exePython(command2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        URL musicRecommend = getClass().getClassLoader().getResource("music_contents_based.py");
+        String[] command3 = new String[2];
+        command3[0] = "python";
+        command3[1] = new File(musicRecommend.getPath()).getAbsolutePath();
+
+        try {
+            exePython(command3);
         } catch (Exception e) {
             e.printStackTrace();
         }

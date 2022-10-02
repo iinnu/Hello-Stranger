@@ -21,4 +21,7 @@ public class FoodRec {
     @Column(name = "food")
     String food;
 
+    public FoodRec(int userId) {
+        this.userId = userId;
+    }
 }

@@ -19,7 +19,6 @@ const initialState = {
     refresh: 0,
     list: [],
     current: {},
-    likeYN: [],
   },
   activityReducer: {
     refresh: 0,

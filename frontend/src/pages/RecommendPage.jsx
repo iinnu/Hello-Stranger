@@ -12,8 +12,14 @@ import {
   setCurrentMusic,
   setMusicList,
 } from 'components/Recommend/Context/musicReducer';
-import { setFoodList } from 'components/Recommend/Context/foodReducer';
-import { setActivityList } from 'components/Recommend/Context/activityReducer';
+import {
+  setCurrentFood,
+  setFoodList,
+} from 'components/Recommend/Context/foodReducer';
+import {
+  setActivityList,
+  setCurrentActivity,
+} from 'components/Recommend/Context/activityReducer';
 
 const titles = [
   ['어떤 음악을', '듣고 싶으신가요?'],
@@ -191,11 +197,13 @@ function RecommendPage() {
   // food
   useEffect(() => {
     dispatch(setFoodList(food));
+    dispatch(setCurrentFood(food[0]));
   }, [food]);
 
   // activity
   useEffect(() => {
     dispatch(setActivityList(activity));
+    dispatch(setCurrentActivity(activity[0]));
   }, [activity]);
 
   return (

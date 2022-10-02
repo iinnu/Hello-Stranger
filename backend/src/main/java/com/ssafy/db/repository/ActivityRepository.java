@@ -18,4 +18,13 @@ public interface ActivityRepository extends JpaRepository<Activity,Integer> {
     public List<Activity> findActivityByDistance(@Param("distance")double distance, @Param("latitude")double latitude ,@Param("longitude") double longitude, @Param("category")String category);
 
     Activity findByActivityId(int activityId);
+
+    String queryForCommercial = "select *,(6371*ACOS(COS(RADIANS(:latitude))*COS(RADIANS(f.activity_latitude))*COS(RADIANS(f.activity_longitude)-RADIANS(:longitude))+SIN(RADIANS(:latitude))*SIN(RADIANS(f.activity_latitude)))) AS distance \n" +
+            "from activity f\n" +
+            "where f.activity_dong like :address \n" +
+            "and f.activity_category like (select fc.activity_category from activity_commercial fc where fc.activity_dong like :address order by fc.cnt :sortKey limit 1)\n" +
+            "order by distance limit 0,5;";
+
+    @Query(value = queryForCommercial, nativeQuery = true)
+    public List<Activity> findActivityByCommercial(@Param("address") String address, @Param("latitude") double latitude, @Param("longitude") double longitude, @Param("sortKey") String sortKey);
 }

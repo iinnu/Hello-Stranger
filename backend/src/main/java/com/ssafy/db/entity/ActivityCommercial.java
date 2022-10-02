@@ -12,13 +12,13 @@ import javax.persistence.Table;
 @Table(name = "activity_commercial")
 public class ActivityCommercial {
     @Id
-    @Column
+    @Column(name = "activity_id")
     int id;
-    @Column
+    @Column(name = "activity_sigungu")
     String activitySigungu;
-    @Column
+    @Column(name = "activity_category")
     String activityCategory;
-    @Column
+    @Column(name = "cnt")
     int cnt;
 
 }

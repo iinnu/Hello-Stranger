@@ -8,6 +8,7 @@ import StarIcon from '@mui/icons-material/Star';
 import sample from 'assets/images/sample.jpg';
 import OpenClosed from './OpenClosed';
 import StoreReview from './StoreReview';
+import StoreListItems from './StoreListItems';
 import {getOtherUserActivity, getOtherUserFood} from 'api/other'
 import { useEffect, useState } from 'react';
 
@@ -48,22 +49,8 @@ const CustomLabel = styled(Button)`
   }
 `;
 
-export default function StoreInfoDrawer({ open, toggleDrawer, data, isHistory, type }) {
-  const [detailData, setDetailData] = useState({}) 
-  useEffect(()=>{
-    async function getData(){
-      if(type === 'food'){
-        const data = await getOtherUserFood(data.id)
-        setDetailData(data)
-      } else {
-        const data = await getOtherUserActivity(data.id)
-        setDetailData(data)
-      }
-    }
-    getData()
-  }
-
-  ,[])
+export default function StoreInfoDrawer({ open, toggleDrawer, detailData, leftData, isHistory, type }) {
+  useEffect(()=>console.log('storeinfodrawer', leftData))
   return (
     <CustomSwipeableDrawer
       anchor="bottom"
@@ -114,14 +101,18 @@ export default function StoreInfoDrawer({ open, toggleDrawer, data, isHistory, t
           {detailData.review && detailData.review.map((e)=><StoreReview content={e}/>)}
           {!detailData.review && <p>리뷰 정보가 없습니다.</p>}
         </StyledBox>
+        {isHistory &&
         <StyledBox className="store-info-drawer__review">
-          <div className="review__title">
-            <div>리뷰</div>
-            <div>*네이버 지도 리뷰</div>
-          </div>
-          {detailData.review && detailData.review.map((e)=><StoreReview content={e}/>)}
-          {!detailData.review && <p>리뷰 정보가 없습니다.</p>}
+          {leftData !== [] && (
+            <>
+            <div className="review__title">
+              <div>{leftData[0]?.foodCategory}</div>
+            </div>
+            {leftData.map((e)=><StoreListItems content={e}/>)}
+            </>
+          )} 
         </StyledBox>
+        }
       </div>
     </CustomSwipeableDrawer>
   );

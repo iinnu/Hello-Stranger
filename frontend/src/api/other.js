@@ -2,9 +2,9 @@ import { getApiInstance } from 'api';
 const api = getApiInstance();
 
 export function getOtherUser() {
-    api.get(`/otheruser`)
+    return api.get(`/otheruser`)
     .then((res)=>{
-        console.log('otheruser', res)
+        console.log('otheruser', res.data)
         return res.data
     })
     .catch((err)=>{
@@ -12,9 +12,9 @@ export function getOtherUser() {
     });
 }
 export function getOtherUserActivity({activityId}) {
-    api.get(`/detail/activity/${activityId}`)
+    return api.get(`/detail/activity/${activityId}`)
     .then((res)=>{
-        console.log('otheruser activity', res)
+        console.log('타유저 선택 활동 상세보기', res.data)
         return res.data
     })
     .catch((err)=>{
@@ -22,9 +22,9 @@ export function getOtherUserActivity({activityId}) {
     });
 }
 export function getOtherUserFood({foodId}) {
-    api.get(`/detail/food/${foodId}`)
+    return api.get(`/detail/food/${foodId}`)
     .then((res)=>{
-        console.log('otheruser food', res)
+        console.log('타유저 선택 음식 상세보기', res.data)
         return res.data
     })
     .catch((err)=>{

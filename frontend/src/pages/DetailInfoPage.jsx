@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 
 import ButtonGroups from "components/DetailInfo/ButtonGroups";
 import FeedbackModal from "components/DetailInfo/Modal";
-import StoreInfoDrawer from "components/DetailInfo/Drawer/StoreInfoDrawer2";
+import StoreInfoDrawer from "components/DetailInfo/Drawer/DetailStoreInfoDrawer";
 import MusicDrawer from 'components/DetailInfo/MusicDrawer'
 import Container from "components/common/Container";
 import BottomNav from "components/common/BottomNav";
@@ -12,17 +12,24 @@ import DetailInfoTitle from "components/DetailInfo/Title";
 import Map from "components/DetailInfo/Map";
 
 // data api
-import {getOtherUser} from 'api/other'
+import {getOtherUser,getOtherUserActivity, getOtherUserFood} from 'api/other'
 import axios from 'axios'
 import "styles/DetailInfoPage/DetailInfoPage.scss";
-import { getUserDetail } from "api/history";
+import { getUserDetail, getUserActivity, getUserFood } from "api/history";
 import { useLocation } from "react-router-dom";
 
 export default function DetailInfoPage() {
   const location = useLocation()
   const pathName = location.pathname.split('/')[1];
+  const pathId = location.pathname.split('/')[2];
   const [currentPath, setCurrentPath] = useState('');
   const [userData, setUserData] = useState({})
+  const [detailData, setDetailData] = useState({})
+
+  const [leftData, setLeftData] = useState([])
+  const [leftFoodData, setLeftFoodData] = useState({})
+  const [leftActivityData, setLeftActivityData] = useState({})
+
   const [isHistory, setIsHistory] = useState(true)
   const [type, setType] = useState("");
   const [detailTitle, setDetailTitle] = useState('')
@@ -36,12 +43,14 @@ export default function DetailInfoPage() {
         setUserData(Data)
         setIsHistory(false)
       } else {
-        console.log('다시보기')
-        const Data = await getUserDetail()
+        console.log('다시보기', pathId)
+        const Data = await getUserDetail(pathId)
         setUserData(Data)
         setIsHistory(true)
         setDetailTitle(Data.title)
         setDetailDate(Data.activity.time)
+        setLeftFoodData(Data.food)
+        setLeftActivityData(Data.activity)
       }
     }
     getData()
@@ -75,19 +84,43 @@ export default function DetailInfoPage() {
     setOpenMusicDrawer(state);
   };
 
-  // 
-  function clickFood() {
+  async function clickFood() {
     setOpenDrawer(true);
     setType("food");
+    if(isHistory){
+      console.log('food, history')
+      const response = await getUserFood(userData.choice_food.foodId)
+      setDetailData(response)
+      setLeftData(leftFoodData)
+    } 
+    else {
+      console.log('food, other')
+      // const response = await getOtherUserFood(userData.food.id)
+      // setDetailData(response)
+      setDetailData(userData.food)
+    }
   }
-  function clickActivity() {
+  async function clickActivity() {
+
     setOpenDrawer(true);
     setType("activity");
+    if(isHistory){
+      console.log('activity, history')
+      const response = await getUserActivity(userData.choice_activity.activityId)
+      setDetailData(response)
+      setLeftData(leftActivityData)
+    } 
+    else {
+      console.log('activity, other')
+      // const response = await getOtherUserActivity(userData.activity.id)
+      // setDetailData(response)
+      setDetailData(userData.activity)
+
+    }
   }
   function clickMusic() {
     console.log('clickMusic')
     setOpenMusicDrawer(true);
-    // setType("historyActivity");
   }
 
   // modal
@@ -124,7 +157,8 @@ export default function DetailInfoPage() {
             <StoreInfoDrawer 
             open={openDrawer} 
             toggleDrawer={toggleDrawer} 
-            userData={userData} 
+            detailData={detailData} 
+            leftData={leftData}
             isHistory={isHistory}
             type={type}
             />

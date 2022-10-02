@@ -6,7 +6,6 @@ import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import SkateboardingIcon from "@mui/icons-material/Skateboarding";
 
 export default function DetailInfoButtonGroups({isHistory, clickFood, clickActivity, clickMusic}){
-
  return(
   <ButtonGroup
   className="detail-info__control"

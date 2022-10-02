@@ -2,11 +2,13 @@ import axios from 'axios';
 import { Buffer } from 'buffer';
 
 // 서버 요청 api
+// 이병헌 임시
 function getApiInstance() {
   const instance = axios.create({
     baseURL: process.env.REACT_APP_HOST,
     headers: {
       'Content-type': 'application/json',
+      // 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoaXRsYmhAbmF2ZXIuY29tIiwiaXNzIjoiaGVsbG9fc3RyYW5nZXIiLCJleHAiOjE2NjQ2NzAyNjMsImlhdCI6MTY2NDYyNzA2M30.rTrqD7Ie0uvMU6iqu0tQeo0j83hdBUsffdK63FWUyJYt4OIzSkExb0-_uDrxjJpxbLiOgdpfg7LlGdPfOxNkNg'
     },
   });
 

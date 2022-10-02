@@ -15,6 +15,7 @@ export default function HistoryScroll(){
             return
         } 
         else {
+            console.log('여기?')
             const data = await getUserHistory()
             setCardList([...cardList, ...data])
             setLoadedNum(loadedNum + data.length)
@@ -29,6 +30,7 @@ export default function HistoryScroll(){
         pageStart={0}
         loadMore={fetchItems}
         hasMore={hasMore}
+        initialLoad={true}
         loader={<CircularProgress className='history__list--loading'/>}
         useWindow={false}
         >

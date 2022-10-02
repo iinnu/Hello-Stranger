@@ -7,6 +7,10 @@
     &__Music{
         &__Title{
             height: 25%;
+            &__Bottom{
+                width:70%;
+                background: linear-gradient(to top, #fff9e0 50%, transparent 50%);
+            }
         }
         &__Title h2{
             margin: 5px;
@@ -27,6 +31,10 @@
     &__Food{
         &__Title{
             height: 25%;
+            &__Bottom{
+                width:70%;
+                background: linear-gradient(to top, #92b4ec 50%, transparent 50%);
+            }
         }
         &__Title h2{
             margin: 5px;
@@ -47,6 +55,10 @@
     &__Activity{
         &__Title{
             height: 25%;
+            &__Bottom{
+                width:70%;
+                background: linear-gradient(to top, #fff9e0 50%, transparent 50%);
+            }
         }
         &__Title h2{
             margin: 5px;

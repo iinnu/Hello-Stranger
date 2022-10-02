@@ -8,11 +8,9 @@ import java.util.List;
 
 @Data
 @Builder
-public class SelectGetRes {
+public class SelectOtherUserGetRes {
     String title;
     String playlistUrl;
-    SelectInfo choice_food;
-    SelectInfo choice_activity;
-    List<SelectInfo> food;
-    List<SelectInfo> activity;
+    SelectInfo food;
+    SelectInfo activity;
 }

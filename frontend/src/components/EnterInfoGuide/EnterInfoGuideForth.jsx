@@ -29,7 +29,7 @@ const EnterInfoGuideForth = () => {
           userInputInfo.food=res.data.food
           userInputInfo.activity=res.data.activity
           userInputInfo.music=res.data.music
-          console.log(userInputInfo)
+          console.log(res)
           localStorage.setItem("userInputInfoFood", JSON.stringify(userInputInfo.food))
           localStorage.setItem("userInputInfoActivity", JSON.stringify(userInputInfo.activity))
           localStorage.setItem("userInputInfoMusic", JSON.stringify(userInputInfo.music))
@@ -47,8 +47,7 @@ const EnterInfoGuideForth = () => {
             <div className='Guide__Forth__Title'>
                 <h2>회원님의 취향을 고려해서</h2>
                 <h2>새로운 일상을</h2>
-                <h2>제공해드릴게요!</h2>
-
+                <h2 className='Guide__Forth__Title__Bottom'>제공해드릴게요!</h2>
             </div>
             <div className="Guide__Forth__Item">
                 <img className="Guide__Forth__Item__Mascot" src={mascot} alt="Mascot" />

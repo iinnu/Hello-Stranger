@@ -1,6 +1,5 @@
 package com.ssafy.db.entity;
 
-import lombok.Data;
 import lombok.Getter;
 
 import javax.persistence.Column;
@@ -10,15 +9,16 @@ import javax.persistence.Table;
 
 @Entity
 @Getter
-@Table(name = "activity_recommend")
-public class ActivityRec {
+@Table(name = "food_recommend")
+public class FoodRec {
     @Id
-    @Column(name = "activity_recommend_id")
-    int activityRecommendId;
+    @Column(name = "food_recommend_id")
+    int foodRecommendId;
 
     @Column(name = "user_id")
     int userId;
 
-    @Column(name = "activity")
-    String activity;
+    @Column(name = "food")
+    String food;
+
 }

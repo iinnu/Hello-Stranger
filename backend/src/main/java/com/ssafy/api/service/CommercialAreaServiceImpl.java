@@ -10,10 +10,12 @@ import com.ssafy.db.repository.ActivityRepository;
 import com.ssafy.db.repository.FoodCommercialRepository;
 import com.ssafy.db.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class CommercialAreaServiceImpl implements CommercialAreaService{
 
     @Autowired

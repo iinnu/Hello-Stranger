@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "activity_commercial")
 public class ActivityCommercial {
     @Id
-    @Column(name = "activity_id")
+    @Column(name = "activity_category_id")
     int id;
     @Column(name = "activity_sigungu")
     String activitySigungu;

@@ -18,20 +18,16 @@ export default function RecipeReviewCard({ id, title, image }) {
   }
 
   function activityDataInputBad(){
-    const existData = [JSON.parse(localStorage.getItem("activityDataInput"))]
+    const existData = []
+    const existData2 = [JSON.stringify(existData)]
     const activityDataInput = {
       "category": title,
       "choiceYN" : "N"
     }
     console.log(existData.length)
-    if (existData < 1){
-      existData.push(activityDataInput)
-      localStorage.setItem("activityDataInput", JSON.stringify(existData))
-    }
-    if (existData.length >= 1){
-      existData.push(activityDataInput)
-      localStorage.setItem("activityDataInput", JSON.stringify(existData))
-    }
+    existData.push(activityDataInput)
+    localStorage.setItem("activityDataInput", JSON.stringify(existData))
+    
   }
   
   return (

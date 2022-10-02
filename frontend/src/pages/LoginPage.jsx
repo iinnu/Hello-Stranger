@@ -49,7 +49,7 @@ const LoginPage = ({ onSocial }) => {
     const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
     const redirect_uri = process.env.REACT_APP_SPOTIFY_REDIRECT_URI;
     const scope =
-      'streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state user-read-currently-playing';
+      'playlist-modify-public playlist-modify-private streaming user-read-email user-read-private user-library-read user-library-modify user-read-playback-state user-modify-playback-state user-read-currently-playing';
     const state = generateRandomString(16);
     const url = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&scope=${scope}&redirect_uri=${redirect_uri}&state=${state}`;
     window.location.href = url;

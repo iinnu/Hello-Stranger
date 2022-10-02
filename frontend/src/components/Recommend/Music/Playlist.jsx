@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { useRecommendContext } from '../Context/RecommendContext';
 import usePullToRefresh from 'hook/usePullToRefresh';
 import useSpotifyReady from 'hook/useSpotifyReady';
@@ -9,6 +10,7 @@ function Playlist() {
     usePullToRefresh();
   const { state } = useRecommendContext();
   const { list, current } = state.musicReducer;
+  const { pathname } = useLocation();
 
   // // set spotify access token
   // useEffect(() => {
@@ -85,13 +87,26 @@ function Playlist() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {list.map((item) => (
-          <MusicItem
-            key={item.musicID}
-            active={item.musicID === current.musicID ? true : false}
-            item={item}
-          />
-        ))}
+        {!pathname.includes('result') &&
+          list.map((item) => (
+            <MusicItem
+              key={item.musicID}
+              active={item.musicID === current.musicID ? true : false}
+              item={item}
+              result={false}
+            />
+          ))}
+        {pathname.includes('result') &&
+          list
+            .filter((item) => item.choiceYN !== 2)
+            .map((item) => (
+              <MusicItem
+                key={item.musicID}
+                active={item.musicID === current.musicID ? true : false}
+                item={item}
+                result={true}
+              />
+            ))}
       </div>
     </div>
   );

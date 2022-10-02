@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useRecommendContext } from '../Context/RecommendContext';
 import { setFoodChoice } from '../Context/foodReducer';
 import { setActivityChoice } from '../Context/activityReducer';
@@ -15,6 +16,7 @@ export default function CategoryCard({ item, category, handleOpenDetail }) {
   const { index } = state.indexReducer;
   const [like, setLike] = useState(item.choiceYN === 1 ? true : false);
   const [dislike, setDislike] = useState(item.choiceYN === 2 ? true : false);
+  const { pathname } = useLocation();
 
   const handleLike = () => {
     const actionCreator = index === 1 ? setFoodChoice : setActivityChoice;
@@ -49,16 +51,18 @@ export default function CategoryCard({ item, category, handleOpenDetail }) {
       <div className="category-card__category-desc">
         <div className="category-desc__inner">
           <span>{category}</span>
-          <div className="category-desc__like">
-            <IconButton onClick={handleLike}>
-              {!like && <ThumbUpOffAltIcon />}
-              {like && <ThumbUpAltIcon />}
-            </IconButton>
-            <IconButton onClick={handleDislike}>
-              {!dislike && <ThumbDownOffAltIcon />}
-              {dislike && <ThumbDownAltIcon />}
-            </IconButton>
-          </div>
+          {!pathname.includes('result') && (
+            <div className="category-desc__like">
+              <IconButton onClick={handleLike}>
+                {!like && <ThumbUpOffAltIcon />}
+                {like && <ThumbUpAltIcon />}
+              </IconButton>
+              <IconButton onClick={handleDislike}>
+                {!dislike && <ThumbDownOffAltIcon />}
+                {dislike && <ThumbDownAltIcon />}
+              </IconButton>
+            </div>
+          )}
         </div>
       </div>
     </div>

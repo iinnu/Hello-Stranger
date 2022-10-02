@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useRecommendContext } from '../Context/RecommendContext';
 import { setCurrentMusic, setMusicChoice } from '../Context/musicReducer';
 import { IconButton } from '@mui/material';
@@ -22,11 +21,10 @@ const CustomIconButton = styled(IconButton)`
   }
 `;
 
-function MusicItem({ active, item }) {
+function MusicItem({ active, item, result }) {
   const [like, setLike] = useState(item.choiceYN === 1 ? true : false);
   const [dislike, setDislike] = useState(item.choiceYN === 2 ? true : false);
   const { dispatch } = useRecommendContext();
-  const { pathname } = useLocation();
 
   const handleClickItem = () => {
     dispatch(setCurrentMusic(item));
@@ -57,7 +55,7 @@ function MusicItem({ active, item }) {
         <div className="item__title">{item.musicName}</div>
         <div className="item__artist">{item.musicArtist}</div>
       </div>
-      {!pathname.includes('result') && (
+      {!result && (
         <>
           <div className="item__like">
             <CustomIconButton

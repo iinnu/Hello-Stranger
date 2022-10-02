@@ -2,19 +2,18 @@ import axios from 'axios';
 import { Buffer } from 'buffer';
 
 // 서버 요청 api
-// 이병헌 임시
 function getApiInstance() {
   const instance = axios.create({
     baseURL: process.env.REACT_APP_HOST,
     headers: {
       'Content-type': 'application/json',
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoaXRsYmhAbmF2ZXIuY29tIiwiaXNzIjoiaGVsbG9fc3RyYW5nZXIiLCJleHAiOjE2NjQ3MjIwMjksImlhdCI6MTY2NDY3ODgyOX0.QE7qkeNkRKSIuIsYZwXjQoTRrT10F_tK4xVkvDUTa3OQ-iMcLzrdtz4-Bp0PiKVncaNWLncLtWO6e6tFKP-L4A'
     },
   });
 
   // 토큰이 있으면 헤더에 토큰 설정
   instance.interceptors.request.use(function (config) {
     const token = localStorage.getItem('token');
+    console.log('여기서 안걸리나?', token)
     if (token) {
       config.headers['Authorization'] = 'Bearer ' + token;
     }

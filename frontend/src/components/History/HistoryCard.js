@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 function HistoryCard({ data }) {
   const navigate = useNavigate();
   function openDetail() {
-    console.log(data.reviewId);
     navigate(`${data.reviewId}`);
   }
 

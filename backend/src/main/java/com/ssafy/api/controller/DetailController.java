@@ -26,7 +26,7 @@ import java.util.List;
 
 @Api(value = "상세조회 API", tags = {"Detail"})
 @RestController
-@RequestMapping("/api/detail/{reviewId}")
+@RequestMapping("/api/detail")
 public class DetailController {
 
     @Autowired
@@ -41,7 +41,7 @@ public class DetailController {
     @Autowired
     RecService recService;
 
-    @GetMapping()
+    @GetMapping("{reviewId}")
     @ApiOperation(value = "유저 선택 결과 반환", notes = "유저가 선택했던 음악,음식,활동과 해당 장소 정보 리스트를 반환한다.")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
@@ -156,7 +156,7 @@ public class DetailController {
         return ResponseEntity.status(200).body(res);
     }
 
-    @PostMapping("rating")
+    @PostMapping("{reviewId}/rating")
     @ApiOperation(value = "유저 상세조회에서 카데고리 평가", notes = "카테고리 평가")
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),

@@ -14,7 +14,6 @@ const initialState = {
     refresh: 0,
     list: [],
     current: {},
-    likeYN: [],
   },
   foodReducer: {
     refresh: 0,

@@ -21,4 +21,6 @@ public interface ReviewService {
     List<Food> getNoChoicefoodIdsByReviewId(int reviewId);
 
     Music getMusicIdByReviewId(int reviewId);
+
+    void updateReviewEvalYNbyReviewId(int reviewId);
 }

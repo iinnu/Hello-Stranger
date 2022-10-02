@@ -4,6 +4,7 @@ import com.ssafy.api.dto.BaseInfo;
 import com.ssafy.api.dto.CategoryLikeYN;
 import com.ssafy.api.dto.IdLikeYN;
 import com.ssafy.api.request.CategoryChoiceReq;
+import com.ssafy.api.request.DetailRatingRegistReq;
 import com.ssafy.api.response.ActivityRecGetRes;
 import com.ssafy.api.response.FoodRecGetRes;
 import com.ssafy.api.response.MusicRecGetRes;
@@ -152,6 +153,18 @@ public class RecServiceImpl implements RecService{
         musicUserRepository.saveAll(musicUserList);
         foodUserRepository.saveAll(foodUserList);
         activityUserRepository.saveAll(activityUserList);
+    }
+
+    @Override
+    public void registDetailRating(DetailRatingRegistReq detailRatingResgistReq, User user) {
+        MusicUser musicUser = new MusicUser(user.getUserId(), detailRatingResgistReq.getMusic().getId(), detailRatingResgistReq.getMusic().getLikeYN());
+        musicUserRepository.save(musicUser);
+
+        FoodUser foodUser = new FoodUser(user.getUserId(), detailRatingResgistReq.getFood().getCategory(), detailRatingResgistReq.getFood().getLikeYN());
+        foodUserRepository.save(foodUser);
+
+        ActivityUser activityUser = new ActivityUser(user.getUserId(), detailRatingResgistReq.getActivity().getCategory(), detailRatingResgistReq.getActivity().getLikeYN());
+        activityUserRepository.save(activityUser);
     }
 
 }

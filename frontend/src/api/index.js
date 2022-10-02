@@ -8,7 +8,7 @@ function getApiInstance() {
     baseURL: process.env.REACT_APP_HOST,
     headers: {
       'Content-type': 'application/json',
-      // 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoaXRsYmhAbmF2ZXIuY29tIiwiaXNzIjoiaGVsbG9fc3RyYW5nZXIiLCJleHAiOjE2NjQ2NzAyNjMsImlhdCI6MTY2NDYyNzA2M30.rTrqD7Ie0uvMU6iqu0tQeo0j83hdBUsffdK63FWUyJYt4OIzSkExb0-_uDrxjJpxbLiOgdpfg7LlGdPfOxNkNg'
+      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoaXRsYmhAbmF2ZXIuY29tIiwiaXNzIjoiaGVsbG9fc3RyYW5nZXIiLCJleHAiOjE2NjQ3MjIwMjksImlhdCI6MTY2NDY3ODgyOX0.QE7qkeNkRKSIuIsYZwXjQoTRrT10F_tK4xVkvDUTa3OQ-iMcLzrdtz4-Bp0PiKVncaNWLncLtWO6e6tFKP-L4A'
     },
   });
 

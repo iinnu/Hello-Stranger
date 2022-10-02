@@ -8,6 +8,24 @@ $padding-size: 15px;
   box-shadow: 5px 5px 8px -4px #9e9e9e;
 }
 
+@mixin custom-scrollbar {
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    padding-left: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $blue;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #85858524;
+  }
+}
+
 .recommend-result-title {
   position: absolute;
   z-index: 1000;
@@ -91,5 +109,16 @@ $padding-size: 15px;
     font-size: 1.2em;
     font-weight: 600;
     padding: 22px 20px 20px;
+  }
+
+  &__list-inner {
+    @include custom-scrollbar();
+
+    &__desc {
+      font-size: 0.8em;
+      color: gray;
+    }
+
+    padding: 0px 20px;
   }
 }

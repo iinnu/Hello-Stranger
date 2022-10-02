@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react';
+import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
 import { styled } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import MusicDrawer from './MusicDrawer';
-import FoodDrawer from './FoodDrawer';
-import ActivityDrawer from './ActivityDrawer';
+import Music from 'components/Recommend/Music';
+import StoreDrawer from './StoreDrawer';
 import PlanDrawer from './PlanDrawer';
 
 const drawer = [
@@ -13,13 +13,6 @@ const drawer = [
   '음식 가게 목록',
   '활동 가게 목록',
   '일정 저장',
-];
-
-const drawerContent = [
-  <MusicDrawer />,
-  <FoodDrawer />,
-  <ActivityDrawer />,
-  <PlanDrawer />,
 ];
 
 const backdrop = {
@@ -58,6 +51,7 @@ const CustomSwipeableDrawer = styled(SwipeableDrawer)`
 export default function MenuDrawer({ menu }) {
   const puller = useMemo(() => <Puller />, []);
   const [open, setOpen] = useState(false);
+  const { state } = useRecommendContext();
 
   // drawer
   const toggleDrawer = (state) => (event) => {
@@ -100,7 +94,10 @@ export default function MenuDrawer({ menu }) {
           {puller}
           <div className="drawer__inner">{drawer[menu]}</div>
         </div>
-        {menu !== -1 && drawerContent[menu]}
+        {menu === 0 && <Music />}
+        {menu === 1 && <StoreDrawer list={state.foodReducer.list} />}
+        {menu === 2 && <StoreDrawer list={state.activityReducer.list} />}
+        {menu === 3 && <PlanDrawer />}
       </CustomSwipeableDrawer>
     </>
   );

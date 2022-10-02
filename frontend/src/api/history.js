@@ -43,29 +43,28 @@ export function getUserFood(foodId){
     })
 }
 
-export function rateRecommendation({reviewId, rating}){
-    api.post(`detail/detail/${reviewId}/rating`,
+export function rateRecommendation({reviewId, activityCatergory, activityLike, foodCategory, foodLike, musicId, musicLike}){
+    console.log('api rateRecommendation', reviewId, activityCatergory, activityLike, foodCategory, foodLike, musicId, musicLike)
+    api.post(`detail/${reviewId}/rating`,
         {
-        rating,
-        //body내용, 아마 바뀔 듯
-        // "activity": {
-        //     "category": "string",
-        //     "choiceYN": "string"
-        // },
-        // "food": {
-        //     "category": "string",
-        //     "choiceYN": "string"
-        // },
-        // "music": {
-        //     "choiceYN": "string",
-        //     "id": 0
-        // },
+        "activity": {
+            "category": activityCatergory,
+            "choiceYN": activityLike
+        },
+        "food": {
+            "category": foodCategory,
+            "choiceYN": foodLike
+        },
+        "music": {
+            "choiceYN": musicLike,
+            "id": musicId
+        },
         }
     )
     .then((res)=> {
-        console.log(res)
+        console.log('평가 제대로 됨',res, reviewId, activityCatergory, activityLike, foodCategory, foodLike, musicId, musicLike)
     })
     .catch((err)=>{
-        console.error(err)
+        console.error('평가 제대로 안됨',err, reviewId, activityCatergory, activityLike, foodCategory, foodLike, musicId, musicLike)
     })
 }

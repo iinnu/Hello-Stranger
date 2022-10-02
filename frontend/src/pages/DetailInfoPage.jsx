@@ -16,7 +16,7 @@ import DetailInfoMap from "components/DetailInfo/Map";
 import {getOtherUser,getOtherUserActivity, getOtherUserFood} from 'api/other'
 import axios from 'axios'
 import "styles/DetailInfoPage/DetailInfoPage.scss";
-import { getUserDetail, getUserActivity, getUserFood } from "api/history";
+import { getUserDetail, getUserActivity, getUserFood, rateRecommendation } from "api/history";
 import { useLocation } from "react-router-dom";
 
 export default function DetailInfoPage() {
@@ -38,7 +38,8 @@ export default function DetailInfoPage() {
   const [currentStore, setCurrentStore] = useState({})
 
   function Map({currentStore}){
-    return (userData
+    const localStorageData = localStorage.getItem('storeData')
+    return (localStorageData
       ? <DetailInfoMap currentStore={currentStore}/>
       : null
     )
@@ -64,14 +65,28 @@ export default function DetailInfoPage() {
         localStorage.setItem('storeLocationData', JSON.stringify(storeLocationData))
         localStorage.setItem('storeData', JSON.stringify(Data))
       } else {
-        console.log('다시보기', pathId)
+        console.log('다시보기')
         const Data = await getUserDetail(pathId)
         setUserData(Data)
         setIsHistory(true)
         setDetailTitle(Data.title)
-        setDetailDate(Data.activity.time)
         setLeftFoodData(Data.food)
         setLeftActivityData(Data.activity)
+        console.log('여기서??')
+        const storeLocationData = {
+          food: {
+            lat: Data.choice_food.latitude,
+            lng: Data.choice_food.longitude
+          },
+          activity: {
+            lat: Data.choice_activity.latitude,
+            lng: Data.choice_activity.longitude
+          },
+        }
+        console.log('아님 여기서???')
+        console.log('다시보기', Data, 'data.title', Data.title, 'Daata', Data.food, Data.activity, storeLocationData)
+        localStorage.setItem('storeLocationData', JSON.stringify(storeLocationData))
+        localStorage.setItem('storeData', JSON.stringify(Data))
       }
     }
     getData()
@@ -109,7 +124,7 @@ export default function DetailInfoPage() {
     setOpenDrawer(true);
     setType("food");
     if(isHistory){
-      const response = await getUserFood(userData.choice_food.foodId)
+      const response = await getUserFood(userData.choice_food.id)
       const pos = {
         lat: userData.choice_food.latitude,
         lng: userData.choice_food.longitude
@@ -117,7 +132,7 @@ export default function DetailInfoPage() {
       setDetailData(response)
       setCurrentStore(pos)
       setLeftData(leftFoodData)
-      console.log('food, history')
+      console.log('food, history',pos, currentStore, userData.choice_food.id, response, leftFoodData)
     } 
     else {
       const pos = {
@@ -126,15 +141,14 @@ export default function DetailInfoPage() {
       }
       setCurrentStore(pos)
       setDetailData(userData.food)
-      console.log('food, other', pos, currentStore)
+      console.log('food, other', pos, currentStore, userData.food.id)
     }
   }
   async function clickActivity() {
-
     setOpenDrawer(true);
     setType("activity");
     if(isHistory){
-      const response = await getUserActivity(userData.choice_activity.activityId)
+      const response = await getUserActivity(userData.choice_activity.id)
       const pos = {
         lat: userData.choice_activity.latitude,
         lng: userData.choice_activity.longitude
@@ -142,7 +156,7 @@ export default function DetailInfoPage() {
       setDetailData(response)
       setCurrentStore(pos)
       setLeftData(leftActivityData)
-      console.log('activity, history')
+      console.log('activity, history', response, leftActivityData)
     } 
     else {
       const pos = {
@@ -166,13 +180,16 @@ export default function DetailInfoPage() {
     setOpenModal(true);
   };
   const handleCloseModal = () => setOpenModal(false);
-
-
-  const current = JSON.parse(localStorage.getItem("current"));
+  const modalData = {
+    reviewId: parseInt(pathId), 
+    activityCatergory: userData?.choice_activity?.category, 
+    foodCategory:  userData?.choice_food?.category, 
+    musicId: 0, 
+  }
 
   return (
     <>
-      <FeedbackModal open={openModal} onClose={handleCloseModal} />
+      <FeedbackModal open={openModal} onClose={handleCloseModal} modalData={modalData}/>
       <Container>
         <div className="detail-info">
           <ButtonGroups

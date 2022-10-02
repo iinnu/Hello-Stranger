@@ -20,4 +20,7 @@ public class MusicRec {
     @Column(name = "music")
     String music;
 
+    public MusicRec(int userId) {
+        this.userId = userId;
+    }
 }

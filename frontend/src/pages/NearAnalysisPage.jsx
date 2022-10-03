@@ -7,8 +7,29 @@ import DetailInfoList from "components/NearAnalysis/Drawer/TabPanel";
 import ButtonGroups from "components/NearAnalysis/ButtonGroups";
 import NearDrawer from "components/NearAnalysis/Drawer/NearDrawer";
 import Map from "components/NearAnalysis/Map";
+import { useMainState } from 'components/Main/MainContext';
+import useGeocoder from 'hook/useGeocoder';
+
+
 import "styles/NearAnalysisPage/NearAnalysisPage.scss";
 function NearAnalysisPage() {
+  // const { location } = useMainState();
+  const location =  JSON.parse(localStorage.getItem('current'))
+  const { coord2Address } = useGeocoder();
+
+  const callback = (result) => {
+    const address =
+      result[0].address.address_name ?? result[0].road_address?.address_name ;
+    localStorage.setItem('address', result[0].address.address_name)
+  };
+
+  useEffect(() => {
+    if (location) {
+      console.log('location 들어오지?', location)
+      coord2Address(location, callback);
+    }
+  }, [location]);
+
   const [openDrawer, setOpenDrawer] = useState(false);
   const toggleDrawer = (state) => (event) => {
     if (

@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useRecommendContext } from '../Context/RecommendContext';
-import { setCurrentMusic } from '../Context/musicReducer';
+import { setCurrentMusic, setMusicChoice } from '../Context/musicReducer';
 import { IconButton } from '@mui/material';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
@@ -21,11 +20,11 @@ const CustomIconButton = styled(IconButton)`
     }
   }
 `;
-function MusicItem({ active, item }) {
-  const [like, setLike] = useState(false);
-  const [dislike, setDislike] = useState(false);
+
+function MusicItem({ active, item, result }) {
+  const [like, setLike] = useState(item.choiceYN === 1 ? true : false);
+  const [dislike, setDislike] = useState(item.choiceYN === 2 ? true : false);
   const { dispatch } = useRecommendContext();
-  const { pathname } = useLocation();
 
   const handleClickItem = () => {
     dispatch(setCurrentMusic(item));
@@ -33,11 +32,15 @@ function MusicItem({ active, item }) {
 
   const handleLike = () => {
     if (dislike) setDislike(false);
+    if (like) dispatch(setMusicChoice(item.musicID, 0));
+    else dispatch(setMusicChoice(item.musicID, 1));
     setLike(!like);
   };
 
   const handleDislike = () => {
     if (like) setLike(false);
+    if (dislike) dispatch(setMusicChoice(item.musicID, 0));
+    else dispatch(setMusicChoice(item.musicID, 2));
     setDislike(!dislike);
   };
 
@@ -52,7 +55,7 @@ function MusicItem({ active, item }) {
         <div className="item__title">{item.musicName}</div>
         <div className="item__artist">{item.musicArtist}</div>
       </div>
-      {!pathname.includes('result') && (
+      {!result && (
         <>
           <div className="item__like">
             <CustomIconButton

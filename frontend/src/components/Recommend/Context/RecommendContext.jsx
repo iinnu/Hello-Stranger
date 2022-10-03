@@ -14,19 +14,16 @@ const initialState = {
     refresh: 0,
     list: [],
     current: {},
-    likeYN: [],
   },
   foodReducer: {
     refresh: 0,
     list: [],
     current: {},
-    likeYN: [],
   },
   activityReducer: {
     refresh: 0,
     list: [],
     current: {},
-    likeYN: [],
   },
 };
 

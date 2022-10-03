@@ -46,7 +46,7 @@ const CustomLabel = styled(Button)`
   }
 `;
 
-export default function StoreInfoDrawer({ type, store, open, toggleDrawer }) {
+export default function StoreInfoDrawer({ store, open, toggleDrawer }) {
   return (
     <CustomSwipeableDrawer
       anchor="bottom"
@@ -65,7 +65,7 @@ export default function StoreInfoDrawer({ type, store, open, toggleDrawer }) {
         <StyledBox className="store-info-drawer__main">
           <div>
             <img className="main__image" src={sample} alt="store img" />
-            <div className="main__title">{store[type + 'Name']}</div>
+            <div className="main__title">{store.name}</div>
             <div className="main__status">
               <span>★ 4.5/5</span>
               <OpenClosed />
@@ -75,7 +75,7 @@ export default function StoreInfoDrawer({ type, store, open, toggleDrawer }) {
         <StyledBox className="store-info-drawer__detail">
           <div className="detail detail__address">
             <CustomLabel startIcon={<LocationOnIcon />}>
-              {store[type + 'Address']}
+              {store.address}
             </CustomLabel>
           </div>
           <div className="detail detail__phone">

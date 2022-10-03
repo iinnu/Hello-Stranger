@@ -23,12 +23,8 @@ export default function StoreItem({ item, handleClick }) {
   return (
     <div className="store-item" onClick={handleItemClick}>
       <Col>
-        <div className="store-item__title">
-          {item.foodName ? item.foodName : item.activityName}
-        </div>
-        <span className="store-item__address">
-          {item.foodAddress ? item.foodAddress : item.activityAddress}
-        </span>
+        <div className="store-item__title">{item.name}</div>
+        <span className="store-item__address">{item.address}</span>
       </Col>
       <div className="store-item__img-wrapper">
         <img src={sample} alt="store preview" />

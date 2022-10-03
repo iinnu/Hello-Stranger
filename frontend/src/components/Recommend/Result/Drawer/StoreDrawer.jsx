@@ -2,52 +2,71 @@ import { useState } from 'react';
 import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
 import { setCurrentFood } from 'components/Recommend/Context/foodReducer';
 import { setCurrentActivity } from 'components/Recommend/Context/activityReducer';
-import sample from 'assets/images/sample.jpg';
 import StoreItem from 'components/Recommend/Category/Detail/List/StoreItem';
 
 export default function StoreDrawer({ type, list }) {
-  const [open, setOpen] = useState(false);
+  const [category, setCategory] = useState('전체');
   const { state, dispatch } = useRecommendContext();
   const { current } = state[type + 'Reducer'];
+  const storeList = list.map((item) => item.store);
 
-  const handleCategoryClick = (item) => {
-    const actionCreator = item.foodCategory
-      ? setCurrentFood
-      : setCurrentActivity;
-    dispatch(actionCreator(item));
-    setOpen(true);
+  const handleClickCategory = (value, item) => {
+    setCategory(value);
+    if (value !== '전체') {
+      const actionCreator =
+        type === 'food' ? setCurrentFood : setCurrentActivity;
+      dispatch(actionCreator(item));
+    }
   };
+
+  const handleClickStore = (item) => {};
 
   return (
     <div className="drawer__list-inner">
-      {!open && (
-        <>
-          <div className="drawer__list-inner__desc">
-            * 카테고리를 선택하면 가게 목록을 볼 수 있습니다
+      <div className="drawer__list-inner__desc">
+        * 카테고리를 선택하면 가게 목록을 볼 수 있습니다
+      </div>
+      <div className="drawer__category-select">
+        <div className="category-select__category-list">
+          <div
+            className={
+              category === '전체'
+                ? 'category-select__category-list__item category-select__category-list__item--active'
+                : 'category-select__category-list__item'
+            }
+            onClick={() => handleClickCategory('전체')}
+          >
+            전체
           </div>
-          <div className="category-list__inner">
-            {list
-              .filter((item) => item.choiceYN !== 2)
-              .map((item) => (
-                <div
-                  key={item[type + 'Category']}
-                  className="category-card"
-                  onClick={() => handleCategoryClick(item)}
-                >
-                  <div className="category-card__img-wrapper">
-                    <img src={sample} alt="cateogry-img" />
-                  </div>
-                  <div className="category-card__category-desc">
-                    <div className="category-desc__inner">
-                      <span>{item[type + 'Category']}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
-        </>
-      )}
-      {open && current.store.map((item) => <StoreItem item={item} />)}
+          {list
+            .filter((item) => item.choiceYN !== 2)
+            .map((item) => (
+              <div
+                key={item[type + 'Category']}
+                className={
+                  category === item[type + 'Category']
+                    ? 'category-select__category-list__item category-select__category-list__item--active'
+                    : 'category-select__category-list__item'
+                }
+                onClick={() =>
+                  handleClickCategory(item[type + 'Category'], item)
+                }
+              >
+                {item[type + 'Category']}
+              </div>
+            ))}
+        </div>
+        <div className="category-select__store-list">
+          {category === '전체' &&
+            storeList.map((stores) =>
+              stores.map((store) => <StoreItem key={store.id} item={store} />)
+            )}
+          {category !== '전체' &&
+            current?.store.map((item) => (
+              <StoreItem key={item.id} item={item} />
+            ))}
+        </div>
+      </div>
     </div>
   );
 }

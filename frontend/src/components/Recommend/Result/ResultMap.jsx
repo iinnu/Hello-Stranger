@@ -25,6 +25,7 @@ export default function ResultMap() {
           foodStoreList.map((list) =>
             list.map((store) => (
               <MapMarker
+                key={`${store.latitude}-${store.longitude}`}
                 position={{ lat: store.latitude, lng: store.longitude }}
                 image={{ src: marker, size: { width: 40, height: 40 } }}
               />
@@ -34,6 +35,7 @@ export default function ResultMap() {
           activityStoreList.map((list) =>
             list.map((store) => (
               <MapMarker
+                key={`${store.latitude}-${store.longitude}`}
                 position={{ lat: store.latitude, lng: store.longitude }}
                 image={{ src: marker, size: { width: 40, height: 40 } }}
               />

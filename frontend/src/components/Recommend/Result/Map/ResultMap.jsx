@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useRecommendContext } from '../Context/RecommendContext';
-import { useResultContext } from '../Context/ResultContext';
+import { useRecommendContext } from '../../Context/RecommendContext';
+import { useResultContext } from '../../Context/ResultContext';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import marker_my from 'assets/images/marker-my.png';
-import Menu from './Menu';
+import Menu from '../Menu';
 import ResultMarker from './ResultMarker';
 
 export default function ResultMap() {

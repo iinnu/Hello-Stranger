@@ -1,4 +1,7 @@
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import { getUserActivity, getUserFood } from "api/history";
+import StoreContent from './StoreContent';
 
 const ReviewBox = styled('div')`
   padding: 15px 25px;
@@ -9,6 +12,29 @@ const ReviewBox = styled('div')`
   }
 `;
 
-export default function StoreReview({content}) {
-  return <ReviewBox>{content.foodName || content.activityName}</ReviewBox>;
+export default function StoreReview({content, type}) {
+  const [show, setShow] = useState(false);
+  const [detailData, setDetailData] = useState({})
+  function showDetail(){
+    setShow(!show)
+    localStorage.setItem('currentStore', )
+  }
+  useEffect(()=>{
+    async function getData(){
+      if(type==='food'){
+        const data = await getUserFood(content.id)
+        setDetailData(data)
+      } else {
+        const data = await getUserActivity(content.id)
+        setDetailData(data)
+      }
+    }
+    getData()
+  },[]) 
+  return (<>
+  <ReviewBox onClick={showDetail}>{content.name}</ReviewBox>
+  {show && 
+    <StoreContent detailData={detailData} type={type}/>
+  }
+  </>)
 }

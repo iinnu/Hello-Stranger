@@ -26,10 +26,11 @@ export default function DetailInfoPage() {
   const [currentPath, setCurrentPath] = useState('');
   const [userData, setUserData] = useState(null)
   const [detailData, setDetailData] = useState({})
-
+  const [foodData, setFoodData] = useState({})
+  const [activityData, setActivityData] = useState({})
   const [leftData, setLeftData] = useState([])
-  const [leftFoodData, setLeftFoodData] = useState({})
-  const [leftActivityData, setLeftActivityData] = useState({})
+  const [leftFoodData, setLeftFoodData] = useState([])
+  const [leftActivityData, setLeftActivityData] = useState([])
 
   const [isHistory, setIsHistory] = useState(true)
   const [type, setType] = useState("");
@@ -68,33 +69,31 @@ export default function DetailInfoPage() {
         console.log('다시보기')
         const Data = await getUserDetail(pathId)
         setUserData(Data)
+        const foodResponse = Data?.choice_food ? await getUserFood(Data.choice_food?.id) : {}
+        const activityResponse = Data?.choice_activity ? await getUserActivity(Data.choice_activity?.id) : {}
+        setFoodData(foodResponse)
+        setActivityData(activityResponse)
         setIsHistory(true)
-        setDetailTitle(Data.title)
-        setLeftFoodData(Data.food)
-        setLeftActivityData(Data.activity)
-        console.log('여기서??')
+        setDetailTitle(Data.title ?? '')
+        setLeftFoodData(Data.food ?? [])
+        setLeftActivityData(Data.activity ?? [])
         const storeLocationData = {
           food: {
             lat: Data.choice_food.latitude,
             lng: Data.choice_food.longitude
           },
           activity: {
-            lat: Data.choice_activity.latitude,
-            lng: Data.choice_activity.longitude
+            lat: (Data.choice_activity?.latitude ? Data.choice_activity.latitude : Data.choice_food.latitude),
+            lng:  (Data.choice_activity?.longitude ? Data.choice_activity.longitude : Data.choice_food.longitude),
           },
         }
-        console.log('아님 여기서???')
-        console.log('다시보기', Data, 'data.title', Data.title, 'Daata', Data.food, Data.activity, storeLocationData)
         localStorage.setItem('storeLocationData', JSON.stringify(storeLocationData))
         localStorage.setItem('storeData', JSON.stringify(Data))
       }
     }
     getData()
   }
-  ,[])
-  const [trackIdList, settrackIdList] = useState([]);
-  let { id } = useParams();
-  const navigate = useNavigate();
+  ,[pathName])
 
   // drawer
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -121,18 +120,16 @@ export default function DetailInfoPage() {
   };
 
   async function clickFood() {
-    setOpenDrawer(true);
     setType("food");
     if(isHistory){
-      const response = await getUserFood(userData.choice_food.id)
       const pos = {
         lat: userData.choice_food.latitude,
         lng: userData.choice_food.longitude
       }
-      setDetailData(response)
+      setDetailData(foodData ?? [])
       setCurrentStore(pos)
-      setLeftData(leftFoodData)
-      console.log('food, history',pos, currentStore, userData.choice_food.id, response, leftFoodData)
+      setLeftData(leftFoodData ?? [])
+      console.log('food, history',pos, currentStore, userData.choice_food.id,leftFoodData, detailData)
     } 
     else {
       const pos = {
@@ -140,23 +137,25 @@ export default function DetailInfoPage() {
         lng: userData.food.longitude
       }
       setCurrentStore(pos)
-      setDetailData(userData.food)
-      console.log('food, other', pos, currentStore, userData.food.id)
+      setDetailData(userData.food ?? [])
+      console.log('food, other', pos, currentStore, userData.food.id, foodData, activityData, detailData)
     }
+    setOpenDrawer(true);
   }
   async function clickActivity() {
     setOpenDrawer(true);
+    console.log('clickActivity', isHistory)
     setType("activity");
     if(isHistory){
-      const response = await getUserActivity(userData.choice_activity.id)
+      console.log('activityData', activityData)
       const pos = {
-        lat: userData.choice_activity.latitude,
-        lng: userData.choice_activity.longitude
+        lat: userData.choice_activity?.latitude ? userData.choice_activity?.latitude: userData.choice_food?.latitude,
+        lng: userData.choice_activity?.longitude ? userData.choice_activity?.longitude: userData.choice_food?.longitude
       }
-      setDetailData(response)
+      setDetailData(activityData ?? [])
       setCurrentStore(pos)
-      setLeftData(leftActivityData)
-      console.log('activity, history', response, leftActivityData)
+      setLeftData(leftActivityData ?? [])
+      console.log('activity, history',pos, currentStore, userData.choice_activity?.id,leftActivityData, detailData)
     } 
     else {
       const pos = {
@@ -164,9 +163,8 @@ export default function DetailInfoPage() {
         lng: userData.food.longitude
       }
       setCurrentStore(pos)
-      setDetailData(userData.activity)
+      setDetailData(userData.activity ?? [])
       console.log('activity, other', pos, currentStore)
-
     }
   }
   function clickMusic() {

@@ -7,7 +7,18 @@ import { current } from '@reduxjs/toolkit';
 export default function DetailInfoMap({currentStore}) {
   const storeLocationData = Object.values(JSON.parse(localStorage.getItem('storeLocationData')));
   const storeData = Object.entries(JSON.parse(localStorage.getItem('storeData')));
-
+  // const storeLocationData = () => {
+  //   const localStorageLocation = localStorage.getItem('storeLocationData')
+  //   return localStorageLocation
+  //   ? Object.values(JSON.parse(localStorage.getItem('storeLocationData')))
+  //   : null
+  // }
+  // const storeData = () => {
+  //   const localStorageStore = localStorage.getItem('storeLocationData')
+  //   return localStorageStore
+  //   ? Object.values(JSON.parse(localStorage.getItem('storeLocationData')))
+  //   : null
+  // }
   const center = {
     lat: (storeLocationData[0].lat + storeLocationData[1].lat) / 2,
     lng: (storeLocationData[0].lng + storeLocationData[1].lng) / 2

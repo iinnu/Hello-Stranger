@@ -11,6 +11,7 @@ import StoreReview from './StoreReview';
 import StoreListItems from './StoreListItems';
 import {getOtherUserActivity, getOtherUserFood} from 'api/other'
 import { useEffect, useState } from 'react';
+import StoreContent from './StoreContent';
 
 const backdrop = {
   style: { background: 'none' },
@@ -50,7 +51,7 @@ const CustomLabel = styled(Button)`
 `;
 
 export default function StoreInfoDrawer({ open, toggleDrawer, detailData, leftData, isHistory, type }) {
-  useEffect(()=>console.log('storeinfodrawer', leftData))
+  useEffect(()=>{console.log('storeinfodrawer', detailData, leftData)},[detailData, leftData])
   return (
     <CustomSwipeableDrawer
       anchor="bottom"
@@ -65,55 +66,7 @@ export default function StoreInfoDrawer({ open, toggleDrawer, detailData, leftDa
         componentsProps: { backdrop: backdrop },
       }}
     >
-      <div className="store-info-drawer">
-        <StyledBox className="store-info-drawer__main">
-          <div>
-            <img className="main__image" src={sample} alt="store img" />
-            <div className="main__title">{detailData.name}</div>
-            <div className="main__status">
-              <span> {detailData.rating ?  `★${detailData.rating}/5` : `별점 정보가 없습니다.`}</span>
-              <OpenClosed />
-            </div>
-          </div>
-        </StyledBox>
-        <StyledBox className="store-info-drawer__detail">
-          <div className="detail detail__address">
-            <CustomLabel startIcon={<LocationOnIcon />}>
-              {detailData.address}
-            </CustomLabel>
-          </div>
-          <div className="detail detail__phone">
-            <CustomLabel startIcon={<PhoneIcon />}>
-              {detailData.tel ?  detailData.tel: `전화번호 정보가 없습니다.`}
-            </CustomLabel>
-          </div>
-          <div className="detail detail__hours">
-            <CustomLabel startIcon={<AccessTimeIcon />}>
-              {detailData.time ?  detailData.time: `영업시간 정보가 없습니다.`}
-            </CustomLabel>
-          </div>
-        </StyledBox>
-        <StyledBox className="store-info-drawer__review">
-          <div className="review__title">
-            <div>리뷰</div>
-            <div>*네이버 지도 리뷰</div>
-          </div>
-          {detailData.review && detailData.review.map((e)=><StoreReview content={e}/>)}
-          {!detailData.review && <p>리뷰 정보가 없습니다.</p>}
-        </StyledBox>
-        {isHistory &&
-        <StyledBox className="store-info-drawer__review">
-          {leftData !== [] && (
-            <>
-            <div className="review__title">
-              <div>{leftData[0]?.foodCategory}</div>
-            </div>
-            {leftData.map((e)=><StoreListItems content={e}/>)}
-            </>
-          )} 
-        </StyledBox>
-        }
-      </div>
+    <StoreContent detailData={detailData} leftData={leftData} isHistory={isHistory} type={type}/>
     </CustomSwipeableDrawer>
   );
 }

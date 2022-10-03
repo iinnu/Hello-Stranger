@@ -1,5 +1,6 @@
 import 'styles/Recommend/RecommendResultPage.scss';
 import { useState } from 'react';
+import { ResultProvider } from 'components/Recommend/Context/ResultContext';
 import Container from 'components/common/Container';
 import ResultLoading from 'components/Recommend/Result/ResultLoading';
 import ResultMap from 'components/Recommend/Result/ResultMap';
@@ -14,7 +15,11 @@ function RecommendResultPage() {
   return (
     <Container>
       {loading && <ResultLoading handleLoading={handleLoading} />}
-      {!loading && <ResultMap />}
+      {!loading && (
+        <ResultProvider>
+          <ResultMap />
+        </ResultProvider>
+      )}
     </Container>
   );
 }

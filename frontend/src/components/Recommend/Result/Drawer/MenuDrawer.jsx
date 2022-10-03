@@ -96,10 +96,18 @@ export default function MenuDrawer({ menu }) {
         </div>
         {menu === 0 && <Music />}
         {menu === 1 && (
-          <StoreDrawer type="food" list={state.foodReducer.list} />
+          <StoreDrawer
+            type="food"
+            list={state.foodReducer.list}
+            setOpen={setOpen}
+          />
         )}
         {menu === 2 && (
-          <StoreDrawer type="activity" list={state.activityReducer.list} />
+          <StoreDrawer
+            type="activity"
+            list={state.activityReducer.list}
+            setOpen={setOpen}
+          />
         )}
         {menu === 3 && <PlanDrawer />}
       </CustomSwipeableDrawer>

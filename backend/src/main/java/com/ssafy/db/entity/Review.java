@@ -62,4 +62,17 @@ public class Review {
         this.user = user;
     }
 
+    public Review withEvalYN(String evalYN){
+        return new Review(
+                this.reviewId,
+                this.musicId,
+                this.regDate,
+                evalYN,
+                this.title,
+                this.user,
+                this.activityCategory,
+                this.foodCategory
+        );
+    }
+
 }

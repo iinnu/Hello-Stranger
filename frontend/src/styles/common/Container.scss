@@ -1,0 +1,14 @@
+@import '_util';
+
+#container {
+  min-height: $viewport-height;
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  width: 100%;
+  height: $viewport-height;
+  max-width: 500px;
+  position: relative;
+}

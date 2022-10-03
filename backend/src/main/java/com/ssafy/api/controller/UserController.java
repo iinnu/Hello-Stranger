@@ -7,6 +7,9 @@ import com.ssafy.api.response.BaseResponseBody;
 import com.ssafy.api.response.CommercialAreaGetRes;
 import com.ssafy.api.response.UserChoiceGetRes;
 import com.ssafy.api.response.UserRegistRes;
+import com.ssafy.api.service.ActivityRecService;
+import com.ssafy.api.service.FoodRecService;
+import com.ssafy.api.service.MusicRecService;
 import com.ssafy.api.service.UserService;
 import com.ssafy.common.auth.HelloStrangerUserDetails;
 import com.ssafy.common.util.JwtTokenUtil;
@@ -36,6 +39,15 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MusicRecService musicRecService;
+
+    @Autowired
+    FoodRecService foodRecService;
+
+    @Autowired
+    ActivityRecService activityRecService;
+
     @PostMapping()
     @ApiOperation(value = "소셜로그인, 소셜회원가입", notes = "저장되지 않은 이메일 일 시에는 회원가입과 로그인을 시키고, 저장된 이메일 일 시에는 로그인 시켜준다")
     @ApiResponses({
@@ -48,19 +60,32 @@ public class UserController {
         String nickname = userRegistReq.getNickname();
         String img = userRegistReq.getImg();
 
+        UserRegistRes res;
+
         //이미일 중복 확인
         User user = userService.getUserByUserEmail(userRegistReq.getEmail());
 
         // 없으면 회원가입
         if(user == null){
             user = userService.createUser(email, nickname, img);
+            // 추천 테이블 생성
+            musicRecService.createMusicRec(user.getUserId());
+            activityRecService.createActivityRec(user.getUserId());
+            foodRecService.createFoodRec(user.getUserId());
+            String accessToken = JwtTokenUtil.getToken(email);
+            res = UserRegistRes.builder()
+                    .accessToken(accessToken)
+                    .isSignup("Y")
+                    .build();
+        } else {
+            // accessToken 반환
+            String accessToken = JwtTokenUtil.getToken(email);
+            res = UserRegistRes.builder()
+                    .accessToken(accessToken)
+                    .isSignup("N")
+                    .build();
         }
 
-        // accessToken 반환
-        String accessToken = JwtTokenUtil.getToken(email);
-        UserRegistRes res = UserRegistRes.builder()
-                .accessToken(accessToken)
-                .build();
         return ResponseEntity.status(200).body(res);
     }
 
@@ -85,44 +110,7 @@ public class UserController {
             @ApiResponse(code = 200, message = "성공"),
     })
     public ResponseEntity<UserChoiceGetRes> getUserChoice(){
-        UserChoiceGetResMusic music = UserChoiceGetResMusic.builder()
-                .musicId(1)
-                .musicName("Waves")
-                .musicArtist("Paige")
-                .musicImgUrl("https://firebasestorage.googleapis.com/v0/b/viewdle-b6bf5.appspot.com/o/ch%40ssafy.com_profile?alt=media&token=e0584d41-eced-40bb-b79d-e395f1203855")
-                .build();
-
-        UserChoiceGetResFood food = UserChoiceGetResFood.builder()
-                .foodCategory("떡볶이")
-                .foodImgUrl("https://firebasestorage.googleapis.com/v0/b/viewdle-b6bf5.appspot.com/o/ch%40ssafy.com_profile?alt=media&token=e0584d41-eced-40bb-b79d-e395f1203855")
-                .build();
-
-        UserChoiceGetResActivity activity = UserChoiceGetResActivity.builder()
-                .activityCategory("호캉스")
-                .activityImgUrl("https://firebasestorage.googleapis.com/v0/b/viewdle-b6bf5.appspot.com/o/ch%40ssafy.com_profile?alt=media&token=e0584d41-eced-40bb-b79d-e395f1203855")
-                .build();
-
-
-        List<UserChoiceGetResMusic> musicList = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
-            musicList.add(music);
-        }
-
-        List<UserChoiceGetResFood> foodList = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
-            foodList.add(food);
-        }
-
-        List<UserChoiceGetResActivity> activityList = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
-            activityList.add(activity);
-        }
-
-        UserChoiceGetRes res = UserChoiceGetRes.builder()
-                .music(musicList)
-                .food(foodList)
-                .activity(activityList)
-                .build();
+        UserChoiceGetRes res = userService.getUserChoiceList();
         return ResponseEntity.status(200).body(res);
     }
 
@@ -140,7 +128,7 @@ public class UserController {
         try {
             userId = userService.getUser(categoryChoiceReq.getUserEmail());
         } catch(Exception e){
-            return ResponseEntity.status(601).body(BaseResponseBody.of(911, "유효하지 않은 사용자입니다."));
+            return ResponseEntity.status(911).body(BaseResponseBody.of(911, "유효하지 않은 사용자입니다."));
         }
 
         System.out.println(userId);
@@ -176,6 +164,28 @@ public class UserController {
 
         try {
             exePython(command);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        URL foodRecommend = getClass().getClassLoader().getResource("food_contents_based.py");
+        String[] command2 = new String[2];
+        command2[0] = "python";
+        command2[1] = new File(foodRecommend.getPath()).getAbsolutePath();
+
+        try {
+            exePython(command2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        URL musicRecommend = getClass().getClassLoader().getResource("music_contents_based.py");
+        String[] command3 = new String[2];
+        command3[0] = "python";
+        command3[1] = new File(musicRecommend.getPath()).getAbsolutePath();
+
+        try {
+            exePython(command3);
         } catch (Exception e) {
             e.printStackTrace();
         }

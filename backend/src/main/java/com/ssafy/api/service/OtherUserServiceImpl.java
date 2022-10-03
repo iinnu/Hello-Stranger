@@ -26,8 +26,13 @@ public class OtherUserServiceImpl implements OtherUserService {
     public SelectOtherUserGetRes getOtherUser() {
         // 랜덤한 리뷰 뽑기
         // 리뷰 타이틀 추가, review.findById(17),
-        //Review randomReview = reviewRepository.getReviewByRandom();
-        Review randomReview = reviewRepository.getReviewByReviewId(17);
+        //TODO 랜덤리뷰가져오기로 변경
+        //TODO 컨트롤러 null 리턴처리
+        Review randomReview = reviewRepository.getReviewByRandom();
+        //Review randomReview = reviewRepository.getReviewByReviewId(17);
+        if(randomReview == null){
+            return null;
+        }
         //랜덤한 리뷰에서 식당 봅기
         ReviewFood reviewFood = reviewFoodRepository.findByChoiceYNAndReview("Y",randomReview);
         Food food = reviewFood.getFood();
@@ -35,7 +40,6 @@ public class OtherUserServiceImpl implements OtherUserService {
         review = review.replace(".||.", " ").replace("\"\"", "\"");
         review = review.startsWith("\"") ? review.substring(1, review.length()-1) : review;
         String[] results = review.split("\\[>\\*}");
-
 
         DetailInfo foodDetail = DetailInfo.builder()
                 .id(food.getFoodId())
@@ -53,7 +57,7 @@ public class OtherUserServiceImpl implements OtherUserService {
                 .build();
 
         //랜덤한 리뷰에서 활동 뽑기
-       /* Activity activity = activityRepository.findByActivityId(1);
+        Activity activity = activityRepository.findByActivityId(1);
 
         review = activity.getActivityReview();
         review = review.replace(".||.", " ").replace("\"\"", "\"");
@@ -74,11 +78,11 @@ public class OtherUserServiceImpl implements OtherUserService {
                 .tel(activity.getActivityTel().replace("||", " "))
                 .time(activity.getActivityTime())
                 .desc(activity.getActivityDesc().replace(".||.", " ").replace("||", " ").replace("\r", ""))
-                .build();*/
+                .build();
 
         SelectOtherUserGetRes res = SelectOtherUserGetRes.builder()
-                //.activity(activityDetail)
-                .activity(foodDetail)
+                .activity(activityDetail)
+                //.activity(foodDetail)
                 .food(foodDetail)
                 .title(randomReview.getTitle())
                 .build();

@@ -1,6 +1,7 @@
 package com.ssafy.api.controller;
 
 import com.ssafy.api.dto.SelectInfo;
+import com.ssafy.api.response.BaseResponseBody;
 import com.ssafy.api.response.SelectGetRes;
 import com.ssafy.api.response.SelectOtherUserGetRes;
 import com.ssafy.api.service.OtherUserService;
@@ -23,7 +24,6 @@ import java.util.List;
 public class OtherUserController {
     @Autowired
     OtherUserService otherUserService;
-    //TODO 다른유저선택 한명만 보내주기
     @GetMapping()
     @ApiOperation(value = "타 유저 선택 결과 반환", notes = "타 유저가 선택했던 음악,음식,활동과 해당 장소 정보 리스트를 반환한다.")
     @ApiResponses({
@@ -31,6 +31,9 @@ public class OtherUserController {
     })
     public ResponseEntity<SelectOtherUserGetRes> getOtherUserSelect(){
         SelectOtherUserGetRes res = otherUserService.getOtherUser();
+        if(res==null){
+            return ResponseEntity.status(900).body(null);
+        }
         return ResponseEntity.status(200).body(res);
     }
 

@@ -1,7 +1,9 @@
 package com.ssafy.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class ActivityCategory {
     @Column(name = "activity_category_name")
     String categoryName;
 
+    @JsonIgnore
     @Column(name = "activity_category_feature")
     String categoryFeatrue;
 

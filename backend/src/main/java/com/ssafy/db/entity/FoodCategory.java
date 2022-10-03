@@ -1,5 +1,6 @@
 package com.ssafy.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -22,6 +23,7 @@ public class FoodCategory {
     @Column(name = "food_category_name")
     String categoryName;
 
+    @JsonIgnore
     @Column(name = "food_category_feature")
     String categoryFeatrue;
 

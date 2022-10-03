@@ -60,6 +60,8 @@ public class UserController {
         String nickname = userRegistReq.getNickname();
         String img = userRegistReq.getImg();
 
+        UserRegistRes res;
+
         //이미일 중복 확인
         User user = userService.getUserByUserEmail(userRegistReq.getEmail());
 
@@ -70,13 +72,20 @@ public class UserController {
             musicRecService.createMusicRec(user.getUserId());
             activityRecService.createActivityRec(user.getUserId());
             foodRecService.createFoodRec(user.getUserId());
+            String accessToken = JwtTokenUtil.getToken(email);
+            res = UserRegistRes.builder()
+                    .accessToken(accessToken)
+                    .isSignup("Y")
+                    .build();
+        } else {
+            // accessToken 반환
+            String accessToken = JwtTokenUtil.getToken(email);
+            res = UserRegistRes.builder()
+                    .accessToken(accessToken)
+                    .isSignup("N")
+                    .build();
         }
 
-        // accessToken 반환
-        String accessToken = JwtTokenUtil.getToken(email);
-        UserRegistRes res = UserRegistRes.builder()
-                .accessToken(accessToken)
-                .build();
         return ResponseEntity.status(200).body(res);
     }
 

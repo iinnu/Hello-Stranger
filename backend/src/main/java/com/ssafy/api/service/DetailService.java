@@ -4,6 +4,6 @@ import com.ssafy.api.dto.DetailInfo;
 
 public interface DetailService {
 
-    DetailInfo getActivity(int activityId);
-    DetailInfo getFood(int foodId);
+    public DetailInfo getActivity(int activityId);
+    public DetailInfo getFood(int foodId);
 }

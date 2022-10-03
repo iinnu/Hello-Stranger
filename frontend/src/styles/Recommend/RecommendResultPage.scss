@@ -73,6 +73,44 @@ $padding-size: 15px;
       top: -80px;
     }
   }
+
+  &__marker {
+    position: relative;
+    bottom: 90px;
+    width: 200px;
+    height: 50px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px 1px rgb(185, 185, 185);
+    padding: 10px 10px 15px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.marker {
+  &__button {
+    display: flex;
+    justify-content: end;
+
+    & button {
+      background-color: unset;
+      border: unset;
+      font-size: 0.7em;
+      padding: 0;
+      cursor: pointer;
+    }
+  }
+
+  &__title {
+    font-size: 0.9em;
+    font-weight: 600;
+  }
+
+  &__address {
+    font-size: 0.7em;
+  }
 }
 
 .menu {
@@ -136,11 +174,13 @@ $padding-size: 15px;
     margin-right: 10px;
 
     &__item {
-      margin-bottom: 15px;
+      padding: 10px 5px;
       cursor: pointer;
 
       &--active {
-        font-weight: 600;
+        color: white;
+        background-color: #82a5dc9d;
+        font-weight: 900;
       }
     }
   }

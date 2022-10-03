@@ -17,9 +17,8 @@ export default function StoreDrawer({ type, list }) {
         type === 'food' ? setCurrentFood : setCurrentActivity;
       dispatch(actionCreator(item));
     }
+    document.querySelector('.category-select__store-list').scrollTo(0, 0);
   };
-
-  const handleClickStore = (item) => {};
 
   return (
     <div className="drawer__list-inner">

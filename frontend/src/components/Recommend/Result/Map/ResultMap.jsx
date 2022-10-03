@@ -10,10 +10,12 @@ export default function ResultMap() {
   const { currentStore, setCurrentStore } = useResultContext();
   const { state } = useRecommendContext();
   const currentPos = JSON.parse(localStorage.getItem('current'));
-  const foodStoreList = state.foodReducer.list.map((item) => item.store);
-  const activityStoreList = state.activityReducer.list.map(
-    (item) => item.store
-  );
+  const foodStoreList = state.foodReducer.list
+    .filter((item) => item.choiceYN !== 2)
+    .map((item) => item.store);
+  const activityStoreList = state.activityReducer.list
+    .filter((item) => item.choiceYN !== 2)
+    .map((item) => item.store);
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState(-1);
   const [prePos, setPrePos] = useState();

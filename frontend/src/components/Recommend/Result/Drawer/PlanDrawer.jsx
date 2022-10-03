@@ -1,9 +1,12 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import styled from '@emotion/styled';
 import TabPanel from '../Plan/TabPanel';
+import FoodSelect from '../Plan/FoodSelect';
+import ActivitySelect from '../Plan/ActivitySelect';
+import CustomButton from 'components/common/CustomButton';
 
 const CustomTabs = styled(Tabs)`
   &.MuiTabs-root > .MuiTabs-scroller > .MuiTabs-indicator {
@@ -34,31 +37,36 @@ function a11yProps(index) {
 }
 
 export default function PlanDrawer() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <CustomTabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-          variant="fullWidth"
-        >
-          <CustomTab label="음식" {...a11yProps(0)} />
-          <CustomTab label="활동" {...a11yProps(1)} />
-        </CustomTabs>
+    <>
+      <Box sx={{ width: '100%', height: '100%' }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <CustomTabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+            variant="fullWidth"
+          >
+            <CustomTab label="음식" {...a11yProps(0)} />
+            <CustomTab label="활동" {...a11yProps(1)} />
+          </CustomTabs>
+        </Box>
+        <TabPanel value={value} index={0}>
+          <FoodSelect />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <ActivitySelect />
+        </TabPanel>
       </Box>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-    </Box>
+      <CustomButton className="plan__button" variant="contained">
+        저장
+      </CustomButton>
+    </>
   );
 }

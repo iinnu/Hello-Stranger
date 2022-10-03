@@ -1,18 +1,20 @@
+import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 
 export default function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <Box
+      sx={{ height: '100%' }}
       role="tabpanel"
       hidden={value !== index}
       id={`tabpanel-${index}`}
       aria-labelledby={`tab-${index}`}
       {...other}
     >
-      {value === index && <div>{children}</div>}
-    </div>
+      {value === index && <>{children}</>}
+    </Box>
   );
 }
 

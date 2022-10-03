@@ -5,6 +5,7 @@ import com.ssafy.api.response.BaseResponseBody;
 import com.ssafy.api.response.SelectGetRes;
 import com.ssafy.api.response.SelectOtherUserGetRes;
 import com.ssafy.api.service.OtherUserService;
+import com.ssafy.common.auth.HelloStrangerUserDetails;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -14,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +32,9 @@ public class OtherUserController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "성공"),
     })
-    public ResponseEntity<SelectOtherUserGetRes> getOtherUserSelect(){
-        SelectOtherUserGetRes res = otherUserService.getOtherUser();
+    public ResponseEntity<SelectOtherUserGetRes> getOtherUserSelect(@ApiIgnore Authentication authentication){
+        HelloStrangerUserDetails userDetails = (HelloStrangerUserDetails)authentication.getDetails();
+        SelectOtherUserGetRes res = otherUserService.getOtherUser(userDetails.getUser());
         if(res==null){
             return ResponseEntity.status(900).body(null);
         }

@@ -3,10 +3,7 @@ package com.ssafy.api.service;
 import com.ssafy.api.dto.DetailInfo;
 import com.ssafy.api.dto.SelectInfo;
 import com.ssafy.api.response.SelectOtherUserGetRes;
-import com.ssafy.db.entity.Activity;
-import com.ssafy.db.entity.Food;
-import com.ssafy.db.entity.Review;
-import com.ssafy.db.entity.ReviewFood;
+import com.ssafy.db.entity.*;
 import com.ssafy.db.repository.*;
 import org.hibernate.sql.Select;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +20,12 @@ public class OtherUserServiceImpl implements OtherUserService {
     ActivityRepository activityRepository;
 
     @Override
-    public SelectOtherUserGetRes getOtherUser() {
+    public SelectOtherUserGetRes getOtherUser(User user) {
         // 랜덤한 리뷰 뽑기
         // 리뷰 타이틀 추가, review.findById(17),
         //TODO 랜덤리뷰가져오기로 변경
         //TODO 컨트롤러 null 리턴처리
-        Review randomReview = reviewRepository.getReviewByRandom();
+        Review randomReview = reviewRepository.getReviewByRandom(user.getUserId());
         //Review randomReview = reviewRepository.getReviewByReviewId(17);
         if(randomReview == null){
             return null;

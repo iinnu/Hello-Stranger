@@ -12,13 +12,62 @@ import {
   setCurrentMusic,
   setMusicList,
 } from 'components/Recommend/Context/musicReducer';
-import { setFoodList } from 'components/Recommend/Context/foodReducer';
-import { setActivityList } from 'components/Recommend/Context/activityReducer';
+import {
+  setCurrentFood,
+  setFoodList,
+} from 'components/Recommend/Context/foodReducer';
+import {
+  setActivityList,
+  setCurrentActivity,
+} from 'components/Recommend/Context/activityReducer';
 
 const titles = [
   ['어떤 음악을', '듣고 싶으신가요?'],
   ['어떤 음식을', '먹고 싶으신가요?'],
   ['어떤 활동을', '하고 싶으신가요?'],
+];
+
+const store = [
+  {
+    id: 1,
+    name: '이태리 제면소',
+    address: '대구 달성군 화원읍 비슬로 2528',
+    latitude: '35.8012585',
+    longitude: '128.494283',
+    time: '매일 11:10 ~ 21:00',
+  },
+  {
+    id: '2',
+    name: '황장군',
+    address: '대구 달성군 화원읍 비슬로 2530',
+    latitude: '35.8014342',
+    longitude: '128.494651',
+    time: '매일 08:00 ~ 21:30',
+  },
+  {
+    id: '3',
+    name: '코스모스막창',
+    address: '대구 달성군 화원읍 명천로 226',
+    latitude: '35.7993167',
+    longitude: '128.493904',
+    time: '매일 15:30 ~ 00:30',
+  },
+  {
+    id: '4',
+    name: '투썸플레이스',
+    address: '대구 달성군 화원읍 비슬로 2529',
+    latitude: '35.8019464',
+    longitude: '128.494041',
+    time: '매일 08:30 ~ 00:30',
+  },
+  {
+    id: '5',
+    name: '이디야 커피',
+    address: '대구 달성군 화원읍 비슬로 2503',
+    latitude: '35.8004907',
+    longitude: '128.491525',
+    time: '매일 09:00 ~ 22:30',
+  },
 ];
 
 const playlist = [
@@ -91,46 +140,46 @@ const playlist = [
 const food = [
   {
     foodCategory: '만두',
-    store: [],
+    store: store,
   },
   {
     foodCategory: '떡볶이',
-    store: [],
+    store: store,
   },
   {
     foodCategory: '우동',
-    store: [],
+    store: store,
   },
   {
     foodCategory: '라면',
-    store: [],
+    store: store,
   },
   {
     foodCategory: '삼겹살',
-    store: [],
+    store: store,
   },
 ];
 
 const activity = [
   {
     activityCategory: '테니스',
-    store: [],
+    store: store,
   },
   {
     activityCategory: '영화',
-    store: [],
+    store: store,
   },
   {
     activityCategory: '클라이밍',
-    store: [],
+    store: store,
   },
   {
     activityCategory: '피시방',
-    store: [],
+    store: store,
   },
   {
     activityCategory: '테마카페',
-    store: [],
+    store: store,
   },
 ];
 
@@ -148,11 +197,13 @@ function RecommendPage() {
   // food
   useEffect(() => {
     dispatch(setFoodList(food));
+    dispatch(setCurrentFood(food[0]));
   }, [food]);
 
   // activity
   useEffect(() => {
     dispatch(setActivityList(activity));
+    dispatch(setCurrentActivity(activity[0]));
   }, [activity]);
 
   return (
@@ -161,7 +212,6 @@ function RecommendPage() {
       <div className="recommend-content">
         <Title title={titles[index]} />
         {index === 0 ? <Music /> : index === 1 ? <Food /> : <Activity />}
-        {/* <Food /> */}
       </div>
       <PrevNext index={index} />
     </Container>

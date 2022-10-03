@@ -2,8 +2,7 @@
 const REFRESH_ACTIVITY_LIST = 'activity/refresh';
 const SET_ACTIVITY_LIST = 'activity/list';
 const SET_CURRENT_ACTIVITY = 'activity/current';
-const ADD_LIKE_ACTIVITY = 'activity/like';
-const ADD_DISLIKE_ACTIVITY = 'activity/dislike';
+const SET_ACTIVITY_CHOICE = 'activity/choice';
 const SET_CURRENT_STORE = 'activity/store';
 
 /* 액션 생성 함수 */
@@ -16,19 +15,15 @@ export const setActivityList = (list) => ({
   list,
 });
 
+export const setActivityChoice = (category, value) => ({
+  type: SET_ACTIVITY_CHOICE,
+  category,
+  value,
+});
+
 export const setCurrentActivity = (current) => ({
   type: SET_CURRENT_ACTIVITY,
   current,
-});
-
-export const addLikeACTIVITY = (activity) => ({
-  type: ADD_LIKE_ACTIVITY,
-  activity,
-});
-
-export const addDislikeACTIVITY = (activity) => ({
-  type: ADD_DISLIKE_ACTIVITY,
-  activity,
 });
 
 export const setCurrentStore = (store) => ({
@@ -42,13 +37,22 @@ export function activityReducer(state, action) {
     case REFRESH_ACTIVITY_LIST:
       return { ...state, refresh: state.refresh + 1 };
     case SET_ACTIVITY_LIST:
-      return { ...state, list: action.list };
+      const newList = action.list.map((item) => {
+        item.choiceYN = 0;
+        return item;
+      });
+      return { ...state, list: newList };
     case SET_CURRENT_ACTIVITY:
       return { ...state, current: action.current };
-    case ADD_LIKE_ACTIVITY:
-      return state;
-    case ADD_DISLIKE_ACTIVITY:
-      return state;
+    case SET_ACTIVITY_CHOICE:
+      const updatedList = state.list.map((item) => {
+        if (item.activityCategory === action.category)
+          item.choiceYN = action.value;
+        return item;
+      });
+      console.log(updatedList);
+      console.log(action);
+      return { ...state, list: updatedList };
     case SET_CURRENT_STORE:
       return { ...state, store: action.store };
     default:

@@ -95,8 +95,12 @@ export default function MenuDrawer({ menu }) {
           <div className="drawer__inner">{drawer[menu]}</div>
         </div>
         {menu === 0 && <Music />}
-        {menu === 1 && <StoreDrawer list={state.foodReducer.list} />}
-        {menu === 2 && <StoreDrawer list={state.activityReducer.list} />}
+        {menu === 1 && (
+          <StoreDrawer type="food" list={state.foodReducer.list} />
+        )}
+        {menu === 2 && (
+          <StoreDrawer type="activity" list={state.activityReducer.list} />
+        )}
         {menu === 3 && <PlanDrawer />}
       </CustomSwipeableDrawer>
     </>

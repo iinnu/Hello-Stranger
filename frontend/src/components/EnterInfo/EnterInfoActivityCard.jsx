@@ -60,9 +60,11 @@ export default function RecipeReviewCard({ id, title, image }) {
     setDisable(true)
     setDisable2(false)
   }
+
   function newbutton(){
     setDisable(false)
     setDisable2(true)
+
   }
   return (
     <Card className="UserInput__Activity__Item__Area__Card">

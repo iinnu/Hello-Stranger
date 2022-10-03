@@ -14,7 +14,7 @@ const generateRandomString = (length) => {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
   return text;
-};
+}
 
 const LoginPage = ({ onSocial }) => {
   const CLIENT_ID = '6d92d2e223a8402db931ef210c6c4556';

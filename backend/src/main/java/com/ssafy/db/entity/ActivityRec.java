@@ -21,4 +21,8 @@ public class ActivityRec {
 
     @Column(name = "activity")
     String activity;
+
+    public ActivityRec(int userId) {
+        this.userId = userId;
+    }
 }

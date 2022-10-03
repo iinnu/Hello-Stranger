@@ -2,42 +2,57 @@ import React, { useState, useEffect } from "react";
 import BottomNav from "components/common/BottomNav";
 import Container from "components/common/Container";
 import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import RestaurantRoundedIcon from "@mui/icons-material/RestaurantRounded";
-import SkateboardingIcon from "@mui/icons-material/Skateboarding";
 import Drawer from "@mui/material/Drawer";
-import DetailInfoList from "components/DetailInfo/List";
-
+import DetailInfoList from "components/NearAnalysis/Drawer/TabPanel";
+import ButtonGroups from "components/NearAnalysis/ButtonGroups";
+import NearDrawer from "components/NearAnalysis/Drawer/NearDrawer";
 import Map from "components/NearAnalysis/Map";
+import { useMainState } from 'components/Main/MainContext';
+import useGeocoder from 'hook/useGeocoder';
+
+
 import "styles/NearAnalysisPage/NearAnalysisPage.scss";
 function NearAnalysisPage() {
+  // const { location } = useMainState();
+  const location =  JSON.parse(localStorage.getItem('current'))
+  const { coord2Address } = useGeocoder();
+
+  const callback = (result) => {
+    const address =
+      result[0].address.address_name ?? result[0].road_address?.address_name ;
+    localStorage.setItem('address', result[0].address.address_name)
+  };
+
+  useEffect(() => {
+    if (location) {
+      console.log('location 들어오지?', location)
+      coord2Address(location, callback);
+    }
+  }, [location]);
+
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [type, setType] = useState("nearFood");
+  const toggleDrawer = (state) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setOpenDrawer(state);
+  };
+  const [type, setType] = useState("food");
   function openFood() {
     setOpenDrawer(true);
-    setType("nearFood");
+    setType("food");
   }
   function openActivity() {
     setOpenDrawer(true);
-    setType("nearActivity");
+    setType("activity");
   }
   function closeDetail() {
     setOpenDrawer(false);
   }
-  const buttons = [
-    <Button className="near-analysis__control--button" onClick={openFood}>
-      <RestaurantRoundedIcon />
-      음식
-    </Button>,
-    <Button className="near-analysis__control--button" onClick={openActivity}>
-      <SkateboardingIcon />
-      활동
-    </Button>,
-  ];
-
   return (
     <>
       <Container>
@@ -45,18 +60,12 @@ function NearAnalysisPage() {
           <Paper className="near-analysis__title">
             <div className="near-analysis__title--text">우리 동네 분석</div>
           </Paper>
-          <ButtonGroup
-            className="near-analysis__control"
-            orientation="vertical"
-            aria-label="vertical contained button group"
-            variant="contained"
-          >
-            {buttons}
-          </ButtonGroup>
+          <ButtonGroups
+            openFood={openFood}
+            openActivity={openActivity}
+          />
           <Map />
-          <Drawer anchor="bottom" open={openDrawer} onClose={closeDetail}>
-            <DetailInfoList type={type} />
-          </Drawer>
+          <NearDrawer open={openDrawer} toggleDrawer={toggleDrawer} type={type}/>
         </div>
         <BottomNav />
       </Container>

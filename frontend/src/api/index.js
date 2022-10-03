@@ -13,6 +13,7 @@ function getApiInstance() {
   // 토큰이 있으면 헤더에 토큰 설정
   instance.interceptors.request.use(function (config) {
     const token = localStorage.getItem('token');
+    console.log('여기서 안걸리나?', token)
     if (token) {
       config.headers['Authorization'] = 'Bearer ' + token;
     }

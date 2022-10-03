@@ -1,5 +1,6 @@
 package com.ssafy.db.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import javax.persistence.*;
  */
 @Entity
 @Getter
+@AllArgsConstructor
 @Table(name = "review")
 public class Review {
 
@@ -49,5 +51,28 @@ public class Review {
     FoodCategory foodCategory;
 
     public Review() {};
+
+    public Review(int musicId, String regDate, String evalYN, String title, ActivityCategory activityCategoryName, FoodCategory foodCategoryName, User user) {
+        this.musicId = musicId;
+        this.regDate = regDate;
+        this.evalYN = evalYN;
+        this.title = title;
+        this.activityCategory = activityCategoryName;
+        this.foodCategory = foodCategoryName;
+        this.user = user;
+    }
+
+    public Review withEvalYN(String evalYN){
+        return new Review(
+                this.reviewId,
+                this.musicId,
+                this.regDate,
+                evalYN,
+                this.title,
+                this.user,
+                this.activityCategory,
+                this.foodCategory
+        );
+    }
 
 }

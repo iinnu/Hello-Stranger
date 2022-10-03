@@ -1,0 +1,44 @@
+@import "../common/util";
+
+.history {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: calc($viewport-height - 56px);
+
+  &__title {
+    position: relative;
+    display: flex;
+    padding: 0 5%;
+    align-items: center;
+    width: 100%;
+    height: calc(($viewport-height - 56px)*0.1);
+    font-size: 17px;
+    font-weight: 600;
+    color: #444;
+  }
+  &__list {
+    position: relative;
+    width: 100%;
+    height: calc(($viewport-height - 56px)*0.9);
+    padding: 0 5%;
+  }
+  &__card {
+    margin-bottom: 5%;
+  }
+
+}
+.history-inner{
+  height: 100%;
+  padding: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+// .title {
+//   &--top {
+//     padding-bottom: 5px;
+//   }
+// }

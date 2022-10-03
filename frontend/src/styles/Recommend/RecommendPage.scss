@@ -1,0 +1,39 @@
+@import './_common.scss';
+
+.recommend-title {
+  height: 100px;
+  font-size: 2em;
+  font-weight: 900;
+  padding: 0 $padding-side;
+  padding-top: $padding-top;
+}
+
+.recommend-content {
+  height: calc($viewport-height - 46.5px - 40px);
+  position: relative;
+}
+
+.recommend-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 5px 0;
+
+  &__page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: gray;
+    font-size: 0.9em;
+  }
+}
+
+/* reload */
+.loading-element {
+  display: flex;
+  justify-content: center;
+}

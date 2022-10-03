@@ -1,0 +1,18 @@
+@import '../common/_util';
+
+$padding-top: 10px;
+$padding-side: 20px;
+
+/* layout */
+$top-height: 40px;
+$title-height: 110px;
+$bottom-height: 46.5px;
+
+/* food, activity category */
+$category-list-height: calc(
+  $viewport-height - $top-height - $title-height - $bottom-height
+);
+$category-height: 200px;
+$category-img-height: 160px;
+$category-desc-height: calc($category-height - $category-img-height);
+$category-border: 8px;

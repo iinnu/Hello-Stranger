@@ -2,7 +2,6 @@ package com.ssafy.db.repository;
 
 import com.ssafy.db.entity.FoodCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
-<<<<<<< backend/src/main/java/com/ssafy/db/repository/FoodCategoryRepository.java
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 

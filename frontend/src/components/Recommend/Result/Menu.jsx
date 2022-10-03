@@ -15,9 +15,8 @@ const list = [
   { icon: <SportsTennisIcon />, label: '활동' },
 ];
 
-export default function Menu() {
+export default function Menu({ menu, setMenu }) {
   const navigate = useNavigate();
-  const [menu, setMenu] = useState(-1);
   const [modal, setModal] = useState(false);
 
   // 왼쪽 메뉴

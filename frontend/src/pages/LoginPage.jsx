@@ -17,33 +17,6 @@ const generateRandomString = (length) => {
 }
 
 const LoginPage = ({ onSocial }) => {
-  const CLIENT_ID = '6d92d2e223a8402db931ef210c6c4556';
-  // const REDIRECT_URI = "http://localhost:3000/guide/first"
-  const REDIRECT_URI = 'http://localhost:3000';
-
-  const onSuccess = (response) => {
-    console.log(response);
-    axios({
-      url: 'http://localhost:8081/api/user',
-      method: 'post',
-      data: {
-        idToken: response.access_token,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        // window.location.href ="/main"
-        window.location.href = '/guide/first';
-      })
-      .catch((err) => {
-        console.log(err);
-        window.location.href = '/guide/first';
-      });
-  };
-
-  const onFailure = (response) => {
-    console.log(response);
-  };
 
   const handleLogin = () => {
     const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;

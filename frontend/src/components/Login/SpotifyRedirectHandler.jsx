@@ -22,11 +22,9 @@ export default function SpotifyRedirectHandler() {
 
         localStorage.setItem('spotify', accessToken);
         setRefreshToken(refreshToken);
-
+        
         // 스포티파이에서 유저 정보 얻기
         const info = await getSpotifyUserInfo(accessToken);
-        console.log(info);
-
         // 유저 정보를 성공적으로 얻었으면 로그인 요청
         if (info?.status === 200) {
           const email = { 
@@ -35,11 +33,13 @@ export default function SpotifyRedirectHandler() {
             'nickname': info.data.display_name,
             }
           console.log(email) 
+          localStorage.setItem('email', email.email)
           const login = await getApiInstance().post('/user', email);
 
           // 로그인 성공 시, 첫 로그인 여부에 따라서 페이지 다르게 이동
           if (login?.status === 200) {
             localStorage.setItem('token', login.data.accessToken);
+            // localStorage.setItem('email', info.data.email)
             window.location.replace('/guide/first');
           }
           // 로그인 실패 시
@@ -54,6 +54,7 @@ export default function SpotifyRedirectHandler() {
       },
       (err) => {
         console.log(err);
+        // window.location.replace('/guide/first');
       }
     );
   }, []);

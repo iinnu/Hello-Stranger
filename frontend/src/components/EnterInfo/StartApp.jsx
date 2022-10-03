@@ -29,6 +29,7 @@ const StartApp = () => {
       localStorage.removeItem("foodDataInput") 
       localStorage.removeItem("activityDataInput") 
       console.log(userChoice)
+      const token = localStorage.getItem("token")
       const start = getApiInstance().post('/user/choice', userChoice);
       if (start?.status === 200) {
         console.log("hi")
@@ -37,7 +38,7 @@ const StartApp = () => {
       else {
         alert('ㅠㅠ');
         // window.location.replace('/info/start');
-        window.location.replace('/main')
+        // window.location.replace('/main')
       }
     }
     return (

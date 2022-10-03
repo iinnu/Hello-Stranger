@@ -17,7 +17,7 @@ export default function RecipeReviewCard({id, name, artist, image}) {
     const musicDataInput = [
       {
       "id": id,
-      "likeYN" : "Y"
+      "likeYN" : 1
       }
     ]
     localStorage.setItem("musicDataInput", JSON.stringify(musicDataInput))
@@ -27,7 +27,7 @@ export default function RecipeReviewCard({id, name, artist, image}) {
     const musicDataInput = 
       {
       "id": id,
-      "likeYN" : "Y"
+      "likeYN" : 1
       }
       existData.push(musicDataInput)
       localStorage.setItem("musicDataInput", JSON.stringify(existData))
@@ -42,7 +42,7 @@ export default function RecipeReviewCard({id, name, artist, image}) {
       const musicDataInput = [
         {
         "id": id,
-        "likeYN" : "N"
+        "likeYN" : -1
         }
       ]
       localStorage.setItem("musicDataInput", JSON.stringify(musicDataInput))
@@ -52,7 +52,7 @@ export default function RecipeReviewCard({id, name, artist, image}) {
       const musicDataInput = 
         {
         "id": id,
-        "likeYN" : "N"
+        "likeYN" : -1
         }
         existData.push(musicDataInput)
         localStorage.setItem("musicDataInput", JSON.stringify(existData))

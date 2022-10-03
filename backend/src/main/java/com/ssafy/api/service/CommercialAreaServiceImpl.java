@@ -29,11 +29,32 @@ public class CommercialAreaServiceImpl implements CommercialAreaService{
 
     @Override
     public CommercialAreaGetRes getCommercialArea(String userAddress,double latitude, double longitude) {
-        String foodKeyAdress = userAddress;
-        String activityKeyAdress = userAddress;
+        String[] parsing = userAddress.split(" ");
+
+        if(parsing[0].equals("서울")) parsing[0] = "서울특별시";
+        else if(parsing[0].equals("부산")) parsing[0] = "부산광역시";
+        else if(parsing[0].equals("인천")) parsing[0] = "인천광역시";
+        else if(parsing[0].equals("대구")) parsing[0] = "대구광역시";
+        else if(parsing[0].equals("대전")) parsing[0] = "대전광역시";
+        else if(parsing[0].equals("광주")) parsing[0] = "광주광역시";
+        else if(parsing[0].equals("울산")) parsing[0] = "울산광역시";
+        else if(parsing[0].equals("세종")) parsing[0] = "세종특별자치시";
+        else if(parsing[0].equals("경기")) parsing[0] = "경기도";
+        else if(parsing[0].equals("강원")) parsing[0] = "강원도";
+        else if(parsing[0].equals("충북")) parsing[0] = "충청북도";
+        else if(parsing[0].equals("충남")) parsing[0] = "충청남도";
+        else if(parsing[0].equals("전북")) parsing[0] = "전라북도";
+        else if(parsing[0].equals("전남")) parsing[0] = "전라남도";
+        else if(parsing[0].equals("경북")) parsing[0] = "경상북도";
+        else if(parsing[0].equals("경남")) parsing[0] = "경상남도";
+        else if(parsing[0].equals("제주")) parsing[0] = "제주특별자치도";
+
+        String foodKeyAdress = parsing[0]+" "+parsing[1]+" "+parsing[2];
+        String activityKeyAdress = parsing[0]+" "+parsing[1];
 
         //1. 가장많은 음식점(desc)
-        List<Food> mostFood = foodRepository.findFoodByCommercial(foodKeyAdress,latitude,longitude,"desc");
+        List<Food> mostFood = foodRepository.findFoodByCommercialDesc(foodKeyAdress,latitude,longitude);
+        System.out.println(mostFood.size());
         String mostFoodCategory = mostFood.get(0).getFoodCategory();
         List<BaseInfo> mostResFood = new ArrayList<>();
         for(Food food : mostFood){
@@ -47,7 +68,7 @@ public class CommercialAreaServiceImpl implements CommercialAreaService{
                             .build());
         }
         //2. 가장적은 음식점(asc)
-        List<Food> leastFood = foodRepository.findFoodByCommercial(foodKeyAdress,latitude,longitude,"asc");
+        List<Food> leastFood = foodRepository.findFoodByCommercialAsc(foodKeyAdress,latitude,longitude);
         List<BaseInfo> leastResFood = new ArrayList<>();
         String leastFoodCategory = "";
         if(leastFood.isEmpty()){
@@ -68,11 +89,11 @@ public class CommercialAreaServiceImpl implements CommercialAreaService{
         }
 
         //3, 가장많은 활동(desc)
-        List<Activity> mostActivity = activityRepository.findActivityByCommercial(activityKeyAdress,latitude,longitude,"desc");
+        List<Activity> mostActivity = activityRepository.findActivityByCommercialDesc(activityKeyAdress,latitude,longitude);
         String mostActivityCategory = mostActivity.get(0).getActivityCategory();
         List<BaseInfo> mostResActivity = new ArrayList<>();
         for(Activity activity : mostActivity){
-            mostResFood.add(BaseInfo.builder()
+            mostResActivity.add(BaseInfo.builder()
                     .id(activity.getActivityId())
                     .address(activity.getActivityAddress())
                     .latitude(activity.getActivityLatitude())
@@ -83,7 +104,7 @@ public class CommercialAreaServiceImpl implements CommercialAreaService{
         }
 
         //4. 가장적은 활동(asc)
-        List<Activity> leastActivity = activityRepository.findActivityByCommercial(activityKeyAdress,latitude,longitude,"asc");
+        List<Activity> leastActivity = activityRepository.findActivityByCommercialAsc(activityKeyAdress,latitude,longitude);
         List<BaseInfo> leastResActivity = new ArrayList<>();
         String leastActivityCategory = "";
         if(leastActivity.isEmpty()){
@@ -92,7 +113,7 @@ public class CommercialAreaServiceImpl implements CommercialAreaService{
         else{
             leastActivityCategory = leastActivity.get(0).getActivityCategory();
             for(Activity activity : leastActivity){
-                leastResFood.add(BaseInfo.builder()
+                leastResActivity.add(BaseInfo.builder()
                         .id(activity.getActivityId())
                         .address(activity.getActivityAddress())
                         .latitude(activity.getActivityLatitude())

@@ -23,14 +23,25 @@ public interface FoodRepository extends JpaRepository<Food,Integer> {
     Food findByFoodId(int foodId);
 
 
-    String queryForCommercial = "select *,(6371*ACOS(COS(RADIANS(:latitude))*COS(RADIANS(f.food_latitude))*COS(RADIANS(f.food_longitude)-RADIANS(:longitude))+SIN(RADIANS(:latitude))*SIN(RADIANS(f.food_latitude)))) AS distance \n" +
+
+
+    String queryForCommercialDesc = "select *,(6371*ACOS(COS(RADIANS(:latitude))*COS(RADIANS(f.food_latitude))*COS(RADIANS(f.food_longitude)-RADIANS(:longitude))+SIN(RADIANS(:latitude))*SIN(RADIANS(f.food_latitude)))) AS distance \n" +
             "from food f\n" +
             "where f.food_dong like :address \n" +
-            "and f.food_category like (select fc.food_category from food_commercial fc where fc.food_dong like :address order by fc.cnt :sortKey limit 1)\n" +
+            "and f.food_category like (select fc.food_category from food_commercial fc where fc.food_dong like :address ORDER BY fc.cnt DESC limit 1)\n" +
             "order by distance limit 0,5;";
 
-    @Query(value = queryForCommercial, nativeQuery = true)
-    public List<Food> findFoodByCommercial(@Param("address") String address, @Param("latitude") double latitude, @Param("longitude") double longitude, @Param("sortKey") String sortKey);
+    @Query(value = queryForCommercialDesc, nativeQuery = true)
+    public List<Food> findFoodByCommercialDesc(@Param("address") String address, @Param("latitude") double latitude, @Param("longitude") double longitude);
+
+    String queryForCommercialAsc = "select *,(6371*ACOS(COS(RADIANS(:latitude))*COS(RADIANS(f.food_latitude))*COS(RADIANS(f.food_longitude)-RADIANS(:longitude))+SIN(RADIANS(:latitude))*SIN(RADIANS(f.food_latitude)))) AS distance \n" +
+            "from food f\n" +
+            "where f.food_dong like :address \n" +
+            "and f.food_category like (select fc.food_category from food_commercial fc where fc.food_dong like :address ORDER BY fc.cnt ASC limit 1)\n" +
+            "order by distance limit 0,5;";
+
+    @Query(value = queryForCommercialAsc, nativeQuery = true)
+    public List<Food> findFoodByCommercialAsc(@Param("address") String address, @Param("latitude") double latitude, @Param("longitude") double longitude);
 
 
 }

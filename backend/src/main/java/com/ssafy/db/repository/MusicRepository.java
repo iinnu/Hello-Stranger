@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface MusicRepository extends JpaRepository<Music, Integer> {
 
+    Music findByMusicId(int musicId);
+
     @Query(value = "select * from music order by RAND() limit 5", nativeQuery = true)
     List<Music> getCategoryList();
+
 }

@@ -1,11 +1,11 @@
 import Rating from '@mui/material/Rating';
 import OpenClosed from '../OpenClosed';
 
-export default function StoreInfo({ type, store, toggleDrawer }) {
+export default function StoreInfo({ store, toggleDrawer }) {
   return (
     <div className="store-info" onClick={toggleDrawer(true)}>
       <div className="store-info__top">
-        <span className="top__title">{store[type + 'Name']}</span>
+        <span className="top__title">{store.name}</span>
       </div>
       <div className="store-info__scope">
         <span>2.5</span>
@@ -18,7 +18,7 @@ export default function StoreInfo({ type, store, toggleDrawer }) {
         />
         <OpenClosed />
       </div>
-      <div className="store-info__address">{store[type + 'Address']}</div>
+      <div className="store-info__address">{store.address}</div>
     </div>
   );
 }

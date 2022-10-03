@@ -2,8 +2,7 @@
 const REFRESH_FOOD_LIST = 'food/refresh';
 const SET_FOOD_LIST = 'food/list';
 const SET_CURRENT_FOOD = 'food/current';
-const ADD_LIKE_FOOD = 'food/like';
-const ADD_DISLIKE_FOOD = 'food/dislike';
+const SET_FOOD_CHOICE = 'food/choice';
 const SET_CURRENT_STORE = 'food/store';
 
 /* 액션 생성 함수 */
@@ -21,14 +20,10 @@ export const setCurrentFood = (current) => ({
   current,
 });
 
-export const addLikeFood = (food) => ({
-  type: ADD_LIKE_FOOD,
-  food,
-});
-
-export const addDislikeFood = (food) => ({
-  type: ADD_DISLIKE_FOOD,
-  food,
+export const setFoodChoice = (category, value) => ({
+  type: SET_FOOD_CHOICE,
+  category,
+  value,
 });
 
 export const setCurrentStore = (store) => ({
@@ -42,13 +37,19 @@ export function foodReducer(state, action) {
     case REFRESH_FOOD_LIST:
       return { ...state, refresh: state.refresh + 1 };
     case SET_FOOD_LIST:
-      return { ...state, list: action.list };
+      const newList = action.list.map((item) => {
+        item.choiceYN = 0;
+        return item;
+      });
+      return { ...state, list: newList };
     case SET_CURRENT_FOOD:
       return { ...state, current: action.current };
-    case ADD_LIKE_FOOD:
-      return state;
-    case ADD_DISLIKE_FOOD:
-      return state;
+    case SET_FOOD_CHOICE:
+      const updatedList = state.list.map((item) => {
+        if (item.foodCategory === action.category) item.choiceYN = action.value;
+        return item;
+      });
+      return { ...state, list: updatedList };
     case SET_CURRENT_STORE:
       return { ...state, store: action.store };
     default:

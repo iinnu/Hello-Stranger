@@ -27,7 +27,7 @@ const titles = [
   ['어떤 활동을', '하고 싶으신가요?'],
 ];
 
-const store = [
+const foodstore = [
   {
     id: 1,
     name: '이태리 제면소',
@@ -67,6 +67,49 @@ const store = [
     latitude: '35.8004907',
     longitude: '128.491525',
     time: '매일 09:00 ~ 22:30',
+  },
+];
+
+const activitystore = [
+  {
+    id: 1,
+    name: 'CGV 월성',
+    address: '대구 달서구 조암로 29',
+    latitude: '35.8245685',
+    longitude: '128.526809',
+    time: '매일 00:00 ~ 23:59',
+  },
+  {
+    id: 2,
+    name: '옥연지 송해공원',
+    address: '대구 달성군 옥포읍 기세리 306',
+    latitude: '35.7803447',
+    longitude: '128.480256',
+    time: '매일 00:00 ~ 23:59',
+  },
+  {
+    id: 3,
+    name: '화원명곡체육공원',
+    address: '대구 달성군 화원읍 인흥1길 12',
+    latitude: '35.7979681',
+    longitude: '128.503779',
+    time: '매일 00:00 ~ 23:59',
+  },
+  {
+    id: 4,
+    name: '아이비키즈스포츠 화원명곡점',
+    address: '대구 달성군 화원읍 비슬로504길 16',
+    latitude: '35.7991400',
+    longitude: '128.492894',
+    time: '매일 09:00 ~ 23:00',
+  },
+  {
+    id: 5,
+    name: '오늘은 헤어',
+    address: '대구 달성군 화원읍 화암로 111',
+    latitude: '35.7996881',
+    longitude: '128.499541',
+    time: '매일 10:00 ~ 19:30',
   },
 ];
 
@@ -140,46 +183,46 @@ const playlist = [
 const food = [
   {
     foodCategory: '만두',
-    store: store,
+    store: foodstore,
   },
   {
     foodCategory: '떡볶이',
-    store: store,
+    store: foodstore,
   },
   {
     foodCategory: '우동',
-    store: store,
+    store: foodstore,
   },
   {
     foodCategory: '라면',
-    store: store,
+    store: foodstore,
   },
   {
     foodCategory: '삼겹살',
-    store: store,
+    store: foodstore,
   },
 ];
 
 const activity = [
   {
     activityCategory: '테니스',
-    store: store,
+    store: activitystore,
   },
   {
     activityCategory: '영화',
-    store: store,
+    store: activitystore,
   },
   {
     activityCategory: '클라이밍',
-    store: store,
+    store: activitystore,
   },
   {
     activityCategory: '피시방',
-    store: store,
+    store: activitystore,
   },
   {
     activityCategory: '테마카페',
-    store: store,
+    store: activitystore,
   },
 ];
 

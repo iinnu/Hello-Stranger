@@ -17,7 +17,7 @@ export default function RecipeReviewCard({ id, title, image }) {
     const foodDataInput = [
       {
       "category": title,
-      "likeYN" : "Y"
+      "likeYN" : 1
       }
     ]
     localStorage.setItem("foodDataInput", JSON.stringify(foodDataInput))
@@ -27,7 +27,7 @@ export default function RecipeReviewCard({ id, title, image }) {
     const foodDataInput = 
       {
       "category": title,
-      "likeYN" : "Y"
+      "likeYN" : 1
       }
       existData.push(foodDataInput)
       localStorage.setItem("foodDataInput", JSON.stringify(existData))
@@ -42,7 +42,7 @@ export default function RecipeReviewCard({ id, title, image }) {
       const foodDataInput = [
         {
         "category": title,
-        "likeYN" : "N"
+        "likeYN" : -1
         }
       ]
       localStorage.setItem("foodDataInput", JSON.stringify(foodDataInput))
@@ -52,7 +52,7 @@ export default function RecipeReviewCard({ id, title, image }) {
       const foodDataInput = 
         {
         "category": title,
-        "likeYN" : "N"
+        "likeYN" : -1
         }
         existData.push(foodDataInput)
         localStorage.setItem("foodDataInput", JSON.stringify(existData))

@@ -25,20 +25,22 @@ const StartApp = () => {
       userChoice.music=JSON.parse(localStorage.getItem("musicDataInput"))
       userChoice.food=JSON.parse(localStorage.getItem("foodDataInput"))
       userChoice.activity=JSON.parse(localStorage.getItem("activityDataInput"))
-      localStorage.removeItem("musicDataInput") 
-      localStorage.removeItem("foodDataInput") 
-      localStorage.removeItem("activityDataInput") 
+      userChoice.userEmail=localStorage.getItem("email")
+      // localStorage.removeItem("musicDataInput") 
+      // localStorage.removeItem("foodDataInput") 
+      // localStorage.removeItem("activityDataInput") 
+      // localStorage.removeItem("email")
       console.log(userChoice)
-      const start = getApiInstance().post('/user/choice', userChoice);
-      if (start?.status === 200) {
-        console.log("hi")
-        window.location.replace('/main');
-      }
-      else {
-        alert('ㅠㅠ');
-        // window.location.replace('/info/start');
+      const start = getApiInstance();
+      start.post('/user/choice', userChoice)
+      .then(
+        console.log("hi"),
         window.location.replace('/main')
-      }
+      )
+      .catch(
+        err =>{console.log(err)
+        
+      })
     }
     return (
         <div>

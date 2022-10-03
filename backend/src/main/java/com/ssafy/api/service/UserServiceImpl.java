@@ -2,23 +2,18 @@ package com.ssafy.api.service;
 
 import com.ssafy.api.dto.CategoryLikeYN;
 import com.ssafy.api.dto.IdLikeYN;
+import com.ssafy.api.dto.UserChoiceGetResActivity;
+import com.ssafy.api.dto.UserChoiceGetResFood;
 import com.ssafy.api.request.CategoryChoiceReq;
-import com.ssafy.db.entity.ActivityUser;
-import com.ssafy.db.entity.FoodUser;
-import com.ssafy.db.entity.MusicUser;
-import com.ssafy.db.repository.ActivityUserRepository;
-import com.ssafy.db.repository.FoodUserRepository;
-import com.ssafy.db.repository.MusicUserRepository;
-import com.ssafy.db.repository.UserRepository;
+import com.ssafy.api.response.UserChoiceGetRes;
+import com.ssafy.db.entity.*;
+import com.ssafy.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.ssafy.db.entity.User;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -34,6 +29,15 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     MusicUserRepository musicUserRepository;
+
+    @Autowired
+    ActivityCategoryRepository activityCategoryRepository;
+
+    @Autowired
+    FoodCategoryRepository foodCategoryRepository;
+
+    @Autowired
+    MusicRepository musicRepository;
 
     @Override
     public int getUser(String userEmail) {
@@ -81,6 +85,41 @@ public class UserServiceImpl implements UserService{
         musicUserRepository.saveAll(musicUserList);
         foodUserRepository.saveAll(foodUserList);
         activityUserRepository.saveAll(activityUserList);
+    }
+
+    @Transactional
+    @Override
+    public UserChoiceGetRes getUserChoiceList() {
+
+        List<Music> musicCategory = musicRepository.getCategoryList();
+        List<FoodCategory> foodCategory = foodCategoryRepository.getCategoryList();
+        List<ActivityCategory> activityCategory = activityCategoryRepository.getCategoryList();
+
+        List<UserChoiceGetResFood> userChoiceGetResFoods = new ArrayList<>();
+        for(FoodCategory category : foodCategory){
+            UserChoiceGetResFood userChoiceFood = UserChoiceGetResFood.builder()
+                    .foodCategory(category.getCategoryName())
+                    .foodImgUrl(category.getCategoryImgUrl())
+                    .build();
+            userChoiceGetResFoods.add(userChoiceFood);
+        }
+
+        List<UserChoiceGetResActivity> userChoiceGetResActivities = new ArrayList<>();
+        for(ActivityCategory category : activityCategory){
+            UserChoiceGetResActivity userChoiceActivity = UserChoiceGetResActivity.builder()
+                    .activityCategory(category.getCategoryName())
+                    .activityImgUrl(category.getCategoryImgUrl())
+                    .build();
+            userChoiceGetResActivities.add(userChoiceActivity);
+        }
+
+        UserChoiceGetRes userChoiceGetRes = UserChoiceGetRes.builder()
+                .music(musicCategory)
+                .food(userChoiceGetResFoods)
+                .activity(userChoiceGetResActivities)
+                .build();
+
+        return userChoiceGetRes;
     }
 
     @Override

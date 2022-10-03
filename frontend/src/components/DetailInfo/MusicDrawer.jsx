@@ -57,7 +57,7 @@ export default function StoreInfoDrawer({ open, toggleDrawer }) {
     settrackIdList(playlistIdList)
     setPlaylist(playlist)
   }
-  useEffect(()=>{getMusic()},[])
+  // useEffect(()=>{getMusic()},[])
 
   return (
     <CustomSwipeableDrawer

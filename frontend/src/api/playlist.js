@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export default async function createPlaylist(data) {
-  const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN_ONE
+  // const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN_ONE
+  const accessToken = localStorage.getItem('spotify')
   console.log('createPlaylist', accessToken)
 
   const playlistIdList = await data.tracks.map((d)=>`spotify:track:${d.id}`)

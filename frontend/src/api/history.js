@@ -25,21 +25,25 @@ export function getUserDetail(reviewId) {
 }
 
 export function getUserActivity(activityId){
-    api.get(`/detail/activity/${activityId}`)
+    return api.get(`/detail/activity/${activityId}`)
     .then((res)=> {
         console.log('활동 상세 정보',res.data)
+        return res.data
     })
     .catch((err)=>{
-        console.error(err)
+        console.error(err, '활동 정보 안넘어옴')
+        return []
     })
 }
 export function getUserFood(foodId){
-    api.get(`/detail/food/${foodId}`)
+    return api.get(`/detail/food/${foodId}`)
     .then((res)=> {
         console.log('음식 상세 정보',res.data)
+        return res.data
     })
     .catch((err)=>{
         console.error(err)
+        return []
     })
 }
 

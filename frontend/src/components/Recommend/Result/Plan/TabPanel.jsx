@@ -6,7 +6,7 @@ export default function TabPanel(props) {
 
   return (
     <Box
-      sx={{ height: '100%' }}
+      sx={{ height: 'calc(100% - 49px)' }}
       role="tabpanel"
       hidden={value !== index}
       id={`tabpanel-${index}`}

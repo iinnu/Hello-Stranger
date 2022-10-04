@@ -6,7 +6,13 @@ import com.ssafy.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -64,6 +70,7 @@ public class ReviewServiceImpl implements ReviewService{
                     .musicId(reviewAll.getMusicId())
                     .foodCategoryName(reviewAll.getFoodCategory().getCategoryName())
                     .activityCategoryName(reviewAll.getActivityCategory().getCategoryName())
+                    .evalYN(reviewAll.getEvalYN())
                     .build();
             reviews.add(content);
         }
@@ -125,6 +132,36 @@ public class ReviewServiceImpl implements ReviewService{
     public void updateReviewEvalYNbyReviewId(int reviewId) {
         Review review = reviewRepository.getReviewByReviewId(reviewId);
         reviewRepository.save(review.withEvalYN("Y"));
+    }
+
+    @Override
+    public String getEvalYN(List<ReviewGetResContent> reviews) throws ParseException {
+        String evalYN = "N";
+        for(int i = 0; i < reviews.size(); i++){
+            if(reviews.get(i).getEvalYN().equals("N")){
+                if(checkIs48hours(reviews.get(i))){
+                    evalYN = "Y";
+                    break;
+                }
+            }
+        }
+        return evalYN;
+    }
+
+    private boolean checkIs48hours(ReviewGetResContent reviewGetResContent) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy:MM:dd:HH:mm:ss");
+        Date reviewRegDate = formatter.parse(reviewGetResContent.getRegDate());
+
+        String regDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy:MM:dd:HH:mm:ss"));
+        Date nowDate = formatter.parse(regDate);
+
+        Calendar regDatePlus2 = Calendar.getInstance();
+        regDatePlus2.setTime(reviewRegDate);
+        regDatePlus2.add(Calendar.DATE, 2);
+
+        if(regDatePlus2.getTime().after(nowDate)){
+            return true;
+        } else { return false;}
     }
 
 }

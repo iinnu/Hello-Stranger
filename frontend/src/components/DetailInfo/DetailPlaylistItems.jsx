@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-export default function DetailPlaylist({data, currentMusic}){
-    const songName = data.name
-    const artistsName = data.artists.map((e)=>{
+export default function DetailPlaylistItems({data, currentMusic}){
+    const songName = data?.name
+    const artistsName = data?.artists.map((e)=>{
         return e.name
     }).join(',')
     const shortVersion = function(text){
@@ -21,11 +21,9 @@ export default function DetailPlaylist({data, currentMusic}){
     }
     ,[currentMusic])
     return (
-        <>
         <div className="list-items" style={isPlaying ? {backgroundColor: 'rgba(255, 255, 255, 0.4)'} : {} }>
         <p>{shortVersion(songName)}</p>
         <p>{shortVersion(artistsName)}</p>
         </div>
-        </>
     )
 }

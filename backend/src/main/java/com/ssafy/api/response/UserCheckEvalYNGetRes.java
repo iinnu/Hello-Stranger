@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 @Builder
-public class UserRegistRes {
-    String accessToken;
-    String isSignup;
+public class UserCheckEvalYNGetRes {
+    String isNeedEval;
 }

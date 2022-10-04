@@ -12,6 +12,7 @@ public class ReviewGetResContent {
     String title;
     String regDate;
     int musicId;
+    String evalYN;
     String foodCategoryName;
     String activityCategoryName;
 }

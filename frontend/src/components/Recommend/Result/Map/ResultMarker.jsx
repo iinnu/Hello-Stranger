@@ -1,4 +1,4 @@
-import { useResultContext } from '../Context/ResultContext';
+import { useResultContext } from '../../Context/ResultContext';
 import { MapMarker } from 'react-kakao-maps-sdk';
 import marker from 'assets/images/marker.png';
 import marker_active from 'assets/images/marker-active.png';

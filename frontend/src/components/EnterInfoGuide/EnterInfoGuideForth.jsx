@@ -22,7 +22,7 @@ const EnterInfoGuideForth = () => {
     function handleClick(e) {
       const userInputInfo = {}
       axios({
-        url: 'https://j7d104.p.ssafy.io:8081/api/user/choice',
+        url: 'https://j7d104.p.ssafy.io/api/user/choice',
         method:'get',
         })
         .then(res=>{

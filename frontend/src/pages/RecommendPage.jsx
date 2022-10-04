@@ -49,10 +49,10 @@ function RecommendPage() {
 
   const handleLoading = () => setLoading(false);
 
-  // localStorage.setItem(
-  //   'token',
-  //   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmcm9tLmh0aWVrQGdtYWlsLmNvbSIsImlzcyI6ImhlbGxvX3N0cmFuZ2VyIiwiZXhwIjoxNjY0OTI2OTExLCJpYXQiOjE2NjQ4ODM3MTF9.ZYgPGZmNO0CVg6ZC4K6iG753G3xJ9d00psMafgYHxiuiMf8SRrpKa8BoldVrkV4boXEQ4keikICkRUIlYYZ7JQ'
-  // );
+  localStorage.setItem(
+    'token',
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoaXRsYmg3NzdAZ21haWwuY29tIiwiaXNzIjoiaGVsbG9fc3RyYW5nZXIiLCJleHAiOjE2NjQ5MzM0ODEsImlhdCI6MTY2NDg5MDI4MX0.2fM_-wjcoJ1aPgKIz1RLWaEbdSvk7qDBeguYkmpdR80zxRg7Ugcl3UObCPDRGNFgYVrPzYyglfH3qwJkTkvfAQ'
+  );
 
   // music
   useEffect(() => {

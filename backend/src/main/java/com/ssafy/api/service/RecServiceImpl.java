@@ -19,6 +19,10 @@ import java.util.List;
 @Service
 public class RecServiceImpl implements RecService{
     @Autowired
+    FoodCategoryRepository foodCategoryRepository;
+    @Autowired
+    ActivityCategoryRepository activityCategoryRepository;
+    @Autowired
     ActivityRecRepository activityRecRepository;
     @Autowired
     ActivityRepository activityRepository;
@@ -69,6 +73,7 @@ public class RecServiceImpl implements RecService{
 
         String [] activityRecs = activityRecRepository.findByUserId(userId).getActivity().split(" ");
         for(int i=start; i<start+recNum; i++){
+            String imgUrl = activityCategoryRepository.getActivityCategoryByCategoryName(activityRecs[i]).getCategoryImgUrl().replace("\r","");
             List<Activity> stores = activityRepository.findActivityByDistance(distance,latitude,longitude,activityRecs[i]);
             List<BaseInfo> storesBase = new ArrayList<>();
             int len = stores.size();
@@ -83,7 +88,7 @@ public class RecServiceImpl implements RecService{
                         .address(cur.getActivityAddress())
                         .build());
             }
-            res.add(ActivityRecGetRes.builder().activityCategory(activityRecs[i]).store(storesBase).build());
+            res.add(ActivityRecGetRes.builder().activityCategory(activityRecs[i]).store(storesBase).imgUrl(imgUrl).build());
         }
         return res;
     }
@@ -96,6 +101,7 @@ public class RecServiceImpl implements RecService{
         int start = recNum*key;
         String [] foodRecs = foodRecRepository.findByUserId(userId).getFood().split(" ");
         for(int i=start; i<start+recNum; i++){
+            String imgUrl = foodCategoryRepository.getFoodCategoryByCategoryName(foodRecs[i]).getCategoryImgUrl().replace("\r","");
             List<Food> stores = foodRepository.findFoodByDistance(distance,latitude,longitude,foodRecs[i]);
             List<BaseInfo> storesBase = new ArrayList<>();
             int len = stores.size();
@@ -110,7 +116,7 @@ public class RecServiceImpl implements RecService{
                         .address(cur.getFoodAddress())
                         .build());
             }
-            res.add(FoodRecGetRes.builder().foodCategory(foodRecs[i]).store(storesBase).build());
+            res.add(FoodRecGetRes.builder().foodCategory(foodRecs[i]).store(storesBase).imgUrl(imgUrl).build());
         }
         return res;
     }

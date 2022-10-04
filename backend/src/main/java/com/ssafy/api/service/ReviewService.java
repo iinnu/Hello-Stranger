@@ -3,6 +3,7 @@ package com.ssafy.api.service;
 import com.ssafy.api.dto.ReviewGetResContent;
 import com.ssafy.db.entity.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface ReviewService {
@@ -23,4 +24,6 @@ public interface ReviewService {
     Music getMusicIdByReviewId(int reviewId);
 
     void updateReviewEvalYNbyReviewId(int reviewId);
+
+    String getEvalYN(List<ReviewGetResContent> reviews) throws ParseException;
 }

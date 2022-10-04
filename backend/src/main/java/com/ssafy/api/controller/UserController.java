@@ -158,10 +158,13 @@ public class UserController {
         userService.registUserChoice(userId, categoryChoiceReq);
 
         URL activityRecommend = getClass().getClassLoader().getResource("activity_contents_based.py");
+        System.out.println(activityRecommend);
         String[] command = new String[2];
         command[0] = "python3";
         command[1] = new File(activityRecommend.getPath()).getAbsolutePath();
+        System.out.println(command[1]);
 
+        
         try {
             exePython(command);
         } catch (Exception e) {

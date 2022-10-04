@@ -145,6 +145,10 @@ $map-border-color: rgb(185, 185, 185);
   border-bottom: 1px solid #eee;
   cursor: pointer;
 
+  &--active {
+    background-color: rgba(183, 183, 183, 0.136);
+  }
+
   &__title {
     font-weight: 600;
     font-size: 1.2em;

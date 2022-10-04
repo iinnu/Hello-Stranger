@@ -55,7 +55,7 @@ const EnterInfo = () => {
       <Container>
         <div className="UserInput">
             <div className='UserInput__Activity__Title'>
-                <h2>어던 활동을</h2>
+                <h2>어떤 활동을</h2>
                 <h2 className='UserInput__Activity__Title__Bottom'>자주 하시나요?</h2>
             </div>
             <div className='UserInput__Activity__Item'>

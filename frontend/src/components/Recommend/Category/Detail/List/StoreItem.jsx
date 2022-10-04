@@ -10,7 +10,7 @@ const Col = styled('div')`
   justify-content: center;
 `;
 
-export default function StoreItem({ item, handleClick }) {
+export default function StoreItem({ item, active, handleClick }) {
   const { state, dispatch } = useRecommendContext();
   const { index } = state.indexReducer;
 
@@ -21,7 +21,10 @@ export default function StoreItem({ item, handleClick }) {
   };
 
   return (
-    <div className="store-item" onClick={handleItemClick}>
+    <div
+      className={active ? 'store-item store-item--active' : 'store-item'}
+      onClick={handleItemClick}
+    >
       <Col>
         <div className="store-item__title">{item.name}</div>
         <span className="store-item__address">{item.address}</span>

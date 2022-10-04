@@ -88,9 +88,22 @@
             align-items: center;
             &__Card{
                 width: 80%;
+                &__Newbutton{
+                    position: relative;
+                    left: 80%;
+                    height: 0;
+                }
+                &__Title{
+                    overflow:hidden;
+                    text-overflow: hidden;
+                    white-space: nowrap;
+                }
                 &__Bottom{
                     display:flex;
                     justify-content: space-around;
+                    &__Artist{
+                        max-width: 200px;
+                    }
                 }
             }
             &__Uparrow{

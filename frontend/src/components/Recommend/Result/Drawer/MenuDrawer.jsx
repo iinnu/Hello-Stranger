@@ -98,14 +98,16 @@ export default function MenuDrawer({ menu }) {
         {menu === 1 && (
           <StoreDrawer
             type="food"
-            list={state.foodReducer.list}
+            list={state.foodReducer.list.filter((item) => item.choiceYN !== 2)}
             setOpen={setOpen}
           />
         )}
         {menu === 2 && (
           <StoreDrawer
             type="activity"
-            list={state.activityReducer.list}
+            list={state.activityReducer.list.filter(
+              (item) => item.choiceYN !== 2
+            )}
             setOpen={setOpen}
           />
         )}

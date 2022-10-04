@@ -3,7 +3,7 @@ import mascot from '../../assets/images/guide_forth.jpg'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import styled from '@emotion/styled';
 import Container from 'components/common/Container';
-import axios from "axios";
+import { getApiInstance } from 'api';
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -21,10 +21,8 @@ const EnterInfoGuideForth = () => {
       };
     function handleClick(e) {
       const userInputInfo = {}
-      axios({
-        url: 'http://localhost:8081/api/user/choice',
-        method:'get',
-        })
+      const userinfo = getApiInstance();
+      userinfo.get('/user/choice', userInputInfo)
         .then(res=>{
           userInputInfo.food=res.data.food
           userInputInfo.activity=res.data.activity

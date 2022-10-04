@@ -159,7 +159,7 @@ public class UserController {
 
         URL activityRecommend = getClass().getClassLoader().getResource("activity_contents_based.py");
         String[] command = new String[2];
-        command[0] = "python";
+        command[0] = "python3";
         command[1] = new File(activityRecommend.getPath()).getAbsolutePath();
 
         try {
@@ -170,7 +170,7 @@ public class UserController {
 
         URL foodRecommend = getClass().getClassLoader().getResource("food_contents_based.py");
         String[] command2 = new String[2];
-        command2[0] = "python";
+        command2[0] = "python3";
         command2[1] = new File(foodRecommend.getPath()).getAbsolutePath();
 
         try {
@@ -181,7 +181,7 @@ public class UserController {
 
         URL musicRecommend = getClass().getClassLoader().getResource("music_contents_based.py");
         String[] command3 = new String[2];
-        command3[0] = "python";
+        command3[0] = "python3";
         command3[1] = new File(musicRecommend.getPath()).getAbsolutePath();
 
         try {

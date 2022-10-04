@@ -68,13 +68,10 @@ const Map = () => {
   const getLevel = () => {
     switch (range) {
       case 1:
-        return 5;
-      case 2:
+      case 1.5:
         return 6;
-      case 3:
-        return 7;
       default:
-        return 8;
+        return 7;
     }
   };
 

@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import sample from 'assets/images/sample.jpg';
+import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
 import { setCurrentStore as activityStore } from 'components/Recommend/Context/activityReducer';
 import { setCurrentStore as foodStore } from 'components/Recommend/Context/foodReducer';
-import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
 
 const Col = styled('div')`
   display: flex;

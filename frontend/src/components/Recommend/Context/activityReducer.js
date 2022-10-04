@@ -50,8 +50,6 @@ export function activityReducer(state, action) {
           item.choiceYN = action.value;
         return item;
       });
-      console.log(updatedList);
-      console.log(action);
       return { ...state, list: updatedList };
     case SET_CURRENT_STORE:
       return { ...state, store: action.store };

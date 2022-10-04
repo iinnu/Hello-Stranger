@@ -7,7 +7,6 @@ function Recommend({ children }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    console.log({ location, range });
     localStorage.setItem('current', JSON.stringify(location));
     localStorage.setItem('range', range);
     navigate(`/recommend`);

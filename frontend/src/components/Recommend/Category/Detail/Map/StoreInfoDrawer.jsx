@@ -51,7 +51,6 @@ export default function StoreInfoDrawer({ store, open, toggleDrawer }) {
     <CustomSwipeableDrawer
       anchor="bottom"
       open={open}
-      disable
       onClose={toggleDrawer(false)}
       onOpen={toggleDrawer(true)}
       disableBackdropTransition
@@ -68,7 +67,6 @@ export default function StoreInfoDrawer({ store, open, toggleDrawer }) {
             <div className="main__title">{store.name}</div>
             <div className="main__status">
               <span>★ 4.5/5</span>
-              <OpenClosed />
             </div>
           </div>
         </StyledBox>
@@ -83,7 +81,7 @@ export default function StoreInfoDrawer({ store, open, toggleDrawer }) {
           </div>
           <div className="detail detail__hours">
             <CustomLabel startIcon={<AccessTimeIcon />}>
-              09:00 ~ 18:00
+              {store.time ? store.time : '등록된 영업시간이 없습니다'}
             </CustomLabel>
           </div>
         </StyledBox>
@@ -92,11 +90,6 @@ export default function StoreInfoDrawer({ store, open, toggleDrawer }) {
             <div>리뷰</div>
             <div>*네이버 지도 리뷰</div>
           </div>
-          <StoreReview />
-          <StoreReview />
-          <StoreReview />
-          <StoreReview />
-          <StoreReview />
         </StyledBox>
       </div>
     </CustomSwipeableDrawer>

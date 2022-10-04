@@ -8,8 +8,6 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-import sample from 'assets/images/sample.jpg';
-import sample2 from 'assets/images/sample2.png';
 
 export default function CategoryCard({ item, category, handleOpenDetail }) {
   const { state, dispatch } = useRecommendContext();
@@ -46,7 +44,7 @@ export default function CategoryCard({ item, category, handleOpenDetail }) {
         className="category-card__img-wrapper"
         onClick={() => handleOpenDetail(item)}
       >
-        <img src={index === 1 ? sample : sample2} alt="cateogory-img" />
+        <img src={item.imgUrl} alt="cateogory-img" />
       </div>
       <div className="category-card__category-desc">
         <div className="category-desc__inner">

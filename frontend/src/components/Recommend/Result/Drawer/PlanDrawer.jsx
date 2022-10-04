@@ -8,6 +8,8 @@ import TabPanel from '../Plan/TabPanel';
 import CustomButton from 'components/common/CustomButton';
 import StoreSelect from '../Plan/StoreSelect';
 import MusicSelect from '../Plan/MusicSelect';
+import CustomModal from 'components/common/CustomModal';
+import { Alert, Snackbar, TextField } from '@mui/material';
 
 const CustomTabs = styled(Tabs)`
   &.MuiTabs-root > .MuiTabs-scroller > .MuiTabs-indicator {
@@ -30,6 +32,14 @@ const CustomTab = styled(Tab)`
   }
 `;
 
+const CustomAlert = styled(Alert)`
+  &.MuiAlert-root {
+    height: unset;
+    padding: 6px 16px;
+    border-radius: 4px;
+  }
+`;
+
 function a11yProps(index) {
   return {
     id: `tab-${index}`,
@@ -47,6 +57,9 @@ export default function PlanDrawer() {
     (item) => item.choiceYN !== 2
   );
   const [value, setValue] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [title, setTitle] = useState('');
   const [music, setMusic] = useState();
   const [food, setFood] = useState();
   const [activity, setActivity] = useState();
@@ -55,7 +68,9 @@ export default function PlanDrawer() {
     setValue(newValue);
   };
 
-  const handleClickSave = () => {
+  const handleConfirm = () => {
+    if (!title) return;
+
     const payload = {
       activity: {
         category: activity.category.activityCategory,
@@ -73,10 +88,18 @@ export default function PlanDrawer() {
       },
       musicId: music.musicID,
       playlist_url: '',
-      title: music.musicName,
+      title: title,
     };
 
     console.log(payload);
+    setAlert(true);
+    setOpen(false);
+    setTitle('');
+  };
+
+  const handleCancle = () => {
+    setOpen(false);
+    setTitle('');
   };
 
   return (
@@ -118,10 +141,33 @@ export default function PlanDrawer() {
         className="plan__button"
         variant="contained"
         disabled={!(music && food && activity)}
-        onClick={handleClickSave}
+        onClick={() => setOpen(true)}
       >
         저장
       </CustomButton>
+      <CustomModal
+        open={open}
+        handleConfirm={handleConfirm}
+        handleCancle={handleCancle}
+      >
+        <div>일정 이름</div>
+        <TextField
+          fullWidth
+          size="small"
+          variant="standard"
+          sx={{ marginTop: '5px' }}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </CustomModal>
+      <Snackbar
+        open={alert}
+        onClose={() => setAlert(false)}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <CustomAlert severity="success">일정이 저장되었습니다!</CustomAlert>
+      </Snackbar>
     </>
   );
 }

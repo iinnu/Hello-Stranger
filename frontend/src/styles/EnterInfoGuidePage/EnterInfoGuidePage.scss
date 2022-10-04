@@ -101,6 +101,9 @@
                 &__Bottom{
                     display:flex;
                     justify-content: space-around;
+                    &__Artist{
+                        max-width: 200px;
+                    }
                 }
             }
             &__Uparrow{

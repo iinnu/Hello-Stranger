@@ -46,7 +46,8 @@ export default function SpotifyRedirectHandler() {
               window.location.replace('/guide/first');
             }
             else{
-              window.location.replace('/main');
+              // window.location.replace('/main');
+              window.location.replace('/guide/first');
             }
           }
           // 로그인 실패 시

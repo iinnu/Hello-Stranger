@@ -56,7 +56,7 @@ public class RecController {
         User user = userDetails.getUser();
 
         int key = Integer.parseInt(request.get("key"));
-        int distance = Integer.parseInt(request.get("distance"));
+        double distance = Double.parseDouble(request.get("distance"));
         double latitude = Double.parseDouble(request.get("latitude"));
         double longitude = Double.parseDouble(request.get("longitude"));
         List<FoodRecGetRes> res = recService.getFoodRec(key,distance,latitude,longitude,user);
@@ -86,7 +86,7 @@ public class RecController {
         User user = userDetails.getUser();
 
         int key = Integer.parseInt(request.get("key"));
-        int distance = Integer.parseInt(request.get("distance"));
+        double distance = Double.parseDouble(request.get("distance"));
         double latitude = Double.parseDouble(request.get("latitude"));
         double longitude = Double.parseDouble(request.get("longitude"));
         List<ActivityRecGetRes> res = recService.getActivityRec(key,distance,latitude,longitude,user);

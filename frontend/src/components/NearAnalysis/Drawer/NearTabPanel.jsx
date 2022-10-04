@@ -13,7 +13,7 @@ import Paper from "@mui/material/Paper";
 import Grow from "@mui/material/Grow";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import StoreCard from "./StoreCard";
+import StoreListItems from './StoreListItems'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -47,34 +47,51 @@ function a11yProps(index) {
   };
 }
 
-export default function NearList({ type }) {
+export default function NearTabPanel({ type, nearData, getCurrentStore }) {
+  console.log('neartabpanel, getcurrentstore', getCurrentStore)
   const [value, setValue] = React.useState(0);
-
+  const leastActivityStore = nearData?.leastActivityStore
+  const mostActivityStore = nearData?.mostActivityStore
+  const leastFoodStore = nearData?.leastFoodStore
+  const mostFoodStore = nearData?.mostFoodStore
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const foodList = [
-    {
-      id: 1,
-      title: "음식점11",
-    },
-    {
-      id: 2,
-      title: "음식점22",
-    },
-  ];
-   const activityList = [
-     {
-       iId: 1,
-       title: "활동11",
-     },
-     {
-       id: 2,
-       title: "활동22",
-     },
-   ];
+
   return (
     <>
+      {type === "activity" && (
+        <>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+          >
+            <Tab label="최다" {...a11yProps(0)}></Tab>
+            <Tab label="최소" {...a11yProps(1)}></Tab>
+          </Tabs>
+          <TabPanel className="near-analysis__drawer--title" value={value} index={0}>
+            {nearData?.mostActivityCategory}
+          </TabPanel>
+          <TabPanel value={value} index={0}>
+            <List>
+            {mostActivityStore?.map((e)=>{
+              return <StoreListItems key={e.id} content={e} type={'activity'} getCurrentStore={getCurrentStore}/>
+            })}
+            </List>
+          </TabPanel>         
+          <TabPanel value={value} index={1}>
+            <div className="near-analysis__drawer--title">{nearData?.leastActivityCategory}</div>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <List>
+            {leastActivityStore?.map((e)=>{
+              return <StoreListItems key={e.id} content={e} type={'activity'} getCurrentStore={getCurrentStore}/>
+            })}
+            </List>
+          </TabPanel>         
+        </>
+      )}
       {type === "food" && (
         <>
           <Tabs
@@ -86,51 +103,25 @@ export default function NearList({ type }) {
             <Tab label="최소" {...a11yProps(1)}></Tab>
           </Tabs>
           <TabPanel value={value} index={0}>
-            최다분포음식점
+            <div className="near-analysis__drawer--title">{nearData?.mostFoodCategory}</div>
           </TabPanel>
           <TabPanel value={value} index={0}>
-            {foodList.map((e)=>{
-              return <StoreCard data={e}/>
-            })}
-          </TabPanel>         
+            <List>
 
-
-          <TabPanel value={value} index={1}>
-            최소분포음식점
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            {foodList.map((e)=>{
-              return <StoreCard data={e}/>
+            {mostFoodStore?.map((e)=>{
+              return <StoreListItems key={e.id} content={e} type={'food'} getCurrentStore={getCurrentStore}/>
             })}
-          </TabPanel>         
-
-        </>
-      )}
-      {type === "activity" && (
-        <>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
-            <Tab label="최다" {...a11yProps(0)}></Tab>
-            <Tab label="최소" {...a11yProps(1)}></Tab>
-          </Tabs>
-          <TabPanel value={value} index={0}>
-            최다분포활동
-          </TabPanel>
-          <TabPanel value={value} index={0}>
-            {activityList.map((e)=>{
-              return <StoreCard data={e}/>
-            })}
+            </List>
           </TabPanel>  
           <TabPanel value={value} index={1}>
-            최소분포활동
+            <div className="near-analysis__drawer--title">{nearData?.leastFoodCategory}</div>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            {activityList.map((e)=>{
-              return <StoreCard data={e}/>
+            <List>
+            {leastFoodStore?.map((e)=>{
+              return <StoreListItems key={e.id} content={e} type={'food'} getCurrentStore={getCurrentStore}/>
             })}
+            </List>
           </TabPanel>  
         </>
       )}

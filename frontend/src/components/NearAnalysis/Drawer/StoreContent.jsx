@@ -9,7 +9,6 @@ import sample from 'assets/images/sample.jpg';
 import OpenClosed from './OpenClosed';
 import StoreReview from './StoreReview';
 import StoreListItems from './StoreListItems';
-import {getOtherUserActivity, getOtherUserFood} from 'api/other'
 import { useEffect, useState } from 'react';
 
 const backdrop = {
@@ -51,18 +50,18 @@ const CustomLabel = styled(Button)`
 
 export default function StoreContent({detailData, leftData, isHistory, type }) {
 useEffect(()=>{
-    console.log('휴', detailData, leftData, isHistory, type)
-},[])
+    console.log('휴', detailData)
+},[detailData])
 const Review = () => {
-    console.log('review', detailData, detailData?.review, Object.keys(detailData))
+    console.log('review', detailData, detailData?.review)
     if(Object.keys(detailData)!==[]){
         return(
             <>
-            <div className="review__title">
+            <div className="near-analysis__drawer--review--title">
                 <div>리뷰</div>
                 <div>*네이버 지도 리뷰</div>
             </div>
-            {detailData?.review[0] === 'noResult' && <p>리뷰 정보가 없습니다.</p>}
+            {detailData?.review[0] === 'noResult' && <div className='near-analysis__drawer--review--empty'>리뷰 정보가 없습니다.</div>}
             {detailData?.review[0] !== 'noResult' && detailData.review.map((e)=><StoreReview content={e}/>)}
             </>
         )
@@ -100,18 +99,6 @@ const Review = () => {
     <StyledBox className="store-info-drawer__review">
     <Review/>
     </StyledBox>
-    {isHistory &&
-    <StyledBox className="store-info-drawer__review">
-        {leftData !== [] && (
-        <>
-        <div className="review__title">
-            <div>{leftData[0]?.category}</div>
-        </div>
-        {leftData.map((e)=><StoreListItems key={e.id} content={e} type={type}/>)}
-        </>
-        )} 
-    </StyledBox>
-    }
     </div>
   );
 }

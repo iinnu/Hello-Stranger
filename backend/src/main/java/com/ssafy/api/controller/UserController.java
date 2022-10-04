@@ -3,16 +3,11 @@ package com.ssafy.api.controller;
 import com.ssafy.api.dto.*;
 import com.ssafy.api.request.CategoryChoiceReq;
 import com.ssafy.api.request.UserRegistReq;
-import com.ssafy.api.response.BaseResponseBody;
-import com.ssafy.api.response.CommercialAreaGetRes;
-import com.ssafy.api.response.UserChoiceGetRes;
-import com.ssafy.api.response.UserRegistRes;
-import com.ssafy.api.service.ActivityRecService;
-import com.ssafy.api.service.FoodRecService;
-import com.ssafy.api.service.MusicRecService;
-import com.ssafy.api.service.UserService;
+import com.ssafy.api.response.*;
+import com.ssafy.api.service.*;
 import com.ssafy.common.auth.HelloStrangerUserDetails;
 import com.ssafy.common.util.JwtTokenUtil;
+import com.ssafy.db.entity.Review;
 import com.ssafy.db.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +21,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.File;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +34,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ReviewService reviewService;
 
     @Autowired
     MusicRecService musicRecService;
@@ -60,6 +59,8 @@ public class UserController {
         String nickname = userRegistReq.getNickname();
         String img = userRegistReq.getImg();
 
+        UserRegistRes res;
+
         //이미일 중복 확인
         User user = userService.getUserByUserEmail(userRegistReq.getEmail());
 
@@ -70,13 +71,20 @@ public class UserController {
             musicRecService.createMusicRec(user.getUserId());
             activityRecService.createActivityRec(user.getUserId());
             foodRecService.createFoodRec(user.getUserId());
+            String accessToken = JwtTokenUtil.getToken(email);
+            res = UserRegistRes.builder()
+                    .accessToken(accessToken)
+                    .isSignup("Y")
+                    .build();
+        } else {
+            // accessToken 반환
+            String accessToken = JwtTokenUtil.getToken(email);
+            res = UserRegistRes.builder()
+                    .accessToken(accessToken)
+                    .isSignup("N")
+                    .build();
         }
 
-        // accessToken 반환
-        String accessToken = JwtTokenUtil.getToken(email);
-        UserRegistRes res = UserRegistRes.builder()
-                .accessToken(accessToken)
-                .build();
         return ResponseEntity.status(200).body(res);
     }
 
@@ -182,5 +190,24 @@ public class UserController {
         }
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "정상적으로 저장되었습니다."));
+    }
+
+    @GetMapping("check")
+    @ApiOperation(value = "평가할거 있는지 체크", notes = "2일 안된 거 중 평가할 거 있는지 확인")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "성공"),
+    })
+    public ResponseEntity<UserCheckEvalYNGetRes> getUserEvalYN(@ApiIgnore Authentication authentication) throws ParseException {
+        // auth에서 가져오기
+        HelloStrangerUserDetails userDetails = (HelloStrangerUserDetails)authentication.getDetails();
+        User user = userDetails.getUser();
+        List<ReviewGetResContent> reviews = reviewService.getReviews(user);
+
+        String evalYN = reviewService.getEvalYN(reviews);
+
+        UserCheckEvalYNGetRes res = UserCheckEvalYNGetRes.builder()
+                .isNeedEval(evalYN)
+                .build();
+        return ResponseEntity.status(200).body(res);
     }
 }

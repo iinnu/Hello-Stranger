@@ -4,7 +4,6 @@ import Grid from "@mui/material/Grid";
 
 import ButtonGroups from "components/DetailInfo/ButtonGroups";
 import FeedbackModal from "components/DetailInfo/Modal";
-import StoreInfo from "components/DetailInfo/Drawer/StoreInfo";
 import StoreInfoDrawer from "components/DetailInfo/Drawer/DetailStoreInfoDrawer";
 import MusicDrawer from 'components/DetailInfo/MusicDrawer'
 import Container from "components/common/Container";
@@ -144,18 +143,15 @@ export default function DetailInfoPage() {
   }
   async function clickActivity() {
     setOpenDrawer(true);
-    console.log('clickActivity', isHistory)
     setType("activity");
     if(isHistory){
-      console.log('activityData', activityData)
+      setDetailData(activityData ?? [])
+      setLeftData(leftActivityData ?? [])
       const pos = {
         lat: userData.choice_activity?.latitude ? userData.choice_activity?.latitude: userData.choice_food?.latitude,
         lng: userData.choice_activity?.longitude ? userData.choice_activity?.longitude: userData.choice_food?.longitude
       }
-      setDetailData(activityData ?? [])
       setCurrentStore(pos)
-      setLeftData(leftActivityData ?? [])
-      console.log('activity, history',pos, currentStore, userData.choice_activity?.id,leftActivityData, detailData)
     } 
     else {
       const pos = {

@@ -15,6 +15,18 @@ const useGeocoder = () => {
       }
     );
   };
+  const coord2RegionCode = (coord, callback) => {
+    const kakaoCoord = new kakao.maps.LatLng(coord.lat, coord.lng);
+    geocoder.coord2RegionCode(
+      kakaoCoord.getLng(),
+      kakaoCoord.getLat(),
+      (result, status) => {
+        if (status === kakao.maps.services.Status.OK) {
+          callback(result);
+        }
+      }
+    );
+  };
 
   const addressSearch = (address, callback) => {
     geocoder.addressSearch(address, (result, status) => {
@@ -24,7 +36,7 @@ const useGeocoder = () => {
     });
   };
 
-  return { coord2Address, addressSearch };
+  return { coord2Address, addressSearch, coord2RegionCode };
 };
 
 export default useGeocoder;

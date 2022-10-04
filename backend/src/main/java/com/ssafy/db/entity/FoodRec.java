@@ -24,4 +24,8 @@ public class FoodRec {
     public FoodRec(int userId) {
         this.userId = userId;
     }
+
+    public FoodRec() {
+
+    }
 }

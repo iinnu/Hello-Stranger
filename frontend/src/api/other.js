@@ -2,6 +2,7 @@ import { getApiInstance } from 'api';
 const api = getApiInstance();
 
 export function getOtherUser() {
+    console.log('token', localStorage.getItem('token'))
     return api.get(`/otheruser`)
     .then((res)=>{
         console.log('otheruser', res.data)

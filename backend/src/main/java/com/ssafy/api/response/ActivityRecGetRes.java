@@ -10,5 +10,6 @@ import java.util.List;
 @Builder
 public class ActivityRecGetRes {
     private String activityCategory;
+    private String imgUrl;
     private List<BaseInfo> store;
 }

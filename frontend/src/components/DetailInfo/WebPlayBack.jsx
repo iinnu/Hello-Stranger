@@ -1,6 +1,6 @@
 import {useMemo, useEffect, useState} from 'react'
 import SpotifyPlayer from 'react-spotify-web-playback';
-import DetailPlaylistItem from './PlaylistItem';
+import DetailPlaylistItem from './DetailPlaylistItems';
 function WebPlayback({trackIdList, playlist}) {
     const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN_TWO
     const [currentMusic, setCurrentMusic] = useState(false)

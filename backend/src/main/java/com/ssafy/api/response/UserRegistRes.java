@@ -7,4 +7,5 @@ import lombok.Data;
 @Builder
 public class UserRegistRes {
     String accessToken;
+    String isSignup;
 }

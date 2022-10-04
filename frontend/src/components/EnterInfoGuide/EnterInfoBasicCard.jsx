@@ -6,10 +6,13 @@ import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-
+import React, { useState } from 'react';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 
 export default function RecipeReviewCard() {
+  const [isDisable, setDisable] = useState(false)
+  const [isDisable2, setDisable2] = useState(true) 
   const playlist =
     {
       musicID: 1,
@@ -19,12 +22,27 @@ export default function RecipeReviewCard() {
       musicImgUrl:
         'https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/066/039/122/66039122_1395715494760_1_600x600.JPG/dims/resize/Q_80,0',
     };
-
+    function newbutton(){
+      setDisable(false)
+      setDisable2(true)
+    }
+    function DataInputGood(){
+     setDisable(true)
+     setDisable2(false)
+    }
+    
+  
+    function DataInputBad(){
+      setDisable(true)
+      setDisable2(false)
+    }
   return (
     <Card className='Guide__Third__Item__Card'>
       <CardHeader
         title={playlist.musicName}
-        subheader={playlist.musicArtist}
+        action={
+          <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>
+        }
       />
       <CardMedia
         component="img"
@@ -34,18 +52,15 @@ export default function RecipeReviewCard() {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
         </Typography>
       </CardContent>
       <div className='Guide__Third__Item__Card__Bottom'>
         <div>
-          hihi
+          {playlist.musicArtist}
         </div>
         <div>
-          <Button><ThumbUpOffAltIcon/></Button>
-          <Button><ThumbDownOffAltIcon/></Button>
+        <Button onClick={DataInputGood} disabled={isDisable}><ThumbUpOffAltIcon/></Button>
+        <Button onClick={DataInputBad} disabled={isDisable}><ThumbDownOffAltIcon/></Button>
         </div>
       </div>
     </Card>

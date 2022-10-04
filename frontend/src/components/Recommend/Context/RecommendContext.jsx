@@ -3,16 +3,27 @@ import { createContext, useMemo, useReducer } from 'react';
 import { Outlet } from 'react-router-dom';
 import { indexReducer } from './indexReducer';
 import { musicReducer } from './musicReducer';
+import { foodReducer } from './foodReducer';
+import { activityReducer } from './activityReducer';
 
 const initialState = {
   indexReducer: {
     index: 0,
   },
   musicReducer: {
+    refresh: 0,
     list: [],
     current: {},
-    like: [],
-    dislike: [],
+  },
+  foodReducer: {
+    refresh: 0,
+    list: [],
+    current: {},
+  },
+  activityReducer: {
+    refresh: 0,
+    list: [],
+    current: {},
   },
 };
 
@@ -26,7 +37,12 @@ const combineReducers = (slices) => (state, action) => {
 };
 
 const RecommendContext = createContext();
-const rootReducer = combineReducers({ indexReducer, musicReducer });
+const rootReducer = combineReducers({
+  indexReducer,
+  musicReducer,
+  foodReducer,
+  activityReducer,
+});
 
 export function RecommendProvider() {
   const [state, dispatch] = useReducer(rootReducer, initialState);

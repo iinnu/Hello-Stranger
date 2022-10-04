@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 const { kakao } = window;
 
 const Map = () => {
+  const currentPos = JSON.parse(localStorage.getItem('current'));
+
   useEffect(() => {
     let container = document.getElementById("map");
     let options = {

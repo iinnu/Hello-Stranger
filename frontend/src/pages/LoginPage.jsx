@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import GoogleLogin from 'react-google-login';
-import { gapi } from 'gapi-script';
-import logo from '../assets/images/Logo.png'
-import mascot from '../assets/images/WalkingGirl.gif'
+import logo from '../assets/images/Logo.png';
+import mascot from '../assets/images/WalkingGirl.gif';
 import Container from 'components/common/Container';
 import 'styles/LoginPage/LoginPage.scss';
-import axios from "axios";
-import { useDispatch } from 'react-redux'
+import axios from 'axios';
+import SpotifyLogin from 'react-spotify-login';
+import spotify_logo from 'assets/images/spotify_logo.png';
 
+<<<<<<< HEAD
 const LoginPage = ({ onSocial }) => {
     //youtube 권한 얻기 위해 scope 추가 - 0921 병헌
     // const [user_choice, set_user_choice] = useState()
@@ -101,12 +100,54 @@ const LoginPage = ({ onSocial }) => {
             </Container>
         </div>
     );
+=======
+const generateRandomString = (length) => {
+  let text = '';
+  const possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+>>>>>>> 860b62af5e67629c0cf220c8ba19bbbf06bb9969
 };
 
+const LoginPage = ({ onSocial }) => {
 
+  const handleLogin = () => {
+    const client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+    const redirect_uri = process.env.REACT_APP_SPOTIFY_REDIRECT_URI;
+    const scope =
+      'playlist-modify-public playlist-modify-private streaming user-read-email user-read-private user-library-read user-library-modify user-read-playback-state user-modify-playback-state user-read-currently-playing';
+    const state = generateRandomString(16);
+    const url = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&scope=${scope}&redirect_uri=${redirect_uri}&state=${state}`;
+    window.location.href = url;
+  };
 
+  return (
+    <div>
+      <Container>
+        <div className="Login">
+          <img className="Login__Logo" src={logo} alt="Logo" />
+          <img className="Login__Mascot" src={mascot} alt="Mascot" />
+          {/* <SpotifyLogin
+            clientId={CLIENT_ID}
+            redirectUri={REDIRECT_URI}
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+          /> */}
+          <button className="Login__button" onClick={handleLogin}>
+            <img src={spotify_logo} alt="spotify logo" />
+            <div>Login with Spotify</div>
+          </button>
+        </div>
+      </Container>
+    </div>
+  );
+};
 
 export default LoginPage;
+<<<<<<< HEAD
 
 // const clientId = '835634401246-ddaeprck32cbkjmajefeffl5vh7f5kd6.apps.googleusercontent.com'
 
@@ -169,3 +210,5 @@ export default LoginPage;
 
 
 // export default LoginPage;
+=======
+>>>>>>> 860b62af5e67629c0cf220c8ba19bbbf06bb9969

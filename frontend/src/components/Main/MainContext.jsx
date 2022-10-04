@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer } from 'react';
 
 const initialState = {
-  location: {},
+  location: { lat: 36.1081964, lng: 128.413952 },
   range: 2,
 };
 

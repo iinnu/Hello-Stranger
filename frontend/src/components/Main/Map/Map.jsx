@@ -52,7 +52,8 @@ const Map = () => {
 
     // Geolocation의 getCurrentPosition 메소드에 대한 실패 콜백 핸들러
     const handleError = (error) => {
-      console.log(error);
+      setLoading(false);
+      setCurrentLocation(location);
     };
 
     // Geolocation API 호출

@@ -1,9 +1,11 @@
 import axios from "axios";
 
-export default async function createPlaylist(trackIdLIst) {
-  const accessToken =
-    "BQDqusGlBsU1Eaj4dwLdY6Y3vv5N6JIylcuspIetjx0nSLckd78Krm2Yai7G4LQ3TVski69j3oCZri5giyke6-KVa85fh0scIeUSPKP742L2zV2JJLC2gVrr4SorkKDy3rMqjQlU8W6EkApzie190v_WIH0uBiL74iSsZOXUDNJ8HZaqSDcRO7GAjF9TG_p4hEXheNb1hiaCG6Au5Ay5Eqj1FISaF8jKi8Ogj-p6R4Wqs_GdzQF3LrKPopHEemSz";
+export default async function createPlaylist(data) {
+  const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN_ONE
+  console.log('createPlaylist', accessToken)
 
+  const playlistIdList = await data.tracks.map((d)=>`spotify:track:${d.id}`)
+  const playlist = data.tracks
   // 플레이리스트 만들기 위해 userId를 get user profile 통해 가져옴
   async function getCurrentUserProfileAxios() {
     const userId = await axios
@@ -55,7 +57,7 @@ export default async function createPlaylist(trackIdLIst) {
       .post(
         `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
         {
-          uris: trackIdLIst,
+          uris: playlistIdList,
           position: 0,
         },
         {
@@ -73,4 +75,6 @@ export default async function createPlaylist(trackIdLIst) {
   const userId = await getCurrentUserProfileAxios();
   const playlistId = await createPlaylistAxios();
   await addItemsToPlaylistAxios();
+
+  return {playlistIdList, playlist}
 }

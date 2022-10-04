@@ -24,7 +24,13 @@ const CustomButton = styled('button')`
   cursor: pointer;
 `;
 
-export default function Title({ handleClose }) {
+const CustomLabel = styled('div')`
+  font-size: 0.7em;
+  font-weight: 400;
+  text-align: center;
+`;
+
+export default function Title({ title, isList, handleClick, handleClose }) {
   return (
     <div className="category-detail__title">
       <IconButton aria-label="category detail close" onClick={handleClose}>
@@ -33,20 +39,20 @@ export default function Title({ handleClose }) {
       <div className="title__inner">
         <div className="title__content">
           <Col>
-            <Row>만두</Row>
+            <Row>{title}</Row>
           </Col>
-          <CustomButton>
-            <MapIcon />
-            <div
-              style={{
-                fontSize: '0.5em',
-                fontWeight: '400',
-                textAlign: 'center',
-              }}
-            >
-              지도
-            </div>
-          </CustomButton>
+          {isList && (
+            <CustomButton onClick={handleClick}>
+              <MapIcon />
+              <CustomLabel>지도</CustomLabel>
+            </CustomButton>
+          )}
+          {!isList && (
+            <CustomButton onClick={handleClick}>
+              <FormatListBulletedIcon />
+              <CustomLabel>목록</CustomLabel>
+            </CustomButton>
+          )}
         </div>
       </div>
     </div>

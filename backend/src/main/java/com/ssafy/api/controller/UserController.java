@@ -161,8 +161,8 @@ public class UserController {
         System.out.println(activityRecommend);
         String[] command = new String[2];
         command[0] = "python3";
-        command[1] = new File(activityRecommend.getPath()).getAbsolutePath();
-        System.out.println(command[1]);
+        //command[1] = new File(activityRecommend.getPath()).getAbsolutePath();
+        command[1] = "/rec/resources/activity_contents_based.py";
 
         
         try {
@@ -174,7 +174,8 @@ public class UserController {
         URL foodRecommend = getClass().getClassLoader().getResource("food_contents_based.py");
         String[] command2 = new String[2];
         command2[0] = "python3";
-        command2[1] = new File(foodRecommend.getPath()).getAbsolutePath();
+        //command2[1] = new File(foodRecommend.getPath()).getAbsolutePath();
+        command2[1] = "/rec/resources/food_contents_based.py";
 
         try {
             exePython(command2);
@@ -185,7 +186,8 @@ public class UserController {
         URL musicRecommend = getClass().getClassLoader().getResource("music_contents_based.py");
         String[] command3 = new String[2];
         command3[0] = "python3";
-        command3[1] = new File(musicRecommend.getPath()).getAbsolutePath();
+        //command3[1] = new File(musicRecommend.getPath()).getAbsolutePath();
+        command3[1] = "/rec/resources/music_contents_based.py";
 
         try {
             exePython(command3);

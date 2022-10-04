@@ -4,10 +4,14 @@ const api = getApiInstance();
 
 //동네 최다/최소 분포 업종 목록
 //유저 위치 input
-function getNearInfo(){
-    api.get()
+function getNearInfo(userAdress, current){
+    const latitude = String(current.lat)
+    const longitude = String(current.lng)
+    console.log('getNearInfo', userAdress, typeof(userAdress), latitude, longitude, current, typeof(current))
+    return api.get(`/commercialarea/${userAdress}/${latitude}/${longitude}`)
     .then((res)=>{
-        console.log(res)
+        console.log('getNearInfo res',res)
+        return res.data
     })
     .catch((err)=>{
         console.error(err)

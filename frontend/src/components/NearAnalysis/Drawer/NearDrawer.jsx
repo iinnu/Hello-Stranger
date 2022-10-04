@@ -1,14 +1,7 @@
 import styled from '@emotion/styled';
 import Button from '@mui/material/Button';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import PhoneIcon from '@mui/icons-material/Phone';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import StarIcon from '@mui/icons-material/Star';
-import sample from 'assets/images/sample.jpg';
-import OpenClosed from './OpenClosed';
-import StoreReview from './StoreReview';
-import NearList from './TabPanel';
+import NearTabPanel from './NearTabPanel';
 const backdrop = {
   style: { background: 'none' },
 };
@@ -46,7 +39,7 @@ const CustomLabel = styled(Button)`
   }
 `;
 
-export default function NearDrawer({ open, toggleDrawer, type }) {
+export default function NearDrawer({ open, toggleDrawer, type, nearData, getCurrentStore }) {
   return (
     <CustomSwipeableDrawer
       anchor="bottom"
@@ -62,7 +55,7 @@ export default function NearDrawer({ open, toggleDrawer, type }) {
       }}
     >
       <div className="near-analysis__drawer">
-        <NearList type={type}/>
+        <NearTabPanel type={type} nearData={nearData} getCurrentStore={getCurrentStore}/>
       </div>
     </CustomSwipeableDrawer>
   );

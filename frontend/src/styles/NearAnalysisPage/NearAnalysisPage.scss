@@ -65,7 +65,49 @@ $near-analysis-map-height: 100%;
     padding: 5%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    overflow: auto;
+    .MuiTabs-root{
+      align-self: center;
+    }
+
+    .MuiBox-root{
+      padding: 0;
+      margin-top: 15px;
+      .MuiList-root {
+        padding: 0;
+        margin-top: 5%;
+      }
+    }
+    &--title{
+      font-size: 20px;
+      font-weight: bolder;
+      margin-top: 20px;
+      margin-left: 25px;
+      width: 100%;
+      height: 30px;
+      background-color: white;
+      justify-self: center;
+    }
+    &--review{
+      &--title{
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 20px;
+        border-bottom: 3px solid #f6f6f6;
+        :nth-child(1){
+          font-size: 20px;
+          font-weight: bolder;
+        }
+        :nth-child(2){
+          color: rgb(154, 154, 154);
+          font-size: 0.7em;
+          padding-top: 10px;
+        }
+      }
+      &--empty{
+        margin-left: 6%;      
+      }
+    }
   }
 }
 

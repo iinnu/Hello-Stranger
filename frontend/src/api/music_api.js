@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getSpotifyUserInfo, getSpotifyToken } from './spotify';
 
 const genreList = [
   "acoustic",
@@ -130,9 +131,10 @@ const genreList = [
 ];
 
 export default async function getRecommendation() {
-  // const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN_ONE
   const accessToken = localStorage.getItem('spotify')
-  console.log('getRecommendation', accessToken)
+  const myInfo = await getSpotifyUserInfo(accessToken)
+  const token = await getSpotifyToken()
+  console.log('myInfo',myInfo)
 
   // search를 통해 유저가 선택한 곡 제목을 인풋으로 넣고의 trackId, artistId를 받는 요청
   function searchAxios() {

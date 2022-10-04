@@ -38,11 +38,9 @@ export default function RecipeReviewCard() {
     }
   return (
     <Card className='Guide__Third__Item__Card'>
+      <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>
       <CardHeader
         title={playlist.musicName}
-        action={
-          <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>
-        }
       />
       <CardMedia
         component="img"

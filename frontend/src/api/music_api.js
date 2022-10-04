@@ -137,11 +137,11 @@ export default async function getRecommendation() {
   console.log('myInfo',myInfo)
 
   // search를 통해 유저가 선택한 곡 제목을 인풋으로 넣고의 trackId, artistId를 받는 요청
-  function searchAxios() {
+  function searchAxios({trackTitle, trackArtist}) {
     return axios
       .get("https://api.spotify.com/v1/search", {
         params: {
-          q: "macklemore can't hold us",
+          q: {trackArtist} + ' ' + {trackTitle},
           type: "track",
           limit: "1",
         },

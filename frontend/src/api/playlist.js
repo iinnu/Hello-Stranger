@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export default async function createPlaylist(data) {
+const accessToken = localStorage.getItem('spotify')
+export async function createPlaylist(data) {
   // const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN_ONE
-  const accessToken = localStorage.getItem('spotify')
   console.log('createPlaylist', accessToken)
 
   const playlistIdList = await data.tracks.map((d)=>`spotify:track:${d.id}`)
@@ -79,3 +79,22 @@ export default async function createPlaylist(data) {
 
   return {playlistIdList, playlist}
 }
+
+export async function getPlaylist(){
+  const playlistId = localStorage.getItem('playlistId')
+  return axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, {
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      }
+  })
+  .then((res)=>{
+    const playlistIdList = res.data.uri
+    const playlistItems = res.data.tracks.items
+    console.log('get playlist with id', res.data, playlistIdList, playlistItems)
+    return {playlistIdList, playlistItems}
+  })
+  .catch((err)=>{console.error(err)})
+  ;
+} 

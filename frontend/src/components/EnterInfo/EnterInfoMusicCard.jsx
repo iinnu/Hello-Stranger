@@ -65,6 +65,8 @@ export default function RecipeReviewCard({id, name, artist, image}) {
     setDisable(false)
     setDisable2(true)
   }
+
+
   return (
     <Card className="UserInput__Music__Item__Area__Card"> 
     <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>

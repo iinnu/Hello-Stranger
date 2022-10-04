@@ -10,5 +10,6 @@ import java.util.List;
 @Builder
 public class FoodRecGetRes {
     private String foodCategory;
+    private String imgUrl;
     private List<BaseInfo> store;
 }

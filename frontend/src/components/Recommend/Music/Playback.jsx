@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import useSpotifyReady from 'hook/useSpotifyReady';
 
-const { Spotify } = window;
-
-export default function WebPlayback() {
+export default function Playback() {
   const [token, setToken] = useState();
   const ready = useSpotifyReady();
 
@@ -11,7 +9,7 @@ export default function WebPlayback() {
   useEffect(() => {
     const spotify = localStorage.getItem('spotify');
     if (spotify) {
-      setToken(true);
+      setToken(spotify);
       return;
     }
   }, []);
@@ -20,11 +18,10 @@ export default function WebPlayback() {
   useEffect(() => {
     // sdk를 사용할 수 있고 access token이 있을 때
     if (ready && token) {
-      const spotify = token;
-      const player = new Spotify.Player({
+      const player = new window.Spotify.Player({
         name: 'Web Playback SDK',
         getOAuthToken: (cb) => {
-          cb(spotify);
+          cb(token);
         },
         volume: 0.5,
       });
@@ -56,7 +53,7 @@ export default function WebPlayback() {
         console.error(message);
       });
 
-      //player.connect();
+      player.connect();
     }
   }, [ready, token]);
 }

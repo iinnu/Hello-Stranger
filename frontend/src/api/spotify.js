@@ -54,12 +54,19 @@ export function getMusicUris(list) {
   const token = localStorage.getItem('spotify');
   const api = apiController(token);
 
-  const uris = Promise.all(list.map(async (item) => {
-    const response = await api.get('/search', {
-      params: { q: `${item.musicName} ${item.musicArtist}`, type: 'track', limit: '1' },
-    });
-    return {...item, uri: response.data.tracks.items[0].uri};
-  }));
+  const uris = Promise.all(
+    list.map(async (item) => {
+      const response = await api.get('/search', {
+        params: {
+          q: `${item.musicName} ${item.musicArtist}`,
+          type: 'track',
+          limit: '2',
+        },
+      });
+      const track = response.data.tracks.items[0];
+      return { ...item, uri: track.uri, preview: track.preview_url };
+    })
+  );
 
   return uris;
 }

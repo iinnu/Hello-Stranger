@@ -1,7 +1,7 @@
 FROM azul/zulu-openjdk:8 as build-stage
 WORKDIR /var/jenkins_home/workspace/deploy/backend
 
-RUN apt-get install software-properties-common
+RUN apt-get update && apt-get install -y software-properties-common
 RUN apt-get install -y python3-pip python3-dev
 RUN cd /usr/local/bin && \
     ln -s /usr/bin/python3 python && \

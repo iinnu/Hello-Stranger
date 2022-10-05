@@ -3,10 +3,11 @@ import { useRecommendContext } from 'components/Recommend/Context/RecommendConte
 import { setCurrentStore as activityStore } from 'components/Recommend/Context/activityReducer';
 import { setCurrentStore as foodStore } from 'components/Recommend/Context/foodReducer';
 import styled from '@emotion/styled';
-import { Drawer } from '@mui/material';
+import Drawer from '@mui/material/Drawer';
 import Title from './Title';
 import StoreMap from './Map/StoreMap';
 import StoreItem from './List/StoreItem';
+import NoResult from './NoResult';
 
 const CustomDrawer = styled(Drawer)`
   .MuiPaper-root {
@@ -54,6 +55,7 @@ export default function CategoryDetail({ current, open, handleClose }) {
           {current?.store.map((item) => (
             <StoreItem key={item.id} item={item} handleClick={handleClick} />
           ))}
+          {current?.store.length === 0 && <NoResult />}
         </div>
       )}
       {!isList && <StoreMap list={current.store} />}

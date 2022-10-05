@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import BottomNav from "components/common/BottomNav";
 import Container from "components/common/Container";
 import Paper from "@mui/material/Paper";
@@ -31,7 +31,7 @@ function NearAnalysisPage() {
   const [loading, setLoading] = useState(true)
   const currentStoreLocation = JSON.parse(localStorage.getItem('currentStore'))
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const dataObject = {}
     async function getData(){
       if (location) {

@@ -12,7 +12,7 @@ RUN ./gradlew bootJAR
 FROM azul/zulu-openjdk:8
 COPY --from=build-stage /var/jenkins_home/workspace/deploy/backend/build/libs/*.jar app.jar
 
-RUN apt-get install software-properties-common
+RUN apt-get update && apt-get install -y software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update
 RUN apt-get install python3.8

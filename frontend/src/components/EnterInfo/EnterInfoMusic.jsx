@@ -31,6 +31,7 @@ const EnterInfo = () => {
       const handleNext = () => {
         console.log('다음');
         window.location.href ="/info/food"
+        localStorage.removeItem('musicarr')
       };
       const [musicarr, setmusicarr] = useState([])
       const parentFunction = (e) => {

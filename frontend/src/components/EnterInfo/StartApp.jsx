@@ -30,6 +30,9 @@ const StartApp = () => {
       localStorage.removeItem("foodDataInput") 
       localStorage.removeItem("activityDataInput") 
       localStorage.removeItem("email")
+      localStorage.removeItem("userInputInfoActivity")
+      localStorage.removeItem("userInputInfoFood")
+      localStorage.removeItem("userInputInfoMusic")
       console.log(userChoice)
       const start = getApiInstance();
       start.post('/user/choice', userChoice)

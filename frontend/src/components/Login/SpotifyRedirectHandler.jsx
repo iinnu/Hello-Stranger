@@ -42,12 +42,11 @@ export default function SpotifyRedirectHandler() {
           if (login?.status === 200) {
             localStorage.setItem('token', login.data.accessToken);
             localStorage.setItem('email', info.data.email)
-            if(login.data.isSignup === 'N') {
+            if(login.data.isSignup === 'Y') {
               window.location.replace('/guide/first');
             }
             else{
-              // window.location.replace('/main');
-              window.location.replace('/guide/first');
+              window.location.replace('/main');
             }
           }
           // 로그인 실패 시

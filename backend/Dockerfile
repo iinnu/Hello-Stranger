@@ -1,9 +1,16 @@
 FROM azul/zulu-openjdk:8 as build-stage
-
-RUN apt-get update && apt-get install -y software-properties-common && apt-get install -y python3-pip
-RUN python3 -m pip install --upgrade pip && python3 -m pip install pandas && python3 -m pip install -Iv pymysql==0.9.3 && python3 -m pip install sklearn
-
 WORKDIR /var/jenkins_home/workspace/deploy/backend
+
+ENV PYTHONUNBUFFERED=1
+RUN echo "**** install Python ****" && \
+    apk add --no-cache python3 && \
+    if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
+    \
+    echo "**** install pip ****" && \
+    python3 -m ensurepip && \
+    rm -r /usr/lib/python*/ensurepip && \
+    pip3 install --no-cache --upgrade pip setuptools wheel && \
+    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi
 
 COPY gradlew .
 COPY gradle gradle

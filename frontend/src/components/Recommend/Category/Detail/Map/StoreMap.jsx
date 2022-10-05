@@ -38,15 +38,15 @@ export default function StoreMap({ list }) {
   function getMarkers(list, store) {
     return list.map((item) => {
       const pos = { lat: item.latitude, lng: item.longitude };
-      const src = store.id === item.id ? marker_active : marker;
+      const src = store?.id === item.id ? marker_active : marker;
       const size =
-        store.id === item.id
+        store?.id === item.id
           ? { width: 45, height: 45 }
           : { width: 32, height: 32 };
 
       return (
         <MapMarker
-          key={`${item.latitude}-${item.longitude}`}
+          key={item.id}
           position={pos}
           image={{ src: src, size: size }}
           clickable={true}
@@ -60,10 +60,14 @@ export default function StoreMap({ list }) {
     <div className="category-store-map">
       <Map
         className="category-store-map__map"
-        center={{
-          lat: store.latitude,
-          lng: store.longitude,
-        }}
+        center={
+          store
+            ? {
+                lat: store.latitude,
+                lng: store.longitude,
+              }
+            : currentPos
+        }
         level={3}
       >
         <MapMarker
@@ -72,8 +76,14 @@ export default function StoreMap({ list }) {
         />
         {markers}
       </Map>
-      <StoreInfo store={store} toggleDrawer={toggleDrawer} />
-      <StoreInfoDrawer open={open} store={store} toggleDrawer={toggleDrawer} />
+      {store && <StoreInfo store={store} toggleDrawer={toggleDrawer} />}
+      {store && (
+        <StoreInfoDrawer
+          open={open}
+          store={store}
+          toggleDrawer={toggleDrawer}
+        />
+      )}
     </div>
   );
 }

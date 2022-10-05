@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import Walking from 'assets/images/WalkingGirl.gif';
 
@@ -12,7 +11,6 @@ const Col = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
 `;
 
 const TitleBox = styled('div')`
@@ -21,19 +19,13 @@ const TitleBox = styled('div')`
   margin-bottom: 50px;
 `;
 
-export default function ResultLoading({ handleLoading }) {
-  useEffect(() => {
-    setTimeout(() => {
-      handleLoading();
-    }, 3000);
-  }, []);
-
+export default function Loading() {
   return (
     <Row>
       <Col>
         <TitleBox>
-          새로운 하루가 <br />
-          도착했습니다!
+          추천을 목록을 <br />
+          가져오는 중입니다...
         </TitleBox>
         <img src={Walking} alt="loading" width={220} />
       </Col>

@@ -1,5 +1,5 @@
 import 'styles/Main/MainPage.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MainProvider } from 'components/Main/MainContext';
 import { Grid } from '@mui/material';
 import BottomNav from 'components/common/BottomNav';
@@ -10,10 +10,11 @@ import Range from 'components/Main/Search/Range';
 import Recommend from 'components/Main/Search/Recommend';
 import Postcode from 'components/Main/Search/Postcode';
 import HistoryAlert from 'components/Main/HistoryAlert';
+import { getApiInstance } from 'api';
 
 function MainPage() {
   const [open, setOpen] = useState(false);
-  const [alert, setAlert] = useState(true);
+  const [alert, setAlert] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -26,6 +27,16 @@ function MainPage() {
   const handleAlertClose = () => {
     setAlert(false);
   };
+
+  useEffect(() => {
+    getApiInstance()
+      .get('/user/check')
+      .then((res) => {
+        if (res.data.isNeedEval === 'Y') {
+          setAlert(true);
+        }
+      });
+  }, []);
 
   return (
     <MainProvider>

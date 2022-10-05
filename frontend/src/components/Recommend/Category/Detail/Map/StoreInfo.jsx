@@ -16,7 +16,6 @@ export default function StoreInfo({ store, toggleDrawer }) {
           size="small"
           readOnly
         />
-        <OpenClosed />
       </div>
       <div className="store-info__address">{store.address}</div>
     </div>

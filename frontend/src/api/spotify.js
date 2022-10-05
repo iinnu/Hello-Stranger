@@ -49,3 +49,24 @@ export function getSpotifyUserInfo(token) {
   const api = apiController(token);
   return api.get('/me');
 }
+
+export function getMusicUris(list) {
+  const token = localStorage.getItem('spotify');
+  const api = apiController(token);
+
+  const uris = Promise.all(
+    list.map(async (item) => {
+      const response = await api.get('/search', {
+        params: {
+          q: `${item.musicName} ${item.musicArtist}`,
+          type: 'track',
+          limit: '2',
+        },
+      });
+      const track = response.data.tracks.items[0];
+      return { ...item, uri: track.uri, preview: track.preview_url };
+    })
+  );
+
+  return uris;
+}

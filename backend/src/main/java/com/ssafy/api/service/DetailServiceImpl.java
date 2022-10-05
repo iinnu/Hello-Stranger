@@ -22,7 +22,7 @@ public class DetailServiceImpl implements DetailService{
         Activity activity = activityRepository.findByActivityId(activityId);
 
         String review = activity.getActivityReview();
-        review = review.replace(".||.", " ").replace("\"\"", "\"");
+        review = review.replace(".||.", " ").replace("\"\"", "\"").replace("error","").replace("noResult","");
         review = review.startsWith("\"") ? review.substring(1, review.length()-1) : review;
         String[] results = review.split("\\[>\\*}");
 
@@ -49,7 +49,7 @@ public class DetailServiceImpl implements DetailService{
         Food food = foodRepository.findByFoodId(foodId);
 
         String review = food.getFoodReview();
-        review = review.replace(".||.", " ").replace("\"\"", "\"");
+        review = review.replace(".||.", " ").replace("\"\"", "\"").replace("error","").replace("noResult","");
         review = review.startsWith("\"") ? review.substring(1, review.length()-1) : review;
         String[] results = review.split("\\[>\\*}");
 //        System.out.println(Arrays.toString(results));

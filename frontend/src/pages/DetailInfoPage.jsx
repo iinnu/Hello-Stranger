@@ -10,6 +10,7 @@ import Container from "components/common/Container";
 import BottomNav from "components/common/BottomNav";
 import DetailInfoTitle from "components/DetailInfo/Title";
 import DetailInfoMap from "components/DetailInfo/Map";
+import Loading from "components/Main/Map/Loading";
 
 // data api
 import {getOtherUser,getOtherUserActivity, getOtherUserFood} from 'api/other'
@@ -209,7 +210,7 @@ export default function DetailInfoPage() {
             isHistory={isHistory}
             type={type}
             />
-            <MusicDrawer open={openMusicDrawer} toggleDrawer={toggleMusicDrawer}/>
+            {isHistory ? <MusicDrawer open={openMusicDrawer} toggleDrawer={toggleMusicDrawer}/> : <Loading/>}
           </Grid>
         </div>
         <BottomNav />

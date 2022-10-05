@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install -y software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update
 RUN apt-get install python3.8
-RUN apt-get install python3-pip
 RUN pip install pandas
 RUN pip install -Iv pymysql==0.9.3
 RUN pip install sklearn

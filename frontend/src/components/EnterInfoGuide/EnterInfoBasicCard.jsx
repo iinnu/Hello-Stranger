@@ -10,42 +10,34 @@ import React, { useState } from 'react';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard({id, name, artist, image}) {
   const [isDisable, setDisable] = useState(false)
   const [isDisable2, setDisable2] = useState(true) 
-  const playlist =
-    {
-      musicID: 1,
-      musicName: '가장 보통의 존재',
-      musicArtist: '언니네 이발관',
-      musicCategory: '',
-      musicImgUrl:
-        'https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/066/039/122/66039122_1395715494760_1_600x600.JPG/dims/resize/Q_80,0',
-    };
-    function newbutton(){
-      setDisable(false)
-      setDisable2(true)
-    }
-    function DataInputGood(){
-     setDisable(true)
-     setDisable2(false)
-    }
-    
+
+  function newbutton(){
+    setDisable(false)
+    setDisable2(true)
+  }
   
-    function DataInputBad(){
-      setDisable(true)
-      setDisable2(false)
-    }
+  function DataInputGood(){
+    setDisable(true)
+    setDisable2(false)
+  }
+    
+  function DataInputBad(){
+    setDisable(true)
+    setDisable2(false)
+  }
   return (
     <Card className='Guide__Third__Item__Card'>
       <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>
       <CardHeader
-        title={playlist.musicName}
+        title={name}
       />
       <CardMedia
         component="img"
         height="194"
-        image={playlist.musicImgUrl}
+        image={image}
         alt="musicImg"
       />
       <CardContent>
@@ -54,7 +46,7 @@ export default function RecipeReviewCard() {
       </CardContent>
       <div className='Guide__Third__Item__Card__Bottom'>
         <div>
-          {playlist.musicArtist}
+          {artist}
         </div>
         <div>
         <Button onClick={DataInputGood} disabled={isDisable}><ThumbUpOffAltIcon/></Button>

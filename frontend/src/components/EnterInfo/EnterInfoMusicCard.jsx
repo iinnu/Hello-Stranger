@@ -12,7 +12,7 @@ import axios from "axios";
 import SpotifyPlayer from 'react-spotify-web-playback';
 
 
-export default function RecipeReviewCard({id, name, artist, image}) {
+export default function RecipeReviewCard({id, name, artist, image, musicplayer}) {
   const [isDisable, setDisable] = useState(false)
   const [isDisable2, setDisable2] = useState(true) 
   function musicDataInputGood(){
@@ -74,89 +74,87 @@ export default function RecipeReviewCard({id, name, artist, image}) {
 
 // #############################################################################################################33
 // 음악플레이
-const [musicid, setmusicid] = useState('')
-useEffect(()=>{
-  async function getData(){
-    const data = await searchAxios()
-    setmusicid(`spotify:track:${data.trackId}`)
-  }
-  getData()
-},[name, artist])
+  const [musicarrs, setmusicarrs] = useState([])
+  useEffect(()=>{
+    async function getData(){
+      const data = await searchAxios()
+      const musicarr = [localStorage.getItem('musicarr')]
+      musicarr.push(`spotify:track:${data.trackId}`)
+      localStorage.setItem('musicarr', musicarr)
+      const musicarrs = localStorage.getItem('musicarr').split(',')
+      musicarrs.shift()
+      setmusicarrs(musicarrs)
+    }
+    getData()
+    },[name, artist]
+  )
   const accessToken = localStorage.getItem('spotify')
   const [currentMusic, setCurrentMusic] = useState(false)
   const trackList = []
   const trackIdList = []
   function searchAxios() {
-      return axios
-        .get("https://api.spotify.com/v1/search", {
-          params: {
-            q: artist + ' ' + name,
-            type: "track",
-            limit: "1", //가장 정확한 1개만 가져오게 1로 리밋 정함
-          },
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        .then((res) => {
-          console.log("inside searchAxios", res.data);
-          const trackId = res.data.tracks.items[0].id;
-          const artistId = res.data.tracks.items[0].artists[0].id;
-          return { trackId, artistId };
-        })
-        .catch((err) => console.log(err) );
-    }
+    return axios
+      .get("https://api.spotify.com/v1/search", {
+      params: {
+        q: artist + ' ' + name,
+        type: "track",
+        limit: "1", //가장 정확한 1개만 가져오게 1로 리밋 정함
+      },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((res) => {
+      console.log("inside searchAxios", res.data);
+      const trackId = res.data.tracks.items[0].id;
+      const artistId = res.data.tracks.items[0].artists[0].id;
+      return { trackId, artistId };
+      })
+      .catch((err) => console.log(err));
+  }
 
   trackIdList.map((e)=>{
-  searchAxios(e)
+    searchAxios(e)
   })
   function handleCallback(){
-  const currentMusicLink = document.querySelector('div.rswp__active > a > img')
-  if(currentMusicLink){
+    const currentMusicLink = document.querySelector('div.rswp__active > a > img')
+    if(currentMusicLink){
       setCurrentMusic(currentMusicLink.getAttribute('alt'))
       console.log('alt',currentMusicLink.getAttribute('alt'))
-  } else return;
+    } else return;
   }
 // #################################################################################################################################
- 
-
-
+  musicplayer(musicarrs)
 
 
 
 return (
-    <Card className="UserInput__Music__Item__Area__Card"> 
+  <Card className="UserInput__Music__Item__Area__Card"> 
     <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>
-      <CardHeader 
+    <CardHeader 
       className='UserInput__Music__Item__Area__Card__Title'
-        title={name}
-      />
-      <CardMedia
-        component="img"
-        height="194"
-        image={image}
-        alt="album"
-      />
-      <CardContent>
-      <SpotifyPlayer
-        token={accessToken}
-        uris={musicid}
-        callback={handleCallback}
-        />
-        <Typography variant="body2" color="text.secondary">
-        </Typography>  
-      </CardContent>
-      <div className='Guide__Third__Item__Card__Bottom'>
-        <div className='Guide__Third__Item__Card__Bottom__Artist'>
-          {artist}
-        </div>
-        <div className='Guide__Third__Item__Card__Bottom__Button'>
+      title={name}
+    />
+    <CardMedia
+      component="img"
+      height="194"
+      image={image}
+      alt="album"
+    />
+    <CardContent>
+      <Typography variant="body2" color="text.secondary">
+      </Typography>  
+    </CardContent>
+    <div className='Guide__Third__Item__Card__Bottom'>
+      <div className='Guide__Third__Item__Card__Bottom__Artist'>
+        {artist}
+      </div>
+      <div className='Guide__Third__Item__Card__Bottom__Button'>
         <Button onClick={musicDataInputGood} disabled={isDisable}><ThumbUpOffAltIcon/></Button>
         <Button onClick={musicDataInputBad} disabled={isDisable}><ThumbDownOffAltIcon/></Button>
-        </div>
       </div>
-    </Card>
-  );
-}
+    </div>
+  </Card>
+);}

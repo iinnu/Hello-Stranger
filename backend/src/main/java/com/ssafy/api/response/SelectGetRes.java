@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 public class SelectGetRes {
     String title;
+    int musicId;
     String playlistUrl;
     SelectInfo choice_food;
     SelectInfo choice_activity;

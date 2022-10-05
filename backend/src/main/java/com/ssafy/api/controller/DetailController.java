@@ -49,35 +49,35 @@ public class DetailController {
     public ResponseEntity<SelectGetRes> getDetailSelect(@PathVariable int reviewId){
 
         Review review = reviewService.getReview(reviewId);
-//        Activity choiceActivity = reviewService.getChoiceActivityIdByReviewId(reviewId);
-//        List<Activity> activity = reviewService.getNoChoiceActivityIdsByReviewId(reviewId);
-//
-//        SelectInfo choiceActivityInfo = SelectInfo.builder()
-//                .id(choiceActivity.getActivityId())
-//                .category(choiceActivity.getActivityCategory())
-//                .name(choiceActivity.getActivityName())
-//                .address(choiceActivity.getActivityAddress())
-//                .latitude(choiceActivity.getActivityLatitude())
-//                .longitude(choiceActivity.getActivityLongitude())
-//                .time(choiceActivity.getActivityTime())
-//                .ChoiceYN("Y")
-//                .build();
-//
-//        List<SelectInfo> noChoiceActivityInfos = new ArrayList<>();
-//
-//        for(int i = 0; i < activity.size(); i++){
-//            SelectInfo tempActivityInfo = SelectInfo.builder()
-//                    .id(activity.get(i).getActivityId())
-//                    .category(activity.get(i).getActivityCategory())
-//                    .name(activity.get(i).getActivityName())
-//                    .address(activity.get(i).getActivityAddress())
-//                    .latitude(activity.get(i).getActivityLatitude())
-//                    .longitude(activity.get(i).getActivityLongitude())
-//                    .time(activity.get(i).getActivityTime())
-//                    .ChoiceYN("N")
-//                    .build();
-//            noChoiceActivityInfos.add(tempActivityInfo);
-//        }
+        Activity choiceActivity = reviewService.getChoiceActivityIdByReviewId(reviewId);
+        List<Activity> activity = reviewService.getNoChoiceActivityIdsByReviewId(reviewId);
+
+        SelectInfo choiceActivityInfo = SelectInfo.builder()
+                .id(choiceActivity.getActivityId())
+                .category(choiceActivity.getActivityCategory())
+                .name(choiceActivity.getActivityName())
+                .address(choiceActivity.getActivityAddress())
+                .latitude(choiceActivity.getActivityLatitude())
+                .longitude(choiceActivity.getActivityLongitude())
+                .time(choiceActivity.getActivityTime())
+                .ChoiceYN("Y")
+                .build();
+
+        List<SelectInfo> noChoiceActivityInfos = new ArrayList<>();
+
+        for(int i = 0; i < activity.size(); i++){
+            SelectInfo tempActivityInfo = SelectInfo.builder()
+                    .id(activity.get(i).getActivityId())
+                    .category(activity.get(i).getActivityCategory())
+                    .name(activity.get(i).getActivityName())
+                    .address(activity.get(i).getActivityAddress())
+                    .latitude(activity.get(i).getActivityLatitude())
+                    .longitude(activity.get(i).getActivityLongitude())
+                    .time(activity.get(i).getActivityTime())
+                    .ChoiceYN("N")
+                    .build();
+            noChoiceActivityInfos.add(tempActivityInfo);
+        }
 
         Food choiceFood = reviewService.getChoicefoodIdByReviewId(reviewId);
         List<Food> food = reviewService.getNoChoicefoodIdsByReviewId(reviewId);
@@ -109,16 +109,17 @@ public class DetailController {
             noChoiceFoodInfos.add(tempFoodInfo);
         }
 
-//        Music music = reviewService.getMusicIdByReviewId(reviewId);
+        Music music = reviewService.getMusicIdByReviewId(reviewId);
         String playListUrl = reviewMusicService.getReviewMusicPlayListUrlByReview(review);
 
         SelectGetRes res = SelectGetRes.builder()
                 .title(review.getTitle())
                 .playlistUrl(playListUrl)
                 .choice_food(choicefoodInfo)
-//                .choice_activity(choiceActivityInfo)
+                .choice_activity(choiceActivityInfo)
                 .food(noChoiceFoodInfos)
-//                .activity(noChoiceActivityInfos)
+                .activity(noChoiceActivityInfos)
+                .musicId(music.getMusicId())
                 .build();
 
         return ResponseEntity.status(200).body(res);

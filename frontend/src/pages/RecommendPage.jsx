@@ -26,6 +26,7 @@ import {
   getMusicRecommend,
 } from 'api/recommend';
 import Loading from 'components/Recommend/Loading';
+import { getMusicUris } from 'api/spotify';
 
 const titles = [
   ['어떤 음악을', '듣고 싶으신가요?'],
@@ -37,7 +38,6 @@ function RecommendPage() {
   const { state, dispatch } = useRecommendContext();
   const index = state.indexReducer.index;
   const close = useMemo(() => <CloseRecommend />, []);
-  const [loading, setLoading] = useState(true);
   const [music, setMusic] = useState(false);
   const [food, setFood] = useState(false);
   const [activity, setActivity] = useState(false);
@@ -47,20 +47,14 @@ function RecommendPage() {
     distance: localStorage.getItem('range'),
   };
 
-  const handleLoading = () => setLoading(false);
-
-  localStorage.setItem(
-    'token',
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoaXRsYmg3NzdAZ21haWwuY29tIiwiaXNzIjoiaGVsbG9fc3RyYW5nZXIiLCJleHAiOjE2NjQ5MzM0ODEsImlhdCI6MTY2NDg5MDI4MX0.2fM_-wjcoJ1aPgKIz1RLWaEbdSvk7qDBeguYkmpdR80zxRg7Ugcl3UObCPDRGNFgYVrPzYyglfH3qwJkTkvfAQ'
-  );
-
   // music
   useEffect(() => {
     getMusicRecommend(
       0,
-      (res) => {
-        dispatch(setMusicList(res.data));
-        dispatch(setCurrentMusic(res.data[0]));
+      async (res) => {
+        const uris = await getMusicUris(res.data);
+        dispatch(setMusicList(uris));
+        dispatch(setCurrentMusic(uris[0]));
         setMusic(true);
       },
       (err) => console.log(err)
@@ -76,7 +70,6 @@ function RecommendPage() {
         dispatch(setFoodList(res.data));
         dispatch(setCurrentFood(res.data[0]));
         setFood(true);
-        console.log(res.data);
       },
       (err) => console.log(err)
     );
@@ -91,7 +84,6 @@ function RecommendPage() {
         dispatch(setActivityList(res.data));
         dispatch(setCurrentActivity(res.data[0]));
         setActivity(true);
-        console.log(res.data);
       },
       (err) => console.log(err)
     );
@@ -100,7 +92,7 @@ function RecommendPage() {
   return (
     <Container>
       {(!music || !food || !activity) && (
-        <Loading handleLoading={handleLoading} />
+        <Loading />
       )}
       {music && food && activity && (
         <>

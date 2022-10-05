@@ -1,11 +1,9 @@
 import { useLocation } from 'react-router-dom';
 import { useRecommendContext } from '../Context/RecommendContext';
 import usePullToRefresh from 'hook/usePullToRefresh';
-import useSpotifyReady from 'hook/useSpotifyReady';
 import MusicItem from './MusicItem';
 
 function Playlist() {
-  const ready = useSpotifyReady();
   const { div, handleTouchStart, handleTouchMove, handleTouchEnd } =
     usePullToRefresh();
   const { state } = useRecommendContext();
@@ -14,7 +12,7 @@ function Playlist() {
 
   // // set spotify access token
   // useEffect(() => {
-  //   const spotify = window.localStorage.getItem('spotify');
+  //   const spotify = localStorage.getItem('spotify');
   //   if (spotify) {
   //     setToken(true);
   //     return;

@@ -12,7 +12,6 @@
     "buffer": "^6.0.3",
     "classnames": "^2.3.2",
     "gapi-script": "^1.2.0",
-    "http-proxy-middleware": "^2.0.6",
     "query-string": "^7.1.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
@@ -30,7 +29,6 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "react-spotify-web-playback": "^0.10.0",
-    "react-spotify-login": "^0.9.1",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "sass": "^1.54.9",
@@ -72,5 +70,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.6"
   }
 }

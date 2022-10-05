@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import Walking from 'assets/images/WalkingGirl.gif';
 
@@ -12,7 +11,6 @@ const Col = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center;
 `;
 
 const TitleBox = styled('div')`

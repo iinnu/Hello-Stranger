@@ -17,36 +17,37 @@ function AlbumCover() {
   };
 
   const handlePlay = () => {
-    const prevAudio = document.getElementById(`preview-${prev.musicID}`);
     const currentAudio = document.getElementById(`preview-${current.musicID}`);
-
-    // 현재 재생중인 음악이 있으면 멈춤
-    if(play && prev.musicID !== current.musicID && !prevAudio.paused) {
-      prevAudio.pause();
-    }
-    else if(!play) {
-      if(prev.musicID !== current.musicID) setPrev(current);
-      currentAudio.play();
-      setPlay(true);
-    }
-    else if(play) {
-      if(prev.musicID === current.musicID) currentAudio.pause();
+    // 재생 중이 아니면
+    if (!play) {
+      if (prev.musicID !== current.musicID) setPrev(current);
+      if (current.preview) {
+        currentAudio.play();
+        setPlay(true);
+      }
+      // 현재 재생 중이면
+    } else {
+      if (prev.musicID === current.musicID) currentAudio.pause();
       setPlay(false);
     }
   };
 
   useEffect(() => {
-    if(current) {
+    if (current) {
       const pre = document?.getElementById(`preview-${prev.musicID}`);
       const cur = document?.getElementById(`preview-${current.musicID}`);
-      if(!pre.paused) {
+      // 재생 중에 선택한 목록이 바뀌면
+      if (!pre.paused) {
+        // 재생 중인걸 멈춤
         pre.pause();
-        if(current.preview) cur.play();
-        else setPlay(false);
+        if (current.preview) {
+          setPrev(current);
+          cur.play();
+        } else setPlay(false);
         setPrev(current);
       }
     }
-  }, [current])
+  }, [current]);
 
   return (
     <div className="album-cover" style={albumImg}>

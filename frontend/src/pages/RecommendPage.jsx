@@ -91,9 +91,7 @@ function RecommendPage() {
 
   return (
     <Container>
-      {(!music || !food || !activity) && (
-        <Loading />
-      )}
+      {(!music || !food || !activity) && <Loading />}
       {music && food && activity && (
         <>
           {close}

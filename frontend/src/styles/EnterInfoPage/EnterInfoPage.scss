@@ -5,8 +5,16 @@
     width: 100%;
     height: 100%;
     &__Music{
+        &__Player{
+            margin-top: 5%;
+            margin-left:10%;
+            width: 80%;
+            max-width: 400px;
+            bottom:0;
+        }
         &__Title{
             height: 25%;
+            margin-bottom:10%;
             &__Bottom{
                 width:70%;
                 background: linear-gradient(to top, #fff9e0 50%, transparent 50%);

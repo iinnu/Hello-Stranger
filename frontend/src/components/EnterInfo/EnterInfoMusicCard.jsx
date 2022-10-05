@@ -12,7 +12,7 @@ import axios from "axios";
 import SpotifyPlayer from 'react-spotify-web-playback';
 
 
-export default function RecipeReviewCard({id, name, artist, image}) {
+export default function RecipeReviewCard({id, name, artist, image, musicplayer}) {
   const [isDisable, setDisable] = useState(false)
   const [isDisable2, setDisable2] = useState(true) 
   function musicDataInputGood(){
@@ -74,11 +74,16 @@ export default function RecipeReviewCard({id, name, artist, image}) {
 
 // #############################################################################################################33
 // 음악플레이
-const [musicid, setmusicid] = useState('')
+const [musicarrs, setmusicarrs] = useState([])
 useEffect(()=>{
   async function getData(){
     const data = await searchAxios()
-    setmusicid(`spotify:track:${data.trackId}`)
+    const musicarr = [localStorage.getItem('musicarr')]
+    musicarr.push(`spotify:track:${data.trackId}`)
+    localStorage.setItem('musicarr', musicarr)
+    const musicarrs = localStorage.getItem('musicarr').split(',')
+    musicarrs.shift()
+    setmusicarrs(musicarrs)
   }
   getData()
 },[name, artist])
@@ -120,9 +125,7 @@ useEffect(()=>{
   } else return;
   }
 // #################################################################################################################################
- 
-
-
+musicplayer(musicarrs)
 
 
 
@@ -140,11 +143,6 @@ return (
         alt="album"
       />
       <CardContent>
-      <SpotifyPlayer
-        token={accessToken}
-        uris={musicid}
-        callback={handleCallback}
-        />
         <Typography variant="body2" color="text.secondary">
         </Typography>  
       </CardContent>

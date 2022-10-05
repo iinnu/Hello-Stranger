@@ -64,7 +64,7 @@ public class ReviewController {
 
         //DB에 활동이 없어서 에러남
         List<ReviewRegistReq.ReviewReqConentStore> activityStores =  reviewRegistReq.getActivity().getStore();
-//        reviewActivityService.createReviewActivity(review, activityStores);
+        reviewActivityService.createReviewActivity(review, activityStores);
 
         List<ReviewRegistReq.ReviewReqConentStore> foodStores =  reviewRegistReq.getFood().getStore();
         reviewFoodService.createReviewFood(review, foodStores);

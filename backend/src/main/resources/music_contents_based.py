@@ -3,17 +3,18 @@ from tempfile import tempdir
 import pandas as pd
 import numpy as np
 import pymysql
+import sys
 
 conn = pymysql.connect(host="j7d104.p.ssafy.io", port=3306, user="D104", passwd="37h!li0_st^@s0313", db="hello_stranger", charset='utf8')
 cur = conn.cursor()
 
-sql = ''' SELECT * FROM music_recommend where music IS NULL '''
+# sql = ''' SELECT * FROM music_recommend where music IS NULL '''
+#
+# cur.execute(sql)
+# music_recommend = cur.fetchall()
+new_user = new_user = int(sys.argv[1])
 
-cur.execute(sql)
-music_recommend = cur.fetchall()
-new_user = music_recommend[0][1]
-
-sql = ''' SELECT music_id, like_YN FROM music_user WHERE user_id = {0}'''.format(new_user)
+sql = ''' SELECT music_id, like_YN FROM music_user WHERE user_id = {0} and like_YN = 1'''.format(new_user)
 cur.execute(sql)
 user_likes = cur.fetchall()
 

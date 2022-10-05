@@ -25,4 +25,8 @@ public class ActivityRec {
     public ActivityRec(int userId) {
         this.userId = userId;
     }
+
+    public ActivityRec() {
+
+    }
 }

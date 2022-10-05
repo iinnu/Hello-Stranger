@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import sample from 'assets/images/sample.jpg';
 import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
 import { setCurrentStore as activityStore } from 'components/Recommend/Context/activityReducer';
 import { setCurrentStore as foodStore } from 'components/Recommend/Context/foodReducer';
@@ -30,7 +29,7 @@ export default function StoreItem({ item, active, handleClick }) {
         <span className="store-item__address">{item.address}</span>
       </Col>
       <div className="store-item__img-wrapper">
-        <img src={sample} alt="store preview" />
+        {item.imgUrl && <img src={item.imgUrl} alt="store preview" />}
       </div>
     </div>
   );

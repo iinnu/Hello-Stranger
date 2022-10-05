@@ -88,7 +88,7 @@ export default function PlanDrawer() {
         })),
       },
       musicId: music.musicID,
-      playlist_url: '',
+      playlist_url: state.musicReducer.url,
       title: title,
     };
 

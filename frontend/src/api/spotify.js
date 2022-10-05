@@ -125,3 +125,29 @@ export async function getSpotifyRecommendation(seed) {
 
   return getRecommendList(response.data.tracks);
 }
+
+export async function createPlaylist(list, success) {
+  const token = localStorage.getItem('spotify');
+  const api = apiController(token);
+
+  const info = await getSpotifyUserInfo(token);
+
+  // 플레이리스트 생성
+  const payload = {
+    name: 'HS - ' + new Date().toLocaleString(),
+    description: 'Hello Stranger playlist',
+  };
+  const playlist = await api.post(`/users/${info.data.id}/playlists`, payload);
+  const playlist_id = playlist.data.id;
+
+  // 플레이리스트에 아이템 추가
+  const uris = list.map((item) => item.uri);
+  api
+    .post(`/playlists/${playlist_id}/tracks`, {
+      uris: uris,
+      position: 0,
+    })
+    .then(success);
+
+  return playlist.data.external_urls.spotify;
+}

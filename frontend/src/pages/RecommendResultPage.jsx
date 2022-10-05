@@ -1,11 +1,12 @@
 import 'styles/Recommend/RecommendResultPage.scss';
 import { useEffect, useState } from 'react';
-import { getSpotifyRecommendation } from 'api/spotify';
+import { createPlaylist, getSpotifyRecommendation } from 'api/spotify';
 import { ResultProvider } from 'components/Recommend/Context/ResultContext';
 import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
 import {
   setRecommendCurrent,
   setRecommendList,
+  setRecommendUrl,
 } from 'components/Recommend/Context/musicReducer';
 import Container from 'components/common/Container';
 import ResultLoading from 'components/Recommend/Result/ResultLoading';
@@ -25,6 +26,7 @@ function RecommendResultPage() {
     getSpotifyRecommendation(seed).then((res) => {
       dispatch(setRecommendList(res));
       dispatch(setRecommendCurrent(res[0]));
+      createPlaylist(res).then((res) => dispatch(setRecommendUrl(res)));
     });
   }, []);
 

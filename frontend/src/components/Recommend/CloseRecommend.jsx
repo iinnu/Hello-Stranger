@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CustomModal from 'components/common/CustomModal';
-import RefreshList from './Result/RefreshList';
-import { BorderBottom } from '@mui/icons-material';
+import RefreshList from './RefreshList';
 
 function CloseRecommend() {
   const [open, setOpen] = useState(false);

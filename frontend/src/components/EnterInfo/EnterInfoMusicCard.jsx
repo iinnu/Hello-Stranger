@@ -9,8 +9,6 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import React, { useState, useEffect } from 'react';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import axios from "axios";
-import SpotifyPlayer from 'react-spotify-web-playback';
-
 
 export default function RecipeReviewCard({id, name, artist, image, musicplayer}) {
   const [isDisable, setDisable] = useState(false)
@@ -67,6 +65,17 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer})
   function newbutton(){
     setDisable(false)
     setDisable2(true)
+    const localMusicData = JSON.parse(localStorage.getItem('musicDataInput'))
+    for(var i = 0; i < localMusicData.length; i++){ 
+      if (localMusicData[i].id === id) { 
+        localMusicData.splice(i, 1); 
+        i--; 
+      }
+    }
+    localStorage.setItem('musicDataInput', JSON.stringify(localMusicData))
+    if(JSON.parse(localStorage.getItem('musicDataInput')).length===0){
+      localStorage.removeItem('musicDataInput')
+    }
   }
 
 

@@ -79,6 +79,10 @@ public class RecServiceImpl implements RecService{
             int len = stores.size();
             for(int j=0; j<len;j++){
                 Activity cur = stores.get(j);
+                 String review = cur.getActivityReview();
+                review = review.replace(".||.", " ").replace("\"\"", "\"").replace("error","").replace("noResult","");
+                review = review.startsWith("\"") ? review.substring(1, review.length()-1) : review;
+                String[] results = review.split("\\[>\\*}");
                 storesBase.add(BaseInfo.builder()
                         .longitude(cur.getActivityLongitude())
                         .latitude(cur.getActivityLatitude())
@@ -86,6 +90,9 @@ public class RecServiceImpl implements RecService{
                         .name(cur.getActivityName())
                         .time(cur.getActivityTime())
                         .address(cur.getActivityAddress())
+                        .imgUrl(cur.getActivityImgUrl())
+                        .rating(cur.getActivityRating())
+                        .review(results)
                         .build());
             }
             res.add(ActivityRecGetRes.builder().activityCategory(activityRecs[i]).store(storesBase).imgUrl(imgUrl).build());
@@ -107,6 +114,10 @@ public class RecServiceImpl implements RecService{
             int len = stores.size();
             for(int j=0; j<len;j++){
                 Food cur = stores.get(j);
+                String review = cur.getFoodReview();
+                review = review.replace(".||.", " ").replace("\"\"", "\"").replace("error","").replace("noResult","");
+                review = review.startsWith("\"") ? review.substring(1, review.length()-1) : review;
+                String[] results = review.split("\\[>\\*}");
                 storesBase.add(BaseInfo.builder()
                         .longitude(cur.getFoodLongitude())
                         .latitude(cur.getFoodLatitude())
@@ -114,6 +125,9 @@ public class RecServiceImpl implements RecService{
                         .name(cur.getFoodName())
                         .time(cur.getFoodTime())
                         .address(cur.getFoodAddress())
+                        .review(results)
+                        .rating(cur.getFoodRating())
+                        .imgUrl(cur.getFoodImgUrl())
                         .build());
             }
             res.add(FoodRecGetRes.builder().foodCategory(foodRecs[i]).store(storesBase).imgUrl(imgUrl).build());

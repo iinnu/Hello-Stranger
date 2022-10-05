@@ -76,7 +76,7 @@ $player-rswp-height: 40%;
   &__control {
     position: relative;
     align-items: center;
-    top: 15%;
+    top: 7%;
     z-index: 2;
     width: 20%;
     left: 2%;
@@ -86,11 +86,15 @@ $player-rswp-height: 40%;
       justify-content: center;
       align-items: center;
     }
-
+    
     .MuiButtonBase-root {
       background-color: white;
       color: black;
     }
+    .css-sghohy-MuiButtonBase-root-MuiButton-root:hover{
+      background-color: #92B4EC !important;
+    }
+
   }
   &__music{
     &--playlist{
@@ -224,4 +228,8 @@ ul {
 
 .css-qb3kwf{
   width: 100%;
+}
+
+.css-s7d5x3-MuiButtonGroup-root .MuiButtonGroup-grouped:not(:last-of-type){
+  border: none !important;
 }

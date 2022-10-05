@@ -25,9 +25,10 @@
   &__list {
     position: relative;
     width: 100%;
-    height: calc(($viewport-height - 56px)*0.9);
+    height: calc(($viewport-height - 56px)*0.8);
     padding: 0 5%;
     overflow: auto;
+    margin-top: 10%;
     &--scroll{
       height: 100%;
       // overflow: auto;

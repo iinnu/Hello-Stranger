@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 
@@ -11,6 +11,7 @@ import BottomNav from "components/common/BottomNav";
 import DetailInfoTitle from "components/DetailInfo/Title";
 import DetailInfoMap from "components/DetailInfo/Map";
 import Loading from "components/Main/Map/Loading";
+import Paper from "@mui/material/Paper";
 
 // data api
 import {getOtherUser,getOtherUserActivity, getOtherUserFood} from 'api/other'
@@ -38,21 +39,13 @@ export default function DetailInfoPage() {
   const [detailDate, setDetailDate] = useState('')
   const [currentStore, setCurrentStore] = useState({})
 
-  function Map({currentStore}){
-    const localStorageData = localStorage.getItem('storeData')
-    return (localStorageData
-      ? <DetailInfoMap currentStore={currentStore}/>
-      : null
-    )
-  }
-
-  useEffect(()=> {
+  useLayoutEffect(()=> {
     async function getData(){
       if(pathName === 'other'){
+        setIsHistory(false)
         console.log('다른유저')
         const Data = await getOtherUser()
         setUserData(Data)
-        setIsHistory(false)
         const storeLocationData = {
           food: {
             lat: Data.food.latitude,
@@ -129,7 +122,6 @@ export default function DetailInfoPage() {
       setDetailData(foodData ?? [])
       setCurrentStore(pos)
       setLeftData(leftFoodData ?? [])
-      console.log('food, history',pos, currentStore, userData.choice_food.id,leftFoodData, detailData)
     } 
     else {
       const pos = {
@@ -138,7 +130,6 @@ export default function DetailInfoPage() {
       }
       setCurrentStore(pos)
       setDetailData(userData.food ?? [])
-      console.log('food, other', pos, currentStore, userData.food.id, foodData, activityData, detailData)
     }
     setOpenDrawer(true);
   }
@@ -181,26 +172,35 @@ export default function DetailInfoPage() {
     foodCategory:  userData?.choice_food?.category, 
     musicId: 0, 
   }
-
+  function Map({currentStore}){
+    const localStorageData = localStorage.getItem('storeData')
+    return (localStorageData
+      ? <DetailInfoMap currentStore={currentStore}/>
+      : null
+    )
+  }
   return (
     <>
       <FeedbackModal open={openModal} onClose={handleCloseModal} modalData={modalData}/>
       <Container>
         <div className="detail-info">
+          <Map currentStore={currentStore}/>
+          {isHistory
+          ? <DetailInfoTitle
+          title={detailTitle}
+          date={detailDate}
+          handleOpenModal={handleOpenModal}
+          />
+          : <Paper className="detail-info__title--other">
+              <div className="detail-info__title--other--text">다른 유저 일정</div>
+            </Paper>
+          }
           <ButtonGroups
             isHistory={isHistory}
             clickFood={clickFood}
             clickActivity={clickActivity}
             clickMusic={clickMusic}
           />
-          <Map currentStore={currentStore}/>
-          {isHistory && (
-            <DetailInfoTitle
-              title={detailTitle}
-              date={detailDate}
-              handleOpenModal={handleOpenModal}
-            />
-          )}
           <Grid container className="detail-info-inner">
             <StoreInfoDrawer 
             open={openDrawer} 
@@ -210,7 +210,7 @@ export default function DetailInfoPage() {
             isHistory={isHistory}
             type={type}
             />
-            {isHistory ? <MusicDrawer open={openMusicDrawer} toggleDrawer={toggleMusicDrawer}/> : <Loading/>}
+            {isHistory ? <MusicDrawer open={openMusicDrawer} toggleDrawer={toggleMusicDrawer}/> : null}
           </Grid>
         </div>
         <BottomNav />

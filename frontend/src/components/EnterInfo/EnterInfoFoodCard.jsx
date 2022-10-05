@@ -64,6 +64,17 @@ export default function RecipeReviewCard({ id, title, image }) {
   function newbutton(){
     setDisable(false)
     setDisable2(true)
+    const localFoodData = JSON.parse(localStorage.getItem('foodDataInput'))
+    for(var i = 0; i < localFoodData.length; i++){ 
+      if (localFoodData[i].category === title) { 
+        localFoodData.splice(i, 1); 
+        i--; 
+      }
+    }
+    localStorage.setItem('foodDataInput', JSON.stringify(localFoodData))
+    if(JSON.parse(localStorage.getItem('foodDataInput')).length===0){
+      localStorage.removeItem('foodDataInput')
+    }
   }
   return (
     <Card className="UserInput__Food__Item__Area__Card">

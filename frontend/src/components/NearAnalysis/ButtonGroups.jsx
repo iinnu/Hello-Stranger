@@ -9,6 +9,17 @@ const Row = styled('div')`
   display: flex;
   justify-content: center;
 `;
+const StyledButton = styled(Button)`
+  border: none !important;
+  &:hover{
+    background-color:#92B4EC !important;
+    color: white;
+  }
+  &:active{
+    background-color:#92B4EC !important;
+    color: white;
+  }
+`
 export default function ButtonGroups({openFood, openActivity}){
  return(
   <ButtonGroup
@@ -17,14 +28,14 @@ export default function ButtonGroups({openFood, openActivity}){
   aria-label="vertical contained button group"
   variant="contained"
   >
-  <Button className="detail-info__control--button" onClick={openFood}>
+  <StyledButton className="detail-info__control--button" onClick={openFood}>
     <Row><RestaurantRoundedIcon /></Row>
     <Row>음식</Row>
-  </Button>
-  <Button className="detail-info__control--button" onClick={openActivity}>
+  </StyledButton>
+  <StyledButton className="detail-info__control--button" onClick={openActivity}>
     <Row><SportsTennisIcon /></Row>
     <Row>활동</Row>
-  </Button>
+  </StyledButton>
   </ButtonGroup>
  )
 }

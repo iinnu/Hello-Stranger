@@ -1,11 +1,6 @@
 FROM azul/zulu-openjdk:8 as build-stage
 WORKDIR /var/jenkins_home/workspace/deploy/backend
 
-RUN apt-get update && apt-get install -y software-properties-common
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get update
-RUN apt-get install python3.8
-
 COPY gradlew .
 COPY gradle gradle
 COPY build.gradle .
@@ -16,6 +11,15 @@ RUN ./gradlew bootJAR
 
 FROM azul/zulu-openjdk:8
 COPY --from=build-stage /var/jenkins_home/workspace/deploy/backend/build/libs/*.jar app.jar
+
+RUN apt-get update && apt-get install -y software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update
+RUN apt-get install python3.8
+RUN apt-get install python3-pip
+RUN pip install pandas
+RUN pip install -Iv pymysql==0.9.3
+RUN pip install sklearn
 
 EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "/app.jar"]

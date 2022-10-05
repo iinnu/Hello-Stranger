@@ -2,9 +2,15 @@ import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import RestaurantRoundedIcon from "@mui/icons-material/RestaurantRounded";
-import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
+import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import SkateboardingIcon from "@mui/icons-material/Skateboarding";
+import SportsTennisIcon from '@mui/icons-material/SportsTennis';
+import styled from '@emotion/styled';
 
+const Row = styled('div')`
+  display: flex;
+  justify-content: center;
+`;
 export default function DetailInfoButtonGroups({isHistory, clickFood, clickActivity, clickMusic}){
  return(
   <ButtonGroup
@@ -13,19 +19,20 @@ export default function DetailInfoButtonGroups({isHistory, clickFood, clickActiv
   aria-label="vertical contained button group"
   variant="contained"
   >
-  <Button className="detail-info__control--button" onClick={clickFood}>
-  <RestaurantRoundedIcon />
-  음식
-  </Button>
-  <Button className="detail-info__control--button" onClick={clickActivity}>
-    <SkateboardingIcon />
-    활동
-  </Button>
   {isHistory &&
   <Button className="detail-info__control--button" onClick={clickMusic}>
-    <LibraryMusicIcon />
-    음악
+    <Row><QueueMusicIcon/></Row>
+    <Row>음악</Row>
   </Button>}
+  <Button className="detail-info__control--button" onClick={clickFood}>
+    <Row><RestaurantRoundedIcon /></Row>
+    <Row>음식</Row>
+  </Button>
+  <Button className="detail-info__control--button" onClick={clickActivity}>
+    <Row><SportsTennisIcon /></Row>
+    <Row>활동</Row>
+  </Button>
+
   </ButtonGroup>
 
  )

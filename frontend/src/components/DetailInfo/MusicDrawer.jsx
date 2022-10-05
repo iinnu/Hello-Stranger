@@ -45,18 +45,19 @@ const CustomLabel = styled(Button)`
   }
 `;
 
-export default function StoreInfoDrawer({ open, toggleDrawer }) {
+export default function MusicDrawer({ open, toggleDrawer, playlistId }) {
   const [trackIdList, setTrackIdList] = useState([]);
   const [playlist, setPlaylist] = useState([])
 
   useEffect(()=>{
-    async function getMusic() {
-      const {playlistIdList, playlistItems} = await getPlaylist();
+    async function getMusic(playlistId) {
+      const {playlistIdList, playlistItems} = await getPlaylist(playlistId);
       setTrackIdList(playlistIdList)
       setPlaylist(playlistItems)
     }
-    getMusic()  
-    },[])
+    getMusic(playlistId)  
+    console.log('playlistid', playlistId, playlist, trackIdList)
+    },[playlistId])
 
   return (
     <CustomSwipeableDrawer

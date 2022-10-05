@@ -22,9 +22,11 @@ export default function StoreReview({content, type}) {
   useEffect(()=>{
     async function getData(){
       if(type==='food'){
+        console.log('이게 안된다고?', type)
         const data = await getUserFood(content.id)
         setDetailData(data)
       } else {
+        console.log('이게 안된다고?', type)
         const data = await getUserActivity(content.id)
         setDetailData(data)
       }

@@ -80,8 +80,8 @@ export async function createPlaylist(data) {
   return {playlistIdList, playlist}
 }
 
-export async function getPlaylist(){
-  const playlistId = localStorage.getItem('playlistId')
+export async function getPlaylist(playlistId){
+  // const playlistId = localStorage.getItem('playlistId')
   return axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, {
     headers: {
         'Accept': 'application/json',

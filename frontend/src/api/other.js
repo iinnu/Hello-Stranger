@@ -6,7 +6,18 @@ export function getOtherUser() {
     return api.get(`/otheruser`)
     .then((res)=>{
         console.log('otheruser', res.data)
-        return res.data
+        const Data = res.data 
+        const locationData = {
+            food: {
+              lat: Data.food.latitude,
+              lng: Data.food.longitude
+            },
+            activity: {
+              lat: Data.activity.latitude,
+              lng: Data.activity.longitude
+            },
+          }
+        return {Data, locationData}
     })
     .catch((err)=>{
         console.error('otheruser error',err)

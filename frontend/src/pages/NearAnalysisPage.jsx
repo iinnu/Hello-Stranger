@@ -14,10 +14,10 @@ import Loading from "components/Main/Map/Loading";
 import "styles/NearAnalysisPage/NearAnalysisPage.scss";
 import { getNearInfo } from "api/near";
 function NearAnalysisPage() {
-  const storeLocations = localStorage.getItem('storeLocationData')
-  function Map({currentStore}){
-      return storeLocations
-      ? <NearMap currentStore={currentStore}/>
+  // const storeLocations = localStorage.getItem('storeLocationData')
+  function Map({currentStore, markerData}){
+      return (markerData !== [])
+      ? <NearMap currentStore={currentStore} markerData={markerData}/>
       : <Loading/>
   }
   const location =  JSON.parse(localStorage.getItem('current'))
@@ -28,40 +28,26 @@ function NearAnalysisPage() {
     console.log('행정동?', result[1])
     localStorage.setItem('address', result[1]?.address_name)
   };
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   const currentStoreLocation = JSON.parse(localStorage.getItem('currentStore'))
 
+  const [markerData, setMarkerData] = useState([])
+
   useLayoutEffect(() => {
-    const dataObject = {}
     async function getData(){
       if (location) {
         coord2RegionCode(location, callback);
       }
       const userAdress = localStorage.getItem('address')
       const current = JSON.parse(localStorage.getItem('current'))
-      const data = await getNearInfo(userAdress, current)
+      const {data, locationData} = await getNearInfo(userAdress, current)
       setNearData(data)
-      const dataArray = Object.entries(data)
-      console.log('dataArray', dataArray)
-      dataArray?.map((key)=>{
-        if(key[0]==='leastFoodStore' || key[0] ==='mostFoodStore'){
-          return key[1].map((e)=>{
-            const data = {lat: e.latitude, lng: e.longitude}
-            dataObject[`food${e.id}`] = data
-        })
-
-        }else if (key[0] === 'leastActivityStore' || key[0] ==='mostActivityStore'){
-          return key[1].map((e)=>{
-            const data = {lat: e.latitude, lng: e.longitude}
-            dataObject[`activity${e.id}`] = data
-        }
-      )}})
-      localStorage.setItem('storeLocationData', JSON.stringify(dataObject))
+      setMarkerData(locationData)
+      // setLoading(false)
+      console.log('data, locationData',data, locationData)
     }
     getData()
   }, []);
-
-
 
   const [openDrawer, setOpenDrawer] = useState(false);
   const toggleDrawer = (state) => (event) => {
@@ -101,7 +87,10 @@ function NearAnalysisPage() {
             openFood={openFood}
             openActivity={openActivity}
           />
-          {loading && <Map currentStore={currentStore}/>}
+          {(markerData === [])
+          ? <Loading/>
+          : <Map currentStore={currentStore} markerData={markerData}/>
+          }
           <NearDrawer open={openDrawer} toggleDrawer={toggleDrawer} type={type} nearData={nearData} getCurrentStore={getCurrentStore}/>
         </div>
         <BottomNav />

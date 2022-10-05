@@ -8,8 +8,8 @@ import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 
 export default function DetailInfoMap({currentStore, markerData, pathName}) {
   console.log('DetailInfoMap 바로 아래 markerData', markerData)
-  const foodData = JSON.parse(localStorage.getItem('storeData')).choice_food
-  const activityData = JSON.parse(localStorage.getItem('storeData')).choice_activity
+  const foodData = JSON.parse(localStorage.getItem('storeData'))?.choice_food
+  const activityData = JSON.parse(localStorage.getItem('storeData'))?.choice_activity
   const current = JSON.parse(localStorage.getItem('current'))
   const [center, setCenter] = useState({lat: current.lat, lng: current.lng})
   const [clickedStore, setClickedStore] = useState({})

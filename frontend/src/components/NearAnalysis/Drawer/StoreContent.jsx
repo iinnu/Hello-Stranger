@@ -5,7 +5,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StarIcon from '@mui/icons-material/Star';
-import sample from 'assets/images/sample.jpg';
+import NoImage from 'assets/images/NoImage.png';
 import OpenClosed from './OpenClosed';
 import StoreReview from './StoreReview';
 import StoreListItems from './StoreListItems';
@@ -71,7 +71,7 @@ const Review = () => {
     <div className="store-info-drawer">
     <StyledBox className="store-info-drawer__main">
         <div>
-        <img className="main__image" src={detailData.imgUrl || sample} alt="store img" />
+        <img className="main__image" src={detailData.imgUrl || NoImage} alt="store img" />
         <div className="main__title">{detailData?.name}</div>
         <div className="main__status">
             <span> {detailData?.rating ?  `★${detailData?.rating}/5` : `별점 정보가 없습니다.`}</span>

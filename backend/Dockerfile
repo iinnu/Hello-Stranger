@@ -9,10 +9,13 @@ COPY src src
 RUN chmod +x ./gradlew
 RUN ./gradlew bootJAR
 
-FROM openjdk:slim
-COPY --from=python:3.6 / /usr/local/lib
-
 FROM azul/zulu-openjdk:8
 COPY --from=build-stage /var/jenkins_home/workspace/deploy/backend/build/libs/*.jar app.jar
+
+RUN apt-get install software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update
+RUN apt-get install python3.8
+
 EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "/app.jar"]

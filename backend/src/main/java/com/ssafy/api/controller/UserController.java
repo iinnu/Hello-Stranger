@@ -158,7 +158,7 @@ public class UserController {
         String[] command = new String[3];
         command[0] = "python";
         command[1] = new File(activityRecommend.getPath()).getAbsolutePath();
-        command[2] = Integer.toString(userId);
+        command[2] = Integer.toString(user.getUserId());
 
         try {
             exePython(command);
@@ -170,7 +170,7 @@ public class UserController {
         String[] command2 = new String[3];
         command2[0] = "python";
         command2[1] = new File(foodRecommend.getPath()).getAbsolutePath();
-        command2[2] = Integer.toString(userId);
+        command2[2] = Integer.toString(user.getUserId());
 
 
         try {
@@ -183,7 +183,7 @@ public class UserController {
         String[] command3 = new String[3];
         command3[0] = "python";
         command3[1] = new File(musicRecommend.getPath()).getAbsolutePath();
-        command3[2] = Integer.toString(userId);
+        command3[2] = Integer.toString(user.getUserId());
 
         try {
             exePython(command3);

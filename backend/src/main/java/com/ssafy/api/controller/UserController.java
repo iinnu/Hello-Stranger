@@ -132,26 +132,26 @@ public class UserController {
         }
 
         // @valid 찾아볼 것
-//        List<IdLikeYN> music = categoryChoiceReq.getMusic();
-//        for(IdLikeYN like : music){
-//            int yn = like.getLikeYN();
-//            if(yn == 1 || yn == -1) continue;
-//            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
-//        }
-//
-//        List<CategoryLikeYN> food = categoryChoiceReq.getFood();
-//        for(CategoryLikeYN like : food){
-//            int yn = like.getLikeYN();
-//            if(yn == 1 || yn == -1) continue;
-//            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
-//        }
-//
-//        List<CategoryLikeYN> activity = categoryChoiceReq.getActivity();
-//        for(CategoryLikeYN like : activity){
-//            int yn = like.getLikeYN();
-//            if(yn == 1 || yn == -1) continue;
-//            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
-//        }
+        List<IdLikeYN> music = categoryChoiceReq.getMusic();
+        for(IdLikeYN like : music){
+            int yn = like.getLikeYN();
+            if(yn == 1 || yn == -1) continue;
+            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+        }
+
+        List<CategoryLikeYN> food = categoryChoiceReq.getFood();
+        for(CategoryLikeYN like : food){
+            int yn = like.getLikeYN();
+            if(yn == 1 || yn == -1) continue;
+            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+        }
+
+        List<CategoryLikeYN> activity = categoryChoiceReq.getActivity();
+        for(CategoryLikeYN like : activity){
+            int yn = like.getLikeYN();
+            if(yn == 1 || yn == -1) continue;
+            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+        }
 
         userService.registUserChoice(user.getUserId(), categoryChoiceReq);
 

@@ -1,5 +1,5 @@
+import { Divider } from '@mui/material';
 import Rating from '@mui/material/Rating';
-import OpenClosed from '../OpenClosed';
 
 export default function StoreInfo({ store, toggleDrawer }) {
   return (
@@ -8,14 +8,18 @@ export default function StoreInfo({ store, toggleDrawer }) {
         <span className="top__title">{store.name}</span>
       </div>
       <div className="store-info__scope">
-        <span>2.5</span>
+        <div className="store-info__scope__inner">
+          {store.rating ? store.rating : '0.0 '}
+        </div>
         <Rating
           name="half-rating-read"
-          defaultValue={2.5}
-          precision={0.5}
+          value={store.rating ? +store.rating : 0}
+          precision={0.1}
           size="small"
           readOnly
         />
+        <Divider orientation="vertical" flexItem />
+        <div>리뷰 {store.review.filter((item) => item !== '').length}</div>
       </div>
       <div className="store-info__address">{store.address}</div>
     </div>

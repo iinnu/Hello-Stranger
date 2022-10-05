@@ -4,6 +4,7 @@ import { useResultContext } from 'components/Recommend/Context/ResultContext';
 import { setCurrentFood } from 'components/Recommend/Context/foodReducer';
 import { setCurrentActivity } from 'components/Recommend/Context/activityReducer';
 import StoreItem from 'components/Recommend/Category/Detail/List/StoreItem';
+import NoResult from 'components/Recommend/Category/Detail/NoResult';
 
 export default function StoreDrawer({ type, list, setOpen }) {
   const [category, setCategory] = useState('전체');
@@ -61,22 +62,30 @@ export default function StoreDrawer({ type, list, setOpen }) {
         </div>
         <div className="category-select__store-list">
           {category === '전체' &&
-            storeList.map((stores) =>
-              stores.map((store) => (
+            (storeList.length === 0 ? (
+              <NoResult />
+            ) : (
+              storeList.map((stores) =>
+                stores.map((store) => (
+                  <StoreItem
+                    key={store.id}
+                    item={store}
+                    handleClick={() => handleClickStoreItem(store)}
+                  />
+                ))
+              )
+            ))}
+          {category !== '전체' &&
+            (current?.store.length === 0 ? (
+              <NoResult />
+            ) : (
+              current?.store.map((item) => (
                 <StoreItem
-                  key={store.id}
-                  item={store}
-                  handleClick={() => handleClickStoreItem(store)}
+                  key={item.id}
+                  item={item}
+                  handleClick={() => handleClickStoreItem(item)}
                 />
               ))
-            )}
-          {category !== '전체' &&
-            current?.store.map((item) => (
-              <StoreItem
-                key={item.id}
-                item={item}
-                handleClick={() => handleClickStoreItem(item)}
-              />
             ))}
         </div>
       </div>

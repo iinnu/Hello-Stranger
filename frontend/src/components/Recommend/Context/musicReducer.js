@@ -3,6 +3,9 @@ const REFRESH_MUSIC_LIST = 'music/refresh';
 const SET_MUSIC_LIST = 'music/list';
 const SET_CURRENT_MUSIC = 'music/current';
 const SET_MUSIC_CHOICE = 'music/choice';
+const SET_RECOMMEND_LIST = 'music/recommend/list';
+const SET_RECOMMEND_CURRENT = 'music/recommend/current';
+const SET_RECOMMEND_URL = 'music/recommend/url';
 
 /* 액션 생성 함수 */
 export const refreshMusicList = () => ({
@@ -25,6 +28,21 @@ export const setMusicChoice = (id, value) => ({
   value,
 });
 
+export const setRecommendList = (recommend) => ({
+  type: SET_RECOMMEND_LIST,
+  recommend,
+});
+
+export const setRecommendCurrent = (current) => ({
+  type: SET_RECOMMEND_CURRENT,
+  current,
+});
+
+export const setRecommendUrl = (url) => ({
+  type: SET_RECOMMEND_URL,
+  url,
+});
+
 /* 리듀서 정의 */
 export function musicReducer(state, action) {
   switch (action.type) {
@@ -44,6 +62,12 @@ export function musicReducer(state, action) {
         return item;
       });
       return { ...state, list: updatedList };
+    case SET_RECOMMEND_LIST:
+      return { ...state, recommend: action.recommend };
+    case SET_RECOMMEND_CURRENT:
+      return { ...state, rec_current: action.current };
+    case SET_RECOMMEND_URL:
+      return { ...state, url: action.url };
     default:
       return state;
   }

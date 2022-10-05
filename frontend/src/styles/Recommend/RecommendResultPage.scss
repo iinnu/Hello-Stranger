@@ -239,6 +239,10 @@ $padding-size: 15px;
     width: 40%;
     padding: 20px 0;
 
+    &__inner {
+      margin-left: 15px;
+    }
+
     & img {
       width: 80%;
       box-shadow: 4px 4px 5px -3px rgb(175, 175, 175);
@@ -255,6 +259,7 @@ $padding-size: 15px;
       cursor: pointer;
 
       & div:first-child {
+        font-size: 0.9em;
         font-weight: 600;
       }
 

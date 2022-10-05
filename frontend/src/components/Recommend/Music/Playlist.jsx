@@ -7,14 +7,19 @@ function Playlist() {
   const { div, handleTouchStart, handleTouchMove, handleTouchEnd } =
     usePullToRefresh();
   const { state } = useRecommendContext();
-  const { list, current } = state.musicReducer;
+  const { list, current, recommend, rec_current } = state.musicReducer;
   const { pathname } = useLocation();
+  const result = pathname.includes('result');
 
   return (
     <div className="playlist">
       <div className="playlist__current-music">
-        <div className="current-music__title">{current?.musicName}</div>
-        <div className="current-music__artist">{current?.musicArtist}</div>
+        <div className="current-music__title">
+          {result ? rec_current?.musicName : current?.musicName}
+        </div>
+        <div className="current-music__artist">
+          {result ? rec_current?.musicArtist : current?.musicArtist}
+        </div>
       </div>
       <div
         className="playlist__list"
@@ -23,7 +28,7 @@ function Playlist() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {!pathname.includes('result') &&
+        {!result &&
           list.map((item) => (
             <MusicItem
               key={item.musicID}
@@ -32,17 +37,15 @@ function Playlist() {
               result={false}
             />
           ))}
-        {pathname.includes('result') &&
-          list
-            .filter((item) => item.choiceYN !== 2)
-            .map((item) => (
-              <MusicItem
-                key={item.musicID}
-                active={item.musicID === current.musicID ? true : false}
-                item={item}
-                result={true}
-              />
-            ))}
+        {result &&
+          recommend.map((item) => (
+            <MusicItem
+              key={item.musicID}
+              active={item.musicID === rec_current.musicID ? true : false}
+              item={item}
+              result={true}
+            />
+          ))}
       </div>
     </div>
   );

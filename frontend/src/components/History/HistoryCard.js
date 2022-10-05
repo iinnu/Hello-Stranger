@@ -6,25 +6,38 @@ import {useState, useEffect} from 'react'
 function HistoryCard({ data }) {
   const navigate = useNavigate();
   function openDetail() {
-    navigate(`${data.reviewId}`);
+    navigate(`${data.reviewId}`,{state:{canEvaluate}});
+    console.log('params왜 안?',{canEvaluate})
   }
   const [canEvaluate, setCanEvaluate] = useState(false)
+  const year = data?.regDate.slice(0,4)
+  const month = data?.regDate.slice(5,7)
+  const day = data?.regDate.slice(8,10)
+  const date = new Date()
+  const thisYear = String(date.getFullYear())
+  const thisMonth = String(date.getMonth()+1)
+  const thisDay = String(date.getDate() )
   useEffect(()=>{
-    const today = new Date()
-    //날짜 비교하는 작업 한 번 들어가야 함
-    if(data.evalYN==='Y'){
-      setCanEvaluate(true)
-    }
+    let cardDate = new Date(year, month, day)
+    cardDate.setDate(cardDate.getDate() + 2)
+    let thisDate = new Date(thisYear, thisMonth, thisDay)
+
+    if((thisDate > cardDate)){
+      setCanEvaluate(false)
+    } else if (data.evalYN === 'Y') {
+      setCanEvaluate(false)
+    } else {setCanEvaluate(true)}
   },[])
+
   return (
     <>
       <div className="history__card">
         <Card onClick={openDetail} style={{backgroundColor: canEvaluate ? 'white' : '#92B4EC' }}>
           <CardContent>
-            <Typography> {data.title} </Typography>
-            <Typography> {data.foodCategoryName} </Typography>
-            <Typography> {data.activityCategoryName} </Typography>
-            <Typography> {data.regDate} </Typography>
+            <Typography variant="h5" fontWeight="1000"> {data.title} </Typography>
+            <Typography variant="h6"> {data.foodCategoryName} </Typography>
+            <Typography variant="h6"> {data.activityCategoryName} </Typography>
+            <Typography> {year}년 {month}월 {day}일</Typography>
           </CardContent>
         </Card>
       </div>

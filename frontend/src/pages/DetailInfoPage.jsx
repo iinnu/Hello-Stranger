@@ -22,6 +22,7 @@ import { useLocation } from "react-router-dom";
 
 export default function DetailInfoPage() {
   const location = useLocation()
+  console.log('location', location)
   const pathName = location.pathname.split('/')[1];
   const pathId = location.pathname.split('/')[2];
   const [currentPath, setCurrentPath] = useState('');
@@ -32,11 +33,11 @@ export default function DetailInfoPage() {
   const [leftData, setLeftData] = useState([])
   const [leftFoodData, setLeftFoodData] = useState([])
   const [leftActivityData, setLeftActivityData] = useState([])
-
+  const [playlistId, setPlaylistId] = useState('')
   const [isHistory, setIsHistory] = useState(true)
   const [type, setType] = useState("");
   const [detailTitle, setDetailTitle] = useState('')
-  const [detailDate, setDetailDate] = useState('')
+  // const [detailRegDate, setDetailRegDate] = useState('')
   const [currentStore, setCurrentStore] = useState({})
 
   useLayoutEffect(()=> {
@@ -67,9 +68,10 @@ export default function DetailInfoPage() {
         setFoodData(foodResponse)
         setActivityData(activityResponse)
         setIsHistory(true)
-        setDetailTitle(Data.title ?? '')
+        // setDetailTitle(Data.title ?? '')
         setLeftFoodData(Data.food ?? [])
         setLeftActivityData(Data.activity ?? [])
+        setPlaylistId(Data.playlistUrl ?? '')
         const storeLocationData = {
           food: {
             lat: Data.choice_food.latitude,
@@ -113,6 +115,7 @@ export default function DetailInfoPage() {
   };
 
   async function clickFood() {
+    console.log('clickFood 동작', userData, activityData, leftActivityData, foodData, leftFoodData)
     setType("food");
     if(isHistory){
       const pos = {
@@ -134,6 +137,7 @@ export default function DetailInfoPage() {
     setOpenDrawer(true);
   }
   async function clickActivity() {
+    console.log('clickActivity 동작', userData, activityData, leftActivityData, foodData, leftFoodData)
     setOpenDrawer(true);
     setType("activity");
     if(isHistory){
@@ -170,7 +174,7 @@ export default function DetailInfoPage() {
     reviewId: parseInt(pathId), 
     activityCatergory: userData?.choice_activity?.category, 
     foodCategory:  userData?.choice_food?.category, 
-    musicId: 0, 
+    musicId: userData?.musicId, 
   }
   function Map({currentStore}){
     const localStorageData = localStorage.getItem('storeData')
@@ -187,9 +191,10 @@ export default function DetailInfoPage() {
           <Map currentStore={currentStore}/>
           {isHistory
           ? <DetailInfoTitle
-          title={detailTitle}
-          date={detailDate}
+          title={userData?.title}
+          regDate={userData?.regDate}
           handleOpenModal={handleOpenModal}
+          canEvaluate={location.state?.canEvaluate}
           />
           : <Paper className="detail-info__title--other">
               <div className="detail-info__title--other--text">다른 유저 일정</div>
@@ -202,15 +207,17 @@ export default function DetailInfoPage() {
             clickMusic={clickMusic}
           />
           <Grid container className="detail-info-inner">
-            <StoreInfoDrawer 
-            open={openDrawer} 
-            toggleDrawer={toggleDrawer} 
-            detailData={detailData} 
-            leftData={leftData}
-            isHistory={isHistory}
-            type={type}
-            />
-            {isHistory ? <MusicDrawer open={openMusicDrawer} toggleDrawer={toggleMusicDrawer}/> : null}
+            {detailData !== {} &&
+              <StoreInfoDrawer 
+              open={openDrawer} 
+              toggleDrawer={toggleDrawer} 
+              detailData={detailData} 
+              leftData={leftData}
+              isHistory={isHistory}
+              type={type}
+              />
+            }
+            {isHistory ? <MusicDrawer open={openMusicDrawer} toggleDrawer={toggleMusicDrawer} playlistId={playlistId}/> : null}
           </Grid>
         </div>
         <BottomNav />

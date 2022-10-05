@@ -15,7 +15,7 @@ const ExitButton = styled(IconButton)`
   }
 `;
 
-function DetailInfoTitle({ title, date, handleOpenModal }) {
+function DetailInfoTitle({ title, regDate, handleOpenModal, canEvaluate }) {
   function goBack() {
     navigate(-1);
   }
@@ -29,12 +29,13 @@ function DetailInfoTitle({ title, date, handleOpenModal }) {
           </Button>
           <div className="detail-info__title--align">
             <div className="detail-info__title--text">{title}</div>
-            <div className="detail-info__title--date">{date}</div>
+            <div className="detail-info__title--date">{regDate}</div>
           </div>
         </div>
+        {canEvaluate && 
         <Button className="detail-info__title--feedback" variant="contained" onClick={handleOpenModal}>
           일정평가
-        </Button>
+        </Button>}
       </div>
     </>
   );

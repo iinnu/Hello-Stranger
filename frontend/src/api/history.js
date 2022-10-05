@@ -5,8 +5,12 @@ const api = getApiInstance();
 export function getUserHistory() {
     return api.get('/review')
     .then((res)=>{
-        console.log('다시보기 리스트 불러오기', res.data.contents)
-        return res.data.contents
+        const cardList = res.data.contents
+        cardList.sort(function(a, b){
+            return b.reviewId - a.reviewId
+        })
+        console.log('다시보기 리스트 불러오기', cardList)
+        return cardList
     })
     .catch((err)=>{
         console.error(err)
@@ -16,7 +20,7 @@ export function getUserHistory() {
 export function getUserDetail(reviewId) {
     return api.get(`/detail/${reviewId}`)
     .then((res)=>{
-        console.log('다시보기 세부 일정 불러오기', res.data)
+        console.log('다시보기 세부 일정 불러오기', reviewId, res.data)
         return res.data
     })
     .catch((err)=>{

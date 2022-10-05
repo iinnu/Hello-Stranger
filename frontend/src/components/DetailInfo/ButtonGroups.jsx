@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import RestaurantRoundedIcon from "@mui/icons-material/RestaurantRounded";
-import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
+import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import SkateboardingIcon from "@mui/icons-material/Skateboarding";
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import styled from '@emotion/styled';
@@ -21,7 +21,7 @@ export default function DetailInfoButtonGroups({isHistory, clickFood, clickActiv
   >
   {isHistory &&
   <Button className="detail-info__control--button" onClick={clickMusic}>
-    <Row><LibraryMusicIcon /></Row>
+    <Row><QueueMusicIcon/></Row>
     <Row>음악</Row>
   </Button>}
   <Button className="detail-info__control--button" onClick={clickFood}>

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 export default function DetailPlaylistItems({data, currentMusic}){
-    const songName = data?.name
-    const artistsName = data?.artists.map((e)=>{
+    console.log('DetailPlaylistItems', data)
+    const songName = data?.track.name
+    const artistsName = data?.track.artists.map((e)=>{
         return e.name
     }).join(',')
     const shortVersion = function(text){

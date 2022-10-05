@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CustomModal from 'components/common/CustomModal';
+import RefreshList from './Result/RefreshList';
+import { BorderBottom } from '@mui/icons-material';
 
 function CloseRecommend() {
   const [open, setOpen] = useState(false);
@@ -17,10 +19,19 @@ function CloseRecommend() {
   };
 
   return (
-    <div>
-      <IconButton onClick={() => setOpen(true)}>
-        <CloseIcon />
-      </IconButton>
+    <>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          BorderBottom: '1px solid gray',
+        }}
+      >
+        <IconButton onClick={() => setOpen(true)}>
+          <CloseIcon />
+        </IconButton>
+        <RefreshList />
+      </div>
       <CustomModal
         open={open}
         handleConfirm={handleConfirm}
@@ -28,7 +39,7 @@ function CloseRecommend() {
       >
         추천을 그만 두시겠습니까?
       </CustomModal>
-    </div>
+    </>
   );
 }
 

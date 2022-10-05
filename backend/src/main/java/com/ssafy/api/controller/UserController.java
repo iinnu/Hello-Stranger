@@ -164,7 +164,7 @@ public class UserController {
         //command[1] = new File(activityRecommend.getPath()).getAbsolutePath();
         command[1] = "/rec/resources/activity_contents_based.py";
 
-        
+
         try {
             exePython(command);
         } catch (Exception e) {

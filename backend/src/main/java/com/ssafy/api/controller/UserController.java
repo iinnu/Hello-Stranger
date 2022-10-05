@@ -121,45 +121,44 @@ public class UserController {
             @ApiResponse(code = 911, message = "유효하지 않은 사용자"),
             @ApiResponse(code = 901, message = "유효하지 않은 값, YN은 1 또는 -1로만 들어올 수 있음"),
     })
-    public ResponseEntity<? extends BaseResponseBody> registUserChoice(@RequestBody CategoryChoiceReq categoryChoiceReq){
+    public ResponseEntity<? extends BaseResponseBody> registUserChoice(@ApiIgnore Authentication authentication, @RequestBody CategoryChoiceReq categoryChoiceReq){
 
-        int userId = 0;
-        try {
-            userId = userService.getUser(categoryChoiceReq.getUserEmail());
-        } catch(Exception e){
+        HelloStrangerUserDetails userDetails = (HelloStrangerUserDetails)authentication.getDetails();
+        User user = userDetails.getUser();
+
+        if(user == null){
             return ResponseEntity.status(911).body(BaseResponseBody.of(911, "유효하지 않은 사용자입니다."));
         }
 
-        System.out.println(userId);
-
         // @valid 찾아볼 것
-//        List<IdLikeYN> music = categoryChoiceReq.getMusic();
-//        for(IdLikeYN like : music){
-//            int yn = like.getLikeYN();
-//            if(yn == 1 || yn == -1) continue;
-//            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
-//        }
-//
-//        List<CategoryLikeYN> food = categoryChoiceReq.getFood();
-//        for(CategoryLikeYN like : food){
-//            int yn = like.getLikeYN();
-//            if(yn == 1 || yn == -1) continue;
-//            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
-//        }
-//
-//        List<CategoryLikeYN> activity = categoryChoiceReq.getActivity();
-//        for(CategoryLikeYN like : activity){
-//            int yn = like.getLikeYN();
-//            if(yn == 1 || yn == -1) continue;
-//            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
-//        }
+        List<IdLikeYN> music = categoryChoiceReq.getMusic();
+        for(IdLikeYN like : music){
+            int yn = like.getLikeYN();
+            if(yn == 1 || yn == -1) continue;
+            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+        }
 
-        userService.registUserChoice(userId, categoryChoiceReq);
+        List<CategoryLikeYN> food = categoryChoiceReq.getFood();
+        for(CategoryLikeYN like : food){
+            int yn = like.getLikeYN();
+            if(yn == 1 || yn == -1) continue;
+            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+        }
+
+        List<CategoryLikeYN> activity = categoryChoiceReq.getActivity();
+        for(CategoryLikeYN like : activity){
+            int yn = like.getLikeYN();
+            if(yn == 1 || yn == -1) continue;
+            else return ResponseEntity.status(901).body(BaseResponseBody.of(901, "유효하지 않은 값입니다."));
+        }
+
+        userService.registUserChoice(user.getUserId(), categoryChoiceReq);
 
         URL activityRecommend = getClass().getClassLoader().getResource("activity_contents_based.py");
-        String[] command = new String[2];
+        String[] command = new String[3];
         command[0] = "python";
         command[1] = new File(activityRecommend.getPath()).getAbsolutePath();
+        command[2] = Integer.toString(user.getUserId());
 
         try {
             exePython(command);
@@ -168,9 +167,11 @@ public class UserController {
         }
 
         URL foodRecommend = getClass().getClassLoader().getResource("food_contents_based.py");
-        String[] command2 = new String[2];
+        String[] command2 = new String[3];
         command2[0] = "python";
         command2[1] = new File(foodRecommend.getPath()).getAbsolutePath();
+        command2[2] = Integer.toString(user.getUserId());
+
 
         try {
             exePython(command2);
@@ -179,9 +180,10 @@ public class UserController {
         }
 
         URL musicRecommend = getClass().getClassLoader().getResource("music_contents_based.py");
-        String[] command3 = new String[2];
+        String[] command3 = new String[3];
         command3[0] = "python";
         command3[1] = new File(musicRecommend.getPath()).getAbsolutePath();
+        command3[2] = Integer.toString(user.getUserId());
 
         try {
             exePython(command3);

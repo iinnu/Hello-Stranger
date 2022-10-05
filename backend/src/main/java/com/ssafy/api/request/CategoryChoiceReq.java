@@ -11,7 +11,6 @@ import java.util.List;
 @Builder
 public class CategoryChoiceReq {
 
-    String userEmail;
     List<IdLikeYN> music;
     List<CategoryLikeYN> food;
     List<CategoryLikeYN> activity;

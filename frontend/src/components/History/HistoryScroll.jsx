@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import HistoryCard from "./HistoryCard";
 import InfiniteScroll from 'react-infinite-scroller';
@@ -7,6 +7,17 @@ export default function HistoryScroll({total}){
     const [cardList, setCardList] = useState([]);
     const [loadedNum, setLoadedNum] = useState(0)
     const [hasMore, setHasMore] = useState(true);
+
+    // useLayoutEffect(()=>{
+    //     const SampleRegDate0 = new Date(cardList[0]?.regDate)
+    //     const SampleRegDate1 = new Date(cardList[1]?.regDate)
+    //     console.log('SampleRegDate', cardList,SampleRegDate0, SampleRegDate1, SampleRegDate0>SampleRegDate1)
+    //     cardList.sort(function(a, b){
+    //         const SampleRegDateA = new Date(a?.regDate)
+    //         const SampleRegDateB = new Date(b?.regDate)
+    //         return SampleRegDateA < SampleRegDateB
+    //     })
+    // },[cardList])
 
     useEffect(()=>{
         async function getTotal(){

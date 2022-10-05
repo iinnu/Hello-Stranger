@@ -29,7 +29,7 @@ import Loading from 'components/Recommend/Loading';
 import { getMusicUris } from 'api/spotify';
 
 const titles = [
-  ['어떤 음악을', '듣고 싶으신가요?'],
+  ['가장 듣고 싶은 음악을', '1개 골라주세요!'],
   ['어떤 음식을', '먹고 싶으신가요?'],
   ['어떤 활동을', '하고 싶으신가요?'],
 ];

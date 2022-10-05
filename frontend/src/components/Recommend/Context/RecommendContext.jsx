@@ -14,6 +14,7 @@ const initialState = {
     refresh: 0,
     list: [],
     current: {},
+    recommend: [],
   },
   foodReducer: {
     refresh: 0,

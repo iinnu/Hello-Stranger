@@ -5,7 +5,13 @@ export default function MusicSelect({ list, current, setCurrent }) {
         {current && (
           <>
             <img src={current.musicImgUrl} alt="music covoer" />
-            <div style={{ fontWeight: '600', marginTop: '10px' }}>
+            <div
+              style={{
+                fontWeight: '600',
+                marginTop: '10px',
+                fontSize: '0.9em',
+              }}
+            >
               {current.musicName}
             </div>
             <div style={{ color: 'gray', fontSize: '0.8em' }}>

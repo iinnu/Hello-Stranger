@@ -14,20 +14,20 @@ export default function RecipeReviewCard({id, name, artist, image}) {
   const [isDisable, setDisable] = useState(false)
   const [isDisable2, setDisable2] = useState(true) 
 
-    function newbutton(){
-      setDisable(false)
-      setDisable2(true)
-    }
-    function DataInputGood(){
-     setDisable(true)
-     setDisable2(false)
-    }
-    
+  function newbutton(){
+    setDisable(false)
+    setDisable2(true)
+  }
   
-    function DataInputBad(){
-      setDisable(true)
-      setDisable2(false)
-    }
+  function DataInputGood(){
+    setDisable(true)
+    setDisable2(false)
+  }
+    
+  function DataInputBad(){
+    setDisable(true)
+    setDisable2(false)
+  }
   return (
     <Card className='Guide__Third__Item__Card'>
       <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>

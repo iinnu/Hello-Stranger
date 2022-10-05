@@ -64,5 +64,5 @@ export default function SpotifyRedirectHandler() {
         // window.location.replace('/guide/first');
       }
     );
-  }, );
+  },);
 }

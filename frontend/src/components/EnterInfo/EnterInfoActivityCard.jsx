@@ -56,7 +56,6 @@ export default function RecipeReviewCard({ id, title, image }) {
         existData.push(activityDataInput)
         localStorage.setItem("activityDataInput", JSON.stringify(existData))
      }
-    //  localStorage.setItem("activityDataInput", [])
     setDisable(true)
     setDisable2(false)
   }
@@ -81,7 +80,6 @@ export default function RecipeReviewCard({ id, title, image }) {
       </CardContent>
       <div className='Guide__Third__Item__Card__Bottom'>
         <div>
-
         </div>
         <div>
           <Button onClick={activityDataInputGood} disabled={isDisable}><ThumbUpOffAltIcon/></Button>

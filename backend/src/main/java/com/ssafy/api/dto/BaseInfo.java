@@ -12,4 +12,7 @@ public class BaseInfo {
     double latitude;
     double longitude;
     String time;
+    String imgUrl;
+    String[] review;
+    String rating;
 }

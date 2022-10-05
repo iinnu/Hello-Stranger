@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ResultProvider } from 'components/Recommend/Context/ResultContext';
 import Container from 'components/common/Container';
 import ResultLoading from 'components/Recommend/Result/ResultLoading';
-import ResultMap from 'components/Recommend/Result/ResultMap';
+import ResultMap from 'components/Recommend/Result/Map/ResultMap';
 
 function RecommendResultPage() {
   const [loading, setLoading] = useState(true);

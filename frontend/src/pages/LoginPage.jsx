@@ -2,8 +2,6 @@ import logo from '../assets/images/Logo.png';
 import mascot from '../assets/images/WalkingGirl.gif';
 import Container from 'components/common/Container';
 import 'styles/LoginPage/LoginPage.scss';
-import axios from 'axios';
-import SpotifyLogin from 'react-spotify-login';
 import spotify_logo from 'assets/images/spotify_logo.png';
 
 const generateRandomString = (length) => {
@@ -14,7 +12,7 @@ const generateRandomString = (length) => {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
   return text;
-};
+}
 
 const LoginPage = ({ onSocial }) => {
 
@@ -34,12 +32,6 @@ const LoginPage = ({ onSocial }) => {
         <div className="Login">
           <img className="Login__Logo" src={logo} alt="Logo" />
           <img className="Login__Mascot" src={mascot} alt="Mascot" />
-          {/* <SpotifyLogin
-            clientId={CLIENT_ID}
-            redirectUri={REDIRECT_URI}
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-          /> */}
           <button className="Login__button" onClick={handleLogin}>
             <img src={spotify_logo} alt="spotify logo" />
             <div>Login with Spotify</div>

@@ -5,8 +5,7 @@ import Button from '@mui/material/Button';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 //음악 추천 및 재생
-import getRecommendation from "api/music_api";
-import createPlaylist from "api/playlist";
+import {getPlaylist} from "api/playlist";
 import WebPlayback from "components/DetailInfo/WebPlayBack";
 
 const backdrop = {
@@ -47,17 +46,17 @@ const CustomLabel = styled(Button)`
 `;
 
 export default function StoreInfoDrawer({ open, toggleDrawer }) {
-  const [trackIdList, settrackIdList] = useState([]);
+  const [trackIdList, setTrackIdList] = useState([]);
   const [playlist, setPlaylist] = useState([])
-  async function getMusic() {
-    const data = await getRecommendation();
-    console.log('오나?',data)
-    const {playlistIdList, playlist} = await createPlaylist(data)
-    console.log('zzzz', playlistIdList, playlist)
-    settrackIdList(playlistIdList)
-    setPlaylist(playlist)
-  }
-  useEffect(()=>{getMusic()},[])
+
+  useEffect(()=>{
+    async function getMusic() {
+      const {playlistIdList, playlistItems} = await getPlaylist();
+      setTrackIdList(playlistIdList)
+      setPlaylist(playlistItems)
+    }
+    getMusic()  
+    },[])
 
   return (
     <CustomSwipeableDrawer

@@ -9,6 +9,6 @@ const ReviewBox = styled('div')`
   }
 `;
 
-export default function StoreReview() {
-  return <ReviewBox>너무 맛있어요</ReviewBox>;
+export default function StoreReview({content}) {
+  return <ReviewBox>{content}</ReviewBox>;
 }

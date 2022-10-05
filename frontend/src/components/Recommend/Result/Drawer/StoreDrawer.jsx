@@ -45,23 +45,19 @@ export default function StoreDrawer({ type, list, setOpen }) {
           >
             전체
           </div>
-          {list
-            .filter((item) => item.choiceYN !== 2)
-            .map((item) => (
-              <div
-                key={item[type + 'Category']}
-                className={
-                  category === item[type + 'Category']
-                    ? 'category-select__category-list__item category-select__category-list__item--active'
-                    : 'category-select__category-list__item'
-                }
-                onClick={() =>
-                  handleClickCategory(item[type + 'Category'], item)
-                }
-              >
-                {item[type + 'Category']}
-              </div>
-            ))}
+          {list.map((item) => (
+            <div
+              key={item[type + 'Category']}
+              className={
+                category === item[type + 'Category']
+                  ? 'category-select__category-list__item category-select__category-list__item--active'
+                  : 'category-select__category-list__item'
+              }
+              onClick={() => handleClickCategory(item[type + 'Category'], item)}
+            >
+              {item[type + 'Category']}
+            </div>
+          ))}
         </div>
         <div className="category-select__store-list">
           {category === '전체' &&

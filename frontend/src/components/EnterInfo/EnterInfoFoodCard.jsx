@@ -67,11 +67,9 @@ export default function RecipeReviewCard({ id, title, image }) {
   }
   return (
     <Card className="UserInput__Food__Item__Area__Card">
+      <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>
       <CardHeader
         title={title}
-        action={
-          <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>
-        }
       />
       <CardMedia
         component="img"

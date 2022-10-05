@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 
@@ -10,6 +10,8 @@ import Container from "components/common/Container";
 import BottomNav from "components/common/BottomNav";
 import DetailInfoTitle from "components/DetailInfo/Title";
 import DetailInfoMap from "components/DetailInfo/Map";
+import Loading from "components/Main/Map/Loading";
+import Paper from "@mui/material/Paper";
 
 // data api
 import {getOtherUser,getOtherUserActivity, getOtherUserFood} from 'api/other'
@@ -20,6 +22,7 @@ import { useLocation } from "react-router-dom";
 
 export default function DetailInfoPage() {
   const location = useLocation()
+  console.log('location', location)
   const pathName = location.pathname.split('/')[1];
   const pathId = location.pathname.split('/')[2];
   const [currentPath, setCurrentPath] = useState('');
@@ -30,28 +33,20 @@ export default function DetailInfoPage() {
   const [leftData, setLeftData] = useState([])
   const [leftFoodData, setLeftFoodData] = useState([])
   const [leftActivityData, setLeftActivityData] = useState([])
-
+  const [playlistId, setPlaylistId] = useState('')
   const [isHistory, setIsHistory] = useState(true)
   const [type, setType] = useState("");
   const [detailTitle, setDetailTitle] = useState('')
-  const [detailDate, setDetailDate] = useState('')
+  // const [detailRegDate, setDetailRegDate] = useState('')
   const [currentStore, setCurrentStore] = useState({})
 
-  function Map({currentStore}){
-    const localStorageData = localStorage.getItem('storeData')
-    return (localStorageData
-      ? <DetailInfoMap currentStore={currentStore}/>
-      : null
-    )
-  }
-
-  useEffect(()=> {
+  useLayoutEffect(()=> {
     async function getData(){
       if(pathName === 'other'){
+        setIsHistory(false)
         console.log('다른유저')
         const Data = await getOtherUser()
         setUserData(Data)
-        setIsHistory(false)
         const storeLocationData = {
           food: {
             lat: Data.food.latitude,
@@ -73,9 +68,10 @@ export default function DetailInfoPage() {
         setFoodData(foodResponse)
         setActivityData(activityResponse)
         setIsHistory(true)
-        setDetailTitle(Data.title ?? '')
+        // setDetailTitle(Data.title ?? '')
         setLeftFoodData(Data.food ?? [])
         setLeftActivityData(Data.activity ?? [])
+        setPlaylistId(Data.playlistUrl ?? '')
         const storeLocationData = {
           food: {
             lat: Data.choice_food.latitude,
@@ -119,6 +115,7 @@ export default function DetailInfoPage() {
   };
 
   async function clickFood() {
+    console.log('clickFood 동작', userData, activityData, leftActivityData, foodData, leftFoodData)
     setType("food");
     if(isHistory){
       const pos = {
@@ -128,7 +125,6 @@ export default function DetailInfoPage() {
       setDetailData(foodData ?? [])
       setCurrentStore(pos)
       setLeftData(leftFoodData ?? [])
-      console.log('food, history',pos, currentStore, userData.choice_food.id,leftFoodData, detailData)
     } 
     else {
       const pos = {
@@ -137,11 +133,11 @@ export default function DetailInfoPage() {
       }
       setCurrentStore(pos)
       setDetailData(userData.food ?? [])
-      console.log('food, other', pos, currentStore, userData.food.id, foodData, activityData, detailData)
     }
     setOpenDrawer(true);
   }
   async function clickActivity() {
+    console.log('clickActivity 동작', userData, activityData, leftActivityData, foodData, leftFoodData)
     setOpenDrawer(true);
     setType("activity");
     if(isHistory){
@@ -178,38 +174,50 @@ export default function DetailInfoPage() {
     reviewId: parseInt(pathId), 
     activityCatergory: userData?.choice_activity?.category, 
     foodCategory:  userData?.choice_food?.category, 
-    musicId: 0, 
+    musicId: userData?.musicId, 
   }
-
+  function Map({currentStore}){
+    const localStorageData = localStorage.getItem('storeData')
+    return (localStorageData
+      ? <DetailInfoMap currentStore={currentStore}/>
+      : null
+    )
+  }
   return (
     <>
       <FeedbackModal open={openModal} onClose={handleCloseModal} modalData={modalData}/>
       <Container>
         <div className="detail-info">
+          <Map currentStore={currentStore}/>
+          {isHistory
+          ? <DetailInfoTitle
+          title={userData?.title}
+          regDate={userData?.regDate}
+          handleOpenModal={handleOpenModal}
+          canEvaluate={location.state?.canEvaluate}
+          />
+          : <Paper className="detail-info__title--other">
+              <div className="detail-info__title--other--text">다른 유저 일정</div>
+            </Paper>
+          }
           <ButtonGroups
             isHistory={isHistory}
             clickFood={clickFood}
             clickActivity={clickActivity}
             clickMusic={clickMusic}
           />
-          <Map currentStore={currentStore}/>
-          {isHistory && (
-            <DetailInfoTitle
-              title={detailTitle}
-              date={detailDate}
-              handleOpenModal={handleOpenModal}
-            />
-          )}
           <Grid container className="detail-info-inner">
-            <StoreInfoDrawer 
-            open={openDrawer} 
-            toggleDrawer={toggleDrawer} 
-            detailData={detailData} 
-            leftData={leftData}
-            isHistory={isHistory}
-            type={type}
-            />
-            <MusicDrawer open={openMusicDrawer} toggleDrawer={toggleMusicDrawer}/>
+            {detailData !== {} &&
+              <StoreInfoDrawer 
+              open={openDrawer} 
+              toggleDrawer={toggleDrawer} 
+              detailData={detailData} 
+              leftData={leftData}
+              isHistory={isHistory}
+              type={type}
+              />
+            }
+            {isHistory ? <MusicDrawer open={openMusicDrawer} toggleDrawer={toggleMusicDrawer} playlistId={playlistId}/> : null}
           </Grid>
         </div>
         <BottomNav />

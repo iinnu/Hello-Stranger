@@ -51,7 +51,7 @@ const CustomLabel = styled(Button)`
 `;
 
 export default function StoreInfoDrawer({ open, toggleDrawer, detailData, leftData, isHistory, type }) {
-  useEffect(()=>{console.log('storeinfodrawer', detailData, leftData)},[detailData, leftData])
+  useEffect(()=>{console.log('storeinfodrawer', detailData, leftData)},[])
   return (
     <CustomSwipeableDrawer
       anchor="bottom"

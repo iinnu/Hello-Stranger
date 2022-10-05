@@ -9,20 +9,26 @@
   &__title {
     position: relative;
     display: flex;
-    padding: 0 5%;
+    align-self: center;
     align-items: center;
-    width: 100%;
-    height: calc(($viewport-height - 56px)*0.1);
-    font-size: 17px;
-    font-weight: 600;
-    color: #444;
+    width: 90%;
+    height: 7%;
+    top: 2%;
+    margin: 0;
+    padding: 5px;
+    z-index: 2;
+    &--text {
+      font-size: 20px;
+      margin-left: 20px;
+    }
   }
   &__list {
     position: relative;
     width: 100%;
-    height: calc(($viewport-height - 56px)*0.9);
+    height: calc(($viewport-height - 56px)*0.8);
     padding: 0 5%;
     overflow: auto;
+    margin-top: 10%;
     &--scroll{
       height: 100%;
       // overflow: auto;

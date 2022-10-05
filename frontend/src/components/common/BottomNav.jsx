@@ -60,7 +60,7 @@ export default function BottomNav() {
           component={Link}
           to={"/near"}
           value={"/near"}
-          label="주변상권"
+          label="동네분석"
           icon={<LocationOnOutlinedIcon />}
         />
         <BottomNavItem

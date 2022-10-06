@@ -98,13 +98,9 @@ const EnterInfoGuideThird = () => {
           </div>
           <div className="Guide__First__Alarm">
             <ErrorOutlineIcon color="error" fontSize="small" />
-            <p>서비스 이용 가이드라인</p>
+            <p>서비스 가이드라인</p>
           </div>
           <div className="Guide__Third__Item">
-            <div>버튼을 새로고침 하고 싶으면 리셋 버튼을 누르세요!</div>
-            <div className="Guide__Third__Item__Downarrow">
-              <ArrowDownwardIcon />
-            </div>
             <div className="Guide__Third__Item__Card">
               <Slider {...settings}>{EnterInfoBasicCards}</Slider>
             </div>

@@ -22,10 +22,8 @@ import { useLocation } from "react-router-dom";
 
 export default function DetailInfoPage() {
   const location = useLocation()
-  console.log('location', location)
   const pathName = location.pathname.split('/')[1];
   const pathId = location.pathname.split('/')[2];
-  const [currentPath, setCurrentPath] = useState('');
   const [userData, setUserData] = useState(null)
   const [detailData, setDetailData] = useState({})
   const [foodData, setFoodData] = useState({})
@@ -36,53 +34,35 @@ export default function DetailInfoPage() {
   const [playlistId, setPlaylistId] = useState('')
   const [isHistory, setIsHistory] = useState(true)
   const [type, setType] = useState("");
-  const [detailTitle, setDetailTitle] = useState('')
-  // const [detailRegDate, setDetailRegDate] = useState('')
   const [currentStore, setCurrentStore] = useState({})
-
+  const [markerData, setMarkerData] = useState([])
+  // const [currentPath, setCurrentPath] = useState('');
+  // const [detailTitle, setDetailTitle] = useState('')
+  // const [detailRegDate, setDetailRegDate] = useState('')
+  useEffect(()=>{console.log('markerData가 바뀜', markerData)},[markerData])
   useLayoutEffect(()=> {
     async function getData(){
       if(pathName === 'other'){
-        setIsHistory(false)
         console.log('다른유저')
-        const Data = await getOtherUser()
+        const {Data, locationData} = await getOtherUser()
+        setMarkerData(locationData)
+        setIsHistory(false)
         setUserData(Data)
-        const storeLocationData = {
-          food: {
-            lat: Data.food.latitude,
-            lng: Data.food.longitude
-          },
-          activity: {
-            lat: Data.activity.latitude,
-            lng: Data.activity.longitude
-          },
-        }
-        localStorage.setItem('storeLocationData', JSON.stringify(storeLocationData))
+        console.log('locationData 올텐데?', locationData)
         localStorage.setItem('storeData', JSON.stringify(Data))
       } else {
         console.log('다시보기')
-        const Data = await getUserDetail(pathId)
+        const {Data, locationData} = await getUserDetail(pathId)
+        setMarkerData(locationData)
         setUserData(Data)
         const foodResponse = Data?.choice_food ? await getUserFood(Data.choice_food?.id) : {}
         const activityResponse = Data?.choice_activity ? await getUserActivity(Data.choice_activity?.id) : {}
         setFoodData(foodResponse)
         setActivityData(activityResponse)
         setIsHistory(true)
-        // setDetailTitle(Data.title ?? '')
         setLeftFoodData(Data.food ?? [])
         setLeftActivityData(Data.activity ?? [])
         setPlaylistId(Data.playlistUrl ?? '')
-        const storeLocationData = {
-          food: {
-            lat: Data.choice_food.latitude,
-            lng: Data.choice_food.longitude
-          },
-          activity: {
-            lat: (Data.choice_activity?.latitude ? Data.choice_activity.latitude : Data.choice_food.latitude),
-            lng:  (Data.choice_activity?.longitude ? Data.choice_activity.longitude : Data.choice_food.longitude),
-          },
-        }
-        localStorage.setItem('storeLocationData', JSON.stringify(storeLocationData))
         localStorage.setItem('storeData', JSON.stringify(Data))
       }
     }
@@ -176,11 +156,12 @@ export default function DetailInfoPage() {
     foodCategory:  userData?.choice_food?.category, 
     musicId: userData?.musicId, 
   }
-  function Map({currentStore}){
-    const localStorageData = localStorage.getItem('storeData')
-    return (localStorageData
-      ? <DetailInfoMap currentStore={currentStore}/>
-      : null
+  function Map({currentStore, markerData, pathName}){
+    console.log('Map rendering data', currentStore, markerData, pathName)
+    return (markerData !== []
+      ? <DetailInfoMap currentStore={currentStore} markerData={markerData} pathName={pathName} 
+      foodData={foodData} activityData={activityData} />
+      : <Loading/>
     )
   }
   return (
@@ -188,7 +169,10 @@ export default function DetailInfoPage() {
       <FeedbackModal open={openModal} onClose={handleCloseModal} modalData={modalData}/>
       <Container>
         <div className="detail-info">
-          <Map currentStore={currentStore}/>
+          {(markerData === 0)
+            ? null
+            : <Map currentStore={currentStore} markerData={markerData} pathName={pathName}/>
+          }
           {isHistory
           ? <DetailInfoTitle
           title={userData?.title}

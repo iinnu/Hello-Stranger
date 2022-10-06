@@ -5,6 +5,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useRecommendContext } from './Context/RecommendContext';
 import { useNavigate } from 'react-router-dom';
 import { decreaseIndex, increaseIndex } from './Context/indexReducer';
+import { saveRecommendResult } from 'api/recommend';
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -16,7 +17,8 @@ const PlainButton = styled(Button)`
 `;
 
 function PrevNext({ index }) {
-  const dispatch = useRecommendContext().dispatch;
+  const { state, dispatch } = useRecommendContext();
+  const { activityReducer, foodReducer, musicReducer } = state;
   const navigate = useNavigate();
 
   const handlePrev = () => {
@@ -24,8 +26,41 @@ function PrevNext({ index }) {
   };
 
   const handleNext = () => {
-    if (index > 1) navigate('/recommend/result');
-    else dispatch(increaseIndex());
+    if (index > 1) {
+      const activity = activityReducer.list.filter(
+        (item) => item.choiceYN !== 0
+      );
+      const food = foodReducer.list.filter((item) => item.choiceYN !== 0);
+      const music = musicReducer.list.filter((item) => item.choiceYN !== 0);
+      const email = localStorage.getItem('email');
+
+      const payload = {
+        activity: activity.map((item) => ({
+          category: item.activityCategory,
+          likeYN: item.choiceYN === 2 ? -1 : 1,
+        })),
+        food: food.map((item) => ({
+          category: item.foodCategory,
+          likeYN: item.choiceYN === 2 ? -1 : 1,
+        })),
+        music: music.map((item) => ({
+          id: item.musicID,
+          likeYN: item.choiceYN === 2 ? -1 : 1,
+        })),
+        userEmail: email,
+      };
+
+      saveRecommendResult(
+        payload,
+        (res) => {
+          navigate('/recommend/result');
+        },
+        (err) => {
+          console.log(err);
+          alert('추천 결과를 전송에 실패했습니다.');
+        }
+      );
+    } else dispatch(increaseIndex());
   };
 
   return (

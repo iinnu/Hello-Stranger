@@ -10,6 +10,7 @@ import StoreSelect from '../Plan/StoreSelect';
 import MusicSelect from '../Plan/MusicSelect';
 import CustomModal from 'components/common/CustomModal';
 import { Alert, Snackbar, TextField } from '@mui/material';
+import { saveReview } from 'api/recommend';
 
 const CustomTabs = styled(Tabs)`
   &.MuiTabs-root > .MuiTabs-scroller > .MuiTabs-indicator {
@@ -87,14 +88,22 @@ export default function PlanDrawer() {
         })),
       },
       musicId: music.musicID,
-      playlist_url: '',
+      playlist_url: state.musicReducer.url,
       title: title,
     };
 
-    console.log(payload);
-    setAlert(true);
-    setOpen(false);
-    setTitle('');
+    saveReview(
+      payload,
+      (res) => {
+        setAlert(true);
+        setOpen(false);
+        setTitle('');
+      },
+      (err) => {
+        console.log(err);
+        alert('일정을 저장할 수 없습니다.');
+      }
+    );
   };
 
   const handleCancle = () => {

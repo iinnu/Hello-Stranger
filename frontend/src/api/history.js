@@ -21,7 +21,31 @@ export function getUserDetail(reviewId) {
     return api.get(`/detail/${reviewId}`)
     .then((res)=>{
         console.log('다시보기 세부 일정 불러오기', reviewId, res.data)
-        return res.data
+        const dataObject = []
+        const dataArray = Object.entries(res.data)
+        dataArray?.map((key)=>{
+          if(key[0]==='choice_food'){
+            const e = key[1]
+            dataObject[`food${e.id}`] = {lat: e.latitude, lng: e.longitude}
+          } 
+          else if(key[0] ==='food'){
+            return key[1].map((e)=>{
+              const data = {lat: e.latitude, lng: e.longitude}
+              dataObject[`food${e.id}`] = data
+          })
+          }else if (key[0] === 'choice_activity'){
+            const e = key[1]
+            dataObject[`activity${e.id}`] = {lat: e.latitude, lng: e.longitude}
+          }else if (key[0] ==='activity'){
+            return key[1].map((e)=>{
+              const data = {lat: e.latitude, lng: e.longitude}
+              dataObject[`activity${e.id}`] = data
+          }
+        )}})
+        const Data = res.data
+        const locationData = dataObject
+        console.log('Data, locationData', Data, locationData)
+        return {Data, locationData}
     })
     .catch((err)=>{
         console.error(err)

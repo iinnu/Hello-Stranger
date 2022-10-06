@@ -46,13 +46,13 @@ export default function ResultMap() {
         {menu !== 2 &&
           foodStoreList.map((list) =>
             list.map((store) => (
-              <ResultMarker key={store.name} store={store} setOpen={setOpen} />
+              <ResultMarker key={store.id} store={store} setOpen={setOpen} />
             ))
           )}
         {menu !== 1 &&
           activityStoreList.map((list) =>
             list.map((store) => (
-              <ResultMarker key={store.name} store={store} setOpen={setOpen} />
+              <ResultMarker key={store.id} store={store} setOpen={setOpen} />
             ))
           )}
         <MapMarker

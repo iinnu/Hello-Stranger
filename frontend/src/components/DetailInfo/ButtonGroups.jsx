@@ -11,6 +11,18 @@ const Row = styled('div')`
   display: flex;
   justify-content: center;
 `;
+
+const StyledButton = styled(Button)`
+  border: none !important;
+  &:hover{
+    background-color:#92B4EC !important;
+    color: white;
+  }
+  &:active{
+    background-color:#92B4EC !important;
+    color: white;
+  }
+`
 export default function DetailInfoButtonGroups({isHistory, clickFood, clickActivity, clickMusic}){
  return(
   <ButtonGroup
@@ -20,18 +32,18 @@ export default function DetailInfoButtonGroups({isHistory, clickFood, clickActiv
   variant="contained"
   >
   {isHistory &&
-  <Button className="detail-info__control--button" onClick={clickMusic}>
+  <StyledButton className="detail-info__control--button" onClick={clickMusic}>
     <Row><QueueMusicIcon/></Row>
     <Row>음악</Row>
-  </Button>}
-  <Button className="detail-info__control--button" onClick={clickFood}>
+  </StyledButton>}
+  <StyledButton className="detail-info__control--button" onClick={clickFood}>
     <Row><RestaurantRoundedIcon /></Row>
     <Row>음식</Row>
-  </Button>
-  <Button className="detail-info__control--button" onClick={clickActivity}>
+  </StyledButton>
+  <StyledButton className="detail-info__control--button" onClick={clickActivity}>
     <Row><SportsTennisIcon /></Row>
     <Row>활동</Row>
-  </Button>
+  </StyledButton>
 
   </ButtonGroup>
 

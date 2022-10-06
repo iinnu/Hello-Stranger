@@ -48,14 +48,16 @@ function usePullToRefresh() {
     }
   }
 
-  function handleTouchEnd() {
+  function handleTouchEnd(refresh) {
     if (div.current?.scrollTop !== 0) return;
     // 로딩 요소의 높이가 MAX_HEIGHT보다 크면
     if (loadingHeight.current >= MAX_HEIGHT) {
       // 로딩표시 해주고
-      loading.current.style.paddingTop = '10px';
-      const el = ReactDOM.createRoot(loading.current);
-      el.render(<CustomLoading />);
+      if (refresh < 2) {
+        loading.current.style.paddingTop = '10px';
+        const el = ReactDOM.createRoot(loading.current);
+        el.render(<CustomLoading />);
+      }
       setTimeout(() => {
         init();
       }, 1000);

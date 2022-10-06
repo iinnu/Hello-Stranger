@@ -3,6 +3,7 @@ import { useMainDispatch, useMainState } from '../MainContext';
 import { IconButton } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import Loading from './Loading';
+import marker_my from 'assets/images/marker-my.png';
 
 const { kakao, navigator, localStorage } = window;
 
@@ -68,13 +69,10 @@ const Map = () => {
   const getLevel = () => {
     switch (range) {
       case 1:
-        return 5;
-      case 2:
+      case 1.5:
         return 6;
-      case 3:
-        return 7;
       default:
-        return 8;
+        return 7;
     }
   };
 
@@ -90,8 +88,11 @@ const Map = () => {
       const map = new kakao.maps.Map(container, options);
       // 지도에 마커 생성
       const markerPosition = new kakao.maps.LatLng(lat, lng);
+      const markerSize = new kakao.maps.Size(45, 45);
+      const markerImage = new kakao.maps.MarkerImage(marker_my, markerSize);
       const marker = new kakao.maps.Marker({
         position: markerPosition,
+        image: markerImage,
       });
       marker.setMap(map);
       // 지도에 검색 범위 표시

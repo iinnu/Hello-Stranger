@@ -3,15 +3,21 @@ export default function MusicSelect({ list, current, setCurrent }) {
     <div className="plan-music__inner">
       <div className="plan-music__selected">
         {current && (
-          <>
+          <div className="plan-music__selected__inner">
             <img src={current.musicImgUrl} alt="music covoer" />
-            <div style={{ fontWeight: '600', marginTop: '10px' }}>
+            <div
+              style={{
+                fontWeight: '600',
+                marginTop: '10px',
+                fontSize: '0.8em',
+              }}
+            >
               {current.musicName}
             </div>
-            <div style={{ color: 'gray', fontSize: '0.8em' }}>
+            <div style={{ color: 'gray', fontSize: '0.7em' }}>
               {current.musicArtist}
             </div>
-          </>
+          </div>
         )}
         {!current && (
           <div

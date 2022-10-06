@@ -39,6 +39,22 @@ const EnterInfo = () => {
     console.log(musicarr)
     console.log('hello')
   };
+  const [isDisable, setDisable] = useState(true)
+  const [count, setcount] = useState(1)
+  const Function = (e) => {
+    setcount(count+1)
+    if (count === 5) {
+      setDisable(false)
+    }
+    console.log(count)
+  };
+  const CountFunction = (e) => {
+    setcount(count-1)
+    if (count !== 5 ) {
+      setDisable(true)
+    }
+    console.log(count)
+  };
   const EnterInfoMusicCards = JSON.parse(MusicList).map((e) => (
     <div className='UserInput__Activity__Item__Area'>
       <EnterInfoMusicCard
@@ -48,6 +64,8 @@ const EnterInfo = () => {
         name={e.musicName}
         image={e.musicImgUrl}
         musicplayer={parentFunction}
+        Disable={Function}
+        Count={CountFunction}
       />
     </div>
   ));
@@ -81,11 +99,13 @@ const EnterInfo = () => {
             {EnterInfoMusicCards}
           </Slider>
         </div>
-        <div className="recommend-bottom">
+        <div className="info-bottom">
           <PlainButton/>
-          <PlainButton endIcon={<ArrowForwardIosIcon />} onClick={handleNext}>
+          <div className="info-bottom__comment">모든 평가가 완료되면 활성화 됩니다. → </div>
+          <Button endIcon={<ArrowForwardIosIcon />} onClick={handleNext} disabled={isDisable}>다음</Button>
+          {/* <PlainButton endIcon={<ArrowForwardIosIcon />} onClick={handleNext}>
             다음
-          </PlainButton>
+          </PlainButton> */}
         </div>
             </div>
       </Container>

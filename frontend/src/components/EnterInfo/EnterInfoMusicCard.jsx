@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import axios from "axios";
 
-export default function RecipeReviewCard({id, name, artist, image, musicplayer}) {
+export default function RecipeReviewCard({id, name, artist, image, musicplayer, Disable, Count}) {
   const [isDisable, setDisable] = useState(false)
   const [isDisable2, setDisable2] = useState(true) 
   function musicDataInputGood(){
@@ -35,6 +35,7 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer})
    }
    setDisable(true)
    setDisable2(false)
+   Disable(false)
   }
   
 
@@ -61,10 +62,12 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer})
     //  localStorage.setItem("musicDataInput", [])
     setDisable(true)
     setDisable2(false)
+    Disable(false)
   }
   function newbutton(){
     setDisable(false)
     setDisable2(true)
+    Count(false)
     const localMusicData = JSON.parse(localStorage.getItem('musicDataInput'))
     for(var i = 0; i < localMusicData.length; i++){ 
       if (localMusicData[i].id === id) { 

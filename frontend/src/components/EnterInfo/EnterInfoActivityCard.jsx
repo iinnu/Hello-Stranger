@@ -8,8 +8,8 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import React, { useState } from 'react';
 
-export default function RecipeReviewCard({ id, title, image }) {
-  const [isDisable, setDisable] = useState(false)
+export default function RecipeReviewCard({ id, title, image, Disable, Count }) {
+  const [isDisable1, setDisable1] = useState(false)
   const [isDisable2, setDisable2] = useState(true) 
   function activityDataInputGood(){
     if (!localStorage.activityDataInput){
@@ -31,7 +31,8 @@ export default function RecipeReviewCard({ id, title, image }) {
       existData.push(activityDataInput)
       localStorage.setItem("activityDataInput", JSON.stringify(existData))
    }
-   setDisable(true)
+   Disable(false)
+   setDisable1(true)
    setDisable2(false)
   }
   
@@ -56,12 +57,14 @@ export default function RecipeReviewCard({ id, title, image }) {
         existData.push(activityDataInput)
         localStorage.setItem("activityDataInput", JSON.stringify(existData))
      }
-    setDisable(true)
+    Disable(false)
+    setDisable1(true)
     setDisable2(false)
   }
 
   function newbutton(){
-    setDisable(false)
+    Count(false)
+    setDisable1(false)
     setDisable2(true)
     const localActivityData = JSON.parse(localStorage.getItem('activityDataInput'))
     for(var i = 0; i < localActivityData.length; i++){ 
@@ -92,8 +95,8 @@ export default function RecipeReviewCard({ id, title, image }) {
         <div>
         </div>
         <div>
-          <Button onClick={activityDataInputGood} disabled={isDisable}><ThumbUpOffAltIcon/></Button>
-          <Button onClick={activityDataInputBad} disabled={isDisable}><ThumbDownOffAltIcon/></Button>
+          <Button onClick={activityDataInputGood} disabled={isDisable1}><ThumbUpOffAltIcon/></Button>
+          <Button onClick={activityDataInputBad} disabled={isDisable1}><ThumbDownOffAltIcon/></Button>
         </div>
       </div>
     </Card>

@@ -9,7 +9,7 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import React, { useState } from 'react';
 
-export default function RecipeReviewCard({ id, title, image }) {
+export default function RecipeReviewCard({ id, title, image, Disable, Count  }) {
   const [isDisable, setDisable] = useState(false) 
   const [isDisable2, setDisable2] = useState(true) 
   function foodDataInputGood(){
@@ -32,6 +32,7 @@ export default function RecipeReviewCard({ id, title, image }) {
       existData.push(foodDataInput)
       localStorage.setItem("foodDataInput", JSON.stringify(existData))
    }
+   Disable(false)
    setDisable(true)
    setDisable2(false)
   }
@@ -58,10 +59,12 @@ export default function RecipeReviewCard({ id, title, image }) {
         localStorage.setItem("foodDataInput", JSON.stringify(existData))
      }
     //  localStorage.setItem("foodDataInput", [])
+    Disable(false)
     setDisable(true)
     setDisable2(false)
   }
   function newbutton(){
+    Count(false)
     setDisable(false)
     setDisable2(true)
     const localFoodData = JSON.parse(localStorage.getItem('foodDataInput'))

@@ -1,5 +1,7 @@
 @import '../common/util';
 
+$title-padding: 25px;
+
 .Guide {
   max-width: 500px;
   width: 100%;
@@ -7,7 +9,7 @@
   &__First {
     &__Title {
       height: 20%;
-      padding: 20px;
+      padding: $title-padding;
       &__Bottom {
         width: 70%;
         //background: linear-gradient(to top, #92b4ec 50%, transparent 50%);
@@ -19,9 +21,9 @@
     &__Alarm {
       background-color: #fff9e0;
       border-radius: 20px;
-      box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+      box-shadow: 1px 2px 5px -2px rgb(0 0 0 / 15%);
       height: 30px;
-      width: 120px;
+      width: 130px;
       padding: 5px;
       text-align: center;
       font-size: x-small;
@@ -51,7 +53,7 @@
   &__Second {
     &__Title {
       height: 20%;
-      padding: 20px;
+      padding: $title-padding;
       &__Bottom {
         width: 70%;
         //background: linear-gradient(to top, #fff9e0 50%, transparent 50%);
@@ -74,7 +76,7 @@
   &__Third {
     &__Title {
       height: 16%;
-      padding: 20px;
+      padding: $title-padding;
       &__Bottom {
         width: 70%;
         //background: linear-gradient(to top, #92b4ec 50%, transparent 50%);
@@ -84,10 +86,10 @@
       margin: 5px;
     }
     &__Item {
+      margin-top: 10px;
       height: 70%;
       display: flex;
       flex-flow: column;
-      justify-content: center;
       align-items: center;
       &__Card {
         width: 80%;
@@ -126,7 +128,7 @@
   &__Forth {
     &__Title {
       height: 20%;
-      padding: 20px;
+      padding: $title-padding;
       &__Bottom {
         width: 70%;
         //background: linear-gradient(to top, #92b4ec 50%, transparent 50%);

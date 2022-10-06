@@ -31,7 +31,7 @@ const EnterInfoGuideFirst = () => {
           </div>
           <div className="Guide__First__Alarm">
             <ErrorOutlineIcon color="error" fontSize="small" />
-            <p>서비스 아용 가이드라인</p>
+            <p>서비스 가이드라인</p>
           </div>
           <div className="Guide__First__Item">
             <img

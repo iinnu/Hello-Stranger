@@ -1,8 +1,9 @@
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useNavigate } from "react-router-dom";
-import styled from "@emotion/styled";
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
+import styled from '@emotion/styled';
+import RateReviewIcon from '@mui/icons-material/RateReview';
 
 const ExitButton = styled(IconButton)`
   background-color: none;
@@ -24,18 +25,29 @@ function DetailInfoTitle({ title, regDate, handleOpenModal, canEvaluate }) {
     <>
       <div className="detail-info__title">
         <div className="detail-info__title--box">
-          <Button className="detail-info__title--exit" aria-label="exit from current page" onClick={goBack}>
-            <ArrowBackIcon />
-          </Button>
-          <div className="detail-info__title--align">
+          <div className="detail-info__title--left">
+            <IconButton
+              className="detail-info__title--exit"
+              aria-label="exit from current page"
+              onClick={goBack}
+            >
+              <ArrowBackIcon />
+            </IconButton>
             <div className="detail-info__title--text">{title}</div>
-            <div className="detail-info__title--date">{regDate}</div>
+            {/* <div className="detail-info__title--align">
+              <div className="detail-info__title--date">{regDate}</div>
+            </div> */}
           </div>
+          {canEvaluate && (
+            <IconButton
+              className="detail-info__title--feedback"
+              variant="contained"
+              onClick={handleOpenModal}
+            >
+              <RateReviewIcon />
+            </IconButton>
+          )}
         </div>
-        {canEvaluate && 
-        <Button className="detail-info__title--feedback" variant="contained" onClick={handleOpenModal}>
-          일정평가
-        </Button>}
       </div>
     </>
   );

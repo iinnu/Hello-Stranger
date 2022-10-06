@@ -11,26 +11,20 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 
 export default function RecipeReviewCard({id, name, artist, image}) {
-  const [isDisable, setDisable] = useState(false)
-  const [isDisable2, setDisable2] = useState(true) 
-
-  function newbutton(){
-    setDisable(false)
-    setDisable2(true)
-  }
+  const [isDisable1, setDisable1] = useState(false)
+  const [isDisable2, setDisable2] = useState(false) 
   
   function DataInputGood(){
-    setDisable(true)
+    setDisable1(true)
     setDisable2(false)
   }
     
   function DataInputBad(){
-    setDisable(true)
-    setDisable2(false)
+    setDisable1(false)
+    setDisable2(true)
   }
   return (
     <Card className='Guide__Third__Item__Card'>
-      <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>
       <CardHeader
         title={name}
       />
@@ -49,8 +43,9 @@ export default function RecipeReviewCard({id, name, artist, image}) {
           {artist}
         </div>
         <div>
-        <Button onClick={DataInputGood} disabled={isDisable}><ThumbUpOffAltIcon/></Button>
-        <Button onClick={DataInputBad} disabled={isDisable}><ThumbDownOffAltIcon/></Button>
+      {isDisable1? <Button onClick={DataInputGood} color="primary" variant="contained"><ThumbUpOffAltIcon/></Button>:<Button onClick={DataInputGood} color="primary"><ThumbUpOffAltIcon/></Button> }
+      {isDisable2? <Button onClick={DataInputBad} color="primary" variant="contained"><ThumbDownOffAltIcon/></Button>:<Button onClick={DataInputBad} color="primary"><ThumbDownOffAltIcon/></Button>}
+
         </div>
       </div>
     </Card>

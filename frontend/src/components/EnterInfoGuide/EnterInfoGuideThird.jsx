@@ -1,4 +1,4 @@
-import EnterInfoBasicCard from './EnterInfoBasicCard.jsx'
+import EnterInfoBasicCard from './EnterInfoBasicCard.jsx';
 import { Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -7,9 +7,9 @@ import Container from 'components/common/Container';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import Slider from 'react-slick'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -22,12 +22,12 @@ const PlainButton = styled(Button)`
 const EnterInfoGuideThird = () => {
   const handlePrev = () => {
     console.log('이전');
-    window.location.href ="/guide/second"
+    window.location.href = '/guide/second';
   };
-    
+
   const handleNext = () => {
     console.log('다음');
-    window.location.href ="/guide/forth"
+    window.location.href = '/guide/forth';
   };
   const MusicList = [
     {
@@ -69,16 +69,16 @@ const EnterInfoGuideThird = () => {
       musicCategory: '',
       musicImgUrl:
         'https://lh3.googleusercontent.com/WPdtmsU1-KxK8WcNwPpRrzO_mC6hE7Mc7UHBJwNy6ayoROXRmjLg7-8rvlOh_2fN3Mg_aPXPkOv_7vIG=w544-h544-l90-rj',
-    }
+    },
   ];
-  const settings={
+  const settings = {
     dots: true,
     infinite: false,
     speed: 500,
-    slidesToShow:1,
+    slidesToShow: 1,
     slidesToScroll: 1,
   };
-  const EnterInfoBasicCards = (MusicList).map((e) => (
+  const EnterInfoBasicCards = MusicList.map((e) => (
     <EnterInfoBasicCard
       key={e.musicID}
       id={e.musicID}
@@ -91,25 +91,29 @@ const EnterInfoGuideThird = () => {
     <div>
       <Container>
         <div className="Guide">
-          <div className='Guide__Third__Title'>
+          <div className="Guide__Third__Title">
             <h2>취향에 따라</h2>
             <h2>좋아요, 싫어요를</h2>
-            <h2 className='Guide__Third__Title__Bottom'>눌러주세요.</h2>
+            <h2 className="Guide__Third__Title__Bottom">눌러주세요.</h2>
           </div>
-          <div className='Guide__First__Alarm'><ErrorOutlineIcon color="error" fontSize="small"/><p>튜토리얼 입니다!!</p></div>
-          <div className='Guide__Third__Item'>
-            <div>버튼을 새로고침 하고 싶으면 리셋 버튼을 누르세요!</div>
-            <div className='Guide__Third__Item__Downarrow'><ArrowDownwardIcon/></div>
-            <div className='Guide__Third__Item__Card'>
-              <Slider {...settings}>
-                {EnterInfoBasicCards}
-              </Slider>
+          <div className="Guide__First__Alarm">
+            <ErrorOutlineIcon color="error" fontSize="small" />
+            <p>서비스 가이드라인</p>
+          </div>
+          <div className="Guide__Third__Item">
+            <div className="Guide__Third__Item__Card">
+              <Slider {...settings}>{EnterInfoBasicCards}</Slider>
             </div>
-            <div className='Guide__Third__Item__Uparrow'><ArrowUpwardIcon/></div>
+            <div className="Guide__Third__Item__Uparrow">
+              <ArrowUpwardIcon />
+            </div>
             <div>선호도에 따라 버튼을 눌러주세요!</div>
           </div>
           <div className="recommend-bottom">
-            <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>
+            <PlainButton
+              startIcon={<ArrowBackIosNewIcon />}
+              onClick={handlePrev}
+            >
               이전
             </PlainButton>
             <PlainButton endIcon={<ArrowForwardIosIcon />} onClick={handleNext}>

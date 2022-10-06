@@ -4,6 +4,7 @@ import marker_active from 'assets/images/marker-active.png';
 import { current } from '@reduxjs/toolkit';
 import { useCallback } from 'react';
 import marker_my from 'assets/images/marker-my.png';
+import marker_user from 'assets/images/marker-user.png';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 
 export default function DetailInfoMap({currentStore, markerData, pathName}) {
@@ -53,7 +54,7 @@ export default function DetailInfoMap({currentStore, markerData, pathName}) {
       const pos = { lat: item.lat, lng: item.lng };
       const isFoodLocation = (foodData?.latitude === item.lat) && (foodData?.longitude === item.lng)
       const isActivityLocation = (activityData?.latitude === item.lat) && (activityData?.longitude === item.lng)
-      const src = (isFoodLocation || isActivityLocation) ? marker_my
+      const src = (isFoodLocation || isActivityLocation) ? marker_user
         : ((currentStore.lat === item.lat && currentStore.lng === item.lng) 
           ? marker_active 
           : marker

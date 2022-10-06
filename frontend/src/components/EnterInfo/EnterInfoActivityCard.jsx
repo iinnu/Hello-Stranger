@@ -8,9 +8,9 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import React, { useState } from 'react';
 
-export default function RecipeReviewCard({ id, title, image, Disable, Count }) {
+export default function RecipeReviewCard({ id, title, image, Disable}) {
   const [isDisable1, setDisable1] = useState(false)
-  const [isDisable2, setDisable2] = useState(true) 
+  const [isDisable2, setDisable2] = useState(false) 
   function activityDataInputGood(){
     if (!localStorage.activityDataInput){
     const activityDataInput = [
@@ -22,6 +22,14 @@ export default function RecipeReviewCard({ id, title, image, Disable, Count }) {
     localStorage.setItem("activityDataInput", JSON.stringify(activityDataInput))
    }
   else if (localStorage.activityDataInput){
+    const localActivityData = JSON.parse(localStorage.getItem('activityDataInput'))
+    for(var i = 0; i < localActivityData.length; i++){ 
+      if (localActivityData[i].category === title) { 
+        localActivityData.splice(i, 1); 
+        i--; 
+      }
+    }
+    localStorage.setItem('activityDataInput', JSON.stringify(localActivityData))
     const existData = JSON.parse(localStorage.getItem("activityDataInput"))
     const activityDataInput = 
       {
@@ -31,6 +39,7 @@ export default function RecipeReviewCard({ id, title, image, Disable, Count }) {
       existData.push(activityDataInput)
       localStorage.setItem("activityDataInput", JSON.stringify(existData))
    }
+
    Disable(false)
    setDisable1(true)
    setDisable2(false)
@@ -48,6 +57,14 @@ export default function RecipeReviewCard({ id, title, image, Disable, Count }) {
       localStorage.setItem("activityDataInput", JSON.stringify(activityDataInput))
      }
     else if (localStorage.activityDataInput){
+      const localActivityData = JSON.parse(localStorage.getItem('activityDataInput'))
+      for(var i = 0; i < localActivityData.length; i++){ 
+        if (localActivityData[i].category === title) { 
+          localActivityData.splice(i, 1); 
+          i--; 
+        }
+      }
+      localStorage.setItem('activityDataInput', JSON.stringify(localActivityData))
       const existData = JSON.parse(localStorage.getItem("activityDataInput"))
       const activityDataInput = 
         {
@@ -57,30 +74,14 @@ export default function RecipeReviewCard({ id, title, image, Disable, Count }) {
         existData.push(activityDataInput)
         localStorage.setItem("activityDataInput", JSON.stringify(existData))
      }
-    Disable(false)
-    setDisable1(true)
-    setDisable2(false)
-  }
 
-  function newbutton(){
-    Count(false)
+    Disable(false)
     setDisable1(false)
     setDisable2(true)
-    const localActivityData = JSON.parse(localStorage.getItem('activityDataInput'))
-    for(var i = 0; i < localActivityData.length; i++){ 
-      if (localActivityData[i].category === title) { 
-        localActivityData.splice(i, 1); 
-        i--; 
-      }
-    }
-    localStorage.setItem('activityDataInput', JSON.stringify(localActivityData))
-    if(JSON.parse(localStorage.getItem('activityDataInput')).length===0){
-      localStorage.removeItem('activityDataInput')
-    }
   }
+
   return (
     <Card className="UserInput__Activity__Item__Area__Card">
-      <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>
       <CardHeader
         title={title}
       />
@@ -93,8 +94,8 @@ export default function RecipeReviewCard({ id, title, image, Disable, Count }) {
       </CardContent>
       <div className='Guide__Third__Item__Card__Bottom'>
         <div>
-          <Button onClick={activityDataInputGood} disabled={isDisable1}><ThumbUpOffAltIcon/></Button>
-          <Button onClick={activityDataInputBad} disabled={isDisable1}><ThumbDownOffAltIcon/></Button>
+          {isDisable1? <Button onClick={activityDataInputGood} color="primary" variant="contained"><ThumbUpOffAltIcon/></Button>:<Button onClick={activityDataInputGood} color="primary"><ThumbUpOffAltIcon/></Button> }
+          {isDisable2? <Button onClick={activityDataInputBad} color="primary" variant="contained"><ThumbDownOffAltIcon/></Button>:<Button onClick={activityDataInputBad} color="primary"><ThumbDownOffAltIcon/></Button>}
         </div>
       </div>
     </Card>

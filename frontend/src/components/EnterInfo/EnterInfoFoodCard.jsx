@@ -97,8 +97,6 @@ export default function RecipeReviewCard({ id, title, image, Disable, Count  }) 
       </CardContent>
       <div className='Guide__Third__Item__Card__Bottom'>
         <div>
-        </div>
-        <div>
         <Button onClick={foodDataInputGood} disabled={isDisable}><ThumbUpOffAltIcon/></Button>
         <Button onClick={foodDataInputBad} disabled={isDisable}><ThumbDownOffAltIcon/></Button>
         </div>

@@ -24,7 +24,7 @@ export default function Loading() {
     <Row>
       <Col>
         <TitleBox>
-          추천을 목록을 <br />
+          추천 목록을 <br />
           가져오는 중입니다...
         </TitleBox>
         <img src={Walking} alt="loading" width={220} />

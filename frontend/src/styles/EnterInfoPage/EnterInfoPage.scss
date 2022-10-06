@@ -1,7 +1,14 @@
 @import '../common/util';
 $title-padding: 25px;
-.info-bottom {
-  position: fixed;
+
+.Gooddisable {
+  color: rgb(172, 171, 171);
+}
+.Goodalbe {
+  color: #92b4ec;
+}
+.info-bottom{
+  position: absolute;
   bottom: 0;
   width: 100%;
   max-width: 500px;
@@ -13,18 +20,16 @@ $title-padding: 25px;
     font-size: small;
   }
 }
-.Gooddisable {
-  color: rgb(172, 171, 171);
-}
-.Goodalbe {
-  color: #92b4ec;
-}
 .UserInput{
     max-width: 500px;
     width: 100%;
     height: 100%;
     &__Music{
         &__Player{
+          &__Top{
+            font-size: x-small;
+          }
+            height: 10%;
             margin-top: 5%;
             margin-left:10%;
             margin-right:10%;
@@ -44,6 +49,7 @@ $title-padding: 25px;
             margin: 5px;
         } 
         &__Item{
+          margin-top: 3%;
             &__Area{
                 &__Card{
                     margin-left:10%;

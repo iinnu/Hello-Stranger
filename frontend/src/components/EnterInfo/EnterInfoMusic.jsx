@@ -81,7 +81,7 @@ const EnterInfo = () => {
               자주 들으시나요?
             </h2>
             <div className="UserInput__Music__Player">
-              <div style={{ margin: '20px 0' }}>
+              <div className="UserInput__Music__Player__Top">
                 5곡을 듣고 아래에 평가해주세요!
               </div>
               <SpotifyPlayer

@@ -84,6 +84,7 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer})
 // #############################################################################################################33
 // 음악플레이
   const [musicarrs, setmusicarrs] = useState([])
+  const [preview, setPreview] =useState('')
   useEffect(()=>{
     async function getData(){
       const data = await searchAxios()
@@ -119,6 +120,7 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer})
       console.log("inside searchAxios", res.data);
       const trackId = res.data.tracks.items[0].id;
       const artistId = res.data.tracks.items[0].artists[0].id;
+      setPreview(res.data.tracks.items[0].preview_url)
       return { trackId, artistId };
       })
       .catch((err) => console.log(err));
@@ -136,7 +138,6 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer})
   }
 // #################################################################################################################################
   musicplayer(musicarrs)
-
 
 
 return (

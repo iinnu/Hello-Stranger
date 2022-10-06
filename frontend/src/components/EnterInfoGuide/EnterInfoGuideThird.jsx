@@ -92,8 +92,8 @@ const EnterInfoGuideThird = () => {
       <Container>
         <div className="Guide">
           <div className='Guide__Third__Title'>
-            <h2>좋아하는 것은 굳버튼,</h2>
-            <h2>싫어하는 것은 밷버튼을</h2>
+            <h2>취향에 따라</h2>
+            <h2>좋아요, 싫어요를</h2>
             <h2 className='Guide__Third__Title__Bottom'>눌러주세요.</h2>
           </div>
           <div className='Guide__First__Alarm'><ErrorOutlineIcon color="error" fontSize="small"/><p>튜토리얼 입니다!!</p></div>

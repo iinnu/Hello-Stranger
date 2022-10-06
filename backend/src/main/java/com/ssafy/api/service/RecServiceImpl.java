@@ -80,7 +80,7 @@ public class RecServiceImpl implements RecService{
             for(int j=0; j<len;j++){
                 Activity cur = stores.get(j);
                  String review = cur.getActivityReview();
-                review = review.replace(".||.", " ").replace("\"\"", "\"").replace("error","").replace("noResult","");
+                review = review.replace(".||.", " ").replace("\"\"", "\"");
                 review = review.startsWith("\"") ? review.substring(1, review.length()-1) : review;
                 String[] results = review.split("\\[>\\*}");
                 storesBase.add(BaseInfo.builder()
@@ -115,7 +115,7 @@ public class RecServiceImpl implements RecService{
             for(int j=0; j<len;j++){
                 Food cur = stores.get(j);
                 String review = cur.getFoodReview();
-                review = review.replace(".||.", " ").replace("\"\"", "\"").replace("error","").replace("noResult","");
+                review = review.replace(".||.", " ").replace("\"\"", "\"");
                 review = review.startsWith("\"") ? review.substring(1, review.length()-1) : review;
                 String[] results = review.split("\\[>\\*}");
                 storesBase.add(BaseInfo.builder()

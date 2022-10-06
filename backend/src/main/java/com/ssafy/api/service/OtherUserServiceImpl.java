@@ -17,6 +17,8 @@ public class OtherUserServiceImpl implements OtherUserService {
     @Autowired
     ReviewFoodRepository reviewFoodRepository;
     @Autowired
+    ReviewActivityRepository reviewActivityRepository;
+    @Autowired
     ActivityRepository activityRepository;
 
     @Override
@@ -54,7 +56,9 @@ public class OtherUserServiceImpl implements OtherUserService {
                 .build();
 
         //랜덤한 리뷰에서 활동 뽑기
-        Activity activity = activityRepository.findByActivityId(1);
+
+        ReviewActivity reviewActivity = reviewActivityRepository.findByChoiceYNAndReview("Y",randomReview);
+        Activity activity = reviewActivity.getActivity();
 
         review = activity.getActivityReview();
         review = review.replace(".||.", " ").replace("\"\"", "\"");

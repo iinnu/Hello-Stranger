@@ -1,24 +1,23 @@
-@import "../common/util";
-$title-padding: 25px;
+@import '../common/util';
 
 .info-bottom {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    max-width: 500px;
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-    padding: 5px 0;
-    &__comment{
-        font-size: small;
-    }
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 5px 0;
+  &__comment {
+    font-size: small;
+  }
 }
-.Gooddisable{
-    color: rgb(172, 171, 171)
+.Gooddisable {
+  color: rgb(172, 171, 171);
 }
-.Goodalbe{
-    color:#92b4ec
+.Goodalbe {
+  color: #92b4ec;
 }
 .UserInput{
     max-width: 500px;
@@ -94,7 +93,6 @@ $title-padding: 25px;
     }
     &__Activity{
         &__Title{
-            height: 25%;
             padding: $title-padding;
             &__Bottom{
                 width:70%;
@@ -125,7 +123,6 @@ $title-padding: 25px;
     &__Start{
         &__Title{
             height: 25%;
-            padding: $title-padding;
         }
         &__Title h2{
             margin: 5px;

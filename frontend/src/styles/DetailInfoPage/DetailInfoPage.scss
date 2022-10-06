@@ -42,6 +42,7 @@ $player-rswp-height: 40%;
       z-index: 2;
       padding: 12px 5px;
       box-shadow: 5px 5px 8px -4px #9e9e9e !important;
+      font-weight: 900;
       &--text {
         font-size: 20px;
         margin-left: 20px;
@@ -125,7 +126,7 @@ $player-rswp-height: 40%;
   }
   &__music {
     &--playlist {
-      background-color: white;
+      background-color: rgb(181, 201, 219);      
       z-index: 1;
       margin-top: 50px;
       position: relative;

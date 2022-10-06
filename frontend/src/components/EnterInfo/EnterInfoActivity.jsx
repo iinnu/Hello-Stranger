@@ -7,8 +7,10 @@ import Container from 'components/common/Container';
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import React, { useState } from 'react';
 
-const PlainButton = styled(Button)`
+const PlainButton = styled(Button)
+`
   &.MuiButton-root {
     color: black;
     &:hover {
@@ -33,6 +35,22 @@ const EnterInfo = () => {
     console.log('다음');
     window.location.href ="/info/start"
   };
+  const [isDisable, setDisable] = useState(true)
+  const [count, setcount] = useState(1)
+  const parentFunction = (e) => {
+    setcount(count+1)
+    if (count === 5) {
+      setDisable(false)
+    }
+    console.log(count)
+  };
+  const CountFunction = (e) => {
+    setcount(count-1)
+    if (count !== 5 ) {
+      setDisable(true)
+    }
+    console.log(count)
+  };
   const EnterInfoActivityCards = JSON.parse(ActivityList).map((e) => (
     <div className='UserInput__Activity__Item__Area'>
       <EnterInfoActivityCard
@@ -40,6 +58,8 @@ const EnterInfo = () => {
         id={e.id}
         title={e.activityCategory}
         image={e.activityImgUrl}
+        Disable={parentFunction}
+        Count={CountFunction}
       />
     </div>
   ));
@@ -56,13 +76,16 @@ const EnterInfo = () => {
               {EnterInfoActivityCards}
             </Slider>
           </div>
-          <div className="recommend-bottom">
-            <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>
+          <div className="info-bottom">
+            <Button startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>이전</Button>
+            <div className="info-bottom__comment">모든 평가가 완료되면 활성화 됩니다. → </div>
+            <Button endIcon={<ArrowForwardIosIcon />} onClick={handleNext} disabled={isDisable}>다음</Button>
+            {/* <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev} disabled={isDisable}>
               이전
             </PlainButton>
-            <PlainButton endIcon={<ArrowForwardIosIcon />} onClick={handleNext}>
+            <PlainButton endIcon={<ArrowForwardIosIcon />} onClick={handleNext} disabled={isDisable}>
               다음
-            </PlainButton>
+            </PlainButton> */}
           </div>
         </div>
       </Container>

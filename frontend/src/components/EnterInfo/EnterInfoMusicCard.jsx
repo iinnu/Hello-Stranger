@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import axios from "axios";
 
-export default function RecipeReviewCard({id, name, artist, image, musicplayer}) {
+export default function RecipeReviewCard({id, name, artist, image, musicplayer, Disable, Count}) {
   const [isDisable, setDisable] = useState(false)
   const [isDisable2, setDisable2] = useState(true) 
   function musicDataInputGood(){
@@ -35,6 +35,7 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer})
    }
    setDisable(true)
    setDisable2(false)
+   Disable(false)
   }
   
 
@@ -61,10 +62,12 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer})
     //  localStorage.setItem("musicDataInput", [])
     setDisable(true)
     setDisable2(false)
+    Disable(false)
   }
   function newbutton(){
     setDisable(false)
     setDisable2(true)
+    Count(false)
     const localMusicData = JSON.parse(localStorage.getItem('musicDataInput'))
     for(var i = 0; i < localMusicData.length; i++){ 
       if (localMusicData[i].id === id) { 
@@ -84,6 +87,7 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer})
 // #############################################################################################################33
 // 음악플레이
   const [musicarrs, setmusicarrs] = useState([])
+  const [preview, setPreview] =useState('')
   useEffect(()=>{
     async function getData(){
       const data = await searchAxios()
@@ -119,6 +123,7 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer})
       console.log("inside searchAxios", res.data);
       const trackId = res.data.tracks.items[0].id;
       const artistId = res.data.tracks.items[0].artists[0].id;
+      setPreview(res.data.tracks.items[0].preview_url)
       return { trackId, artistId };
       })
       .catch((err) => console.log(err));
@@ -136,7 +141,6 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer})
   }
 // #################################################################################################################################
   musicplayer(musicarrs)
-
 
 
 return (

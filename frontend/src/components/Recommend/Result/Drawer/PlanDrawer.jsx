@@ -7,10 +7,10 @@ import styled from '@emotion/styled';
 import TabPanel from '../Plan/TabPanel';
 import CustomButton from 'components/common/CustomButton';
 import StoreSelect from '../Plan/StoreSelect';
-import MusicSelect from '../Plan/MusicSelect';
 import CustomModal from 'components/common/CustomModal';
 import { Alert, Snackbar, TextField } from '@mui/material';
 import { saveReview } from 'api/recommend';
+import CustomTextField from 'components/common/CustomTextField';
 
 const CustomTabs = styled(Tabs)`
   &.MuiTabs-root > .MuiTabs-scroller > .MuiTabs-indicator {
@@ -61,7 +61,6 @@ export default function PlanDrawer() {
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState(false);
   const [title, setTitle] = useState('');
-  const [music, setMusic] = useState();
   const [food, setFood] = useState();
   const [activity, setActivity] = useState();
 
@@ -87,7 +86,7 @@ export default function PlanDrawer() {
           id: item.id,
         })),
       },
-      musicId: music.musicID,
+      musicId: musicList.filter((item) => item.choiceYN === 1)[0].musicID,
       playlist_url: state.musicReducer.url,
       title: title,
     };
@@ -121,15 +120,11 @@ export default function PlanDrawer() {
             aria-label="basic tabs example"
             variant="fullWidth"
           >
-            <CustomTab label="음악" {...a11yProps(0)} />
-            <CustomTab label="음식" {...a11yProps(1)} />
-            <CustomTab label="활동" {...a11yProps(2)} />
+            <CustomTab label="음식" {...a11yProps(0)} />
+            <CustomTab label="활동" {...a11yProps(1)} />
           </CustomTabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <MusicSelect list={musicList} current={music} setCurrent={setMusic} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
           <StoreSelect
             type="food"
             list={foodList}
@@ -137,7 +132,7 @@ export default function PlanDrawer() {
             setCurrent={setFood}
           />
         </TabPanel>
-        <TabPanel value={value} index={2}>
+        <TabPanel value={value} index={1}>
           <StoreSelect
             type="activity"
             list={activityList}
@@ -149,7 +144,7 @@ export default function PlanDrawer() {
       <CustomButton
         className="plan__button"
         variant="contained"
-        disabled={!(music && food && activity)}
+        disabled={!(food && activity)}
         onClick={() => setOpen(true)}
       >
         저장
@@ -160,7 +155,7 @@ export default function PlanDrawer() {
         handleCancle={handleCancle}
       >
         <div>일정 이름</div>
-        <TextField
+        <CustomTextField
           fullWidth
           size="small"
           variant="standard"

@@ -1,6 +1,10 @@
 @import '../common/util';
 $title-padding: 25px;
 
+
+.StartButton{
+    width:60%;
+}
 .Gooddisable {
   color: rgb(172, 171, 171);
 }
@@ -130,6 +134,7 @@ $title-padding: 25px;
     &__Start{
         &__Title{
             height: 25%;
+            padding: $title-padding;
         }
         &__Title h2{
             margin: 5px;

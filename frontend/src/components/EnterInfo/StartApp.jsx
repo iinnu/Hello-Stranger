@@ -4,6 +4,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import styled from '@emotion/styled';
 import Container from 'components/common/Container';
 import { getApiInstance } from 'api';
+import CustomButton from 'components/common/CustomButton';
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -52,7 +53,9 @@ const StartApp = () => {
           </div>
           <div className='UserInput__Start__Item'>
             <img className="UserInput__Start__Item__Mascot" src={mascot} alt="Mascot" />
-            <Button variant="contained" onClick={handleClick}>메인페이지</Button>
+            <CustomButton className="StartButton" variant="contained" onClick={handleClick}>
+              <div>메인페이지</div>
+            </CustomButton>
           </div>
           <div className="recommend-bottom">
             <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>

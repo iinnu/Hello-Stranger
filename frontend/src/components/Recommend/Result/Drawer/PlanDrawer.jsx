@@ -10,6 +10,7 @@ import StoreSelect from '../Plan/StoreSelect';
 import CustomModal from 'components/common/CustomModal';
 import { Alert, Snackbar, TextField } from '@mui/material';
 import { saveReview } from 'api/recommend';
+import CustomTextField from 'components/common/CustomTextField';
 
 const CustomTabs = styled(Tabs)`
   &.MuiTabs-root > .MuiTabs-scroller > .MuiTabs-indicator {
@@ -154,7 +155,7 @@ export default function PlanDrawer() {
         handleCancle={handleCancle}
       >
         <div>일정 이름</div>
-        <TextField
+        <CustomTextField
           fullWidth
           size="small"
           variant="standard"

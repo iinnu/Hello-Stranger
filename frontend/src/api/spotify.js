@@ -149,5 +149,5 @@ export async function createPlaylist(list, success) {
     })
     .then(success);
 
-  return playlist.data.external_urls.spotify;
+  return playlist.data.id;
 }

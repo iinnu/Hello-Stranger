@@ -43,15 +43,8 @@ const EnterInfo = () => {
   const [count, setcount] = useState(1)
   const Function = (e) => {
     setcount(count+1)
-    if (count === 5) {
+    if (count >= 1) {
       setDisable(false)
-    }
-    console.log(count)
-  };
-  const CountFunction = (e) => {
-    setcount(count-1)
-    if (count !== 5 ) {
-      setDisable(true)
     }
     console.log(count)
   };
@@ -64,9 +57,7 @@ const EnterInfo = () => {
         name={e.musicName}
         image={e.musicImgUrl}
         musicplayer={parentFunction}
-        Disable={Function}
-        Count={CountFunction}
-      />
+        Disable={Function}      />
     </div>
   ));
   const accessToken = localStorage.getItem('spotify')
@@ -101,7 +92,7 @@ const EnterInfo = () => {
         </div>
         <div className="info-bottom">
           <PlainButton/>
-          <div className="info-bottom__comment">평가 완료시 활성화 됩니다. → </div>
+          <div className="info-bottom__comment">하나이상 평가시 활성화 됩니다. → </div>
           <Button endIcon={<ArrowForwardIosIcon />} onClick={handleNext} disabled={isDisable}>다음</Button>
           {/* <PlainButton endIcon={<ArrowForwardIosIcon />} onClick={handleNext}>
             다음

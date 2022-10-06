@@ -10,8 +10,8 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import React, { useState } from 'react';
 
 export default function RecipeReviewCard({ id, title, image, Disable, Count  }) {
-  const [isDisable, setDisable] = useState(false) 
-  const [isDisable2, setDisable2] = useState(true) 
+  const [isDisable1, setDisable1] = useState(false) 
+  const [isDisable2, setDisable2] = useState(false) 
   function foodDataInputGood(){
     if (!localStorage.foodDataInput){
     const foodDataInput = [
@@ -23,6 +23,14 @@ export default function RecipeReviewCard({ id, title, image, Disable, Count  }) 
     localStorage.setItem("foodDataInput", JSON.stringify(foodDataInput))
    }
   else if (localStorage.foodDataInput){
+    const localFoodData = JSON.parse(localStorage.getItem('foodDataInput'))
+      for(var i = 0; i < localFoodData.length; i++){ 
+        if (localFoodData[i].category === title) { 
+          localFoodData.splice(i, 1); 
+          i--; 
+        }
+      }
+      localStorage.setItem('foodDataInput', JSON.stringify(localFoodData))
     const existData = JSON.parse(localStorage.getItem("foodDataInput"))
     const foodDataInput = 
       {
@@ -33,7 +41,7 @@ export default function RecipeReviewCard({ id, title, image, Disable, Count  }) 
       localStorage.setItem("foodDataInput", JSON.stringify(existData))
    }
    Disable(false)
-   setDisable(true)
+   setDisable1(true)
    setDisable2(false)
   }
   
@@ -49,6 +57,14 @@ export default function RecipeReviewCard({ id, title, image, Disable, Count  }) 
       localStorage.setItem("foodDataInput", JSON.stringify(foodDataInput))
      }
     else if (localStorage.foodDataInput){
+      const localFoodData = JSON.parse(localStorage.getItem('foodDataInput'))
+      for(var i = 0; i < localFoodData.length; i++){ 
+        if (localFoodData[i].category === title) { 
+          localFoodData.splice(i, 1); 
+          i--; 
+        }
+      }
+      localStorage.setItem('foodDataInput', JSON.stringify(localFoodData))
       const existData = JSON.parse(localStorage.getItem("foodDataInput"))
       const foodDataInput = 
         {
@@ -60,28 +76,12 @@ export default function RecipeReviewCard({ id, title, image, Disable, Count  }) 
      }
     //  localStorage.setItem("foodDataInput", [])
     Disable(false)
-    setDisable(true)
-    setDisable2(false)
-  }
-  function newbutton(){
-    Count(false)
-    setDisable(false)
+    setDisable1(false)
     setDisable2(true)
-    const localFoodData = JSON.parse(localStorage.getItem('foodDataInput'))
-    for(var i = 0; i < localFoodData.length; i++){ 
-      if (localFoodData[i].category === title) { 
-        localFoodData.splice(i, 1); 
-        i--; 
-      }
-    }
-    localStorage.setItem('foodDataInput', JSON.stringify(localFoodData))
-    if(JSON.parse(localStorage.getItem('foodDataInput')).length===0){
-      localStorage.removeItem('foodDataInput')
-    }
   }
+
   return (
     <Card className="UserInput__Food__Item__Area__Card">
-      <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>
       <CardHeader
         title={title}
       />
@@ -97,8 +97,9 @@ export default function RecipeReviewCard({ id, title, image, Disable, Count  }) 
       </CardContent>
       <div className='Guide__Third__Item__Card__Bottom'>
         <div>
-        <Button onClick={foodDataInputGood} disabled={isDisable}><ThumbUpOffAltIcon/></Button>
-        <Button onClick={foodDataInputBad} disabled={isDisable}><ThumbDownOffAltIcon/></Button>
+        {isDisable1? <Button onClick={foodDataInputGood} color="primary" variant="contained"><ThumbUpOffAltIcon/></Button>:<Button onClick={foodDataInputGood} color="primary"><ThumbUpOffAltIcon/></Button> }
+        {isDisable2? <Button onClick={foodDataInputBad} color="primary" variant="contained"><ThumbDownOffAltIcon/></Button>:<Button onClick={foodDataInputBad} color="primary"><ThumbDownOffAltIcon/></Button>}
+
         </div>
       </div>
     </Card>

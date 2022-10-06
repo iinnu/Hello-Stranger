@@ -39,15 +39,8 @@ const EnterInfo = () => {
   const [count, setcount] = useState(1)
   const parentFunction = (e) => {
     setcount(count+1)
-    if (count === 5) {
+    if (count >= 1) {
       setDisable(false)
-    }
-    console.log(count)
-  };
-  const CountFunction = (e) => {
-    setcount(count-1)
-    if (count !== 5 ) {
-      setDisable(true)
     }
     console.log(count)
   };
@@ -59,7 +52,6 @@ const EnterInfo = () => {
         title={e.activityCategory}
         image={e.activityImgUrl}
         Disable={parentFunction}
-        Count={CountFunction}
       />
     </div>
   ));
@@ -78,7 +70,7 @@ const EnterInfo = () => {
           </div>
           <div className="info-bottom">
             <Button startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>이전</Button>
-            <div className="info-bottom__comment">평가 완료시 활성화 됩니다. → </div>
+            <div className="info-bottom__comment">하나이상 평가시 활성화 됩니다. → </div>
             <Button endIcon={<ArrowForwardIosIcon />} onClick={handleNext} disabled={isDisable}>다음</Button>
             {/* <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev} disabled={isDisable}>
               이전

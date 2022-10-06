@@ -11,8 +11,8 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import axios from "axios";
 
 export default function RecipeReviewCard({id, name, artist, image, musicplayer, Disable, Count}) {
-  const [isDisable, setDisable] = useState(false)
-  const [isDisable2, setDisable2] = useState(true) 
+  const [isDisable1, setDisable1] = useState(false)
+  const [isDisable2, setDisable2] = useState(false) 
   function musicDataInputGood(){
     if (!localStorage.musicDataInput){
     const musicDataInput = [
@@ -24,6 +24,14 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer, 
     localStorage.setItem("musicDataInput", JSON.stringify(musicDataInput))
    }
   else if (localStorage.musicDataInput){
+    const localMusicData = JSON.parse(localStorage.getItem('musicDataInput'))
+    for(var i = 0; i < localMusicData.length; i++){ 
+      if (localMusicData[i].id === id) { 
+        localMusicData.splice(i, 1); 
+        i--; 
+      }
+    }
+    localStorage.setItem('musicDataInput', JSON.stringify(localMusicData))
     const existData = JSON.parse(localStorage.getItem("musicDataInput"))
     const musicDataInput = 
       {
@@ -33,7 +41,7 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer, 
       existData.push(musicDataInput)
       localStorage.setItem("musicDataInput", JSON.stringify(existData))
    }
-   setDisable(true)
+   setDisable1(true)
    setDisable2(false)
    Disable(false)
   }
@@ -50,6 +58,14 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer, 
       localStorage.setItem("musicDataInput", JSON.stringify(musicDataInput))
      }
     else if (localStorage.musicDataInput){
+      const localMusicData = JSON.parse(localStorage.getItem('musicDataInput'))
+      for(var i = 0; i < localMusicData.length; i++){ 
+        if (localMusicData[i].id === id) { 
+          localMusicData.splice(i, 1); 
+          i--; 
+        }
+      }
+      localStorage.setItem('musicDataInput', JSON.stringify(localMusicData))
       const existData = JSON.parse(localStorage.getItem("musicDataInput"))
       const musicDataInput = 
         {
@@ -60,29 +76,11 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer, 
         localStorage.setItem("musicDataInput", JSON.stringify(existData))
      }
     //  localStorage.setItem("musicDataInput", [])
-    setDisable(true)
-    setDisable2(false)
+    setDisable1(false)
+    setDisable2(true)
     Disable(false)
   }
-  function newbutton(){
-    setDisable(false)
-    setDisable2(true)
-    Count(false)
-    const localMusicData = JSON.parse(localStorage.getItem('musicDataInput'))
-    for(var i = 0; i < localMusicData.length; i++){ 
-      if (localMusicData[i].id === id) { 
-        localMusicData.splice(i, 1); 
-        i--; 
-      }
-    }
-    localStorage.setItem('musicDataInput', JSON.stringify(localMusicData))
-    if(JSON.parse(localStorage.getItem('musicDataInput')).length===0){
-      localStorage.removeItem('musicDataInput')
-    }
-  }
-
-
-
+  
 
 // #############################################################################################################33
 // 음악플레이
@@ -145,7 +143,6 @@ export default function RecipeReviewCard({id, name, artist, image, musicplayer, 
 
 return (
   <Card className="UserInput__Music__Item__Area__Card"> 
-    <div className="UserInput__Music__Item__Area__Card__Newbutton"><Button onClick={newbutton} disabled={isDisable2}><RestartAltIcon/></Button></div>
     <CardHeader 
       className='UserInput__Music__Item__Area__Card__Title'
       title={name}
@@ -165,8 +162,8 @@ return (
         {artist}
       </div>
       <div className='Guide__Third__Item__Card__Bottom__Button'>
-        <Button onClick={musicDataInputGood} disabled={isDisable}><ThumbUpOffAltIcon/></Button>
-        <Button onClick={musicDataInputBad} disabled={isDisable}><ThumbDownOffAltIcon/></Button>
+      {isDisable1? <Button onClick={musicDataInputGood} color="primary" variant="contained"><ThumbUpOffAltIcon/></Button>:<Button onClick={musicDataInputGood} color="primary"><ThumbUpOffAltIcon/></Button> }
+      {isDisable2? <Button onClick={musicDataInputBad} color="primary" variant="contained"><ThumbDownOffAltIcon/></Button>:<Button onClick={musicDataInputBad} color="primary"><ThumbDownOffAltIcon/></Button>}
       </div>
     </div>
   </Card>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import StoreItem from 'components/Recommend/Category/Detail/List/StoreItem';
+import NoResult from 'components/Recommend/Category/Detail/NoResult';
 
 export default function StoreSelect({ type, list, current, setCurrent }) {
   const field = type + 'Category';
@@ -36,14 +37,16 @@ export default function StoreSelect({ type, list, current, setCurrent }) {
           ))}
         </div>
         <div className="category-select__store-list">
-          {category.store.map((item) => (
-            <StoreItem
-              key={item.id}
-              item={item}
-              active={current?.store.id === item.id ? true : false}
-              handleClick={() => handleClickStore(item)}
-            />
-          ))}
+          {category.store.length === 0 && <NoResult />}
+          {category.store.length !== 0 &&
+            category.store.map((item) => (
+              <StoreItem
+                key={item.id}
+                item={item}
+                active={current?.store.id === item.id ? true : false}
+                handleClick={() => handleClickStore(item)}
+              />
+            ))}
         </div>
       </div>
     </>

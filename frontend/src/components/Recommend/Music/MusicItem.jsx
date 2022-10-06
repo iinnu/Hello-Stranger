@@ -13,7 +13,6 @@ import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import classNames from 'classnames';
 import styled from '@emotion/styled';
-import { useLocation } from 'react-router-dom';
 
 const CustomIconButton = styled(IconButton)`
   &.MuiIconButton-root {

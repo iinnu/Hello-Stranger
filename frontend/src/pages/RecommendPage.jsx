@@ -1,5 +1,5 @@
 import 'styles/Recommend/RecommendPage.scss';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecommendContext } from 'components/Recommend/Context/RecommendContext';
 import Container from 'components/common/Container';
 import CloseRecommend from 'components/Recommend/CloseRecommend';
@@ -37,7 +37,6 @@ const titles = [
 function RecommendPage() {
   const { state, dispatch } = useRecommendContext();
   const index = state.indexReducer.index;
-  const close = useMemo(() => <CloseRecommend />, []);
   const [music, setMusic] = useState(false);
   const [food, setFood] = useState(false);
   const [activity, setActivity] = useState(false);
@@ -94,7 +93,7 @@ function RecommendPage() {
       {(!music || !food || !activity) && <Loading />}
       {music && food && activity && (
         <>
-          {close}
+          <CloseRecommend />
           <div className="recommend-content">
             <Title title={titles[index]} />
             {index === 0 ? <Music /> : index === 1 ? <Food /> : <Activity />}

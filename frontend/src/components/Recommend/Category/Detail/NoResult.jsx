@@ -11,6 +11,7 @@ const Col = styled('div')`
   flex-direction: column;
   justify-content: center;
   color: gray;
+  margin-bottom: 30px;
 `;
 
 export default function NoResult() {

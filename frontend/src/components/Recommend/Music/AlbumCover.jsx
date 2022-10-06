@@ -45,13 +45,15 @@ function AlbumCover() {
       const pre = document?.getElementById(`preview-${prev.musicID}`);
       const cur = document?.getElementById(`preview-${current.musicID}`);
       // 재생 중에 선택한 목록이 바뀌면
-      if (!pre.paused) {
+      if (pre && !pre.paused) {
         // 재생 중인걸 멈춤
         pre.pause();
         if (current.preview) {
           setPrev(current);
           cur.play();
         } else setPlay(false);
+      } else if (!pre) {
+        setPlay(false);
       }
     }
   }, [current]);
@@ -62,7 +64,7 @@ function AlbumCover() {
       const pre = document?.getElementById(`preview-${prev.musicID}`);
       const cur = document?.getElementById(`preview-${rec_current.musicID}`);
       // 재생 중에 선택한 목록이 바뀌면
-      if (!pre.paused) {
+      if (pre && !pre.paused) {
         // 재생 중인걸 멈춤
         pre.pause();
         if (rec_current.preview) {

@@ -1,4 +1,5 @@
 @import "../common/util";
+$title-padding: 25px;
 
 .info-bottom {
     position: fixed;
@@ -34,7 +35,7 @@
         }
         &__Title{
             height: 25%;
-            margin-bottom:10%;
+            padding: $title-padding;
             &__Bottom{
                 width:70%;
                 background: linear-gradient(to top, #fff9e0 50%, transparent 50%);
@@ -69,6 +70,7 @@
     &__Food{
         &__Title{
             height: 25%;
+            padding: $title-padding;
             &__Bottom{
                 width:70%;
                 background: linear-gradient(to top, #92b4ec 50%, transparent 50%);
@@ -102,7 +104,7 @@
     }
     &__Activity{
         &__Title{
-            height: 25%;
+            padding: $title-padding;
             &__Bottom{
                 width:70%;
                 background: linear-gradient(to top, #fff9e0 50%, transparent 50%);

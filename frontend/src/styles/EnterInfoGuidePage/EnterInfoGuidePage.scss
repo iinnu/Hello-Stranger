@@ -88,7 +88,7 @@
             align-items: center;
             &__Card{
                 width: 80%;
-                margin-left:10%;
+                margin-left:6%;
                 &__Newbutton{
                     position: relative;
                     left: 80%;
@@ -109,14 +109,15 @@
             }
             &__Uparrow{
                 position: relative;
-                left: 18%;
-                margin-top:5%;
-                margin-bottom:10px;
+                left: 12%;
+                margin-top:7%;
+                margin-bottom:1%;
             }
             &__Downarrow{
                 position: relative;
-                left: 30%;
-                margin: 10px 0;
+                left: 27%;
+                margin-top: 2%;
+                margin-bottom: 5%;
             }
         }
     }

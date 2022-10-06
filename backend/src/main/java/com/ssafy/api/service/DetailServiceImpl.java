@@ -49,7 +49,7 @@ public class DetailServiceImpl implements DetailService{
         Food food = foodRepository.findByFoodId(foodId);
 
         String review = food.getFoodReview();
-        review = review.replace(".||.", " ").replace("\"\"", "\"").replace("error","").replace("noResult","");
+        review = review.replace(".||.", " ").replace("\"\"", "\"");
         review = review.startsWith("\"") ? review.substring(1, review.length()-1) : review;
         String[] results = review.split("\\[>\\*}");
 //        System.out.println(Arrays.toString(results));

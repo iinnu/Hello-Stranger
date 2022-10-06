@@ -78,7 +78,7 @@ const EnterInfo = () => {
           </div>
           <div className="info-bottom">
             <Button startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev}>이전</Button>
-            <div className="info-bottom__comment">모든 평가가 완료되면 활성화 됩니다. → </div>
+            <div className="info-bottom__comment">평가 완료시 활성화 됩니다. → </div>
             <Button endIcon={<ArrowForwardIosIcon />} onClick={handleNext} disabled={isDisable}>다음</Button>
             {/* <PlainButton startIcon={<ArrowBackIosNewIcon />} onClick={handlePrev} disabled={isDisable}>
               이전

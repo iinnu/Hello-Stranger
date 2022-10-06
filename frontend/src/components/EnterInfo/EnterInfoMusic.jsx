@@ -101,7 +101,7 @@ const EnterInfo = () => {
         </div>
         <div className="info-bottom">
           <PlainButton/>
-          <div className="info-bottom__comment">모든 평가가 완료되면 활성화 됩니다. → </div>
+          <div className="info-bottom__comment">평가 완료시 활성화 됩니다. → </div>
           <Button endIcon={<ArrowForwardIosIcon />} onClick={handleNext} disabled={isDisable}>다음</Button>
           {/* <PlainButton endIcon={<ArrowForwardIosIcon />} onClick={handleNext}>
             다음

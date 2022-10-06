@@ -1,7 +1,14 @@
 @import '../common/util';
+$title-padding: 25px;
 
-.info-bottom {
-  position: fixed;
+.Gooddisable {
+  color: rgb(172, 171, 171);
+}
+.Goodalbe {
+  color: #92b4ec;
+}
+.info-bottom{
+  position: absolute;
   bottom: 0;
   width: 100%;
   max-width: 500px;
@@ -13,159 +20,129 @@
     font-size: small;
   }
 }
-.Gooddisable {
-  color: rgb(172, 171, 171);
-}
-.Goodalbe {
-  color: #92b4ec;
-}
-.UserInput {
-  max-width: 500px;
-  width: 100%;
-  height: 100%;
-  &__Music {
-    &__Player {
-      margin-top: 5%;
-      margin-left: 10%;
-      margin-right: 10%;
-      width: 80%;
-      max-width: 400px;
-      bottom: 0;
-    }
-    &__Title {
-      height: 25%;
-      margin-bottom: 10%;
-      &__Bottom {
-        width: 70%;
-        // background: linear-gradient(to top, #fff9e0 50%, transparent 50%);
-      }
-    }
-    &__Title h2 {
-      margin: 10px;
-      padding-left: 20px;
-
-      &:first-child {
-        padding-top: 20px;
-      }
-    }
-    &__Item {
-      &__Area {
-        &__Card {
-          margin-left: 10%;
-          width: 80%;
-          &__Newbutton {
-            position: relative;
-            left: 80%;
-            height: 0;
+.UserInput{
+    max-width: 500px;
+    width: 100%;
+    height: 100%;
+    &__Music{
+        &__Player{
+          &__Top{
+            font-size: x-small;
           }
-          &__Title {
-            overflow: hidden;
-            text-overflow: hidden;
-            white-space: nowrap;
-          }
-          &__Bottom {
-            display: flex;
-            justify-content: space-around;
-          }
+            height: 10%;
+            margin-top: 5%;
+            margin-left:10%;
+            margin-right:10%;
+            width: 80%;
+            max-width: 400px;
+            bottom:0;
         }
-      }
-    }
-  }
-  &__Food {
-    &__Title {
-      height: 25%;
-      &__Bottom {
-        width: 70%;
-        //background: linear-gradient(to top, #92b4ec 50%, transparent 50%);
-      }
-    }
-    &__Title h2 {
-      margin: 10px;
-      padding-left: 20px;
-
-      &:first-child {
-        padding-top: 20px;
-      }
-    }
-    &__Item {
-      &__Area {
-        &__Card {
-          margin-left: 10%;
-          width: 80%;
-          &__Newbutton {
-            position: relative;
-            left: 80%;
-            height: 0;
-          }
-          &__Title {
-            overflow: hidden;
-            text-overflow: hidden;
-            white-space: nowrap;
-          }
-          &__Bottom {
-            display: flex;
-            justify-content: space-around;
-          }
+        &__Title{
+            height: 25%;
+            padding: $title-padding;
+            &__Bottom{
+                width:70%;
+                background: linear-gradient(to top, #fff9e0 50%, transparent 50%);
+            }
         }
-      }
-    }
-  }
-  &__Activity {
-    &__Title {
-      height: 25%;
-      &__Bottom {
-        width: 70%;
-        //background: linear-gradient(to top, #fff9e0 50%, transparent 50%);
-      }
-    }
-    &__Title h2 {
-      margin: 10px;
-      padding-left: 20px;
-
-      &:first-child {
-        padding-top: 20px;
-      }
-    }
-    &__Item {
-      &__Area {
-        &__Card {
-          margin-left: 10%;
-          width: 80%;
-          &__Newbutton {
-            position: relative;
-            left: 80%;
-            height: 0;
-          }
-          &__Title {
-            overflow: hidden;
-            text-overflow: hidden;
-            white-space: nowrap;
-          }
-          &__Bottom {
-            display: flex;
-            justify-content: space-around;
-          }
+        &__Title h2{
+            margin: 5px;
+        } 
+        &__Item{
+          margin-top: 3%;
+            &__Area{
+                &__Card{
+                    margin-left:10%;
+                    width: 80%;
+                    &__Title{
+                        overflow:hidden;
+                        text-overflow: hidden;
+                        white-space: nowrap;
+                    }
+                    &__Bottom{
+                        display:flex;
+                        justify-content: space-around;
+                    }
+                }
+            }
         }
-      }
     }
-  }
-  &__Start {
-    &__Title {
-      height: 25%;
+    &__Food{
+        &__Title{
+            height: 25%;
+            padding: $title-padding;
+            &__Bottom{
+                width:70%;
+                background: linear-gradient(to top, #92b4ec 50%, transparent 50%);
+            }
+        }
+        &__Title h2{
+            margin: 5px;
+        }  
+        &__Item{
+            &__Area{
+                &__Card{
+                    margin-left:10%;
+                    width: 80%;
+                    &__Title{
+                        overflow:hidden;
+                        text-overflow: hidden;
+                        white-space: nowrap;
+                    }
+                    &__Bottom{
+                        display:flex;
+                        justify-content: space-around;
+                    }
+                }
+            }
+        }
     }
-    &__Title h2 {
-      margin: 5px;
+    &__Activity{
+        &__Title{
+            padding: $title-padding;
+            &__Bottom{
+                width:70%;
+                background: linear-gradient(to top, #fff9e0 50%, transparent 50%);
+            }
+        }
+        &__Title h2{
+            margin: 5px;
+        }
+        &__Item{
+            &__Area{
+                &__Card{
+                    margin-left:10%;
+                    width: 80%;
+                    &__Title{
+                        overflow:hidden;
+                        text-overflow: hidden;
+                        white-space: nowrap;
+                    }
+                    &__Bottom{
+                        display:flex;
+                        justify-content: space-around;
+                    }
+                }
+            }
+        }
     }
-    &__Item {
-      height: 70%;
-      display: flex;
-      flex-flow: column;
-      justify-content: center;
-      align-items: center;
-      &__Mascot {
-        max-width: 400px;
-        width: 90%;
-      }
+    &__Start{
+        &__Title{
+            height: 25%;
+        }
+        &__Title h2{
+            margin: 5px;
+        } 
+        &__Item{
+            height: 70%;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            &__Mascot{
+                max-width: 400px;
+                width: 90%;
+            }
+        }
     }
-  }
 }

@@ -6,8 +6,11 @@ import Container from 'components/common/Container';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SpotifyPlayer from 'react-spotify-web-playback';
+import Loading from './Loading.jsx';
+
+
 
 const PlainButton = styled(Button)`
   &.MuiButton-root {
@@ -26,6 +29,13 @@ const settings = {
 };
 
 const EnterInfo = () => {
+  // const [ready, setReady] = useState(true)
+  // useEffect(() =>{
+  //   setTimeout(()=>{
+  //     setReady(false)
+  //   },3000)
+  // },[])
+
   const MusicList = localStorage.getItem('userInputInfoMusic');
   const handleNext = () => {
     console.log('다음');
@@ -81,7 +91,7 @@ const EnterInfo = () => {
               자주 들으시나요?
             </h2>
             <div className="UserInput__Music__Player">
-              <div style={{ margin: '20px 0' }}>
+              <div className="UserInput__Music__Player__Top">
                 5곡을 듣고 아래에 평가해주세요!
               </div>
               <SpotifyPlayer

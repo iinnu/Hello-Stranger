@@ -232,7 +232,7 @@ Hello, Stranger에 처음 접속하면 사용자의 원할한 취향조사를 �
 
 <img src = "./exec/image/notion.gif">
 
-## 5. 배포
+## [5. 배포](./exec/1.%EB%B0%B0%ED%8F%AC%EB%AC%B8%EC%84%9C_HelloStranger.md)
 
 
 ## 6. 설계

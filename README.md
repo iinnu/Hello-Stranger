@@ -89,18 +89,18 @@ Hello, Stranger에 처음 접속하면 사용자의 원할한 취향조사를 �
 
 ### 3.4 메인 페이지
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194705548-1d95e364-4213-48bd-adc5-612b42251a10.gif' alt='img' />
+<img width='200' src='./exec/image/main_1.gif' alt='img' />
 
 로그인을 하면 메인페이지로 이동해서 현재 위치에 대한 정보를 가져옵니다.
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194705555-b980c47a-50f6-486a-b0da-3fe70a7cee2b.gif' alt='img' />
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194705743-262c8e64-c59b-414f-a1c0-0a6d85eb4b24.gif' alt='img' />
+<img width='200' src='./exec/image/main_2.gif' alt='img' />
+<img width='200' src='./exec/image/main_3.gif' alt='img' />
 
 검색 기준 위치, 검색 범위는 변경이 가능합니다.  
 주소를 클릭해서 원하는 지역을 검색 후 클릭하면 검색 기준 위치가 해당 지역으로 변경됩니다.  
 슬라이더를 드래그해서 1km ~ 3km 사이의 검색 범위를 0.5km 단위로 선택할 수 있습니다.
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194705746-9fe0d26c-c8c0-4953-86a3-07352eab54c1.gif' alt='img' />
+<img width='200' src='./exec/image/main_4.gif' alt='img' />
 
 검색 기준 위치가 변경 됐을 때 홈버튼을 누르면 현재 위치로 다시 설정할 수 있습니다.
 
@@ -108,70 +108,69 @@ Hello, Stranger에 처음 접속하면 사용자의 원할한 취향조사를 �
 
 ### a. 음악 추천
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706015-c2dad7cd-ae84-47e3-bb7e-7a28556e31d2.gif' alt='img' />
+<img width='200' src='./exec/image/rec1_1.gif' alt='img' />
 
 추천 시작 버튼을 눌러서 음악, 음식, 활동에 대한 목록을 받아올 수 있습니다.
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706017-e78e8a63-5c91-4d61-b281-40bb0fdebaa8.gif' alt='img' />
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706022-46fc27a8-eeb1-4979-bfd0-ddad3a2f30e3.gif' alt='img' />
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706023-3c4202eb-bba6-4e1d-8619-4b8b4c4b84a9.gif' alt='img' />
+<img width='200' src='./exec/image/rec1_2.gif' alt='img' />
+<img width='200' src='./exec/image/rec1_3.gif' alt='img' />
+<img width='200' src='./exec/image/rec1_4.gif' alt='img' />
 
 음악 페이지에서는 시드가 될 음악을 하나만 선택해야 합니다.  
 결과 페이지에서 해당 음악을 바탕으로 새로운 플레이리스트를 생성해줍니다.  
 시드가 될 음악을 선택하지 않으면 음식 목록, 활동 목록으로 넘어갈 수 없습니다.  
 마음에 들지 않는 음악에 싫어요 표시를 하면 다음 추천에 반영이 됩니다. 싫어요 갯수에는 제한이 없습니다.
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706019-69786e78-d1d4-4a7f-812a-45e20507b2ac.gif' alt='img' />
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706024-64148e8e-2b61-4f58-b013-e87f1fd2f2e0.gif' alt='img' />
+<img width='200' src='./exec/image/rec1_5.gif' alt='img' />
+<img width='200' src='./exec/image/rec1_6.gif' alt='img' />
 
 스포티파이에서 제공하는 음악에 한해서 미리듣기를 할 수 있습니다.  
 또한, 각 추천 목록에 대해서 새로고침을 최대 2번까지 할 수 있습니다.
 
 ###  b. 음식, 활동 추천
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706649-4b1c8d53-3d08-4f7d-bac8-9c65d1137e38.gif' alt='img' />
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706652-f37c1760-e9e5-4e4f-b704-34447821b407.gif' alt='img' />
+<img width='200' src='./exec/image/rec2_1.gif' alt='img' />
+<img width='200' src='./exec/image/rec2_2.gif' alt='img' />
 
 카테고리를 클릭하면 해당 카테고리에 해당하는 주변 가게 목록을 볼 수 있습니다.  
 가게 목록 중 하나를 선택하면 지도에서 위치를 확인할 수 있습니다.
 
 지도에 나타나는 마커를 누르면 마커에 해당하는 가게 정보를 볼 수 있으며, 하단의 가게 정보를 클릭하면 연락처, 영업 시간, 리뷰, 별정 등의 상세 정보를 볼 수 있습니다.
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706654-cdc01ae5-3947-4517-a16d-443a39616c12.gif' alt='img' />
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706656-4f2b83e9-4e9e-429d-afa2-e3d1ed3b6a4d.gif' alt='img' />
+<img width='200' src='./exec/image/rec2_3.gif' alt='img' />
+<img width='200' src='./exec/image/rec2_4.gif' alt='img' />
 
 뒤로 가기를 눌러서 카테고리 목록으로 돌아갈 수 있습니다.  
 만약 카테고리에 대한 가게가 주변에 없다면 가게 목록이 나타나지 않습니다.  
 음식, 활동 카테고리의 좋아요, 싫어요에는 제한이 없습니다.
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706658-fbb48329-226c-42ff-8a6a-6a8773249708.gif' alt='img' />
+<img width='200' src='./exec/image/rec2_5.gif' alt='img' />
 
 활동 목록도 음식 목록과 동일합니다.
 
 ### 3.6 추천 결과 페이지
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706906-ce8d2d6e-efb1-4934-9940-9c9305024fc5.gif' alt='img' />
+<img width='200' src='./exec/image/result_1.gif' alt='img' />
 
 활동 추천 목록에서 완료를 누르면 추천 결과 페이지로 이동합니다.
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706912-26a1e838-1672-4082-9c00-0ae8655de019.gif' alt='img' />
-
+<img width='200' src='./exec/image/result_2.gif' alt='img' />
 왼쪽 메뉴를 클릭해서 음식 가게만 보거나 활동 가게만 보도록 할 수 있습니다.
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706917-048c3ffe-3a05-48d1-afa9-dfed2a5f6e25.gif' alt='img' />
+<img width='200' src='./exec/image/result_3.gif' alt='img' />
 
 선택했던 시드 음악을 바탕으로 생성된 플레이리스트를 볼 수 있습니다.  
 이 플레이리스트는 사용자의 스포티파이 플레이리스트에서도 확인할 수 있습니다.
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706918-7ceb49ff-b533-4610-ab61-ed64ce54dc72.gif' alt='img' />
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706921-33a37832-608d-484c-8255-925d6b74e379.gif' alt='img' />
+<img width='200' src='./exec/image/result_4.gif' alt='img' />
+<img width='200' src='./exec/image/result_5.gif' alt='img' />
 
 음식, 활동 결과는 카테고리별로 가게 목록을 볼 수 있습니다.  
 이때, 이전 추천 페이지에서 싫어요를 표시했던 카테고리는 나타나지 않습니다.  
 지도에 있는 마커를 누르면 가게 정보가 간략하게 나타납니다.
 
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706925-8953835f-f1b0-4dc1-80f4-087d2633bc6e.gif' alt='img' />
-<img width='200' src='https://user-images.githubusercontent.com/55791128/194706926-74ecae6d-a9c5-4e90-afe2-2922bf172494.gif' alt='img' />
+<img width='200' src='./exec/image/result_6.gif' alt='img' />
+<img width='200' src='./exec/image/result_7.gif' alt='img' />
 
 일정 저장은 추천 결과에서 마음에 드는 가게를 선택해서 플레이리스트와 함께 저장할 수 있는 기능입니다.  
 일정 저장을 누르면 음식, 활동 카테고리 및 가게 목록이 나타나고 각 카테고리에서 가게 하나씩 선택해서 일정명을 입력하면 일정을 저장할 수 있습니다.  
@@ -232,7 +231,9 @@ Hello, Stranger에 처음 접속하면 사용자의 원할한 취향조사를 �
 
 <img src = "./exec/image/notion.gif">
 
-## [5. 배포](./exec/1.%EB%B0%B0%ED%8F%AC%EB%AC%B8%EC%84%9C_HelloStranger.md)
+## 5. 배포
+
+**[배포문서로 이동](./exec/1.%EB%B0%B0%ED%8F%AC%EB%AC%B8%EC%84%9C_HelloStranger.md)**
 
 
 ## 6. 설계
@@ -277,5 +278,5 @@ Hello, Stranger에 처음 접속하면 사용자의 원할한 취향조사를 �
 - 박채림 : 처음으로 경험해보는 Hadoop/Spark, 도커를 이용한 CI/CD를 해보면서 개인적인 어려움이 많았던 프로젝트였지만 팀원들 덕분에 무사히 마무리할 수 있었던것같습니다! 특히 발표 전날에 클러스터 서버가 날아가서 직접 만든 클러스터 서버를 다시 만질때는 굉장히 흥미진진했던것같습니다^^.......... 공통 때부터 같이 프로젝트를 진행해온 팀원들이라 그런지 더 재밌게 진행할 수 있었고 기억에 남을 것 같습니다. 모두들 고생했어요!!!
 - 김이랑 :  나름대로 하둡 에코시스템을 이해하고 이용하면서 프로젝트를 진행할 수 있었습니다. 기술적인 고민을 조금 더 했으면 하는 아쉬움이 남기도하지만, 구현하고자 한 목표를 달성할 수 있었습니다. 로컬 환경, 제공된 클러스터 서버, 직접 만든 클러스터서버 세번에 걸쳐 작업을 진행해 터미널 창과 아주 친해진 기분이 듭니다. 프론트도 백도 다 처음 사용해보는 기술이 많아 부담스러웠을텐데 잘 마무리해서 뿌듯합니다! 다들 고생하셨습니다🥰
 - 임현탁 : 리액트를 처음 접해봐서 익숙치 않았던 프로젝트였습니다. 같은 프론트엔드를 맡아 프로젝트를 진행한 인후님과 병헌님이 잘 이끌어주어 끝마칠 수 있었던 프로젝트였습니다. 백엔드 분들도 데이터 처리와 함께 진행하다 보니 많이 힘드셨을텐데 나빼고 다들 고생하신 것 같아 미안한 마음이 들고 우여곡절이 많았던 프로젝트지만 마무리를 할 수 있게 되어 굉장히 홀가분 합니다!
-- 조인후 :
+- 조인후 : ‘경험해보지 않는 것을 추천해준다’는 말 한 마디로 여기까지 오게 되었습니다. 추천, 추천 결과 페이지를 맡게 되었는데 사용자에게 추천 전과정을 보여주는 중요한 부분임에도 불구하고 저희 프로젝트 주제를 UI 측면에서 잘 표현해내지 못한 것 같아 아쉬움이 남습니다. 또한 사용자가 모바일 환경에서 많이 사용할 것 같아서 PWA를 채택했음에도 불구하고 관련 기능을 써보지 못한 것도 아쉽습니다. 그래도 팀원들 덕분에 계획했던 기능은 대부분 구현해낼 수 있었다고 생각합니다. 다들 너무 고생 많으셨습니다!!
 - 가수왕 : 이번 프로젝트에서 대부분 처음 접해보는 기술을 사용하다 보니 심적인 부담감이 심했습니다. 하지만 서로서로 멘탈케어를 해주고 기술적으로 어려움을 같이 해결하다 보니 무사히 프로젝트를 마무리 할 수 있었던 것 같습니다. 서로 알고 있던 지식을 공유하다 보니 제가 맡지 않았던 파트에 대한 이해도도 자연스럽게 올라갈 수 있어서 좋았습니다. 다들 고생하셨습니다!!!!

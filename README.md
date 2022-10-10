@@ -155,6 +155,7 @@ Hello, Stranger에 처음 접속하면 사용자의 원할한 취향조사를 �
 활동 추천 목록에서 완료를 누르면 추천 결과 페이지로 이동합니다.
 
 <img width='200' src='./exec/image/result_2.gif' alt='img' />
+
 왼쪽 메뉴를 클릭해서 음식 가게만 보거나 활동 가게만 보도록 할 수 있습니다.
 
 <img width='200' src='./exec/image/result_3.gif' alt='img' />
